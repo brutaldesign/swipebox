@@ -1,0 +1,172 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width; initial-scale=1.0"/>
+	<meta name="description" content="A touchable jQuery lightbox plugin for desktop, mobile and tablet" />
+
+	<meta property="og:site_name" content="Swipebox" />
+	<meta property="og:url" content="http://brutaldesign.github.com/swipebox/" />
+	<meta property="og:image" content="http://swipebox.brutaldesign.com/meta/swipe250.jpg" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Swipebox | A touchable jQuery lightbox" />
+	<meta property="og:description" content="Swipebox is a jQuery lightbox plugin for desktop, mobile and tablet">
+
+	<meta itemprop="name" content="Swipebox | A touchable jQuery lightbox">
+	<meta itemprop="image" content="http://swipebox.brutaldesign.com/meta/swipe250.jpg">
+	<meta itemprop="description" content="Swipebox is a jQuery lightbox plugin for desktop, mobile and tablet">
+
+	<link rel="stylesheet" href="http://swipebox.brutaldesign.com/css/style.css">
+	<link rel="stylesheet" href="source/swipebox.css">
+	
+	<title>Swipebox | A touchable jQuery lightbox</title>
+	<script type="text/javascript">(function(doc, script) {
+		var js, 
+		fjs = doc.getElementsByTagName(script)[0],
+		add = function(url, id) {
+		if (doc.getElementById(id)) {return;}
+		js = doc.createElement(script);
+		js.src = url;
+		id && (js.id = id);
+		fjs.parentNode.insertBefore(js, fjs);
+		};add("//connect.facebook.net/en_US/all.js#xfbml=1", "facebook-jssdk");
+		add("//platform.twitter.com/widgets.js", "twitter-wjs");
+		}(document, "script"));
+	</script>
+</head>
+<body>
+	<div id="fb-root"></div>
+
+	<link rel="stylesheet" href="http://swipebox.brutaldesign.com/css/style.css">
+	
+	<link rel="stylesheet" href="source/swipebox.css">
+	
+	<title>Swipebox</title>
+</head>
+<body>
+
+	<a href="https://github.com/brutaldesign/swipebox" id="fork-this"></a>
+	<div id="main">
+		<div class="wrap">
+
+			<header>
+				<h1>Swipebox.</h1>
+				<p class="tagline">A touchable jQuery lightbox</p>
+
+				<div id="share">
+					<div id="twitter-button">
+						<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://bsign.co/7IivSR" data-text="Swipebox | A touchable jQuery lightbox" data-via="brutaldesign">Tweet</a>
+					</div>
+					<div id="fb-like">
+						<div class="fb-like" data-href="http://brutaldesign.github.com/swipebox/" data-send="false" data-layout="button_count" data-width="110" data-show-faces="false" data-colorscheme="light" data-action="like"></div>
+					</div>
+				</div>
+
+			</header>
+			<hr>
+			<section id="presentation">
+				<h2>What is Swipebox ?</h2>
+				<p>Swipebox is a jQuery "lightbox" plugin for desktop, mobile and tablet.</p>		
+				<h3>Features</h3>
+				<ol>
+					<li>Swipe gestures for mobile</li>
+					<li>Keyboard Navigation for desktop</li>
+					<li>CSS transitions with jQuery fallback</li>
+					<li>Retina support for UI icons</li>
+					<li>Easy CSS customization</li>
+					<li>Easy CSS customiation</li>
+				</ol>
+
+				<h3>Compatibility</h3>
+				<p>Chrome, Safari, Firefox, Opera, IE8+, IOS4+, Android, windows phone.</p>
+
+			</section>
+			<hr>
+			<section id="exemple">
+				<h2>Try it</h2>
+				<div class="box">
+					<a href="http://swipebox.brutaldesign.com/assets/full/nuke.jpg" class="swipebox" title="Nuke">
+						<img src="http://swipebox.brutaldesign.com/assets/nuke_thumb.jpg" alt="nuke">
+					</a>
+				</div>
+				<div class="box">
+					<a href="http://swipebox.brutaldesign.com/assets/full/leap.jpg" class="swipebox" title="Leap">
+						<img src="http://swipebox.brutaldesign.com/assets/leap_thumb.jpg" alt="leap">
+					</a>
+				</div>
+				<div class="box">
+					<a href="http://swipebox.brutaldesign.com/assets/full/reine.jpg" class="swipebox" title="Reine">
+						<img src="http://swipebox.brutaldesign.com/assets/reine_thumb.jpg" alt="reine">
+					</a>
+				</div>
+				<div class="box">
+					<a href="http://swipebox.brutaldesign.com/assets/full/neptune.jpg" class="swipebox" title="Neptune">
+						<img src="http://swipebox.brutaldesign.com/assets/neptune_thumb.jpg" alt="neptune">
+					</a>
+				</div>
+				<div class="clear"></div>
+			</section>
+			<hr>
+			<section id="usage">
+				<h2>Usage</h2>
+				<h3>Javascript</h3>
+
+				<p>Include jquery and the swipebox script in your <code>head</code> tags or right before your <code>body</code> closing tag.</p>
+<pre>&lt;script src="lib/jquery-1.9.0.js"&gt;&lt;/script&gt;
+&lt;script src="source/jquery.swipebox.min.js"&gt;&lt;/script&gt;</pre>
+				<h3>CSS</h3>
+				<p>Include the swipebox CSS style in your <code>head</code> tags.</p>
+<pre>&lt;link rel="stylesheet" href="source/swipebox.css"&gt;</pre>
+				<h3>HTML</h3>
+				<p>Use a specific class for your links and use the title attribute as caption.</p>
+<pre>&lt;a href="big/image.jpg" class="swipebox" title="My Caption"&gt;
+	&lt;img src="small/image.jpg" alt="image"&gt;
+&lt;/a></pre>
+				<h3>Fire the plugin</h3>
+				<p>Bind the swipebox behaviour on every link with the "swipebox" class.</p>
+<pre>&lt;script type="text/javascript"&gt;
+jQuery(function($) {
+	$(".swipebox").swipebox();
+});
+&lt;script&gt;
+</pre>
+				<h4>Need a couple of options?</h4>
+<pre>&lt;script type="text/javascript"&gt;
+jQuery(function($) {
+	$(".swipebox").swipebox({
+		useCSS : true, <span>// false will force the use of jQuery for animations</span>
+		hideBarsDelay : 3000 <span>// 0 to always show caption and action bar</span>
+	});
+});
+&lt;script&gt;
+</pre>
+			</section>
+			<section id="action">
+				<p><a class="button" href="https://github.com/brutaldesign/swipebox/archive/master.zip">Download</a> <a class="button" href="https://github.com/brutaldesign/swipebox">View Source</a></p>
+			
+				<p id="follow"><a href="https://twitter.com/brutaldesign" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @brutaldesign</a></p>
+			</section>
+			<hr>
+			<section id="credits">
+				<p><strong>Credits</strong></p>
+				<p>Photos by <a href="http://www.flickr.com/photos/astragony/" target="_blank">Daniele Zedda</a></p>	
+			</section>
+		</div>
+		<footer>
+			<div class="wrap">
+				<a href="http://brutaldesign.com" target="_blank">Constantin Saguin</a> | <a href="http://twitter.com/brutaldesign" target="_blank">@brutaldesign</a>
+			</div>
+		</footer>
+	</div>
+	<script src="lib/jquery-1.9.0.min.js"></script>
+	<script src="lib/ios-orientationchange-fix.js"></script>
+	
+	<script src="source/jquery.swipebox.min.js"></script>
+	<script type="text/javascript">
+		jQuery(function($) {
+			$(".swipebox").swipebox();
+		});
+	</script>
+</body>
+	
+</html>
