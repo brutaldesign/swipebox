@@ -60,7 +60,8 @@
 			},
 
 			build : function(){
-				var $this = this;				
+				var $this = this;
+				
 				$('body').append(html);
 
 				if($this.doCssTrans()){
@@ -138,10 +139,10 @@
 			},
 
 			gesture : function(){
-				if ( this.isTouch() ){
+				if ( isTouch ){
 					var $this = this,
 					distance = null,
-					swipMinDistance = 20,
+					swipMinDistance = 10,
 					startCoords = {}, 
 					endCoords = {};
 					var b = $('#swipebox-caption, #swipebox-action');
@@ -183,9 +184,12 @@
 	       				}else{
 	       					// tap
 	       					if(!b.hasClass('visible-bars')){
-								$this.showBars();
-								$this.setTimeout();
-							}
+							$this.showBars();
+							$this.setTimeout();
+						}else{
+							$this.clearTimeout();
+							$this.hideBars();
+						}
 
 	       				}	
 
@@ -243,7 +247,7 @@
 				var $this = this;
 				var b = $('#swipebox-caption, #swipebox-action');
 				
-				if ( !this.isTouch() ){
+				if ( !isTouch ){
 					
 					b.addClass('visible-bars');
 					$this.setTimeout();
@@ -271,7 +275,7 @@
 			},
 
 			keyboard : function(){
-				if ( !this.isTouch() ){
+				if ( !isTouch ){
 					var $this = this;
 					$(window).bind('keyup', function(e){
 						e.preventDefault();
@@ -415,9 +419,6 @@
 				}
 			},
 
-			isTouch : function(){
-				return isTouch;
-			},
 
 			closeSlide : function (){
 				var $this = this;
