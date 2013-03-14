@@ -243,54 +243,46 @@
 			},
 
 			animBars : function(){
-
 				var $this = this;
 				var b = $('#swipebox-caption, #swipebox-action');
+					
+				b.addClass('visible-bars');
+				$this.setTimeout();
 				
-				if ( !isTouch ){
+				$('#swipebox-slider').click(function(e){
+					if(!b.hasClass('visible-bars')){
+						$this.showBars();
+						$this.setTimeout();
+					}
+				});
+
+				$('#swipebox-action').hover(function() {
+				  		$this.showBars();
+						b.addClass('force-visible-bars');
+						$this.clearTimeout();
 					
-					b.addClass('visible-bars');
-					$this.setTimeout();
-					
-					$('#swipebox-slider').click(function(e){
-						if(!b.hasClass('visible-bars')){
-							$this.showBars();
-							$this.setTimeout();
-						}
-					});
+					},function() { 
+						b.removeClass('force-visible-bars');
+						$this.setTimeout();
 
-					$('#swipebox-action').hover(function() {
-					  		$this.showBars();
-							b.addClass('force-visible-bars');
-							$this.clearTimeout();
-						
-						},function() { 
-							b.removeClass('force-visible-bars');
-							$this.setTimeout();
-
-					});
-
-				}
-
+				});
 			},
 
 			keyboard : function(){
-				if ( !isTouch ){
-					var $this = this;
-					$(window).bind('keyup', function(e){
-						e.preventDefault();
-						e.stopPropagation();
-						if (e.keyCode == 37){
-							$this.getPrev();
-						}
-						else if (e.keyCode==39){
-							$this.getNext();
-						}
-						else if (e.keyCode == 27) {
-							$this.closeSlide();
-						}
-					});
-				}
+				var $this = this;
+				$(window).bind('keyup', function(e){
+					e.preventDefault();
+					e.stopPropagation();
+					if (e.keyCode == 37){
+						$this.getPrev();
+					}
+					else if (e.keyCode==39){
+						$this.getNext();
+					}
+					else if (e.keyCode == 27) {
+						$this.closeSlide();
+					}
+				});
 			},
 
 			actions : function(){
