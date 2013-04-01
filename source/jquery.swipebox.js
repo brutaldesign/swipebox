@@ -44,6 +44,7 @@
 				e.preventDefault();
 				e.stopPropagation();
 				index = $elem.index($(this));
+				ui.target = $(e.target);
 				ui.init(index);
 			});
 
@@ -52,6 +53,7 @@
 		var ui = {
 
 			init : function(index){
+				this.target.trigger('swipebox-start');
 				this.build();
 				this.openSlide(index);
 				this.openImg(index);
@@ -431,7 +433,8 @@
 				$('#swipebox-slider').unbind();
 				$('#swipebox-overlay').remove();
 				$elem.removeData('_swipebox');
-			}
+				this.target.trigger('swipebox-destroy');
+ 			}
 
 		}
 
