@@ -428,7 +428,8 @@
 			destroy : function(){
 				var $this = this;
 				$(window).unbind('keyup');
-				$('body').unbind('touchstart'); 
+				$('body').unbind('touchstart');
+				$('body').unbind('touchmove');
 				$('body').unbind('touchend');
 				$('#swipebox-slider').unbind();
 				$('#swipebox-overlay').remove();
