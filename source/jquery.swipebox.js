@@ -44,6 +44,7 @@
 				e.preventDefault();
 				e.stopPropagation();
 				index = $elem.index($(this));
+				ui.target = $(e.target);
 				ui.init(index);
 			});
 
@@ -52,6 +53,7 @@
 		var ui = {
 
 			init : function(index){
+				this.target.trigger('swipebox-start');
 				this.build();
 				this.openSlide(index);
 				this.openImg(index);
@@ -426,12 +428,14 @@
 			destroy : function(){
 				var $this = this;
 				$(window).unbind('keyup');
-				$('body').unbind('touchstart'); 
+				$('body').unbind('touchstart');
+				$('body').unbind('touchmove');
 				$('body').unbind('touchend');
 				$('#swipebox-slider').unbind();
 				$('#swipebox-overlay').remove();
 				$elem.removeData('_swipebox');
-			}
+				this.target.trigger('swipebox-destroy');
+ 			}
 
 		}
 
