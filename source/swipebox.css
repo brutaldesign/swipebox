@@ -13,7 +13,7 @@
   top: 0;
   left: 0;
   opacity: 0;
-  z-index: 9999;
+  z-index: 99999!important;
   overflow: hidden;
   display: none;
   -webkit-user-select: none;
@@ -51,6 +51,8 @@
   display: inline-block;
   max-height: 100%;
   max-width: 100%;
+  margin: 0;
+  padding: 0;
   width: auto;
   height: auto;
   vertical-align: middle;
