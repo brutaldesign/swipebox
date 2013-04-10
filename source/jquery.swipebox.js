@@ -3,7 +3,7 @@
 @author       Constantin Saguin - @brutaldesign
 @link            http://bsign.co
 @github        http://github.com/brutaldesign/swipebox
-@version     1.0
+@version     1.1
 @license      MIT License
 
 ----------------------------------------------------------------------------------------------*/
@@ -199,7 +199,7 @@
 						
 					});
 
-           			}
+           				}
 			},
 
 			setTimeout: function(){
@@ -340,7 +340,8 @@
 				
 				setTimeout(function(){
 					$('body').addClass('swipebox-overflow-hidden');
-				}, 1500);
+					$(window).trigger('resize');
+				}, 800);
 				
 				this.setSlide(index);
 			},
@@ -365,9 +366,10 @@
 
 
 			setTitle : function(index){
-				var title = null;
+				$('#swipebox-caption').empty();
+				
 				if($elem.eq(index).attr('title')){
-					$('#swipebox-caption').empty().append($elem.eq(index).attr('title'));
+					$('#swipebox-caption').append($elem.eq(index).attr('title'));
 				}
 			},
 			
