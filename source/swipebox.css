@@ -1,4 +1,4 @@
-.swipebox-overflow-hidden {
+.swipebox {
   overflow: hidden!important;
 }
 
@@ -12,10 +12,8 @@
   position: fixed;
   top: 0;
   left: 0;
-  opacity: 0;
   z-index: 99999!important;
   overflow: hidden;
-  display: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
@@ -28,14 +26,15 @@
   width: 100%;
   white-space: nowrap;
   position: absolute;
+  display: none;
 }
 
 #swipebox-slider .slide {
   background: url("img/loader.gif") no-repeat center center;
   height: 100%;
+  width: 100%;
   line-height: 1px;
   text-align: center;
-  width: 100%;
   display: inline-block;
 }
 
