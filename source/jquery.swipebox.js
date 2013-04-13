@@ -3,7 +3,7 @@
 @author       Constantin Saguin - @brutaldesign
 @link            http://bsign.co
 @github        http://github.com/brutaldesign/swipebox
-@version     1.1
+@version     1.1.1
 @license      MIT License
 
 ----------------------------------------------------------------------------------------------*/
@@ -39,7 +39,7 @@
 		plugin.init = function(){
 
 			plugin.settings = $.extend({}, defaults, options);
-
+			
 			$selector.click(function(e){
 				e.preventDefault();
 				e.stopPropagation();
@@ -47,7 +47,6 @@
 				ui.target = $(e.target);
 				ui.init(index);
 			});
-
 		}
 
 		var ui = {
@@ -199,7 +198,7 @@
 						
 					});
 
-           				}
+           			}
 			},
 
 			setTimeout: function(){
@@ -308,12 +307,14 @@
 					});
 				}
 
-				$('#swipebox-close').bind('click touchstart', function(e){
+				$('#swipebox-close').bind('click touchend', function(e){
 					$this.closeSlide();
 				});
 			},
 			
-			setSlide : function (index){
+			setSlide : function (index, isFirst){
+				isFirst = isFirst || false;
+				
 				var slider = $('#swipebox-slider');
 				
 				if(this.doCssTrans()){
@@ -326,8 +327,11 @@
 				$('#swipebox-slider .slide').eq(index).addClass('current');
 				this.setTitle(index);
 
-				$('#swipebox-prev, #swipebox-next').removeClass('disabled');
+				if( isFirst ){
+					slider.fadeIn();
+				}
 
+				$('#swipebox-prev, #swipebox-next').removeClass('disabled');
 				if(index == 0){
 					$('#swipebox-prev').addClass('disabled');
 				}else if( index == $elem.length - 1 ){
@@ -336,14 +340,10 @@
 			},
 		
 			openSlide : function (index){
-				$('#swipebox-overlay').show().stop().animate({ opacity : 1 }, 'slow').addClass('visible');
 				
-				setTimeout(function(){
-					$('body').addClass('swipebox-overflow-hidden');
-					$(window).trigger('resize');
-				}, 800);
-				
-				this.setSlide(index);
+				$('body').addClass('swipebox');
+				$(window).trigger('resize'); // fix scroll bar visibility on desktop
+				this.setSlide(index, true);
 			},
 		
 			preloadImg : function (index){
@@ -365,7 +365,7 @@
 			},
 
 
-			setTitle : function(index){
+			setTitle : function(index, isFirst){
 				$('#swipebox-caption').empty();
 				
 				if($elem.eq(index).attr('title')){
@@ -418,13 +418,9 @@
 
 			closeSlide : function (){
 				var $this = this;
-				$('body').removeClass('swipebox-overflow-hidden');
-				$('#swipebox-overlay').animate({ opacity : 0 }, 'fast');
-				setTimeout(function(){
-					$('#swipebox-overlay').removeClass('visible');
-					$this.destroy();	
-				}, 1000);
-
+				$(window).trigger('resize');
+				$('body').removeClass('swipebox');
+				$this.destroy();
 			},
 
 			destroy : function(){
@@ -436,7 +432,7 @@
 				$('#swipebox-slider').unbind();
 				$('#swipebox-overlay').remove();
 				$elem.removeData('_swipebox');
-				this.target.trigger('swipebox-destroy');
+				$this.target.trigger('swipebox-destroy');
  			}
 
 		}
