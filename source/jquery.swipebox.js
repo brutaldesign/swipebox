@@ -3,7 +3,7 @@
 @author       Constantin Saguin - @brutaldesign
 @link            http://bsign.co
 @github        http://github.com/brutaldesign/swipebox
-@version     1.1.1
+@version     1.1.2
 @license      MIT License
 
 ----------------------------------------------------------------------------------------------*/
@@ -341,7 +341,7 @@
 		
 			openSlide : function (index){
 				
-				$('body').addClass('swipebox');
+				$('html').addClass('swipebox');
 				$(window).trigger('resize'); // fix scroll bar visibility on desktop
 				this.setSlide(index, true);
 			},
@@ -419,7 +419,7 @@
 			closeSlide : function (){
 				var $this = this;
 				$(window).trigger('resize');
-				$('body').removeClass('swipebox');
+				$('html').removeClass('swipebox');
 				$this.destroy();
 			},
 
