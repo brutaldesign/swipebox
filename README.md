@@ -49,9 +49,19 @@ Bind the swipebox behaviour on every link with the "swipebox" class.
 
 `$(".swipebox").swipebox();`
 
+###Pass slides via array
+
+Launch slides viewer dynamically.
+
+`$.swipebox([{href:'big/image.jpg', title:'My Caption'}, ...], options);`
 
 ###Need a couple of options?
 
-
 `useCSS : true, // false will force the use of jQuery for animations`
 `hideBarsDelay : 3000 // 0 to always show caption and action bar`
+`beforeOpen : function(){} // called before opening slides`
+`afterClose : function(){} // called after closing slides`
+
+###Check if slides are open
+
+`if ($.swipebox.isOpen) ...`
