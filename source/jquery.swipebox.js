@@ -261,8 +261,18 @@
 				b.addClass('visible-bars');
 				$this.setTimeout();
 
-				$('#swipebox-slider').on('click mousemove', function(e){
-					if(!b.hasClass('visible-bars')){
+				$('#swipebox-slider').on('click', function(evt){
+          if (!$(evt.target).is('img')) {
+            $this.closeSlide();
+          }
+					else if (!b.hasClass('visible-bars')) {
+						$this.showBars();
+						$this.setTimeout();
+					}
+				});
+
+				$('#swipebox-slider').on('mousemove', function(evt){
+					if (!b.hasClass('visible-bars')) {
 						$this.showBars();
 						$this.setTimeout();
 					}
@@ -443,12 +453,12 @@
 				if (plugin.settings.afterClose) plugin.settings.afterClose();
  			}
 
-		}
+		};
 
 		plugin.init();
 
 		return plugin;
-	}
+	};
 
 	$.fn.swipebox = function(options){
 		if (!$.data(this, "_swipebox")) {
