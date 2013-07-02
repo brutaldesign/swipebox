@@ -43,16 +43,14 @@
 			$selector.click(function(e){
 				var relType, relVal;
 
-		                if (!relVal) {
-		                    relType = 'rel';
-		                    relVal  = $(this).attr(relType);
-		                }
-		                
-		                if (relVal && relVal !== '' && relVal !== 'nofollow') {
-		                    $elem = $selector.filter('[' + relType + '="' + relVal + '"]');
-		                } else {
-		                    $elem = $(this);
-		                }
+				if (!relVal) {
+					relType = 'rel';
+					relVal  = $(this).attr(relType);
+				}
+
+				if (relVal && relVal !== '' && relVal !== 'nofollow') {
+					$elem = $selector.filter('[' + relType + '="' + relVal + '"]');
+				}
 		                
 				e.preventDefault();
 				e.stopPropagation();
