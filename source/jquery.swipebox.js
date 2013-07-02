@@ -1,9 +1,9 @@
 /*---------------------------------------------------------------------------------------------
 
 @author       Constantin Saguin - @brutaldesign
-@link            http://bsign.co
+@link            http://csag.co
 @github        http://github.com/brutaldesign/swipebox
-@version     1.1.2
+@version     1.1.4
 @license      MIT License
 
 ----------------------------------------------------------------------------------------------*/
