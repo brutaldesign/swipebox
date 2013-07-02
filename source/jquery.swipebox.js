@@ -49,6 +49,12 @@
 			});
 		}
 
+		plugin.refresh = function() {
+			ui.destroy();
+			$elem = $(selector);
+			ui.actions();
+		}
+
 		var ui = {
 
 			init : function(index){
@@ -432,7 +438,8 @@
 				$('#swipebox-slider').unbind();
 				$('#swipebox-overlay').remove();
 				$elem.removeData('_swipebox');
-				$this.target.trigger('swipebox-destroy');
+				if ( $this.target )
+					$this.target.trigger('swipebox-destroy');
  			}
 
 		}
@@ -446,6 +453,7 @@
 			var swipebox = new $.swipebox(this, options);
 			this.data('_swipebox', swipebox);
 		}
+		return this.data('_swipebox');
 	}
 
 }(window, document, jQuery));
