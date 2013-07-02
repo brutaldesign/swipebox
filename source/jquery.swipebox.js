@@ -50,6 +50,8 @@
 
 				if (relVal && relVal !== '' && relVal !== 'nofollow') {
 					$elem = $selector.filter('[' + relType + '="' + relVal + '"]');
+				}else{
+					$elem = $(selector);
 				}
 		                
 				e.preventDefault();
