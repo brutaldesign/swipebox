@@ -41,6 +41,19 @@
 			plugin.settings = $.extend({}, defaults, options);
 			
 			$selector.click(function(e){
+				var relType, relVal;
+
+		                if (!relVal) {
+		                    relType = 'rel';
+		                    relVal  = $(this).attr(relType);
+		                }
+		                
+		                if (relVal && relVal !== '' && relVal !== 'nofollow') {
+		                    $elem = $selector.filter('[' + relType + '="' + relVal + '"]');
+		                } else {
+		                    $elem = $(this);
+		                }
+		                
 				e.preventDefault();
 				e.stopPropagation();
 				index = $elem.index($(this));
