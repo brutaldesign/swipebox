@@ -1,15 +1,9 @@
 /*---------------------------------------------------------------------------------------------
 
 @author       Constantin Saguin - @brutaldesign
-<<<<<<< HEAD
-@link            http://bsign.co
-@github        http://github.com/brutaldesign/swipebox
-@version     1.1.2
-=======
 @link            http://csag.co
 @github        http://github.com/brutaldesign/swipebox
 @version     1.2
->>>>>>> origin/master
 @license      MIT License
 
 ----------------------------------------------------------------------------------------------*/
@@ -20,27 +14,6 @@
 
 		var defaults = {
 			useCSS : true,
-<<<<<<< HEAD
-			hideBarsDelay : 3000
-		},
-		
-			plugin = this,
-			$elem = $(elem),
-			elem = elem,
-			selector = elem.selector,
-			$selector = $(selector),
-			isTouch = document.createTouch !== undefined || ('ontouchstart' in window) || ('onmsgesturechange' in window) || navigator.msMaxTouchPoints,
-			supportSVG = !!(window.SVGSVGElement),
-			html = '<div id="swipebox-overlay">\
-					<div id="swipebox-slider"></div>\
-					<div id="swipebox-caption"></div>\
-					<div id="swipebox-action">\
-						<a id="swipebox-close"></a>\
-						<a id="swipebox-prev"></a>\
-						<a id="swipebox-next"></a>\
-					</div>\
-			</div>';
-=======
 			hideBarsDelay : 3000,
 			videoMaxWidth : 1140,
 			vimeoColor : 'CCCCCC',
@@ -64,23 +37,12 @@
 					<a id="swipebox-next"></a>\
 				</div>\
 		</div>';
->>>>>>> origin/master
 
 		plugin.settings = {}
 
 		plugin.init = function(){
 
 			plugin.settings = $.extend({}, defaults, options);
-<<<<<<< HEAD
-			
-			$selector.click(function(e){
-				e.preventDefault();
-				e.stopPropagation();
-				index = $elem.index($(this));
-				ui.target = $(e.target);
-				ui.init(index);
-			});
-=======
 
 			if ($.isArray(elem)) {
 
@@ -136,20 +98,11 @@
 				$elem = $(selector);
 				ui.actions();
 			}
->>>>>>> origin/master
 		}
 
 		var ui = {
 
 			init : function(index){
-<<<<<<< HEAD
-				this.target.trigger('swipebox-start');
-				this.build();
-				this.openSlide(index);
-				this.openImg(index);
-				this.preloadImg(index+1);
-				this.preloadImg(index-1);
-=======
 				if (plugin.settings.beforeOpen) 
 					plugin.settings.beforeOpen();
 				this.target.trigger('swipebox-start');
@@ -159,7 +112,6 @@
 				this.openMedia(index);
 				this.preloadMedia(index+1);
 				this.preloadMedia(index-1);
->>>>>>> origin/master
 			},
 
 			build : function(){
@@ -200,11 +152,7 @@
 					});
 				}
 				
-<<<<<<< HEAD
-				$elem.each(function(){
-=======
 				$.each( elements,  function(){
->>>>>>> origin/master
 					$('#swipebox-slider').append('<div class="slide"></div>');
 				});
 
@@ -213,25 +161,11 @@
 				$this.keyboard();
 				$this.gesture();
 				$this.animBars();
-<<<<<<< HEAD
-
-				$(window).resize(function() {
-					$this.setDim();
-				}).resize();
-=======
 				$this.resize();
->>>>>>> origin/master
 			},
 
 			setDim : function(){
 				var sliderCss = {
-<<<<<<< HEAD
-					width : $(window).width(),
-					height : window.innerHeight ? window.innerHeight : $(window).height() // fix IOS bug
-				}
-
-				$('#swipebox-overlay').css(sliderCss);
-=======
 					width : window.innerWidth ? window.innerWidth : $(window).width(),
 					height : window.innerHeight ? window.innerHeight : $(window).height()
 				}
@@ -246,7 +180,6 @@
 				$(window).resize(function() {
 					$this.setDim();
 				}).resize();
->>>>>>> origin/master
 
 			},
 
@@ -271,15 +204,6 @@
 					var $this = this,
 					distance = null,
 					swipMinDistance = 10,
-<<<<<<< HEAD
-					startCoords = {}, 
-					endCoords = {};
-					var b = $('#swipebox-caption, #swipebox-action');
-
-					b.addClass('visible-bars');
-					$this.setTimeout();
-					
-=======
 					startCoords = {},
 					endCoords = {};
 					var bars = $('#swipebox-caption, #swipebox-action');
@@ -287,7 +211,6 @@
 					bars.addClass('visible-bars');
 					$this.setTimeout();
 
->>>>>>> origin/master
 					$('body').bind('touchstart', function(e){
 
 						$(this).addClass('touching');
@@ -306,18 +229,6 @@
 
 	           			}).bind('touchend',function(e){
 	           				e.preventDefault();
-<<<<<<< HEAD
-						e.stopPropagation();
-	   				
-	   					distance = endCoords.pageX - startCoords.pageX;
-	       				
-	       				if( distance >= swipMinDistance ){
-	       					// swipeLeft
-	       					$this.getPrev();
-	       				}
-
-	       				else if( distance <= - swipMinDistance ){
-=======
 					e.stopPropagation();
    				
    					distance = endCoords.pageX - startCoords.pageX;
@@ -329,17 +240,12 @@
 	       				
 	       				}else if( distance <= - swipMinDistance ){
 	       					
->>>>>>> origin/master
 	       					// swipeRight
 	       					$this.getNext();
 	       				
 	       				}else{
 	       					// tap
-<<<<<<< HEAD
-	       					if(!b.hasClass('visible-bars')){
-=======
 	       					if(!bars.hasClass('visible-bars')){
->>>>>>> origin/master
 							$this.showBars();
 							$this.setTimeout();
 						}else{
@@ -353,11 +259,7 @@
 						
 					});
 
-<<<<<<< HEAD
-           			}
-=======
            				}
->>>>>>> origin/master
 			},
 
 			setTimeout: function(){
@@ -377,62 +279,33 @@
 			},
 
 			showBars : function(){
-<<<<<<< HEAD
-				var b = $('#swipebox-caption, #swipebox-action');
-				if(this.doCssTrans()){
-					b.addClass('visible-bars');
-=======
 				var bars = $('#swipebox-caption, #swipebox-action');
 				if(this.doCssTrans()){
 					bars.addClass('visible-bars');
->>>>>>> origin/master
 				}else{
 					$('#swipebox-caption').animate({ top : 0 }, 500);
 					$('#swipebox-action').animate({ bottom : 0 }, 500);
 					setTimeout(function(){
-<<<<<<< HEAD
-						b.addClass('visible-bars');
-=======
 						bars.addClass('visible-bars');
->>>>>>> origin/master
 					}, 1000);
 				}
 			},
 
 			hideBars : function(){
-<<<<<<< HEAD
-				var b = $('#swipebox-caption, #swipebox-action');
-				if(this.doCssTrans()){
-					b.removeClass('visible-bars');
-=======
 				var bars = $('#swipebox-caption, #swipebox-action');
 				if(this.doCssTrans()){
 					bars.removeClass('visible-bars');
->>>>>>> origin/master
 				}else{
 					$('#swipebox-caption').animate({ top : '-50px' }, 500);
 					$('#swipebox-action').animate({ bottom : '-50px' }, 500);
 					setTimeout(function(){
-<<<<<<< HEAD
-						b.removeClass('visible-bars');
-=======
 						bars.removeClass('visible-bars');
->>>>>>> origin/master
 					}, 1000);
 				}
 			},
 
 			animBars : function(){
 				var $this = this;
-<<<<<<< HEAD
-				var b = $('#swipebox-caption, #swipebox-action');
-					
-				b.addClass('visible-bars');
-				$this.setTimeout();
-				
-				$('#swipebox-slider').click(function(e){
-					if(!b.hasClass('visible-bars')){
-=======
 				var bars = $('#swipebox-caption, #swipebox-action');
 					
 				bars.addClass('visible-bars');
@@ -440,7 +313,6 @@
 				
 				$('#swipebox-slider').click(function(e){
 					if(!bars.hasClass('visible-bars')){
->>>>>>> origin/master
 						$this.showBars();
 						$this.setTimeout();
 					}
@@ -448,19 +320,11 @@
 
 				$('#swipebox-action').hover(function() {
 				  		$this.showBars();
-<<<<<<< HEAD
-						b.addClass('force-visible-bars');
-						$this.clearTimeout();
-					
-					},function() { 
-						b.removeClass('force-visible-bars');
-=======
 						bars.addClass('force-visible-bars');
 						$this.clearTimeout();
 					
 					},function() { 
 						bars.removeClass('force-visible-bars');
->>>>>>> origin/master
 						$this.setTimeout();
 
 				});
@@ -486,11 +350,7 @@
 			actions : function(){
 				var $this = this;
 				
-<<<<<<< HEAD
-				if( $elem.length < 2 ){
-=======
 				if( elements.length < 2 ){
->>>>>>> origin/master
 					$('#swipebox-prev, #swipebox-next').hide();
 				}else{
 					$('#swipebox-prev').bind('click touchend', function(e){
@@ -535,60 +395,17 @@
 				$('#swipebox-prev, #swipebox-next').removeClass('disabled');
 				if(index == 0){
 					$('#swipebox-prev').addClass('disabled');
-<<<<<<< HEAD
-				}else if( index == $elem.length - 1 ){
-=======
 				}else if( index == elements.length - 1 ){
->>>>>>> origin/master
 					$('#swipebox-next').addClass('disabled');
 				}
 			},
 		
 			openSlide : function (index){
-<<<<<<< HEAD
-				
-=======
->>>>>>> origin/master
 				$('html').addClass('swipebox');
 				$(window).trigger('resize'); // fix scroll bar visibility on desktop
 				this.setSlide(index, true);
 			},
 		
-<<<<<<< HEAD
-			preloadImg : function (index){
-				var $this = this;
-				setTimeout(function(){
-					$this.openImg(index);
-				}, 1000);
-			},
-			
-			openImg : function (index){
-				var $this = this;
-				if(index < 0 || index >= $elem.length){
-					return false;
-				}
-
-				$this.loadImg($elem.eq(index).attr('href'), function(){
-					$('#swipebox-slider .slide').eq(index).html(this);
-				});
-			},
-
-
-			setTitle : function(index, isFirst){
-				$('#swipebox-caption').empty();
-				
-				if($elem.eq(index).attr('title')){
-					$('#swipebox-caption').append($elem.eq(index).attr('title'));
-				}
-			},
-			
-			loadImg : function (src, callback){
-				var img = $('<img>').on('load', function(){
-					callback.call(img);
-				});
-				
-				img.attr('src',src);
-=======
 			preloadMedia : function (index){
 				var $this = this, src = null;
 
@@ -676,23 +493,15 @@
 					
 					img.attr('src',src);
 				}	
->>>>>>> origin/master
 			},
 			
 			getNext : function (){
 				var $this = this;
 				index = $('#swipebox-slider .slide').index($('#swipebox-slider .slide.current'));
-<<<<<<< HEAD
-				if(index+1 < $elem.length){
-					index++;
-					$this.setSlide(index);
-					$this.preloadImg(index+1);
-=======
 				if(index+1 < elements.length){
 					index++;
 					$this.setSlide(index);
 					$this.preloadMedia(index+1);
->>>>>>> origin/master
 				}
 				else{
 					
@@ -709,11 +518,7 @@
 				if(index > 0){
 					index--;
 					$this.setSlide(index);
-<<<<<<< HEAD
-					$this.preloadImg(index-1);
-=======
 					$this.preloadMedia(index-1);
->>>>>>> origin/master
 				}
 				else{
 					
@@ -727,13 +532,8 @@
 
 			closeSlide : function (){
 				var $this = this;
-<<<<<<< HEAD
-				$(window).trigger('resize');
-				$('html').removeClass('swipebox');
-=======
 				$('html').removeClass('swipebox');
 				$(window).trigger('resize');
->>>>>>> origin/master
 				$this.destroy();
 			},
 
@@ -745,17 +545,6 @@
 				$('body').unbind('touchend');
 				$('#swipebox-slider').unbind();
 				$('#swipebox-overlay').remove();
-<<<<<<< HEAD
-				$elem.removeData('_swipebox');
-				$this.target.trigger('swipebox-destroy');
- 			}
-
-		}
-
-		plugin.init();
-		
-	}
-=======
 				elem.removeData('_swipebox');
 				if ( $this.target )
 					$this.target.trigger('swipebox-destroy');
@@ -769,20 +558,13 @@
 		plugin.init();
 		
 	};
->>>>>>> origin/master
 
 	$.fn.swipebox = function(options){
 		if (!$.data(this, "_swipebox")) {
 			var swipebox = new $.swipebox(this, options);
 			this.data('_swipebox', swipebox);
 		}
-<<<<<<< HEAD
-	}
-
-}(window, document, jQuery));
-=======
 		return this.data('_swipebox');
 	}
 
 }(window, document, jQuery));
->>>>>>> origin/master

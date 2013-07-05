@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-.swipebox {
-=======
 html.swipebox {
->>>>>>> origin/master
   overflow: hidden!important;
 }
 
@@ -50,12 +46,8 @@ html.swipebox {
   margin-right: -1px;
 }
 
-<<<<<<< HEAD
-#swipebox-slider .slide img {
-=======
 #swipebox-slider .slide img,
 #swipebox-slider .slide .swipebox-video-container {
->>>>>>> origin/master
   display: inline-block;
   max-height: 100%;
   max-width: 100%;
@@ -66,8 +58,6 @@ html.swipebox {
   vertical-align: middle;
 }
 
-<<<<<<< HEAD
-=======
 #swipebox-slider .slide .swipebox-video-container {
   background:none;
   max-width: 1140px;
@@ -94,7 +84,6 @@ html.swipebox {
   top: 0; left: 0;
 }
 
->>>>>>> origin/master
 #swipebox-action, #swipebox-caption {
   position: absolute;
   left: 0;
@@ -226,8 +215,6 @@ html.swipebox {
   }
 }
 
-<<<<<<< HEAD
-=======
 @media screen and (max-width: 800px) {
   #swipebox-action #swipebox-close {
     left: 0;
@@ -243,7 +230,6 @@ html.swipebox {
 }
 
 
->>>>>>> origin/master
 /* Skin 
 --------------------------*/
 #swipebox-overlay {
@@ -258,38 +244,20 @@ html.swipebox {
   background-image: -moz-linear-gradient(#0d0d0d, #000000);
   background-image: -o-linear-gradient(#0d0d0d, #000000);
   background-image: linear-gradient(#0d0d0d, #000000);
-<<<<<<< HEAD
-  -webkit-box-shadow: 0 1px 1px 1px #212121, inset 0 1px 1px 1px black;
-  -moz-box-shadow: 0 1px 1px 1px #212121, inset 0 1px 1px 1px black;
-  box-shadow: 0 1px 1px 1px #212121, inset 0 1px 1px 1px black;
-=======
->>>>>>> origin/master
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=95);
   opacity: 0.95;
 }
 
 #swipebox-action {
-<<<<<<< HEAD
-  -webkit-box-shadow: 0 -1px -1px 1px #212121, inset 0 -1px -1px 1px black;
-  -moz-box-shadow: 0 -1px -1px 1px #212121, inset 0 -1px -1px 1px black;
-  box-shadow: 0 -1px -1px 1px #212121, inset 0 -1px -1px 1px black;
-}
-
-#swipebox-caption {
-=======
   border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 #swipebox-caption {
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
->>>>>>> origin/master
   color: white!important;
   font-size: 15px;
   line-height: 43px;
   font-family: Helvetica, Arial, sans-serif;
 }
-<<<<<<< HEAD
-=======
 
 
->>>>>>> origin/master
