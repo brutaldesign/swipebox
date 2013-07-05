@@ -161,3 +161,7 @@ pip-log.txt
 
 # Mac crap
 .DS_Store
+
+# Sublime Text 2
+*.sublime-project
+*.sublime-workspace

@@ -3,7 +3,7 @@
 @author       Constantin Saguin - @brutaldesign
 @link            http://csag.co
 @github        http://github.com/brutaldesign/swipebox
-@version     1.1.4
+@version     1.2
 @license      MIT License
 
 ----------------------------------------------------------------------------------------------*/
@@ -14,69 +14,104 @@
 
 		var defaults = {
 			useCSS : true,
-			hideBarsDelay : 3000
+			hideBarsDelay : 3000,
+			videoMaxWidth : 1140,
+			vimeoColor : 'CCCCCC',
+			beforeOpen: null,
+		      	afterClose: null
 		},
 		
-			plugin = this,
-			$elem = $(elem),
-			elem = elem,
-			selector = elem.selector,
-			$selector = $(selector),
-			isTouch = document.createTouch !== undefined || ('ontouchstart' in window) || ('onmsgesturechange' in window) || navigator.msMaxTouchPoints,
-			supportSVG = !!(window.SVGSVGElement),
-			html = '<div id="swipebox-overlay">\
-					<div id="swipebox-slider"></div>\
-					<div id="swipebox-caption"></div>\
-					<div id="swipebox-action">\
-						<a id="swipebox-close"></a>\
-						<a id="swipebox-prev"></a>\
-						<a id="swipebox-next"></a>\
-					</div>\
-			</div>';
+		plugin = this,
+		elements = [], // slides array [{href:'...', title:'...'}, ...],
+		elem = elem,
+		selector = elem.selector,
+		$selector = $(selector),
+		isTouch = document.createTouch !== undefined || ('ontouchstart' in window) || ('onmsgesturechange' in window) || navigator.msMaxTouchPoints,
+		supportSVG = !!(window.SVGSVGElement),
+		html = '<div id="swipebox-overlay">\
+				<div id="swipebox-slider"></div>\
+				<div id="swipebox-caption"></div>\
+				<div id="swipebox-action">\
+					<a id="swipebox-close"></a>\
+					<a id="swipebox-prev"></a>\
+					<a id="swipebox-next"></a>\
+				</div>\
+		</div>';
 
 		plugin.settings = {}
 
 		plugin.init = function(){
 
 			plugin.settings = $.extend({}, defaults, options);
-			
-			$selector.click(function(e){
-				var relType, relVal;
 
-				if (!relVal) {
-					relType = 'rel';
-					relVal  = $(this).attr(relType);
-				}
+			if ($.isArray(elem)) {
 
-				if (relVal && relVal !== '' && relVal !== 'nofollow') {
-					$elem = $selector.filter('[' + relType + '="' + relVal + '"]');
-				}else{
-					$elem = $(selector);
-				}
-		                
-				e.preventDefault();
-				e.stopPropagation();
-				index = $elem.index($(this));
-				ui.target = $(e.target);
-				ui.init(index);
-			});
+				elements = elem;
+				ui.target = $(window);
+				ui.init(0);
+
+			}else{
+
+				$selector.click(function(e){
+					elements = [];
+					var index , relType, relVal;
+
+					if (!relVal) {
+						relType = 'rel';
+						relVal  = $(this).attr(relType);
+					}
+
+					if (relVal && relVal !== '' && relVal !== 'nofollow') {
+						$elem = $selector.filter('[' + relType + '="' + relVal + '"]');
+					}else{
+						$elem = $(selector);
+					}
+
+					$elem.each(function(){
+
+						var title = null, href = null;
+						
+						if( $(this).attr('title') )
+							title = $(this).attr('title');
+
+						if( $(this).attr('href') )
+							href = $(this).attr('href');
+
+						elements.push({
+							href: href,
+							title: title
+						});
+					});
+					
+					index = $elem.index($(this));
+					e.preventDefault();
+					e.stopPropagation();
+					ui.target = $(e.target);
+					ui.init(index);
+				});
+			}
 		}
 
 		plugin.refresh = function() {
-			ui.destroy();
-			$elem = $(selector);
-			ui.actions();
+			if (!$.isArray(elem)) {
+				ui.destroy();
+				$elem = $(selector);
+				ui.actions();
+			}
 		}
 
 		var ui = {
 
 			init : function(index){
+				if (plugin.settings.beforeOpen) 
+					plugin.settings.beforeOpen();
 				this.target.trigger('swipebox-start');
+				$.swipebox.isOpen = true;
 				this.build();
 				this.openSlide(index);
-				this.openImg(index);
-				this.preloadImg(index+1);
-				this.preloadImg(index-1);
+				this.openMedia(index);
+				this.preloadMedia(index+1);
+				this.preloadMedia(index-1);
 			},
 
 			build : function(){
@@ -117,7 +152,7 @@
 					});
 				}
 				
-				$elem.each(function(){
+				$.each( elements,  function(){
 					$('#swipebox-slider').append('<div class="slide"></div>');
 				});
 
@@ -126,19 +161,25 @@
 				$this.keyboard();
 				$this.gesture();
 				$this.animBars();
-
-				$(window).resize(function() {
-					$this.setDim();
-				}).resize();
+				$this.resize();
 			},
 
 			setDim : function(){
 				var sliderCss = {
-					width : $(window).width(),
-					height : window.innerHeight ? window.innerHeight : $(window).height() // fix IOS bug
+					width : window.innerWidth ? window.innerWidth : $(window).width(),
+					height : window.innerHeight ? window.innerHeight : $(window).height()
 				}
 
 				$('#swipebox-overlay').css(sliderCss);
+			},
+
+			resize : function(){
+				
+				var $this = this;
+
+				$(window).resize(function() {
+					$this.setDim();
+				}).resize();
 
 			},
 
@@ -163,13 +204,13 @@
 					var $this = this,
 					distance = null,
 					swipMinDistance = 10,
-					startCoords = {}, 
+					startCoords = {},
 					endCoords = {};
-					var b = $('#swipebox-caption, #swipebox-action');
+					var bars = $('#swipebox-caption, #swipebox-action');
 
-					b.addClass('visible-bars');
+					bars.addClass('visible-bars');
 					$this.setTimeout();
-					
+
 					$('body').bind('touchstart', function(e){
 
 						$(this).addClass('touching');
@@ -188,22 +229,23 @@
 
 	           			}).bind('touchend',function(e){
 	           				e.preventDefault();
-						e.stopPropagation();
-	   				
-	   					distance = endCoords.pageX - startCoords.pageX;
+					e.stopPropagation();
+   				
+   					distance = endCoords.pageX - startCoords.pageX;
 	       				
 	       				if( distance >= swipMinDistance ){
+	       					
 	       					// swipeLeft
 	       					$this.getPrev();
-	       				}
-
-	       				else if( distance <= - swipMinDistance ){
+	       				
+	       				}else if( distance <= - swipMinDistance ){
+	       					
 	       					// swipeRight
 	       					$this.getNext();
 	       				
 	       				}else{
 	       					// tap
-	       					if(!b.hasClass('visible-bars')){
+	       					if(!bars.hasClass('visible-bars')){
 							$this.showBars();
 							$this.setTimeout();
 						}else{
@@ -217,7 +259,7 @@
 						
 					});
 
-           			}
+           				}
 			},
 
 			setTimeout: function(){
@@ -237,40 +279,40 @@
 			},
 
 			showBars : function(){
-				var b = $('#swipebox-caption, #swipebox-action');
+				var bars = $('#swipebox-caption, #swipebox-action');
 				if(this.doCssTrans()){
-					b.addClass('visible-bars');
+					bars.addClass('visible-bars');
 				}else{
 					$('#swipebox-caption').animate({ top : 0 }, 500);
 					$('#swipebox-action').animate({ bottom : 0 }, 500);
 					setTimeout(function(){
-						b.addClass('visible-bars');
+						bars.addClass('visible-bars');
 					}, 1000);
 				}
 			},
 
 			hideBars : function(){
-				var b = $('#swipebox-caption, #swipebox-action');
+				var bars = $('#swipebox-caption, #swipebox-action');
 				if(this.doCssTrans()){
-					b.removeClass('visible-bars');
+					bars.removeClass('visible-bars');
 				}else{
 					$('#swipebox-caption').animate({ top : '-50px' }, 500);
 					$('#swipebox-action').animate({ bottom : '-50px' }, 500);
 					setTimeout(function(){
-						b.removeClass('visible-bars');
+						bars.removeClass('visible-bars');
 					}, 1000);
 				}
 			},
 
 			animBars : function(){
 				var $this = this;
-				var b = $('#swipebox-caption, #swipebox-action');
+				var bars = $('#swipebox-caption, #swipebox-action');
 					
-				b.addClass('visible-bars');
+				bars.addClass('visible-bars');
 				$this.setTimeout();
 				
 				$('#swipebox-slider').click(function(e){
-					if(!b.hasClass('visible-bars')){
+					if(!bars.hasClass('visible-bars')){
 						$this.showBars();
 						$this.setTimeout();
 					}
@@ -278,11 +320,11 @@
 
 				$('#swipebox-action').hover(function() {
 				  		$this.showBars();
-						b.addClass('force-visible-bars');
+						bars.addClass('force-visible-bars');
 						$this.clearTimeout();
 					
 					},function() { 
-						b.removeClass('force-visible-bars');
+						bars.removeClass('force-visible-bars');
 						$this.setTimeout();
 
 				});
@@ -308,7 +350,7 @@
 			actions : function(){
 				var $this = this;
 				
-				if( $elem.length < 2 ){
+				if( elements.length < 2 ){
 					$('#swipebox-prev, #swipebox-next').hide();
 				}else{
 					$('#swipebox-prev').bind('click touchend', function(e){
@@ -353,60 +395,113 @@
 				$('#swipebox-prev, #swipebox-next').removeClass('disabled');
 				if(index == 0){
 					$('#swipebox-prev').addClass('disabled');
-				}else if( index == $elem.length - 1 ){
+				}else if( index == elements.length - 1 ){
 					$('#swipebox-next').addClass('disabled');
 				}
 			},
 		
 			openSlide : function (index){
-				
 				$('html').addClass('swipebox');
 				$(window).trigger('resize'); // fix scroll bar visibility on desktop
 				this.setSlide(index, true);
 			},
 		
-			preloadImg : function (index){
-				var $this = this;
-				setTimeout(function(){
-					$this.openImg(index);
-				}, 1000);
+			preloadMedia : function (index){
+				var $this = this, src = null;
+
+				if( elements[index] !== undefined )
+					src = elements[index].href;
+
+				if( !$this.isVideo(src) ){
+					setTimeout(function(){
+						$this.openMedia(index);
+					}, 1000);
+				}else{
+					$this.openMedia(index);
+				}
 			},
 			
-			openImg : function (index){
-				var $this = this;
-				if(index < 0 || index >= $elem.length){
+			openMedia : function (index){
+				var $this = this, src = null;
+
+				if( elements[index] !== undefined )
+					src = elements[index].href;
+
+				if(index < 0 || index >= elements.length){
 					return false;
 				}
 
-				$this.loadImg($elem.eq(index).attr('href'), function(){
-					$('#swipebox-slider .slide').eq(index).html(this);
-				});
+				if( !$this.isVideo(src) ){
+					$this.loadMedia(src, function(){
+						$('#swipebox-slider .slide').eq(index).html(this);
+					});
+				}else{
+					$('#swipebox-slider .slide').eq(index).html($this.getVideo(src));
+				}
+				
 			},
 
+			setTitle : function (index, isFirst){
+				var title = null;
 
-			setTitle : function(index, isFirst){
 				$('#swipebox-caption').empty();
+
+				if( elements[index] !== undefined )
+					title = elements[index].title;
 				
-				if($elem.eq(index).attr('title')){
-					$('#swipebox-caption').append($elem.eq(index).attr('title'));
+				if(title){
+					$('#swipebox-caption').append(title);
 				}
 			},
-			
-			loadImg : function (src, callback){
-				var img = $('<img>').on('load', function(){
-					callback.call(img);
-				});
+
+			isVideo : function (src){
+
+				if( src ){
+					if( 
+						src.match(/youtube\.com\/watch\?v=([a-zA-Z0-9\-_]+)/) 
+						|| src.match(/vimeo\.com\/([0-9]*)/) 
+					){
+						return true;
+					}
+				}
+					
+			},
+
+			getVideo : function(url){
+				var iframe = '';
+				var output = '';
+				var youtubeUrl = url.match(/watch\?v=([a-zA-Z0-9\-_]+)/);
+				var vimeoUrl = url.match(/vimeo\.com\/([0-9]*)/);
+				if( youtubeUrl ){
+
+					iframe = '<iframe width="560" height="315" src="//www.youtube.com/embed/'+youtubeUrl[1]+'" frameborder="0" allowfullscreen></iframe>';
 				
-				img.attr('src',src);
+				}else if(vimeoUrl){
+
+					iframe = '<iframe width="560" height="315"  src="http://player.vimeo.com/video/'+vimeoUrl[1]+'?byline=0&amp;portrait=0&amp;color='+plugin.settings.vimeoColor+'" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
+				
+				}
+
+				return '<div class="swipebox-video-container" style="max-width:'+plugin.settings.videomaxWidth+'px"><div class="swipebox-video">'+iframe+'</div></div>';
+			},
+			
+			loadMedia : function (src, callback){
+				if( !this.isVideo(src) ){
+					var img = $('<img>').on('load', function(){
+						callback.call(img);
+					});
+					
+					img.attr('src',src);
+				}	
 			},
 			
 			getNext : function (){
 				var $this = this;
 				index = $('#swipebox-slider .slide').index($('#swipebox-slider .slide.current'));
-				if(index+1 < $elem.length){
+				if(index+1 < elements.length){
 					index++;
 					$this.setSlide(index);
-					$this.preloadImg(index+1);
+					$this.preloadMedia(index+1);
 				}
 				else{
 					
@@ -423,7 +518,7 @@
 				if(index > 0){
 					index--;
 					$this.setSlide(index);
-					$this.preloadImg(index-1);
+					$this.preloadMedia(index-1);
 				}
 				else{
 					
@@ -437,8 +532,8 @@
 
 			closeSlide : function (){
 				var $this = this;
-				$(window).trigger('resize');
 				$('html').removeClass('swipebox');
+				$(window).trigger('resize');
 				$this.destroy();
 			},
 
@@ -450,16 +545,19 @@
 				$('body').unbind('touchend');
 				$('#swipebox-slider').unbind();
 				$('#swipebox-overlay').remove();
-				$elem.removeData('_swipebox');
+				elem.removeData('_swipebox');
 				if ( $this.target )
 					$this.target.trigger('swipebox-destroy');
+				$.swipebox.isOpen = false;
+				if (plugin.settings.afterClose) 
+					plugin.settings.afterClose();
  			}
 
-		}
+		};
 
 		plugin.init();
 		
-	}
+	};
 
 	$.fn.swipebox = function(options){
 		if (!$.data(this, "_swipebox")) {

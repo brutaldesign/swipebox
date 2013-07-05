@@ -1,0 +1,423 @@
+/*-----------------------------------------------------------------------------------*/
+/*  Demo Style
+/*-----------------------------------------------------------------------------------*/
+/*  Reset this s***
+/*------------------------*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+body {
+  line-height: 1;
+}
+
+ul {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+q, blockquote {
+  quotes: none;
+}
+
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+a img {
+  border: none;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block;
+}
+
+:focus {
+  outline: 0;
+}
+
+strong {
+  font-weight: bold;
+}
+
+em {
+  font-style: italic;
+}
+
+del {
+  text-shadow: none!important;
+}
+
+body {
+  overflow-x: hidden;
+  margin-top: 0!important;
+  -webkit-font-smoothing: antialiased;
+  background: whiteSmoke;
+  color: #333;
+  font-size: 18px;
+  line-height: 1.8em;
+  font-family: Georgia, serif;
+  position: relative;
+  overflow-x: hidden!important;
+}
+
+.clear {
+  clear: both;
+  display: block;
+  overflow: hidden;
+  visibility: hidden;
+  height: 0;
+  line-height: 0;
+  width: 100%;
+}
+
+.clearfix{
+  zoom: 1;
+}
+
+.clearfix:before,
+.clearfix:after,
+.wrap:before,
+.wrap:after,
+hr:before,
+hr:after {
+   content: ""; display: table;
+}
+
+.clearfix:after,
+.wrap:after,
+hr:after {
+  clear: both;
+}
+
+p {
+  margin-bottom: 1em;
+}
+
+span.smooth {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
+  opacity: 0.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-style: normal;
+  line-height: 1.4em;
+  margin-bottom: 0.83em;
+  font-weight: bold;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+h1 {
+  font-size: 5em;
+  line-height: 1.3em;
+  margin-bottom: 0.1em;
+  text-align: center;
+}
+
+.tagline {
+  font-size: 1.5em;
+  font-weight: bold;
+  text-align: center;
+  max-width: 100%;
+  letter-spacing: 0.09em;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+h2 {
+  font-size: 2em;
+  margin-bottom: 0.5em;
+}
+
+h3 {
+  font-size: 1.4em;
+  margin-top: 1.5em;
+  margin-bottom: 0.67em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid #ccc;
+}
+
+h4, h5, h6 {
+  font-size: 1em;
+}
+
+a {
+  text-decoration: underline;
+  color: #293945;
+}
+
+hr {
+  border: none!important;
+  height: 5px;
+  background: #e6e6e6;
+  margin: 3em 0;
+}
+
+ol {
+  margin-left: 1.5em;
+  margin-bottom: 1em;
+}
+
+#main {
+  position: relative;
+  padding: 2em 0 0;
+  border-top: 10px solid #293945;
+}
+
+#fork-this {
+  position: absolute;
+  z-index: 2;
+  width: 150px;
+  height: 150px;
+  top: 5px;
+  right: 0;
+  z-index: 10;
+  background: url("fork.png") no-repeat 0 0;
+  background-size: 150px 150px;
+}
+
+.button {
+  font-weight: bold;
+  font-family: Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-block;
+  color: white;
+  background: #293945;
+  font-size: 24px;
+  padding: 0.8em 1.9em;
+  margin-left: 0.75em;
+  margin-right: 0.75em;
+  -webkit-box-shadow: 0 0 1px 1px #cccccc;
+  -moz-box-shadow: 0 0 1px 1px #cccccc;
+  box-shadow: 0 0 1px 1px #cccccc;
+  -webkit-transition: 0.1s;
+  -moz-transition: 0.1s;
+  -o-transition: 0.1s;
+  transition: 0.1s;
+}
+.button:hover {
+  background: #fff;
+  color: #293945;
+}
+
+.wrap {
+  width: 80%;
+  margin: 0 auto;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 4em;
+}
+
+section {
+  position: relative;
+}
+
+ul.index-table{
+  text-align: left;
+  margin: 3em 1.5em 2em;
+  list-style-type:square;
+}
+
+ul.index-table ul li{
+  margin-left: 1.5em;
+  list-style-type:square;
+}
+
+#action {
+  margin-top: 3em;
+  text-align: center;
+}
+
+footer {
+  background: #0c1115;
+  margin-top: 5em;
+  font-size: 13px;
+  height: 45px;
+  line-height: 46px;
+  width: 100%;
+  font-family: Helvetica, Arial, sans-serif;
+  text-align: center;
+}
+footer a {
+  color: #999999;
+  text-decoration: none;
+}
+
+.box {
+  width: 24.9%;
+  height: auto;
+  float: left;
+  margin-bottom: 0.7em;
+  text-align: center;
+  
+}
+.box a {
+  display: inline-block;
+  width: 98%;
+  height: auto;
+}
+.box a img {
+  width: 98%;
+  height: auto;
+  vertical-align: bottom;
+}
+
+
+#filter{
+  margin-bottom: 1em;
+}
+
+#filter li{
+  display: inline;
+  margin-right: 0.5em;
+}
+
+#grid{
+  margin-bottom: 2em;
+}
+
+#share div {
+  display: inline-block;
+}
+#share #fb-like {
+  position: relative;
+}
+
+#follow {
+  text-align: center;
+  margin-top: 3em;
+}
+
+code, pre {
+  padding: 0.5em;
+  font-size: 16px;
+  line-height: 22px;
+  color: #333;
+  font-family: Monaco, Andale Mono, Courier New, monospace;
+  margin-bottom: 1.5em;
+  overflow-x: auto;
+}
+
+code {
+  line-height: 2em;
+  font-size: 0.8em;
+}
+
+pre {
+  -webkit-box-shadow: inset 0px 0px 4px 1px #e6e6e6;
+  -moz-box-shadow: inset 0px 0px 4px 1px #e6e6e6;
+  box-shadow: inset 0px 0px 4px 1px #e6e6e6;
+  border: 1px solid white;
+  background: white;
+}
+pre span {
+  color: green;
+}
+
+/* Isotope styles
+---------------------------------------*/
+
+.isotope,
+.isotope .isotope-item {
+  /* change duration value to whatever you like */
+  -webkit-transition-duration: 0.8s;
+     -moz-transition-duration: 0.8s;
+       -o-transition-duration: 0.8s;
+          transition-duration: 0.8s;
+}
+
+.isotope {
+  -webkit-transition-property: height, width;
+     -moz-transition-property: height, width;
+       -o-transition-property: height, width;
+          transition-property: height, width;
+}
+
+.isotope .isotope-item {
+  -webkit-transition-property: -webkit-transform, opacity;
+     -moz-transition-property:    -moz-transform, opacity;
+       -o-transition-property:         top, left, opacity;
+          transition-property:         transform, opacity;
+}
+
+.isotope-item {
+  z-index: 2;
+}
+
+.isotope-hidden.isotope-item {
+  pointer-events: none;
+  z-index: 1;
+}
+
+@media screen and (max-width: 1024px) {
+  body {
+    font-size: 1em;
+  }
+
+  .wrap {
+    width: 92%;
+  }
+
+  .box {
+    width: 50%;
+  }
+
+}
+@media screen and (max-width: 500px) {
+  .wrap {
+    width: 95%;
+  }
+
+  .box {
+    width: 100%;
+  }
+
+  h1 {
+    font-size: 3.8em;
+  }
+
+  .tagline {
+    font-size: 1.3em;
+  }
+
+  .button {
+    font-size: 1em;
+    padding: 0.5em 1em;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+  }
+
+  #fork-this {
+    display: none;
+  }
+}
