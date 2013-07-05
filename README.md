@@ -54,7 +54,7 @@ Bind the swipebox behaviour on every link with the "swipebox" class.
 
 `useCSS : true, // false will force the use of jQuery for animations`
 `hideBarsDelay : 3000 // 0 to always show caption and action bar`
-`videoMaxWidth : 1140, // videos max width
+`videoMaxWidth : 1140, // videos max width`
 `beforeOpen: function(){},`
 `afterClose: function(){}`
 
