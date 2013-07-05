@@ -2,6 +2,7 @@
 <html lang="en-US">
 <head>
 	<meta charset="UTF-8">
+<<<<<<< HEAD
 	<meta name="viewport" content="width=device-width; initial-scale=1.0"/>
 	<meta name="description" content="A touchable jQuery lightbox plugin for desktop, mobile and tablet" />
 
@@ -20,6 +21,14 @@
 	<link rel="stylesheet" href="source/swipebox.css">
 	
 	<title>Swipebox | A touchable jQuery lightbox</title>
+=======
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="description" content="A touchable jQuery lightbox plugin for desktop, mobile and tablet" />
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="source/swipebox.css">
+	<title>Swipebox | A touchable jQuery lightbox</title>
+	<!-- share buttons -->
+>>>>>>> origin/master
 	<script type="text/javascript">(function(doc, script) {
 		var js, 
 		fjs = doc.getElementsByTagName(script)[0],
@@ -33,9 +42,15 @@
 		add("//platform.twitter.com/widgets.js", "twitter-wjs");
 		}(document, "script"));
 	</script>
+<<<<<<< HEAD
 </head>
 <body>
 	<div id="fb-root"></div>
+=======
+	<!-- end share buttons -->
+</head>
+<body>
+>>>>>>> origin/master
 	<a href="https://github.com/brutaldesign/swipebox" id="fork-this"></a>
 	<div id="main">
 		<div class="wrap">
@@ -53,12 +68,46 @@
 					</div>
 				</div>
 
+<<<<<<< HEAD
 			</header>
 			<hr>
 			<section id="presentation">
 				<h2>What is Swipebox ?</h2>
 				<p>Swipebox is a jQuery "lightbox" plugin for desktop, mobile and tablet.</p>		
 				<h3>Features</h3>
+=======
+				<ul class="index-table">
+					<li><a href="#what">What is Swipebox ?</a>
+						<ul>
+							<li><a href="#features">Main Features</a></li>
+							<li><a href="#compatibility">Compatibility</a></li>
+						</ul>
+					</li>
+					<li><a href="#try">Try it</a></li>
+					<li><a href="#basic">Basic Usage</a></li>
+					<li><a href="#advanced">Advanced</a>
+						<ul>
+							<li><a href="#rel">Use Rel Attribute</a></li>
+							<li><a href="#video">Youtube support</a></li>
+							<li><a href="#">Load slides dynamically</a></li>
+							<li><a href="#refresh">Refresh Method</a></li>
+							<li><a href="#open">Check open state</a></li>
+							<li><a href="#options">Options</a></li>
+						</ul>
+					</li>
+					<li><a href="#download">Download</a></li>
+
+				</ul>
+			</header>
+			<hr>
+			<section id="presentation">
+				<div id="what"></div>
+				<h2>What is Swipebox ?</h2>
+				<p>Swipebox is a jQuery "lightbox" plugin for desktop, mobile and tablet.</p>		
+				
+				<div id="features"></div>
+				<h3>Main Features</h3>
+>>>>>>> origin/master
 				<ol>
 					<li>Swipe gestures for mobile</li>
 					<li>Keyboard Navigation for desktop</li>
@@ -67,12 +116,21 @@
 					<li>Easy CSS customization</li>
 				</ol>
 
+<<<<<<< HEAD
+=======
+				<div id="compatibility"></div>
+>>>>>>> origin/master
 				<h3>Compatibility</h3>
 				<p>Chrome, Safari, Firefox, Opera, IE8+, IOS4+, Android, windows phone.</p>
 
 			</section>
 			<hr>
+<<<<<<< HEAD
 			<section id="exemple">
+=======
+			<section id="exemple" class="clearfix">
+				<div id="try"></div>
+>>>>>>> origin/master
 				<h2>Try it</h2>
 				<div class="box">
 					<a href="http://swipebox.brutaldesign.com/assets/full/nuke.jpg" class="swipebox" title="Nuke">
@@ -94,6 +152,7 @@
 						<img src="http://swipebox.brutaldesign.com/assets/neptune_thumb.jpg" alt="neptune">
 					</a>
 				</div>
+<<<<<<< HEAD
 				<div class="clear"></div>
 			</section>
 			<hr>
@@ -104,6 +163,18 @@
 				<p>Include jquery and the swipebox script in your <code>head</code> tags or right before your <code>body</code> closing tag.</p>
 <pre>&lt;script src="lib/jquery-1.9.0.min.js"&gt;&lt;/script&gt;
 &lt;script src="source/jquery.swipebox.min.js"&gt;&lt;/script&gt;</pre>
+=======
+			</section>
+			<hr>
+			<section id="usage">
+				<div id="basic"></div>
+				<h2>Basic Usage</h2>
+				<h3>Javascript</h3>
+
+				<p>Include jquery and the swipebox script in your <code>head</code> tags or right before your <code>body</code> closing tag.</p>
+<pre>&lt;script src="lib/jquery-2.0.3.js"&gt;&lt;/script&gt;
+&lt;script src="source/jquery.swipebox.js"&gt;&lt;/script&gt;</pre>
+>>>>>>> origin/master
 				<h3>CSS</h3>
 				<p>Include the swipebox CSS style in your <code>head</code> tags.</p>
 <pre>&lt;link rel="stylesheet" href="source/swipebox.css"&gt;</pre>
@@ -118,14 +189,140 @@
 jQuery(function($) {
 	$(".swipebox").swipebox();
 });
+<<<<<<< HEAD
 &lt;/script&gt;
 </pre>
 				<h4>Need a couple of options?</h4>
+=======
+&lt;script&gt;
+</pre>
+			</section>
+			<hr>
+			<section id="advanced-usage">
+				<div id="advanced"></div>
+				<h2>Advanced</h2>
+				
+				<div id="rel"></div>
+				<h3>Use "rel" Attribute</h3>
+				<p>You can add a <code>rel</code> attribute to your links to seperate galleries.</p>
+<pre>
+<span>&lt;!-- Gallery 1 --&gt;</span>
+&lt;a rel="gallery-1" href="big/image1.jpg" class="swipebox"&gt;
+	&lt;img src="small/image1.jpg" alt="image"&gt;
+&lt;/a&gt;
+&lt;a rel="gallery-1" href="big/image2.jpg" class="swipebox"&gt;
+	&lt;img src="small/image2.jpg" alt="image"&gt;
+&lt;/a&gt;
+<span>&lt;!-- Gallery 2 --&gt;</span>
+&lt;a rel="gallery-2" href="big/image3.jpg" class="swipebox"&gt;
+	&lt;img src="small/image3.jpg" alt="image"&gt;
+&lt;/a&gt;
+&lt;a rel="gallery-2" href="big/image4.jpg" class="swipebox"&gt;
+	&lt;img src="small/image4.jpg" alt="image"&gt;
+&lt;/a&gt;</pre>
+
+				<div id="video"></div>
+				<h3>Youtube support</h3>
+				<p>Simply paste a youtube video URL in your href attribute. The script will automatically check if it's a Youtube URL and open the video in the swipebox.</p>
+				<p>
+					<a class="swipebox-video" href="http://www.youtube.com/watch?v=XSGBVzeBUbk">My Video</a>
+				</p>
+				<pre>&lt;a class="swipebox-video" rel="youtube" href="http://www.youtube.com/watch?v=XSGBVzeBUbk"&gt;My Videos&lt;/a&gt;</pre>
+				
+				<h3>Load slides dynamically</h3>
+				<p>You can set your gallery dynamically by passing an array object to the swipebox.</p>
+				<p><a id="gallery" href="#">View gallery</a></p>
+
+<pre>
+$("#gallery").click(function(e){
+	e.preventDefault();
+	$.swipebox([
+		{href:'big/image1.jpg', title:'My Caption'}, 
+		{href:'big/image2.jpg', title:'My Second Caption'}
+	]);
+});
+</pre>
+			<div id="refresh"></div>
+			<h3>Refresh Method</h3>
+			<p>The refresh method allows you to reload the slides if the DOM has changed.</p>
+			
+			<pre>var swipeboxInstance = $(".a:visible").swipebox();
+
+// Use the refresh method after your event is completed
+swipeboxInstance.refresh();</pre>
+
+			<p>For exemple, if you use <a href="http://isotope.metafizzy.co/demos/filtering.html" target="_blank">isotope</a> filter.</p>
+			
+			<ul id="filter">
+				<li><a href="#" data-filter="item">All</a></li>
+				<li><a href="#" data-filter="sea">Sea</a></li>
+				<li><a href="#" data-filter="beach">Beach</a></li>
+			</ul>
+			<div id="grid" class="clearfix">
+				<div class="box item beach">
+					<a href="http://swipebox.brutaldesign.com/assets/full/nuke.jpg" class="swipebox-isotope" title="Nuke">
+						<img src="http://swipebox.brutaldesign.com/assets/nuke_thumb.jpg" alt="nuke">
+					</a>
+				</div>
+				<div class="box item sea">
+					<a href="http://swipebox.brutaldesign.com/assets/full/leap.jpg" class="swipebox-isotope" title="Leap">
+						<img src="http://swipebox.brutaldesign.com/assets/leap_thumb.jpg" alt="leap">
+					</a>
+				</div>
+				<div class="box item beach">
+					<a href="http://swipebox.brutaldesign.com/assets/full/reine.jpg" class="swipebox-isotope" title="Reine">
+						<img src="http://swipebox.brutaldesign.com/assets/reine_thumb.jpg" alt="reine">
+					</a>
+				</div>
+				<div class="box item sea">
+					<a href="http://swipebox.brutaldesign.com/assets/full/neptune.jpg" class="swipebox-isotope" title="Neptune">
+						<img src="http://swipebox.brutaldesign.com/assets/neptune_thumb.jpg" alt="neptune">
+					</a>
+				</div>
+			</div>
+
+<pre>
+<span>// Use the swipebox only for  visible elements</span>
+var swipeboxInstance = $(".swipebox-isotope:not(.isotope-hidden .swipebox-isotope)").swipebox();
+
+<span>// Callback function that fire the refresh method, once the animation is finished</span>
+onAnimationCompleted = function(){
+	swipeboxInstance.refresh();
+};
+
+// Isotope stuff
+optionFilterLinks = $('#filter').find('a');
+optionFilterLinks.attr('href', '#');
+
+optionFilterLinks.click( function(){
+	var selector = $(this).attr('data-filter');
+	$('#grid').isotope({ 
+		filter : '.' + selector, 
+		itemSelector : '.item',
+		layoutMode : 'fitRows',
+		animationEngine : 'best-available',
+	}, onAnimationCompleted); <span>// callback here</span>
+
+	optionFilterLinks.removeClass('active');
+	$(this).addClass('active');
+
+	return false;
+});</pre>
+			<div id="open"></div>
+			<h3>Check open state</h3>
+			<pre>if ($.swipebox.isOpen){
+	// do stuff
+}</pre>
+
+			<div id="options"></div>
+			<h3>Options</h3>
+>>>>>>> origin/master
 <pre>&lt;script type="text/javascript"&gt;
 jQuery(function($) {
 	$(".swipebox").swipebox({
 		useCSS : true, <span>// false will force the use of jQuery for animations</span>
 		hideBarsDelay : 3000 <span>// 0 to always show caption and action bar</span>
+<<<<<<< HEAD
 	});
 });
 &lt;/script&gt;
@@ -135,6 +332,20 @@ jQuery(function($) {
 				<p><a class="button" href="https://github.com/brutaldesign/swipebox/archive/master.zip">Download</a> <a class="button" href="https://github.com/brutaldesign/swipebox">View Source</a></p>
 			
 				<p id="follow"><a href="https://twitter.com/brutaldesign" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @brutaldesign</a></p>
+=======
+		videoMaxWidth : 1140, <span>// videos max width</span>
+		beforeOpen: function(){}, <span>// called before opening</span>
+	      	afterClose: function(){} <span>// called after closing</span>
+	});
+});
+&lt;script&gt;
+</pre>
+			</section>
+
+			<section id="action">
+				<div id="download"></div>
+				<p><a class="button" href="https://github.com/brutaldesign/swipebox/archive/master.zip">Download</a> <a class="button" href="https://github.com/brutaldesign/swipebox">View Source</a></p>
+>>>>>>> origin/master
 			</section>
 			<hr>
 			<section id="credits">
@@ -144,6 +355,7 @@ jQuery(function($) {
 		</div>
 		<footer>
 			<div class="wrap">
+<<<<<<< HEAD
 				<a href="http://constantinsaguin.com/" target="_blank">Constantin Saguin</a> | <a href="http://twitter.com/brutaldesign" target="_blank">@brutaldesign</a>
 			</div>
 		</footer>
@@ -155,6 +367,64 @@ jQuery(function($) {
 	<script type="text/javascript">
 		jQuery(function($) {
 			$(".swipebox").swipebox();
+=======
+				<a href="http://csag.co" target="_blank">Constantin Saguin</a> | <a href="http://twitter.com/brutaldesign" target="_blank">@brutaldesign</a>
+			</div>
+		</footer>
+	</div>
+	<script src="lib/ios-orientationchange-fix.js"></script>
+	<script src="lib/jquery-2.0.3.min.js"></script>
+	<script src="lib/jquery.isotope.min.js"></script>
+	<script src="source/jquery.swipebox.js"></script>
+	<script type="text/javascript">
+		jQuery(function($) {
+
+			/* Basic Gallery */
+			$(".swipebox").swipebox();
+			
+			/* Video */
+			$(".swipebox-video").swipebox();
+
+
+			/* Dynamic Gallery */
+			$("#gallery").click(function(e){
+				e.preventDefault();
+				$.swipebox([
+					{ href : 'http://swipebox.brutaldesign.com/assets/full/reine.jpg', title : 'My Caption' },
+					{ href : 'http://swipebox.brutaldesign.com/assets/full/nuke.jpg', title : 'My Second Caption' }
+				]);
+			});
+
+
+			/* Isotope */
+			var swipeboxInstance = $(".swipebox-isotope:not(.isotope-hidden .swipebox-isotope)").swipebox();
+
+			var $container = $('#grid');
+			var optionFilter = $('#filter'),
+			optionFilterLinks = optionFilter.find('a');
+			optionFilterLinks.attr('href', '#');
+
+			onAnimationCompleted = function(){
+				swipeboxInstance.refresh();
+			};
+
+			optionFilterLinks.click( function(){
+				var selector = $(this).attr('data-filter');
+				$container.isotope({ 
+					filter : '.' + selector, 
+					itemSelector : '.item',
+					layoutMode : 'fitRows',
+					animationEngine : 'best-available',
+				}, onAnimationCompleted);
+
+				// Highlight the correct filter
+				optionFilterLinks.removeClass('active');
+				$(this).addClass('active');
+
+			
+				return false;
+			});
+>>>>>>> origin/master
 		});
 	</script>
 </body>

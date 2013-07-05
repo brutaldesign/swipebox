@@ -28,8 +28,12 @@ Chrome, Safari, Firefox, Opera, IE8+, IOS4+, Android, windows phone.
 Include jquery and the swipebox script in your head tags or right before your body closing tag.
 
 `<script src="lib/jquery-1.9.0.js"></script>`
+<<<<<<< HEAD
 
 `<script src="source/jquery.swipebox.min.js"></script>`
+=======
+`<script src="source/jquery.swipebox.js"></script>`
+>>>>>>> origin/master
 
 ###CSS
 
@@ -50,9 +54,23 @@ Bind the swipebox behaviour on every link with the "swipebox" class.
 `$(".swipebox").swipebox();`
 
 
+<<<<<<< HEAD
 ###Need a couple of options?
+=======
+###Options
+>>>>>>> origin/master
 
 
 `useCSS : true, // false will force the use of jQuery for animations`
 `hideBarsDelay : 3000 // 0 to always show caption and action bar`
+<<<<<<< HEAD
 
+=======
+`videoMaxWidth : 1140, // videos max width
+`beforeOpen: function(){},`
+`afterClose: function(){}`
+
+
+####Credits
+Photos by [Daniele Zedda](http://www.flickr.com/photos/astragony/)
+>>>>>>> origin/master
