@@ -79,7 +79,8 @@ html.swipebox {
 }
 
 #swipebox-slider .slide .swipebox-video-container .swipebox-video iframe{
-  width: 100%!important; height: 100%!important;
+  width: 100%!important; 
+  height: 100%!important;
   position: absolute;
   top: 0; left: 0;
 }

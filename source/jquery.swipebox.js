@@ -3,7 +3,7 @@
 @author       Constantin Saguin - @brutaldesign
 @link            http://csag.co
 @github        http://github.com/brutaldesign/swipebox
-@version     1.2
+@version     1.2.1
 @license      MIT License
 
 ----------------------------------------------------------------------------------------------*/
@@ -28,6 +28,8 @@
 		$selector = $(selector),
 		isTouch = document.createTouch !== undefined || ('ontouchstart' in window) || ('onmsgesturechange' in window) || navigator.msMaxTouchPoints,
 		supportSVG = !!(window.SVGSVGElement),
+		winWidth = window.innerWidth ? window.innerWidth : $(window).width(),
+		winHeight = window.innerHeight ? window.innerHeight : $(window).height(),
 		html = '<div id="swipebox-overlay">\
 				<div id="swipebox-slider"></div>\
 				<div id="swipebox-caption"></div>\
@@ -116,7 +118,7 @@
 
 			build : function(){
 				var $this = this;
-				
+
 				$('body').append(html);
 
 				if($this.doCssTrans()){
@@ -162,25 +164,48 @@
 				$this.gesture();
 				$this.animBars();
 				$this.resize();
+				
 			},
 
 			setDim : function(){
-				var sliderCss = {
-					width : window.innerWidth ? window.innerWidth : $(window).width(),
-					height : window.innerHeight ? window.innerHeight : $(window).height()
+
+				var width, height, sliderCss = {};
+				
+				if( "onorientationchange" in window ){
+
+					window.addEventListener("orientationchange", function() {
+						if( window.orientation == 0 ){
+							width = winWidth;
+							height = winHeight;
+						}else if( window.orientation == 90 || window.orientation == -90 ){
+							width = winHeight;
+							height = winWidth;
+						}
+					}, false);
+					
+				
+				}else{
+
+					width = window.innerWidth ? window.innerWidth : $(window).width();
+					height = window.innerHeight ? window.innerHeight : $(window).height();
 				}
 
+				sliderCss = {
+					width : width,
+					height : height
+				}
+
+
 				$('#swipebox-overlay').css(sliderCss);
+
 			},
 
-			resize : function(){
-				
+			resize : function (){
 				var $this = this;
-
+				
 				$(window).resize(function() {
 					$this.setDim();
 				}).resize();
-
 			},
 
 			supportTransition : function() {
@@ -513,12 +538,11 @@
 			},
 			
 			getPrev : function (){
-				var $this = this;
 				index = $('#swipebox-slider .slide').index($('#swipebox-slider .slide.current'));
 				if(index > 0){
 					index--;
-					$this.setSlide(index);
-					$this.preloadMedia(index-1);
+					this.setSlide(index);
+					this.preloadMedia(index-1);
 				}
 				else{
 					
@@ -531,23 +555,22 @@
 
 
 			closeSlide : function (){
-				var $this = this;
 				$('html').removeClass('swipebox');
 				$(window).trigger('resize');
-				$this.destroy();
+				this.destroy();
 			},
 
 			destroy : function(){
-				var $this = this;
 				$(window).unbind('keyup');
 				$('body').unbind('touchstart');
 				$('body').unbind('touchmove');
 				$('body').unbind('touchend');
 				$('#swipebox-slider').unbind();
 				$('#swipebox-overlay').remove();
-				elem.removeData('_swipebox');
-				if ( $this.target )
-					$this.target.trigger('swipebox-destroy');
+				if (!$.isArray(elem))
+					elem.removeData('_swipebox');
+				if ( this.target )
+					this.target.trigger('swipebox-destroy');
 				$.swipebox.isOpen = false;
 				if (plugin.settings.afterClose) 
 					plugin.settings.afterClose();
