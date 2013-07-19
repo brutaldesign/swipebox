@@ -14,6 +14,7 @@
 
 		var defaults = {
 			useCSS : true,
+			initialIndexOnArray : 0,
 			hideBarsDelay : 3000,
 			videoMaxWidth : 1140,
 			vimeoColor : 'CCCCCC',
@@ -50,7 +51,7 @@
 
 				elements = elem;
 				ui.target = $(window);
-				ui.init(0);
+				ui.init(plugin.settings.initialIndexOnArray);
 
 			}else{
 
