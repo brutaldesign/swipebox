@@ -34,10 +34,10 @@ html.swipebox {
 
 	white-space: nowrap;
 
-	-webkit-transition: left .4s ease;
-	-moz-transition: left .4s ease;
-	-o-transition: left .4s ease;
-	transition: left .4s ease;
+	-webkit-transition: transform .4s ease;
+	-moz-transition: transform .4s ease;
+	-o-transition: transform .4s ease;
+	transition: transform .4s ease;
 }
 
 #swipebox-slider .slide {
@@ -110,17 +110,19 @@ html.swipebox {
 	width: 100%;
 	height: 50px;
 
-	-webkit-transition: all .5s ease;
-	-moz-transition: all .5s ease;
-	-o-transition: all .5s ease;
-	transition: all .5s ease;
+	-webkit-transition: transform .5s ease;
+	-moz-transition: transform .5s ease;
+	-o-transition: transform .5s ease;
+	transition: transform .5s ease;
 }
 
 #swipebox-action {
 	bottom: -50px;
 }
 #swipebox-action.visible-bars {
-	bottom: 0;
+	-webkit-transform: translate3d(0, -50px, 0);
+	-o-transform: translate3d(0, -50px, 0);
+	transform: translate3d(0, -50px, 0);
 }
 #swipebox-action.force-visible-bars {
 	bottom: 0 !important;
@@ -131,7 +133,9 @@ html.swipebox {
 	text-align: center;
 }
 #swipebox-caption.visible-bars {
-	top: 0;
+	-webkit-transform: translate3d(0, 50px, 0);
+	-o-transform: translate3d(0, 50px, 0);
+	transform: translate3d(0, 50px, 0);
 }
 #swipebox-caption.force-visible-bars {
 	top: 0 !important;
