@@ -316,11 +316,11 @@
 
 				$('#swipebox-action').hover(function() {
 						$this.showBars();
-						bars.addClass('force-visible-bars');
+						if(!$this.doCssTrans()) bars.addClass('force-visible-bars');
 						$this.clearTimeout();
 
 					},function() {
-						bars.removeClass('force-visible-bars');
+						if(!$this.doCssTrans()) bars.removeClass('force-visible-bars');
 						$this.setTimeout();
 
 				});
@@ -430,7 +430,7 @@
 
 				if( !$this.isVideo(src) ){
 					$this.loadMedia(src, function(){
-						$('#swipebox-slider .slide').eq(index).html(this);
+						$('#swipebox-slider .slide').eq(index).css({ backgroundImage: 'url(' + src + ')' }).addClass('loaded');
 					});
 				}else{
 					$('#swipebox-slider .slide').eq(index).html($this.getVideo(src));
