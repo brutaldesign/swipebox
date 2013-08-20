@@ -32,14 +32,14 @@
 		winWidth = window.innerWidth ? window.innerWidth : $(window).width(),
 		winHeight = window.innerHeight ? window.innerHeight : $(window).height(),
 		html = '<div id="swipebox-overlay">\
-				<div id="swipebox-slider"></div>\
-				<div id="swipebox-caption"></div>\
-				<div id="swipebox-action">\
-					<a id="swipebox-close"></a>\
-					<a id="swipebox-prev"></a>\
-					<a id="swipebox-next"></a>\
-				</div>\
-		</div>';
+					<div id="swipebox-slider"></div>\
+					<div id="swipebox-caption"></div>\
+					<div id="swipebox-action">\
+						<a id="swipebox-close"></a>\
+						<a id="swipebox-prev"></a>\
+						<a id="swipebox-next"></a>\
+					</div>\
+				</div>';
 
 		plugin.settings = {}
 
@@ -121,30 +121,6 @@
 				var $this = this;
 
 				$('body').append(html);
-
-				if($this.doCssTrans()){
-					$('#swipebox-slider').css({
-						'-webkit-transition' : 'left 0.4s ease',
-						'-moz-transition' : 'left 0.4s ease',
-						'-o-transition' : 'left 0.4s ease',
-						'-khtml-transition' : 'left 0.4s ease',
-						'transition' : 'left 0.4s ease'
-					});
-					$('#swipebox-overlay').css({
-						'-webkit-transition' : 'opacity 1s ease',
-						'-moz-transition' : 'opacity 1s ease',
-						'-o-transition' : 'opacity 1s ease',
-						'-khtml-transition' : 'opacity 1s ease',
-						'transition' : 'opacity 1s ease'
-					});
-					$('#swipebox-action, #swipebox-caption').css({
-						'-webkit-transition' : '0.5s',
-						'-moz-transition' : '0.5s',
-						'-o-transition' : '0.5s',
-						'-khtml-transition' : '0.5s',
-						'transition' : '0.5s'
-					});
-				}
 
 
 				if(supportSVG){
