@@ -43,41 +43,41 @@
 
 		plugin.settings = {}
 
-		plugin.init = function(){
+		plugin.init = function() {
 
 			plugin.settings = $.extend({}, defaults, options);
 
-			if ($.isArray(elem)) {
+			if($.isArray(elem)) {
 
 				elements = elem;
 				ui.target = $(window);
 				ui.init(plugin.settings.initialIndexOnArray);
 
-			}else{
+			} else {
 
-				$selector.click(function(e){
+				$selector.click(function(e) {
 					elements = [];
-					var index , relType, relVal;
+					var index, relType, relVal;
 
-					if (!relVal) {
+					if(!relVal) {
 						relType = 'rel';
 						relVal  = $(this).attr(relType);
 					}
 
-					if (relVal && relVal !== '' && relVal !== 'nofollow') {
+					if(relVal && relVal !== '' && relVal !== 'nofollow') {
 						$elem = $selector.filter('[' + relType + '="' + relVal + '"]');
-					}else{
+					} else {
 						$elem = $(selector);
 					}
 
-					$elem.each(function(){
+					$elem.each(function() {
 
 						var title = null, href = null;
 
-						if( $(this).attr('title') )
+						if($(this).attr('title'))
 							title = $(this).attr('title');
 
-						if( $(this).attr('href') )
+						if($(this).attr('href'))
 							href = $(this).attr('href');
 
 						elements.push({
@@ -96,7 +96,7 @@
 		}
 
 		plugin.refresh = function() {
-			if (!$.isArray(elem)) {
+			if(!$.isArray(elem)) {
 				ui.destroy();
 				$elem = $(selector);
 				ui.actions();
@@ -105,8 +105,8 @@
 
 		var ui = {
 
-			init : function(index){
-				if (plugin.settings.beforeOpen)
+			init : function(index) {
+				if(plugin.settings.beforeOpen)
 					plugin.settings.beforeOpen();
 				this.target.trigger('swipebox-start');
 				$.swipebox.isOpen = true;
@@ -117,13 +117,12 @@
 				this.preloadMedia(index-1);
 			},
 
-			build : function(){
+			build : function() {
 				var $this = this;
 
 				$('body').append(html);
 
-
-				if(supportSVG){
+				if(supportSVG) {
 					var bg = $('#swipebox-close').css('background-image');
 					bg = bg.replace('png', 'svg');
 					$('#swipebox-prev, #swipebox-next, #swipebox-close').css({
@@ -131,7 +130,7 @@
 					});
 				}
 
-				$.each( elements,  function(){
+				$.each(elements, function() {
 					$('#swipebox-slider').append('<div class="slide"></div>');
 				});
 
@@ -144,25 +143,23 @@
 
 			},
 
-			setDim : function(){
+			setDim : function() {
 
 				var width, height, sliderCss = {};
 
-				if( "onorientationchange" in window ){
+				if('onorientationchange' in window) {
 
-					window.addEventListener("orientationchange", function() {
-						if( window.orientation == 0 ){
+					window.addEventListener('orientationchange', function() {
+						if(window.orientation == 0) {
 							width = winWidth;
 							height = winHeight;
-						}else if( window.orientation == 90 || window.orientation == -90 ){
+						} else if(window.orientation == 90 || window.orientation == -90) {
 							width = winHeight;
 							height = winWidth;
 						}
 					}, false);
 
-
-				}else{
-
+				} else {
 					width = window.innerWidth ? window.innerWidth : $(window).width();
 					height = window.innerHeight ? window.innerHeight : $(window).height();
 				}
@@ -172,12 +169,11 @@
 					height : height
 				}
 
-
 				$('#swipebox-overlay').css(sliderCss);
 
 			},
 
-			resize : function (){
+			resize : function() {
 				var $this = this;
 
 				$(window).resize(function() {
@@ -187,7 +183,7 @@
 
 			supportTransition : function() {
 				var prefixes = 'transition WebkitTransition MozTransition OTransition msTransition KhtmlTransition'.split(' ');
-				for(var i = 0; i < prefixes.length; i++) {
+				for(var i = 0, len = prefixes.length; i < len; i++) {
 					if(document.createElement('div').style[prefixes[i]] !== undefined) {
 						return prefixes[i];
 					}
@@ -195,14 +191,14 @@
 				return false;
 			},
 
-			doCssTrans : function(){
-				if(plugin.settings.useCSS && this.supportTransition() ){
+			doCssTrans : function() {
+				if(plugin.settings.useCSS && this.supportTransition()) {
 					return true;
 				}
 			},
 
-			gesture : function(){
-				if ( isTouch ){
+			gesture : function() {
+				if(isTouch) {
 					var $this = this,
 					distance = null,
 					swipMinDistance = 10,
@@ -213,44 +209,40 @@
 					bars.addClass('visible-bars');
 					$this.setTimeout();
 
-					$('body').bind('touchstart', function(e){
+					$('body').bind('touchstart', function(e) {
 
 						$(this).addClass('touching');
 
 						endCoords = e.originalEvent.targetTouches[0];
-							startCoords.pageX = e.originalEvent.targetTouches[0].pageX;
+						startCoords.pageX = e.originalEvent.targetTouches[0].pageX;
 
-						$('.touching').bind('touchmove',function(e){
+						$('.touching').bind('touchmove', function(e) {
 							e.preventDefault();
 							e.stopPropagation();
-								endCoords = e.originalEvent.targetTouches[0];
-
+							endCoords = e.originalEvent.targetTouches[0];
 						});
 
 						return false;
 
-					}).bind('touchend',function(e){
+					}).bind('touchend', function(e) {
 						e.preventDefault();
 						e.stopPropagation();
 
 						distance = endCoords.pageX - startCoords.pageX;
 
-							if( distance >= swipMinDistance ){
+						if(distance >= swipMinDistance) {
+							// swipeLeft
+							$this.getPrev();
 
-								// swipeLeft
-								$this.getPrev();
-
-							}else if( distance <= - swipMinDistance ){
-
-								// swipeRight
-								$this.getNext();
-
-							}else{
-								// tap
-								if(!bars.hasClass('visible-bars')){
+						} else if(distance <= - swipMinDistance){
+							// swipeRight
+							$this.getNext();
+						} else {
+							// tap
+							if(!bars.hasClass('visible-bars')) {
 								$this.showBars();
 								$this.setTimeout();
-							}else{
+							} else {
 								$this.clearTimeout();
 								$this.hideBars();
 							}
@@ -264,99 +256,98 @@
 				}
 			},
 
-			setTimeout: function(){
-				if(plugin.settings.hideBarsDelay > 0){
+			setTimeout: function() {
+				if(plugin.settings.hideBarsDelay > 0) {
 					var $this = this;
 					$this.clearTimeout();
-					$this.timeout = window.setTimeout( function(){
-						$this.hideBars() },
+					$this.timeout = window.setTimeout(function() {
+						$this.hideBars()},
 						plugin.settings.hideBarsDelay
 					);
 				}
 			},
 
-			clearTimeout: function(){
+			clearTimeout: function() {
 				window.clearTimeout(this.timeout);
 				this.timeout = null;
 			},
 
-			showBars : function(){
+			showBars : function() {
 				var bars = $('#swipebox-caption, #swipebox-action');
-				if(this.doCssTrans()){
+				if(this.doCssTrans()) {
 					bars.addClass('visible-bars');
-				}else{
+				} else {
 					$('#swipebox-caption').animate({ top : 0 }, 500);
 					$('#swipebox-action').animate({ bottom : 0 }, 500);
 				}
 			},
 
-			hideBars : function(){
+			hideBars : function() {
 				var bars = $('#swipebox-caption, #swipebox-action');
-				if(this.doCssTrans()){
+				if(this.doCssTrans()) {
 					bars.removeClass('visible-bars');
-				}else{
+				} else {
 					$('#swipebox-caption').animate({ top : -50 }, 500);
 					$('#swipebox-action').animate({ bottom : -50 }, 500);
 				}
 			},
 
-			animBars : function(){
-				var $this = this;
+			animBars : function() {
+				var $this = this, cssTrans = $this.doCssTrans();
 				var bars = $('#swipebox-caption, #swipebox-action');
 
 				bars.addClass('visible-bars');
 				$this.setTimeout();
 
-				$('#swipebox-slider').click(function(e){
-					if(!bars.hasClass('visible-bars')){
+				$('#swipebox-slider').click(function(e) {
+					if(!bars.hasClass('visible-bars')) {
 						$this.showBars();
 						$this.setTimeout();
 					}
 				});
 
 				$('#swipebox-action').hover(function() {
-						$this.showBars();
-						if(!$this.doCssTrans()) bars.addClass('force-visible-bars');
-						$this.clearTimeout();
+					$this.showBars();
+					if(!cssTrans)
+						bars.addClass('force-visible-bars');
+					$this.clearTimeout();
 
-					},function() {
-						if(!$this.doCssTrans()) bars.removeClass('force-visible-bars');
-						$this.setTimeout();
-
+				},function() {
+					if!cssTrans)
+						bars.removeClass('force-visible-bars');
+					$this.setTimeout();
 				});
 			},
 
-			keyboard : function(){
+			keyboard : function() {
 				var $this = this;
-				$(window).bind('keyup', function(e){
+				$(window).bind('keyup', function(e) {
 					e.preventDefault();
 					e.stopPropagation();
-					if (e.keyCode == 37){
+					if(e.keyCode == 37) {
 						$this.getPrev();
-					}
-					else if (e.keyCode==39){
+					} else if(e.keyCode==39) {
 						$this.getNext();
-					}
-					else if (e.keyCode == 27) {
+					} else if(e.keyCode == 27) {
 						$this.closeSlide();
 					}
 				});
 			},
 
-			actions : function(){
+			actions : function() {
 				var $this = this;
 
-				if( elements.length < 2 ){
+				if(elements.length < 2) {
 					$('#swipebox-prev, #swipebox-next').hide();
-				}else{
-					$('#swipebox-prev').bind('click touchend', function(e){
+				} else {
+					$('#swipebox-prev').bind('click touchend', function(e) {
 						e.preventDefault();
 						e.stopPropagation();
 						$this.getPrev();
 						$this.setTimeout();
 					});
 
-					$('#swipebox-next').bind('click touchend', function(e){
+					$('#swipebox-next').bind('click touchend', function(e) {
 						e.preventDefault();
 						e.stopPropagation();
 						$this.getNext();
@@ -364,20 +355,20 @@
 					});
 				}
 
-				$('#swipebox-close').bind('click touchend', function(e){
+				$('#swipebox-close').bind('click touchend', function(e) {
 					$this.closeSlide();
 				});
 			},
 
-			setSlide : function (index, isFirst){
+			setSlide : function(index, isFirst) {
 				isFirst = isFirst || false;
 
 				var slider = $('#swipebox-slider'), distance;
 
-				if(this.doCssTrans()){
+				if(this.doCssTrans()) {
 					distance = 'translate3d(' + (-index*100) + '%, 0, 0)';
 					slider.css({ '-webkit-transform' : distance, '-o-transform': distance, 'transform' : distance });
-				}else{
+				} else {
 					slider.animate({ left : (-index*100)+'%' });
 				}
 
@@ -385,83 +376,77 @@
 				$('#swipebox-slider > .slide').eq(index).addClass('current');
 				this.setTitle(index);
 
-				if( isFirst ){
+				if(isFirst) {
 					slider.fadeIn();
 				}
 
 				$('#swipebox-prev, #swipebox-next').removeClass('disabled');
-				if(index == 0){
+				if(index == 0) {
 					$('#swipebox-prev').addClass('disabled');
-				}else if( index == elements.length - 1 ){
+				} else if(index == elements.length - 1) {
 					$('#swipebox-next').addClass('disabled');
 				}
 			},
 
-			openSlide : function (index){
+			openSlide : function(index) {
 				$('html').addClass('swipebox');
 				$(window).trigger('resize'); // fix scroll bar visibility on desktop
 				this.setSlide(index, true);
 			},
 
-			preloadMedia : function (index){
+			preloadMedia : function(index) {
 				var $this = this, src = null;
 
-				if( elements[index] !== undefined )
+				if(elements[index] !== undefined)
 					src = elements[index].href;
 
-				if( !$this.isVideo(src) ){
-					setTimeout(function(){
+				if(!$this.isVideo(src)) {
+					setTimeout(function() {
 						$this.openMedia(index);
 					}, 1000);
-				}else{
+				} else {
 					$this.openMedia(index);
 				}
 			},
 
-			openMedia : function (index){
+			openMedia : function(index) {
 				var $this = this, src = null;
 
-				if( elements[index] !== undefined )
+				if(elements[index] !== undefined)
 					src = elements[index].href;
 
-				if(index < 0 || index >= elements.length){
+				if(index < 0 || index >= elements.length)
 					return false;
-				}
 
-				if( !$this.isVideo(src) ){
-					$this.loadMedia(src, function(){
+				if(!$this.isVideo(src)) {
+					$this.loadMedia(src, function() {
 						$('#swipebox-slider > .slide').eq(index).css({ backgroundImage: 'url(' + src + ')' }).addClass('loaded');
 					});
-				}else{
+				} else {
 					$('#swipebox-slider > .slide').eq(index).html($this.getVideo(src));
 				}
-
 			},
 
-			setTitle : function (index, isFirst){
+			setTitle : function (index, isFirst) {
 				var title = null;
 
 				$('#swipebox-caption').empty();
 
-				if( elements[index] !== undefined )
+				if(elements[index] !== undefined)
 					title = elements[index].title;
 
-				if(title){
+				if(title)
 					$('#swipebox-caption').append(title);
-				}
 			},
 
-			isVideo : function (src){
-
-				if( src ){
+			isVideo : function(src) {
+				if(src) {
 					if(
 						src.match(/youtube\.com\/watch\?v=([a-zA-Z0-9\-_]+)/)
 						|| src.match(/vimeo\.com\/([0-9]*)/)
-					){
+					)
 						return true;
-					}
 				}
-
 			},
 
 			getVideo : function(url){
@@ -469,22 +454,18 @@
 				var output = '';
 				var youtubeUrl = url.match(/watch\?v=([a-zA-Z0-9\-_]+)/);
 				var vimeoUrl = url.match(/vimeo\.com\/([0-9]*)/);
-				if( youtubeUrl ){
-
+				if(youtubeUrl) {
 					iframe = '<iframe width="560" height="315" src="//www.youtube.com/embed/'+youtubeUrl[1]+'" frameborder="0" allowfullscreen></iframe>';
-
-				}else if(vimeoUrl){
-
+				} else if(vimeoUrl) {
 					iframe = '<iframe width="560" height="315"  src="http://player.vimeo.com/video/'+vimeoUrl[1]+'?byline=0&amp;portrait=0&amp;color='+plugin.settings.vimeoColor+'" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
-
 				}
 
 				return '<div class="swipebox-video-container" style="max-width:'+plugin.settings.videomaxWidth+'px"><div class="swipebox-video">'+iframe+'</div></div>';
 			},
 
-			loadMedia : function (src, callback){
-				if( !this.isVideo(src) ){
-					var img = $('<img>').on('load', function(){
+			loadMedia : function(src, callback) {
+				if(!this.isVideo(src)) {
+					var img = $('<img>').on('load', function() {
 						callback.call(img);
 					});
 
@@ -492,56 +473,51 @@
 				}
 			},
 
-			getNext : function (){
+			getNext : function() {
 				var $this = this;
 				index = $('#swipebox-slider > .slide').index($('#swipebox-slider > .slide.current'));
-				if(index+1 < elements.length){
+				if(index+1 < elements.length) {
 					index++;
 					$this.setSlide(index);
 					$this.preloadMedia(index+1);
-				}
-				else{
-
+				} else {
 					$('#swipebox-slider').addClass('rightSpring');
-					setTimeout(function(){
+					setTimeout(function() {
 						$('#swipebox-slider').removeClass('rightSpring');
-					},500);
+					}, 500);
 				}
 			},
 
-			getPrev : function (){
+			getPrev : function() {
 				index = $('#swipebox-slider > .slide').index($('#swipebox-slider > .slide.current'));
-				if(index > 0){
+				if(index > 0) {
 					index--;
 					this.setSlide(index);
 					this.preloadMedia(index-1);
-				}
-				else{
-
+				} else {
 					$('#swipebox-slider').addClass('leftSpring');
 					setTimeout(function(){
 						$('#swipebox-slider').removeClass('leftSpring');
-					},500);
+					}, 500);
 				}
 			},
 
-
-			closeSlide : function (){
+			closeSlide : function() {
 				$('html').removeClass('swipebox');
 				$(window).trigger('resize');
 				this.destroy();
 			},
 
-			destroy : function(){
+			destroy : function() {
 				$(window).unbind('keyup');
 				$('body').unbind('touchstart');
 				$('body').unbind('touchmove');
 				$('body').unbind('touchend');
 				$('#swipebox-slider').unbind();
 				$('#swipebox-overlay').remove();
-				if (!$.isArray(elem))
+				if(!$.isArray(elem))
 					elem.removeData('_swipebox');
-				if ( this.target )
+				if(this.target)
 					this.target.trigger('swipebox-destroy');
 				$.swipebox.isOpen = false;
 				if (plugin.settings.afterClose)
@@ -555,7 +531,7 @@
 	};
 
 	$.fn.swipebox = function(options){
-		if (!$.data(this, "_swipebox")) {
+		if(!$.data(this, "_swipebox")) {
 			var swipebox = new $.swipebox(this, options);
 			this.data('_swipebox', swipebox);
 		}
