@@ -131,7 +131,7 @@
 				}
 
 				$.each(elements, function() {
-					$('#swipebox-slider').append('<div class="slide"></div>');
+					$('#swipebox-slider').append('<div class="slide" role="img" aria-label=""></div>');
 				});
 
 				$this.setDim();
@@ -435,8 +435,10 @@
 				if(elements[index] !== undefined)
 					title = elements[index].title;
 
-				if(title)
+				if(title) {
 					$('#swipebox-caption').append(title);
+					$('#swipebox-slider > .slide').eq(index).attr('aria-label', title);
+				}
 			},
 
 			isVideo : function(src) {
