@@ -166,7 +166,8 @@
 
 				sliderCss = {
 					width : width,
-					height : height
+					height : height,
+					lineHeight : height+'px'
 				}
 
 				$('#swipebox-overlay').css(sliderCss);
@@ -233,7 +234,6 @@
 						if(distance >= swipMinDistance) {
 							// swipeLeft
 							$this.getPrev();
-
 						} else if(distance <= - swipMinDistance){
 							// swipeRight
 							$this.getNext();
@@ -246,7 +246,6 @@
 								$this.clearTimeout();
 								$this.hideBars();
 							}
-
 						}
 
 						$('.touching').off('touchmove').removeClass('touching');
@@ -313,7 +312,7 @@
 					$this.clearTimeout();
 
 				},function() {
-					if!cssTrans)
+					if(!cssTrans)
 						bars.removeClass('force-visible-bars');
 					$this.setTimeout();
 				});
@@ -376,9 +375,8 @@
 				$('#swipebox-slider > .slide').eq(index).addClass('current');
 				this.setTitle(index);
 
-				if(isFirst) {
+				if(isFirst)
 					slider.fadeIn();
-				}
 
 				$('#swipebox-prev, #swipebox-next').removeClass('disabled');
 				if(index == 0) {
@@ -451,7 +449,7 @@
 				}
 			},
 
-			getVideo : function(url){
+			getVideo : function(url) {
 				var iframe = '';
 				var output = '';
 				var youtubeUrl = url.match(/watch\?v=([a-zA-Z0-9\-_]+)/);
@@ -462,7 +460,7 @@
 					iframe = '<iframe width="560" height="315"  src="http://player.vimeo.com/video/'+vimeoUrl[1]+'?byline=0&amp;portrait=0&amp;color='+plugin.settings.vimeoColor+'" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
 				}
 
-				return '<div class="swipebox-video-container" style="max-width:'+plugin.settings.videomaxWidth+'px"><div class="swipebox-video">'+iframe+'</div></div>';
+				return '<div class="swipebox-video-container" style="max-width:'+plugin.settings.videoMaxWidth+'px"><div class="swipebox-video">'+iframe+'</div></div>';
 			},
 
 			loadMedia : function(src, callback) {

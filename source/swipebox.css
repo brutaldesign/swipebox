@@ -5,9 +5,21 @@ html.swipebox {
 #swipebox-overlay,
 #swipebox-slider,
 #swipebox-slider .slide,
+#swipebox-slider .swipebox-video,
 #swipebox-slider iframe {
-	top: 0; left: 0;
+	top: 0; right: 0; bottom: 0; left: 0;
 	width: 100%; height: 100%;
+}
+
+#swipebox-slider,
+#swipebox-slider .swipebox-video,
+#swipebox-slider iframe,
+#swipebox-action,
+#swipebox-caption,
+#swipebox-prev,
+#swipebox-next,
+#swipebox-close {
+	position: absolute;
 }
 
 #swipebox-slider,
@@ -24,6 +36,7 @@ html.swipebox {
 	z-index: 1000 !important;
 
 	overflow: hidden;
+	text-align: center;
 
 	-webkit-user-select: none;
 	-moz-user-select: none;
@@ -31,15 +44,12 @@ html.swipebox {
 }
 
 #swipebox-slider {
-	position: absolute;
 	display: none;
-
 	white-space: nowrap;
 }
 
 #swipebox-slider .slide {
 	display: inline-block;
-
 	background: url("img/loader.gif") no-repeat 50% 50%;
 }
 
@@ -48,35 +58,16 @@ html.swipebox {
 }
 
 #swipebox-slider .swipebox-video-container {
-	display: inline-block;
-	width: 100%; height: auto;
-	max-width: 1140px; max-height: 100%;
-	margin: 0;
-	padding: 5%;
-
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-
-	background: none;
-
-	vertical-align: middle;
-}
-
-#swipebox-slider .swipebox-video {
 	position: relative;
+	display: inline-block;
 	width: 100%; height: 0;
-	padding-bottom: 56.25%;
-
-	overflow: hidden;
-}
-
-#swipebox-slider iframe {
-	position: absolute;
+	max-width: 1140px;
+	padding: 0 0 56.25%;
+	vertical-align: middle;
 }
 
 #swipebox-action,
 #swipebox-caption {
-	position: absolute;
 	left: 0;
 	z-index: 1;
 	width: 100%; height: 50px;
@@ -93,7 +84,6 @@ html.swipebox {
 
 #swipebox-caption {
 	top: -50px;
-	text-align: center;
 }
 #swipebox-caption.visible-bars {
 	-webkit-transform: translate3d(0, 50px, 0);
@@ -111,7 +101,6 @@ html.swipebox {
 #swipebox-prev,
 #swipebox-next,
 #swipebox-close {
-	position: absolute;
 	top: 0;
 	width: 50px; height: 50px;
 	border: 0;
@@ -193,12 +182,10 @@ html.swipebox {
 #swipebox-caption {
 	text-shadow: 1px 1px 1px #000;
 	background-color: #0d0d0d;
-	background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #0d0d0d), color-stop(100%, #000000));
-	background-image: -webkit-linear-gradient(#0d0d0d, #000000);
-	background-image: -moz-linear-gradient(#0d0d0d, #000000);
-	background-image: -o-linear-gradient(#0d0d0d, #000000);
-	background-image: linear-gradient(#0d0d0d, #000000);
-	filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=95);
+	background-image: -webkit-linear-gradient(#0d0d0d, #000);
+	background-image: -moz-linear-gradient(#0d0d0d, #000);
+	background-image: -o-linear-gradient(#0d0d0d, #000);
+	background-image: linear-gradient(#0d0d0d, #000);
 	opacity: .95;
 }
 
