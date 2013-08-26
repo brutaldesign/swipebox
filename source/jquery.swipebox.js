@@ -564,7 +564,7 @@
 			
 			loadMedia : function (src, callback){
 				if( !this.isVideo(src) ){
-					var img = $('<img>').on('load', function(){
+					var img = $('<img>').bind('load', function(){
 						callback.call(img);
 					});
 					
