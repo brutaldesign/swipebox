@@ -463,12 +463,15 @@
 				if( isFirst ){
 					slider.fadeIn();
 				}
+				this.clearAutoSwipeTimeout();
+				this.setAutoSwipeTimeout();
 
 				$('#swipebox-prev, #swipebox-next').removeClass('disabled');
 				if(index == 0){
 					$('#swipebox-prev').addClass('disabled');
 				}else if( index == elements.length - 1 ){
 					$('#swipebox-next').addClass('disabled');
+					this.clearAutoSwipeTimeout();
 				}
 			},
 		
@@ -584,8 +587,7 @@
 						$('#swipebox-slider').removeClass('rightSpring');
 					},500);
 				}
-				$this.clearAutoSwipeTimeout();
-				$this.setAutoSwipeTimeout();
+				
 			},
 			
 			getPrev : function (){
@@ -602,8 +604,6 @@
 						$('#swipebox-slider').removeClass('leftSpring');
 					},500);
 				}
-				$this.clearAutoSwipeTimeout();
-				$this.setAutoSwipeTimeout();
 			},
 
 
