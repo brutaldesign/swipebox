@@ -379,14 +379,14 @@
 				if( elements.length < 2 ){
 					$('#swipebox-prev, #swipebox-next').hide();
 				}else{
-					$('#swipebox-prev').bind('click touchend', function(e){
+					$('#swipebox-prev').bind('click', function(e){
 						e.preventDefault();
 						e.stopPropagation();
 						$this.getPrev();
 						$this.setTimeout();
 					});
 					
-					$('#swipebox-next').bind('click touchend', function(e){
+					$('#swipebox-next').bind('click', function(e){
 						e.preventDefault();
 						e.stopPropagation();
 						$this.getNext();
@@ -394,7 +394,7 @@
 					});
 				}
 
-				$('#swipebox-close').bind('click touchend', function(e){
+				$('#swipebox-close').bind('click', function(e){
 					$this.closeSlide();
 				});
 			},
