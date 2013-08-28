@@ -19,7 +19,9 @@
 			videoMaxWidth : 1140,
 			vimeoColor : 'CCCCCC',
 			beforeOpen: null,
-		      	afterClose: null
+			afterClose: null,
+			fullScreen: false,
+			autoSwipeDelay: -1
 		},
 		
 		plugin = this,
@@ -36,16 +38,26 @@
 				<div id="swipebox-caption"></div>\
 				<div id="swipebox-action">\
 					<a id="swipebox-close"></a>\
+					<a id="swipebox-play"></a>\
 					<a id="swipebox-prev"></a>\
 					<a id="swipebox-next"></a>\
 				</div>\
 		</div>';
+
+		
+		
 
 		plugin.settings = {}
 
 		plugin.init = function(){
 
 			plugin.settings = $.extend({}, defaults, options);
+			if(plugin.settings.autoSwipeDelay > 0){
+				this.paused = false;
+			}
+			else{
+				this.paused = true;
+			}
 
 			if ($.isArray(elem)) {
 
@@ -121,6 +133,12 @@
 				var $this = this;
 
 				$('body').append(html);
+				if(this.paused){
+					$('#swipebox-action #swipebox-play').addClass('play-button');
+				}
+				else{
+					$('#swipebox-action #swipebox-play').addClass('pause-button');
+				}
 
 				if($this.doCssTrans()){
 					$('#swipebox-slider').css({
@@ -159,6 +177,10 @@
 					$('#swipebox-slider').append('<div class="slide"></div>');
 				});
 
+				if (plugin.settings.fullScreen) {
+					var elem = document.body;
+					$this.requestFullScreen(elem);
+				}
 				$this.setDim();
 				$this.actions();
 				$this.keyboard();
@@ -166,6 +188,29 @@
 				$this.animBars();
 				$this.resize();
 				
+			},
+
+			requestFullScreen : function(element){
+				// Supports most browsers and their versions.
+				var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
+
+				if (requestMethod) { // Native full screen.
+					requestMethod.call(element);
+				} 
+				// Use ActiveXObject for IE. 
+				// else if (typeof window.ActiveXObject !== "undefined") { // Older IE.
+				// 	var wscript = new ActiveXObject("WScript.Shell");
+				// 	if (wscript !== null) {
+				// 		wscript.SendKeys("{F11}");
+				// 	}
+				// }
+			},
+
+			exitFullScreen : function(element){
+				var exitMethod = document.cancelFullScreen || document.webkitCancelFullScreen || document.mozCancelFullScreen || document.exitFullscreen;
+				if (exitMethod){
+					exitMethod.call(document);
+				}
 			},
 
 			setDim : function(){
@@ -241,37 +286,37 @@
 
 						$(this).addClass('touching');
 
-		  				endCoords = e.originalEvent.targetTouches[0];
-		    				startCoords.pageX = e.originalEvent.targetTouches[0].pageX;
+						endCoords = e.originalEvent.targetTouches[0];
+							startCoords.pageX = e.originalEvent.targetTouches[0].pageX;
 
 						$('.touching').bind('touchmove',function(e){
 							e.preventDefault();
 							e.stopPropagation();
-		    					endCoords = e.originalEvent.targetTouches[0];
+								endCoords = e.originalEvent.targetTouches[0];
 
 						});
-			           			
-			           			return false;
+								
+								return false;
 
-	           			}).bind('touchend',function(e){
-	           				e.preventDefault();
+						}).bind('touchend',function(e){
+							e.preventDefault();
 					e.stopPropagation();
-   				
-   					distance = endCoords.pageX - startCoords.pageX;
-	       				
-	       				if( distance >= swipMinDistance ){
-	       					
-	       					// swipeLeft
-	       					$this.getPrev();
-	       				
-	       				}else if( distance <= - swipMinDistance ){
-	       					
-	       					// swipeRight
-	       					$this.getNext();
-	       				
-	       				}else{
-	       					// tap
-	       					if(!bars.hasClass('visible-bars')){
+				
+					distance = endCoords.pageX - startCoords.pageX;
+						
+						if( distance >= swipMinDistance ){
+							
+							// swipeLeft
+							$this.getPrev();
+						
+						}else if( distance <= - swipMinDistance ){
+							
+							// swipeRight
+							$this.getNext();
+						
+						}else{
+							// tap
+							if(!bars.hasClass('visible-bars')){
 							$this.showBars();
 							$this.setTimeout();
 						}else{
@@ -279,13 +324,13 @@
 							$this.hideBars();
 						}
 
-	       				}	
+						}	
 
-	       				$('.touching').off('touchmove').removeClass('touching');
+						$('.touching').unbind('touchmove').removeClass('touching');
 						
 					});
 
-           				}
+						}
 			},
 
 			setTimeout: function(){
@@ -302,6 +347,22 @@
 			clearTimeout: function(){	
 				window.clearTimeout(this.timeout);
 				this.timeout = null;
+			},
+
+			setAutoSwipeTimeout: function(){
+				if((!this.paused) && (plugin.settings.autoSwipeDelay > 0)){
+					var $this = this;
+					$this.clearAutoSwipeTimeout();
+					$this.swipeTimerId = window.setTimeout( function(){
+						$this.getNext() },
+						plugin.settings.autoSwipeDelay
+					);
+				}
+			},
+			
+			clearAutoSwipeTimeout: function(){	
+				window.clearTimeout(this.swipeTimerId);
+				this.swipeTimerId = null;
 			},
 
 			showBars : function(){
@@ -345,7 +406,7 @@
 				});
 
 				$('#swipebox-action').hover(function() {
-				  		$this.showBars();
+						$this.showBars();
 						bars.addClass('force-visible-bars');
 						$this.clearTimeout();
 					
@@ -397,6 +458,10 @@
 				$('#swipebox-close').bind('click touchend', function(e){
 					$this.closeSlide();
 				});
+
+				$('#swipebox-play').bind('click touchend', function(e){
+					$this.togglePlay();
+				});
 			},
 			
 			setSlide : function (index, isFirst){
@@ -417,12 +482,15 @@
 				if( isFirst ){
 					slider.fadeIn();
 				}
+				this.clearAutoSwipeTimeout();
+				this.setAutoSwipeTimeout();
 
 				$('#swipebox-prev, #swipebox-next').removeClass('disabled');
 				if(index == 0){
 					$('#swipebox-prev').addClass('disabled');
 				}else if( index == elements.length - 1 ){
 					$('#swipebox-next').addClass('disabled');
+					this.clearAutoSwipeTimeout();
 				}
 			},
 		
@@ -464,6 +532,8 @@
 				}else{
 					$('#swipebox-slider .slide').eq(index).html($this.getVideo(src));
 				}
+				$this.clearAutoSwipeTimeout();
+				$this.setAutoSwipeTimeout();
 				
 			},
 
@@ -513,7 +583,7 @@
 			
 			loadMedia : function (src, callback){
 				if( !this.isVideo(src) ){
-					var img = $('<img>').on('load', function(){
+					var img = $('<img>').bind('load', function(){
 						callback.call(img);
 					});
 					
@@ -536,6 +606,7 @@
 						$('#swipebox-slider').removeClass('rightSpring');
 					},500);
 				}
+				
 			},
 			
 			getPrev : function (){
@@ -554,14 +625,31 @@
 				}
 			},
 
+			togglePlay : function (){
+				if(this.paused) {
+					this.clearAutoSwipeTimeout();
+					this.setAutoSwipeTimeout();
+					$('#swipebox-action #swipebox-play').removeClass('play-button').addClass('pause-button');
+					this.paused = false;
+				}
+				else {
+					this.clearAutoSwipeTimeout();
+					$('#swipebox-action #swipebox-play').removeClass('pause-button').addClass('play-button');
+					this.paused = true;
+				}
+			},
 
 			closeSlide : function (){
+				if (plugin.settings.fullScreen){
+					this.exitFullScreen();
+				}
 				$('html').removeClass('swipebox');
 				$(window).trigger('resize');
 				this.destroy();
 			},
 
 			destroy : function(){
+				this.clearAutoSwipeTimeout();
 				$(window).unbind('keyup');
 				$('body').unbind('touchstart');
 				$('body').unbind('touchmove');
@@ -575,7 +663,7 @@
 				$.swipebox.isOpen = false;
 				if (plugin.settings.afterClose) 
 					plugin.settings.afterClose();
- 			}
+			}
 
 		};
 
