@@ -311,7 +311,7 @@
 
 						}	
 
-						$('.touching').off('touchmove').removeClass('touching');
+						$('.touching').unbind('touchmove').removeClass('touching');
 						
 					});
 
