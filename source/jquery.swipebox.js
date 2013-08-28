@@ -350,7 +350,7 @@
 			},
 
 			setAutoSwipeTimeout: function(){
-				if(plugin.settings.autoSwipeDelay > 0){
+				if((!this.paused) && (plugin.settings.autoSwipeDelay > 0)){
 					var $this = this;
 					$this.clearAutoSwipeTimeout();
 					$this.swipeTimerId = window.setTimeout( function(){
