@@ -38,17 +38,26 @@
 				<div id="swipebox-caption"></div>\
 				<div id="swipebox-action">\
 					<a id="swipebox-close"></a>\
+					<a id="swipebox-play"></a>\
 					<a id="swipebox-prev"></a>\
 					<a id="swipebox-next"></a>\
 				</div>\
 		</div>';
-		var swipeTimerId;
+
+		
+		
 
 		plugin.settings = {}
 
 		plugin.init = function(){
 
 			plugin.settings = $.extend({}, defaults, options);
+			if(plugin.settings.autoSwipeDelay > 0){
+				this.paused = false;
+			}
+			else{
+				this.paused = true;
+			}
 
 			if ($.isArray(elem)) {
 
@@ -124,6 +133,12 @@
 				var $this = this;
 
 				$('body').append(html);
+				if(this.paused){
+					$('#swipebox-action #swipebox-play').addClass('play-button');
+				}
+				else{
+					$('#swipebox-action #swipebox-play').addClass('pause-button');
+				}
 
 				if($this.doCssTrans()){
 					$('#swipebox-slider').css({
@@ -443,6 +458,10 @@
 				$('#swipebox-close').bind('click touchend', function(e){
 					$this.closeSlide();
 				});
+
+				$('#swipebox-play').bind('click touchend', function(e){
+					$this.togglePlay();
+				});
 			},
 			
 			setSlide : function (index, isFirst){
@@ -606,6 +625,19 @@
 				}
 			},
 
+			togglePlay : function (){
+				if(this.paused) {
+					this.clearAutoSwipeTimeout();
+					this.setAutoSwipeTimeout();
+					$('#swipebox-action #swipebox-play').removeClass('play-button').addClass('pause-button');
+					this.paused = false;
+				}
+				else {
+					this.clearAutoSwipeTimeout();
+					$('#swipebox-action #swipebox-play').removeClass('pause-button').addClass('play-button');
+					this.paused = true;
+				}
+			},
 
 			closeSlide : function (){
 				if (plugin.settings.fullScreen){
