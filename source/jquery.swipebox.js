@@ -337,6 +337,13 @@
 				bars.addClass('visible-bars');
 				$this.setTimeout();
 				
+				$(document).bind('mousemove', function(e){
+					if(!bars.hasClass('visible-bars')){
+						$this.showBars();
+						$this.setTimeout();
+					}
+				});
+				
 				$('#swipebox-slider').click(function(e){
 					if(!bars.hasClass('visible-bars')){
 						$this.showBars();
