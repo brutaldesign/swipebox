@@ -63,7 +63,8 @@ useCSS : true, // false will force the use of jQuery for animations
 initialIndexOnArray: 0, // which image index to init when a array is passed
 hideBarsDelay : 3000, // 0 to always show caption and action bar
 videoMaxWidth : 1140, // videos max width
-beforeOpen: function(){} , // called before opening
+supportSVG : true, // use svg for action buttons if browser supports svg
+beforeOpen: function(){}, // called before opening
 afterClose: function(){} // called after closing
 ```
 

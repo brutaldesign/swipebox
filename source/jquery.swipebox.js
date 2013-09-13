@@ -19,7 +19,8 @@
 			videoMaxWidth : 1140,
 			vimeoColor : 'CCCCCC',
 			beforeOpen: null,
-		      	afterClose: null
+		    afterClose: null,
+		    supportSVG: true
 		},
 		
 		plugin = this,
@@ -28,7 +29,7 @@
 		selector = elem.selector,
 		$selector = $(selector),
 		isTouch = document.createTouch !== undefined || ('ontouchstart' in window) || ('onmsgesturechange' in window) || navigator.msMaxTouchPoints,
-		supportSVG = !!(window.SVGSVGElement),
+		browserSupportsSVG = !!(window.SVGSVGElement),
 		winWidth = window.innerWidth ? window.innerWidth : $(window).width(),
 		winHeight = window.innerHeight ? window.innerHeight : $(window).height(),
 		html = '<div id="swipebox-overlay">\
@@ -147,7 +148,7 @@
 				}
 
 
-				if(supportSVG){
+				if(plugin.settings.supportSVG && browserSupportsSVG){
 					var bg = $('#swipebox-action #swipebox-close').css('background-image');
 					bg = bg.replace('png', 'svg');
 					$('#swipebox-action #swipebox-prev,#swipebox-action #swipebox-next,#swipebox-action #swipebox-close').css({
