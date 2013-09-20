@@ -318,15 +318,17 @@
 			},
 
 			hideBars : function(){
-				var bars = $('#swipebox-caption, #swipebox-action');
-				if(this.doCssTrans()){
-					bars.removeClass('visible-bars');
-				}else{
-					$('#swipebox-caption').animate({ top : '-50px' }, 500);
-					$('#swipebox-action').animate({ bottom : '-50px' }, 500);
-					setTimeout(function(){
+				if(plugin.settings.hideBarsDelay > 0){
+					var bars = $('#swipebox-caption, #swipebox-action');
+					if(this.doCssTrans()){
 						bars.removeClass('visible-bars');
-					}, 1000);
+					}else{
+						$('#swipebox-caption').animate({ top : '-50px' }, 500);
+						$('#swipebox-action').animate({ bottom : '-50px' }, 500);
+						setTimeout(function(){
+							bars.removeClass('visible-bars');
+						}, 1000);
+					}
 				}
 			},
 
