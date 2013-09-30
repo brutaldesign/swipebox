@@ -85,7 +85,7 @@ html.swipebox {
   top: 0; left: 0;
 }
 
-#swipebox-action, #swipebox-caption {
+#swipebox-bottom, #swipebox-top {
   position: absolute;
   left: 0;
   z-index: 999;
@@ -93,26 +93,28 @@ html.swipebox {
   width: 100%;
 }
 
-#swipebox-action {
+#swipebox-bottom {
   bottom: -50px;
 }
-#swipebox-action.visible-bars {
+#swipebox-bottom.visible-bars {
   bottom: 0;
 }
 
-#swipebox-action.force-visible-bars {
+#swipebox-bottom.force-visible-bars {
   bottom: 0!important;
 }
 
 #swipebox-caption {
-  top: -50px;
   text-align: center;
 }
-#swipebox-caption.visible-bars {
+#swipebox-top {
+  top: -50px;
+}
+#swipebox-top.visible-bars {
   top: 0;
 }
 
-#swipebox-caption.force-visible-bars {
+#swipebox-top.force-visible-bars {
   top: 0!important;
 }
 
@@ -237,7 +239,7 @@ html.swipebox {
   background: rgba(13, 13, 13, 0.6);
 }
 
-#swipebox-action, #swipebox-caption {
+#swipebox-bottom, #swipebox-top {
   text-shadow: 1px 1px 1px black;
   background-color: #0d0d0d;
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #0d0d0d), color-stop(100%, #000000));
@@ -249,12 +251,12 @@ html.swipebox {
   opacity: 0.95;
 }
 
-#swipebox-action {
+#swipebox-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 #swipebox-caption {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   color: white!important;
   font-size: 15px;
   line-height: 43px;

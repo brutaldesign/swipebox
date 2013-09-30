@@ -24,6 +24,7 @@
 
 		plugin = this,
 		elements = [], // slides array [{href:'...', title:'...'}, ...],
+        $elem,
 		selector = elem.selector,
 		$selector = $(selector),
 		isTouch = document.createTouch !== undefined || ('ontouchstart' in window) || ('onmsgesturechange' in window) || navigator.msMaxTouchPoints,
@@ -32,8 +33,10 @@
 		winHeight = window.innerHeight ? window.innerHeight : $(window).height(),
 		html = '<div id="swipebox-overlay">' +
 			'<div id="swipebox-slider"></div>' +
+            '<div id="swipebox-top">' +
 			'<div id="swipebox-caption"></div>' +
-			'<div id="swipebox-action">' +
+            '</div>' +
+            '<div id="swipebox-bottom">' +
 			'<a id="swipebox-close"></a>' +
 			'<a id="swipebox-prev"></a>' +
 			'<a id="swipebox-next"></a>' +
@@ -136,7 +139,7 @@
 						'-khtml-transition' : 'opacity 1s ease',
 						'transition' : 'opacity 1s ease'
 					});
-					$('#swipebox-action, #swipebox-caption').css({
+                    $('#swipebox-bottom, #swipebox-top').css({
 						'-webkit-transition' : '0.5s',
 						'-moz-transition' : '0.5s',
 						'-o-transition' : '0.5s',
@@ -228,7 +231,7 @@
 					swipMinDistance = 10,
 					startCoords = {},
 					endCoords = {};
-					var bars = $('#swipebox-caption, #swipebox-action');
+                    var bars = $('#swipebox-top, #swipebox-bottom');
 
 					bars.addClass('visible-bars');
 					$this.setTimeout();
@@ -301,12 +304,12 @@
 			},
 
 			showBars : function () {
-				var bars = $('#swipebox-caption, #swipebox-action');
+                var bars = $('#swipebox-top, #swipebox-bottom');
 				if (this.doCssTrans()) {
 					bars.addClass('visible-bars');
 				} else {
-					$('#swipebox-caption').animate({ top : 0 }, 500);
-					$('#swipebox-action').animate({ bottom : 0 }, 500);
+                    $('#swipebox-top').animate({ top : 0 }, 500);
+                    $('#swipebox-bottom').animate({ bottom : 0 }, 500);
 					setTimeout(function () {
 						bars.addClass('visible-bars');
 					}, 1000);
@@ -314,12 +317,12 @@
 			},
 
 			hideBars : function () {
-				var bars = $('#swipebox-caption, #swipebox-action');
+                var bars = $('#swipebox-top, #swipebox-bottom');
 				if (this.doCssTrans()) {
 					bars.removeClass('visible-bars');
 				} else {
-					$('#swipebox-caption').animate({ top : '-50px' }, 500);
-					$('#swipebox-action').animate({ bottom : '-50px' }, 500);
+                    $('#swipebox-top').animate({ top : '-50px' }, 500);
+                    $('#swipebox-bottom').animate({ bottom : '-50px' }, 500);
 					setTimeout(function () {
 						bars.removeClass('visible-bars');
 					}, 1000);
@@ -328,7 +331,7 @@
 
 			animBars : function () {
 				var $this = this;
-				var bars = $('#swipebox-caption, #swipebox-action');
+                var bars = $('#swipebox-top, #swipebox-bottom');
 
 				bars.addClass('visible-bars');
 				$this.setTimeout();
@@ -340,7 +343,7 @@
 					}
 				});
 
-				$('#swipebox-action').hover(
+                $('#swipebox-bottom').hover(
 					function () {
 						$this.showBars();
 						bars.addClass('force-visible-bars');
@@ -530,7 +533,7 @@
 			getPrev : function () {
 				var index = $('#swipebox-slider .slide').index($('#swipebox-slider .slide.current'));
 				if (index > 0) {
-					index -= 0;
+                    index -= 1;
 					this.setSlide(index);
 					this.preloadMedia(index - 1);
 				} else {
