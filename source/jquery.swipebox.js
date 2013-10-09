@@ -19,7 +19,9 @@
 			videoMaxWidth : 1140,
 			vimeoColor : 'CCCCCC',
 			beforeOpen: null,
-		      	afterClose: null
+			afterClose: null,
+			titleAttribute: 'title',
+			hrefAttribute: 'href'
 		},
 		
 		plugin = this,
@@ -74,11 +76,11 @@
 
 						var title = null, href = null;
 						
-						if( $(this).attr('title') )
-							title = $(this).attr('title');
+						if( $(this).attr(plugin.settings.titleAttribute) )
+							title = $(this).attr(plugin.settings.titleAttribute);
 
-						if( $(this).attr('href') )
-							href = $(this).attr('href');
+						if( $(this).attr(plugin.settings.hrefAttribute) )
+							href = $(this).attr(plugin.settings.hrefAttribute);
 
 						elements.push({
 							href: href,
