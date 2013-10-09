@@ -399,15 +399,23 @@
 				});
 			},
 			
-			setSlide : function (index, isFirst){
+			setSlide : function (index, isFirst, direction){
 				isFirst = isFirst || false;
 				
 				var slider = $('#swipebox-slider');
+				var $nextSlide = $('#swipebox-slider .slide').eq(index);
+				direction = isFirst ? 'launch' : direction;
 				
 				if(this.doCssTrans()){
 					slider.css({ left : (-index*100)+'%' });
+					//pause for css transition
+					setTimeout(function() {
+						$selector.triggerHandler('slid', [direction, $nextSlide]);
+					}, 100);
 				}else{
-					slider.animate({ left : (-index*100)+'%' });
+					slider.animate({ left : (-index*100)+'%' }, function () {
+						$selector.triggerHandler('slid', [direction, $nextSlide]);
+					});
 				}
 				
 				$('#swipebox-slider .slide').removeClass('current');
@@ -524,9 +532,13 @@
 			getNext : function (){
 				var $this = this;
 				index = $('#swipebox-slider .slide').index($('#swipebox-slider .slide.current'));
+
+				//trigger slide action for callback listeners
+				$selector.triggerHandler('slide', ['next', elements[index+1]]);
+				
 				if(index+1 < elements.length){
 					index++;
-					$this.setSlide(index);
+					$this.setSlide(index, null, 'next');
 					$this.preloadMedia(index+1);
 				}
 				else{
@@ -540,9 +552,13 @@
 			
 			getPrev : function (){
 				index = $('#swipebox-slider .slide').index($('#swipebox-slider .slide.current'));
+				
+				//trigger slide action for callback listeners
+				$selector.triggerHandler('slide', ['prev', elements[index+1]]);
+				
 				if(index > 0){
 					index--;
-					this.setSlide(index);
+					this.setSlide(index, null, 'prev');
 					this.preloadMedia(index-1);
 				}
 				else{
