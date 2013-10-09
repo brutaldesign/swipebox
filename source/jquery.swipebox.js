@@ -19,7 +19,10 @@
 			videoMaxWidth : 1140,
 			vimeoColor : 'CCCCCC',
 			beforeOpen: null,
-		      	afterClose: null
+			afterClose: null,
+		  	titleAttribute: 'title',
+		  	hrefAttribute: 'href',
+		  	flipControls: false
 		},
 		
 		plugin = this,
@@ -31,14 +34,18 @@
 		supportSVG = !!(window.SVGSVGElement),
 		winWidth = window.innerWidth ? window.innerWidth : $(window).width(),
 		winHeight = window.innerHeight ? window.innerHeight : $(window).height(),
-		html = '<div id="swipebox-overlay">\
-				<div id="swipebox-slider"></div>\
-				<div id="swipebox-caption"></div>\
-				<div id="swipebox-action">\
-					<a id="swipebox-close"></a>\
-					<a id="swipebox-prev"></a>\
-					<a id="swipebox-next"></a>\
-				</div>\
+		$sb,
+		html_caption = '<div class="swipebox-caption"></div>',
+		html_action = '<div class="swipebox-action">\
+							<a class="swipebox-close"></a>\
+							<a class="swipebox-prev"></a>\
+							<a class="swipebox-next"></a>\
+						</div>',
+		html = '<div class="swipebox-content">\
+				<div class="swipebox-overlay">\
+				<div class="swipebox-slider"></div>\
+				<div class="swipebox-header"></div>\
+				<div class="swipebox-footer"></div>\
 		</div>';
 
 		plugin.settings = {}
@@ -74,11 +81,11 @@
 
 						var title = null, href = null;
 						
-						if( $(this).attr('title') )
-							title = $(this).attr('title');
+						if( $(this).attr(plugin.settings.titleAttribute) )
+							title = $(this).attr(plugin.settings.titleAttribute);
 
-						if( $(this).attr('href') )
-							href = $(this).attr('href');
+						if( $(this).attr(plugin.settings.hrefAttribute) )
+							href = $(this).attr(plugin.settings.hrefAttribute);
 
 						elements.push({
 							href: href,
@@ -120,24 +127,33 @@
 			build : function(){
 				var $this = this;
 
-				$('body').append(html);
+				//add template to body
+				$sb = $(html).appendTo($('body'));
+				//add controls and title
+				if (plugin.settings.flipControls) {
+					$sb.find('.swipebox-header').append(html_action);
+					$sb.find('.swipebox-footer').append(html_caption);
+				} else {
+					$sb.find('.swipebox-header').append(html_caption);
+					$sb.find('.swipebox-footer').append(html_action);
+				}
 
 				if($this.doCssTrans()){
-					$('#swipebox-slider').css({
+					$sb.find('.swipebox-slider').css({
 						'-webkit-transition' : 'left 0.4s ease',
 						'-moz-transition' : 'left 0.4s ease',
 						'-o-transition' : 'left 0.4s ease',
 						'-khtml-transition' : 'left 0.4s ease',
 						'transition' : 'left 0.4s ease'
 					});
-					$('#swipebox-overlay').css({
+					$sb.find('.swipebox-overlay').css({
 						'-webkit-transition' : 'opacity 1s ease',
 						'-moz-transition' : 'opacity 1s ease',
 						'-o-transition' : 'opacity 1s ease',
 						'-khtml-transition' : 'opacity 1s ease',
 						'transition' : 'opacity 1s ease'
 					});
-					$('#swipebox-action, #swipebox-caption').css({
+					$sb.find('.swipebox-footer, .swipebox-header').css({
 						'-webkit-transition' : '0.5s',
 						'-moz-transition' : '0.5s',
 						'-o-transition' : '0.5s',
@@ -148,15 +164,15 @@
 
 
 				if(supportSVG){
-					var bg = $('#swipebox-action #swipebox-close').css('background-image');
+					var bg = $sb.find('.swipebox-action .swipebox-close').css('background-image');
 					bg = bg.replace('png', 'svg');
-					$('#swipebox-action #swipebox-prev,#swipebox-action #swipebox-next,#swipebox-action #swipebox-close').css({
+					$sb.find('.swipebox-action .swipebox-prev,.swipebox-action .swipebox-next,.swipebox-action .swipebox-close').css({
 						'background-image' : bg
 					});
 				}
 				
 				$.each( elements,  function(){
-					$('#swipebox-slider').append('<div class="slide"></div>');
+					$sb.find('.swipebox-slider').append('<div class="slide"></div>');
 				});
 
 				$this.setDim();
@@ -197,7 +213,7 @@
 				}
 
 
-				$('#swipebox-overlay').css(sliderCss);
+				$sb.find('.swipebox-overlay').css(sliderCss);
 
 			},
 
@@ -232,7 +248,7 @@
 					swipMinDistance = 10,
 					startCoords = {},
 					endCoords = {};
-					var bars = $('#swipebox-caption, #swipebox-action');
+					var bars = $sb.find('.swipebox-header, .swipebox-footer');
 
 					bars.addClass('visible-bars');
 					$this.setTimeout();
@@ -305,12 +321,12 @@
 			},
 
 			showBars : function(){
-				var bars = $('#swipebox-caption, #swipebox-action');
+				var bars = $sb.find('.swipebox-header, .swipebox-footer');
 				if(this.doCssTrans()){
 					bars.addClass('visible-bars');
 				}else{
-					$('#swipebox-caption').animate({ top : 0 }, 500);
-					$('#swipebox-action').animate({ bottom : 0 }, 500);
+					$sb.find('.swipebox-header').animate({ top : 0 }, 500);
+					$sb.find('.swipebox-footer').animate({ bottom : 0 }, 500);
 					setTimeout(function(){
 						bars.addClass('visible-bars');
 					}, 1000);
@@ -318,12 +334,12 @@
 			},
 
 			hideBars : function(){
-				var bars = $('#swipebox-caption, #swipebox-action');
+				var bars = $sb.find('.swipebox-header, .swipebox-footer');
 				if(this.doCssTrans()){
 					bars.removeClass('visible-bars');
 				}else{
-					$('#swipebox-caption').animate({ top : '-50px' }, 500);
-					$('#swipebox-action').animate({ bottom : '-50px' }, 500);
+					$sb.find('.swipebox-header').animate({ top : '-50px' }, 500);
+					$sb.find('.swipebox-footer').animate({ bottom : '-50px' }, 500);
 					setTimeout(function(){
 						bars.removeClass('visible-bars');
 					}, 1000);
@@ -332,19 +348,19 @@
 
 			animBars : function(){
 				var $this = this;
-				var bars = $('#swipebox-caption, #swipebox-action');
+				var bars = $sb.find('.swipebox-header, .swipebox-footer');
 					
 				bars.addClass('visible-bars');
 				$this.setTimeout();
 				
-				$('#swipebox-slider').click(function(e){
+				$sb.find('.swipebox-slider').click(function(e){
 					if(!bars.hasClass('visible-bars')){
 						$this.showBars();
 						$this.setTimeout();
 					}
 				});
 
-				$('#swipebox-action').hover(function() {
+				$sb.find('.swipebox-header, .swipebox-footer').hover(function() {
 				  		$this.showBars();
 						bars.addClass('force-visible-bars');
 						$this.clearTimeout();
@@ -377,16 +393,16 @@
 				var $this = this;
 				
 				if( elements.length < 2 ){
-					$('#swipebox-prev, #swipebox-next').hide();
+					$sb.find('.swipebox-prev, .swipebox-next').hide();
 				}else{
-					$('#swipebox-prev').bind('click touchend', function(e){
+					$sb.find('.swipebox-prev').bind('click touchend', function(e){
 						e.preventDefault();
 						e.stopPropagation();
 						$this.getPrev();
 						$this.setTimeout();
 					});
 					
-					$('#swipebox-next').bind('click touchend', function(e){
+					$sb.find('.swipebox-next').bind('click touchend', function(e){
 						e.preventDefault();
 						e.stopPropagation();
 						$this.getNext();
@@ -394,40 +410,47 @@
 					});
 				}
 
-				$('#swipebox-close').bind('click touchend', function(e){
+				$sb.find('.swipebox-close').bind('click touchend', function(e){
 					$this.closeSlide();
 				});
 			},
 			
-			setSlide : function (index, isFirst){
+			setSlide : function (index, isFirst, direction){
 				isFirst = isFirst || false;
 				
-				var slider = $('#swipebox-slider');
-				
+				var slider = $sb.find('.swipebox-slider');
+				var $nextSlide = $sb.find('.swipebox-slider .slide').eq(index);
+				direction = isFirst ? 'launch' : direction;
 				if(this.doCssTrans()){
 					slider.css({ left : (-index*100)+'%' });
+					//pause for css transition
+					setTimeout(function() {
+						$selector.triggerHandler('slid', [direction, $nextSlide]);
+					}, 100);
 				}else{
-					slider.animate({ left : (-index*100)+'%' });
+					slider.animate({ left : (-index*100)+'%' }, function () {
+						$selector.triggerHandler('slid', [direction, $nextSlide]);
+					});
 				}
 				
-				$('#swipebox-slider .slide').removeClass('current');
-				$('#swipebox-slider .slide').eq(index).addClass('current');
+				$sb.find('.swipebox-slider .slide').removeClass('current');
+				$sb.find('.swipebox-slider .slide').eq(index).addClass('current');
 				this.setTitle(index);
 
 				if( isFirst ){
 					slider.fadeIn();
 				}
 
-				$('#swipebox-prev, #swipebox-next').removeClass('disabled');
+				$sb.find('.swipebox-prev, .swipebox-next').removeClass('disabled');
 				if(index == 0){
-					$('#swipebox-prev').addClass('disabled');
+					$sb.find('.swipebox-prev').addClass('disabled');
 				}else if( index == elements.length - 1 ){
-					$('#swipebox-next').addClass('disabled');
+					$sb.find('.swipebox-next').addClass('disabled');
 				}
 			},
 		
 			openSlide : function (index){
-				$('html').addClass('swipebox');
+				$('html').addClass('swipebox-wrapper');
 				$(window).trigger('resize'); // fix scroll bar visibility on desktop
 				this.setSlide(index, true);
 			},
@@ -459,10 +482,10 @@
 
 				if( !$this.isVideo(src) ){
 					$this.loadMedia(src, function(){
-						$('#swipebox-slider .slide').eq(index).html(this);
+						$sb.find('.swipebox-slider .slide').eq(index).html(this);
 					});
 				}else{
-					$('#swipebox-slider .slide').eq(index).html($this.getVideo(src));
+					$sb.find('.swipebox-slider .slide').eq(index).html($this.getVideo(src));
 				}
 				
 			},
@@ -470,13 +493,13 @@
 			setTitle : function (index, isFirst){
 				var title = null;
 
-				$('#swipebox-caption').empty();
+				$sb.find('.swipebox-caption').empty();
 
 				if( elements[index] !== undefined )
 					title = elements[index].title;
 				
 				if(title){
-					$('#swipebox-caption').append(title);
+					$sb.find('.swipebox-caption').append(title);
 				}
 			},
 
@@ -523,33 +546,41 @@
 			
 			getNext : function (){
 				var $this = this;
-				index = $('#swipebox-slider .slide').index($('#swipebox-slider .slide.current'));
+				index = $sb.find('.swipebox-slider .slide').index($sb.find('.swipebox-slider .slide.current'));
+
+				//trigger slide action for callback listeners
+				$selector.triggerHandler('slide', ['next', elements[index+1]]);
+				
 				if(index+1 < elements.length){
 					index++;
-					$this.setSlide(index);
+					$this.setSlide(index, null, 'next');
 					$this.preloadMedia(index+1);
 				}
 				else{
 					
-					$('#swipebox-slider').addClass('rightSpring');
+					$sb.find('.swipebox-slider').addClass('rightSpring');
 					setTimeout(function(){
-						$('#swipebox-slider').removeClass('rightSpring');
+						$sb.find('.swipebox-slider').removeClass('rightSpring');
 					},500);
 				}
 			},
 			
 			getPrev : function (){
-				index = $('#swipebox-slider .slide').index($('#swipebox-slider .slide.current'));
+				index = $sb.find('.swipebox-slider .slide').index($sb.find('.swipebox-slider .slide.current'));
+				
+				//trigger slide action for callback listeners
+				$selector.triggerHandler('slide', ['prev', elements[index+1]]);
+				
 				if(index > 0){
 					index--;
-					this.setSlide(index);
+					this.setSlide(index, null, 'prev');
 					this.preloadMedia(index-1);
 				}
 				else{
 					
-					$('#swipebox-slider').addClass('leftSpring');
+					$sb.find('.swipebox-slider').addClass('leftSpring');
 					setTimeout(function(){
-						$('#swipebox-slider').removeClass('leftSpring');
+						$sb.find('.swipebox-slider').removeClass('leftSpring');
 					},500);
 				}
 			},
@@ -566,8 +597,8 @@
 				$('body').unbind('touchstart');
 				$('body').unbind('touchmove');
 				$('body').unbind('touchend');
-				$('#swipebox-slider').unbind();
-				$('#swipebox-overlay').remove();
+				$sb.find('.swipebox-slider').unbind();
+				$sb.find('.swipebox-overlay').remove();
 				if (!$.isArray(elem))
 					elem.removeData('_swipebox');
 				if ( this.target )
