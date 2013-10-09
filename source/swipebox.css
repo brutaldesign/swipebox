@@ -1,12 +1,12 @@
-html.swipebox {
+html.swipebox-wrapper {
   overflow: hidden!important;
 }
 
-#swipebox-overlay img {
+.swipebox-content .swipebox-overlay img {
   border: none!important;
 }
 
-#swipebox-overlay {
+.swipebox-content .swipebox-overlay {
   width: 100%;
   height: 100%;
   position: fixed;
@@ -19,7 +19,7 @@ html.swipebox {
   user-select: none;
 }
 
-#swipebox-slider {
+.swipebox-content .swipebox-slider {
   height: 100%;
   left: 0;
   top: 0;
@@ -29,7 +29,7 @@ html.swipebox {
   display: none;
 }
 
-#swipebox-slider .slide {
+.swipebox-content .swipebox-slider .slide {
   background: url("img/loader.gif") no-repeat center center;
   height: 100%;
   width: 100%;
@@ -38,7 +38,7 @@ html.swipebox {
   display: inline-block;
 }
 
-#swipebox-slider .slide:before {
+.swipebox-content .swipebox-slider .slide:before {
   content: "";
   display: inline-block;
   height: 50%;
@@ -46,8 +46,8 @@ html.swipebox {
   margin-right: -1px;
 }
 
-#swipebox-slider .slide img,
-#swipebox-slider .slide .swipebox-video-container {
+.swipebox-content .swipebox-slider .slide img,
+.swipebox-content .swipebox-slider .slide .swipebox-video-container {
   display: inline-block;
   max-height: 100%;
   max-width: 100%;
@@ -58,7 +58,7 @@ html.swipebox {
   vertical-align: middle;
 }
 
-#swipebox-slider .slide .swipebox-video-container {
+.swipebox-content .swipebox-slider .slide .swipebox-video-container {
   background:none;
   max-width: 1140px;
   max-height: 100%;
@@ -70,7 +70,7 @@ html.swipebox {
 }
 
 
-#swipebox-slider .slide .swipebox-video-container .swipebox-video{
+.swipebox-content .swipebox-slider .slide .swipebox-video-container .swipebox-video{
   width: 100%;
   height: 0;
   padding-bottom: 56.25%;
@@ -78,14 +78,14 @@ html.swipebox {
   position: relative;
 }
 
-#swipebox-slider .slide .swipebox-video-container .swipebox-video iframe{
+.swipebox-content .swipebox-slider .slide .swipebox-video-container .swipebox-video iframe{
   width: 100%!important; 
   height: 100%!important;
   position: absolute;
   top: 0; left: 0;
 }
 
-#swipebox-action, #swipebox-caption {
+.swipebox-content .swipebox-footer, .swipebox-content .swipebox-header {
   position: absolute;
   left: 0;
   z-index: 999;
@@ -93,31 +93,30 @@ html.swipebox {
   width: 100%;
 }
 
-#swipebox-action {
+.swipebox-content .swipebox-footer {
   bottom: -50px;
 }
-#swipebox-action.visible-bars {
+.swipebox-content .swipebox-footer.visible-bars {
   bottom: 0;
 }
 
-#swipebox-action.force-visible-bars {
+.swipebox-content .swipebox-footer.force-visible-bars {
   bottom: 0!important;
 }
 
-#swipebox-caption {
+.swipebox-content .swipebox-header {
   top: -50px;
-  text-align: center;
 }
-#swipebox-caption.visible-bars {
+.swipebox-content .swipebox-header.visible-bars {
   top: 0;
 }
 
-#swipebox-caption.force-visible-bars {
+.swipebox-content .swipebox-header.force-visible-bars {
   top: 0!important;
 }
 
-#swipebox-action #swipebox-prev, #swipebox-action #swipebox-next,
-#swipebox-action #swipebox-close {
+.swipebox-content .swipebox-action .swipebox-prev, .swipebox-content .swipebox-action .swipebox-next,
+.swipebox-content .swipebox-action .swipebox-close {
   background-image: url("img/icons.png");
   background-repeat: no-repeat;
   border: none!important;
@@ -129,33 +128,33 @@ html.swipebox {
   top: 0;
 }
 
-#swipebox-action #swipebox-close {
+.swipebox-content .swipebox-action .swipebox-close {
   background-position: 15px 12px;
   left: 40px;
 }
 
-#swipebox-action #swipebox-prev {
+.swipebox-content .swipebox-action .swipebox-prev {
   background-position: -32px 13px;
   right: 100px;
 }
 
-#swipebox-action #swipebox-next {
+.swipebox-content .swipebox-action .swipebox-next {
   background-position: -78px 13px;
   right: 40px;
 }
 
-#swipebox-action #swipebox-prev.disabled,
-#swipebox-action #swipebox-next.disabled {
+.swipebox-content .swipebox-action .swipebox-prev.disabled,
+.swipebox-content .swipebox-action .swipebox-next.disabled {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
   opacity: 0.3;
 }
 
-#swipebox-slider.rightSpring {
+.swipebox-content .swipebox-slider.rightSpring {
   -moz-animation: rightSpring 0.3s;
   -webkit-animation: rightSpring 0.3s;
 }
 
-#swipebox-slider.leftSpring {
+.swipebox-content .swipebox-slider.leftSpring {
   -moz-animation: leftSpring 0.3s;
   -webkit-animation: leftSpring 0.3s;
 }
@@ -217,15 +216,15 @@ html.swipebox {
 }
 
 @media screen and (max-width: 800px) {
-  #swipebox-action #swipebox-close {
+  .swipebox-content .swipebox-action .swipebox-close {
     left: 0;
   }
 
-  #swipebox-action #swipebox-prev {
+  .swipebox-content .swipebox-action .swipebox-prev {
     right: 60px;
   }
 
-  #swipebox-action #swipebox-next {
+  .swipebox-content .swipebox-action .swipebox-next {
     right: 0;
   }
 }
@@ -233,11 +232,11 @@ html.swipebox {
 
 /* Skin 
 --------------------------*/
-#swipebox-overlay {
+.swipebox-content .swipebox-overlay {
   background: #0d0d0d;
 }
 
-#swipebox-action, #swipebox-caption {
+.swipebox-content .swipebox-header, .swipebox-content .swipebox-footer {
   text-shadow: 1px 1px 1px black;
   background-color: #0d0d0d;
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #0d0d0d), color-stop(100%, #000000));
@@ -249,16 +248,22 @@ html.swipebox {
   opacity: 0.95;
 }
 
-#swipebox-action {
+.swipebox-content .swipebox-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.swipebox-content .swipebox-footer {
   border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-#swipebox-caption {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+.swipebox-content .swipebox-caption {
   color: white!important;
   font-size: 15px;
   line-height: 43px;
   font-family: Helvetica, Arial, sans-serif;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 
