@@ -63,6 +63,8 @@ useCSS : true, // false will force the use of jQuery for animations
 initialIndexOnArray: 0, // which image index to init when a array is passed
 hideBarsDelay : 3000, // 0 to always show caption and action bar
 videoMaxWidth : 1140, // videos max width
+vimeoColor : 'CCCCCC', // default color for vimeo embed
+showCount: false, // when true shows a simple slide counter (x/total)
 beforeOpen: function(){} , // called before opening
 afterClose: function(){} // called after closing
 ```
