@@ -417,6 +417,12 @@
 				$('#swipebox-close').bind('click touchend', function (e) {
 					$this.closeSlide();
 				});
+
+				$('#swipebox-slider .slide').bind('click', function (e) {
+					if (e.target === this) {
+						$this.closeSlide();
+					}
+				});
 			},
 
 			setSlide : function (index, isFirst) {
