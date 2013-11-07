@@ -98,7 +98,7 @@
 		plugin.refresh = function() {
 			if (!$.isArray(elem)) {
 				ui.destroy();
-				$elem = $(selector);
+				$selector = $elem = $(selector);
 				ui.actions();
 			}
 		}
