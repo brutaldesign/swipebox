@@ -39,7 +39,7 @@ html.swipebox {
 }
 
 #swipebox-slider .slide.loaded {
-  background: none;
+  background-image: none !important;
 }
 
 #swipebox-slider .slide:before {
