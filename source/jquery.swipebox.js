@@ -419,10 +419,10 @@
 				});
 
 				$('#swipebox-slider .slide').bind('click', function (e) {
-		                	if (e.target === this) {
-                				$this.closeSlide();
-                			}
-                		});
+					if (e.target === this) {
+						$this.closeSlide();
+					}
+				});
 			},
 
 			setSlide : function (index, isFirst) {
