@@ -38,6 +38,10 @@ html.swipebox {
   display: inline-block;
 }
 
+#swipebox-slider .slide.loaded {
+  background: none;
+}
+
 #swipebox-slider .slide:before {
   content: "";
   display: inline-block;

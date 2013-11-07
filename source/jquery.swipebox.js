@@ -479,7 +479,7 @@
 
 				if (!$this.isVideo(src)) {
 					$this.loadMedia(src, function () {
-						$('#swipebox-slider .slide').eq(index).html(this);
+						$('#swipebox-slider .slide').eq(index).html(this).addClass('loaded');
 					});
 				} else {
 					$('#swipebox-slider .slide').eq(index).html($this.getVideo(src));
