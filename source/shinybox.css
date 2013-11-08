@@ -1,12 +1,12 @@
-html.swipebox {
+html.shinybox {
   overflow: hidden!important;
 }
 
-#swipebox-overlay img {
+#shinybox-overlay img {
   border: none!important;
 }
 
-#swipebox-overlay {
+#shinybox-overlay {
   width: 100%;
   height: 100%;
   position: fixed;
@@ -19,7 +19,7 @@ html.swipebox {
   user-select: none;
 }
 
-#swipebox-slider {
+#shinybox-slider {
   height: 100%;
   left: 0;
   top: 0;
@@ -29,7 +29,7 @@ html.swipebox {
   display: none;
 }
 
-#swipebox-slider .slide {
+#shinybox-slider .slide {
   background: url("img/loader.gif") no-repeat center center;
   height: 100%;
   width: 100%;
@@ -38,7 +38,11 @@ html.swipebox {
   display: inline-block;
 }
 
-#swipebox-slider .slide:before {
+#shinybox-slider .slide.loaded {
+  background-image: none !important;
+}
+
+#shinybox-slider .slide:before {
   content: "";
   display: inline-block;
   height: 50%;
@@ -46,8 +50,8 @@ html.swipebox {
   margin-right: -1px;
 }
 
-#swipebox-slider .slide img,
-#swipebox-slider .slide .swipebox-video-container {
+#shinybox-slider .slide img,
+#shinybox-slider .slide .shinybox-video-container {
   display: inline-block;
   max-height: 100%;
   max-width: 100%;
@@ -58,7 +62,7 @@ html.swipebox {
   vertical-align: middle;
 }
 
-#swipebox-slider .slide .swipebox-video-container {
+#shinybox-slider .slide .shinybox-video-container {
   background:none;
   max-width: 1140px;
   max-height: 100%;
@@ -70,7 +74,7 @@ html.swipebox {
 }
 
 
-#swipebox-slider .slide .swipebox-video-container .swipebox-video{
+#shinybox-slider .slide .shinybox-video-container .shinybox-video{
   width: 100%;
   height: 0;
   padding-bottom: 56.25%;
@@ -78,14 +82,14 @@ html.swipebox {
   position: relative;
 }
 
-#swipebox-slider .slide .swipebox-video-container .swipebox-video iframe{
-  width: 100%!important; 
+#shinybox-slider .slide .shinybox-video-container .shinybox-video iframe{
+  width: 100%!important;
   height: 100%!important;
   position: absolute;
   top: 0; left: 0;
 }
 
-#swipebox-action, #swipebox-caption {
+#shinybox-bottom, #shinybox-top {
   position: absolute;
   left: 0;
   z-index: 999;
@@ -93,69 +97,75 @@ html.swipebox {
   width: 100%;
 }
 
-#swipebox-action {
+#shinybox-bottom {
+  text-align: right;
   bottom: -50px;
 }
-#swipebox-action.visible-bars {
+#shinybox-bottom.visible-bars {
   bottom: 0;
 }
 
-#swipebox-action.force-visible-bars {
+#shinybox-bottom.force-visible-bars {
   bottom: 0!important;
 }
 
-#swipebox-caption {
-  top: -50px;
+#shinybox-caption {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   text-align: center;
 }
-#swipebox-caption.visible-bars {
+#shinybox-top {
+  top: -50px;
+}
+#shinybox-top.visible-bars {
   top: 0;
 }
 
-#swipebox-caption.force-visible-bars {
+#shinybox-top.force-visible-bars {
   top: 0!important;
 }
 
-#swipebox-action #swipebox-prev, #swipebox-action #swipebox-next,
-#swipebox-action #swipebox-close {
+#shinybox-prev, #shinybox-next,
+#shinybox-close {
   background-image: url("img/icons.png");
   background-repeat: no-repeat;
   border: none!important;
   text-decoration: none!important;
   cursor: pointer;
-  position: absolute;
   width: 50px;
   height: 50px;
-  top: 0;
+  display: inline-block;
+  position: relative;
 }
 
-#swipebox-action #swipebox-close {
+#shinybox-close {
   background-position: 15px 12px;
-  left: 40px;
+  float: left;
 }
 
-#swipebox-action #swipebox-prev {
+#shinybox-prev {
   background-position: -32px 13px;
-  right: 100px;
 }
 
-#swipebox-action #swipebox-next {
+#shinybox-next {
   background-position: -78px 13px;
-  right: 40px;
 }
 
-#swipebox-action #swipebox-prev.disabled,
-#swipebox-action #swipebox-next.disabled {
+#shinybox-prev.disabled,
+#shinybox-next.disabled {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
   opacity: 0.3;
 }
 
-#swipebox-slider.rightSpring {
+#shinybox-slider.rightSpring {
   -moz-animation: rightSpring 0.3s;
   -webkit-animation: rightSpring 0.3s;
 }
 
-#swipebox-slider.leftSpring {
+#shinybox-slider.leftSpring {
   -moz-animation: leftSpring 0.3s;
   -webkit-animation: leftSpring 0.3s;
 }
@@ -216,28 +226,13 @@ html.swipebox {
   }
 }
 
-@media screen and (max-width: 800px) {
-  #swipebox-action #swipebox-close {
-    left: 0;
-  }
-
-  #swipebox-action #swipebox-prev {
-    right: 60px;
-  }
-
-  #swipebox-action #swipebox-next {
-    right: 0;
-  }
-}
-
-
-/* Skin 
+/* Skin
 --------------------------*/
-#swipebox-overlay {
-  background: #0d0d0d;
+#shinybox-overlay {
+  background: rgba(13, 13, 13, 0.6);
 }
 
-#swipebox-action, #swipebox-caption {
+#shinybox-bottom, #shinybox-top {
   text-shadow: 1px 1px 1px black;
   background-color: #0d0d0d;
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #0d0d0d), color-stop(100%, #000000));
@@ -249,12 +244,12 @@ html.swipebox {
   opacity: 0.95;
 }
 
-#swipebox-action {
+#shinybox-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-#swipebox-caption {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+#shinybox-caption {
   color: white!important;
   font-size: 15px;
   line-height: 43px;
