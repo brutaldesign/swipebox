@@ -2,7 +2,7 @@
 
 @author       Constantin Saguin - @brutaldesign
 @link            http://csag.co
-@github        http://github.com/brutaldesign/swipebox
+@github        http://github.com/One-com/shinybox
 @version     1.2.1
 @license      MIT License
 
@@ -10,7 +10,7 @@
 
 (function (window, document, $) {
 
-	$.swipebox = function (elem, options) {
+	$.shinybox = function (elem, options) {
 
 		var defaults = {
 			useCSS : true,
@@ -43,28 +43,28 @@
 			plugin.settings = $.extend({}, defaults, options);
 			var htmlTop = '', htmlBottom = '';
 			if (plugin.settings.closePlacement === 'top') {
-				htmlTop += '<a id="swipebox-close"></a>';
+				htmlTop += '<a id="shinybox-close"></a>';
 			} else if (plugin.settings.closePlacement === 'bottom') {
-				htmlBottom += '<a id="swipebox-close"></a>';
+				htmlBottom += '<a id="shinybox-close"></a>';
 			}
 			if (plugin.settings.captionPlacement === 'top') {
-				htmlTop += '<div id="swipebox-caption"></div>';
+				htmlTop += '<div id="shinybox-caption"></div>';
 			} else if (plugin.settings.captionPlacement === 'bottom') {
-				htmlBottom += '<div id="swipebox-caption"></div>';
+				htmlBottom += '<div id="shinybox-caption"></div>';
 			}
 			if (plugin.settings.navigationPlacement === 'top') {
-				htmlTop += '<a id="swipebox-prev"></a>' +
-					'<a id="swipebox-next"></a>';
+				htmlTop += '<a id="shinybox-prev"></a>' +
+					'<a id="shinybox-next"></a>';
 			} else if (plugin.settings.navigationPlacement === 'bottom') {
-				htmlBottom += '<a id="swipebox-prev"></a>' +
-					'<a id="swipebox-next"></a>';
+				htmlBottom += '<a id="shinybox-prev"></a>' +
+					'<a id="shinybox-next"></a>';
 			}
-		html = '<div id="swipebox-overlay">' +
-			'<div id="swipebox-slider"></div>' +
-			'<div id="swipebox-top">' +
+		html = '<div id="shinybox-overlay">' +
+			'<div id="shinybox-slider"></div>' +
+			'<div id="shinybox-top">' +
 			htmlTop +
 			'</div>' +
-			'<div id="swipebox-bottom">' +
+			'<div id="shinybox-bottom">' +
 			htmlBottom +
 			'</div>' +
 			'</div>';
@@ -130,8 +130,8 @@
 			init : function (index) {
 				if (plugin.settings.beforeOpen)
 					plugin.settings.beforeOpen();
-				this.target.trigger('swipebox-start');
-				$.swipebox.isOpen = true;
+				this.target.trigger('shinybox-start');
+				$.shinybox.isOpen = true;
 				this.build();
 				this.openSlide(index);
 				this.openMedia(index);
@@ -145,21 +145,21 @@
 				$('body').append(html);
 
 				if ($this.doCssTrans()) {
-					$('#swipebox-slider').css({
+					$('#shinybox-slider').css({
 						'-webkit-transition' : 'left 0.4s ease',
 						'-moz-transition' : 'left 0.4s ease',
 						'-o-transition' : 'left 0.4s ease',
 						'-khtml-transition' : 'left 0.4s ease',
 						'transition' : 'left 0.4s ease'
 					});
-					$('#swipebox-overlay').css({
+					$('#shinybox-overlay').css({
 						'-webkit-transition' : 'opacity 1s ease',
 						'-moz-transition' : 'opacity 1s ease',
 						'-o-transition' : 'opacity 1s ease',
 						'-khtml-transition' : 'opacity 1s ease',
 						'transition' : 'opacity 1s ease'
 					});
-					$('#swipebox-bottom, #swipebox-top').css({
+					$('#shinybox-bottom, #shinybox-top').css({
 						'-webkit-transition' : '0.5s',
 						'-moz-transition' : '0.5s',
 						'-o-transition' : '0.5s',
@@ -170,15 +170,15 @@
 
 
 				if (supportSVG) {
-					var bg = $('#swipebox-close').css('background-image');
+					var bg = $('#shinybox-close').css('background-image');
 					bg = bg.replace('png', 'svg');
-					$('#swipebox-prev,#swipebox-next,#swipebox-close').css({
+					$('#shinybox-prev,#shinybox-next,#shinybox-close').css({
 						'background-image' : bg
 					});
 				}
 
 				$.each(elements, function () {
-					$('#swipebox-slider').append('<div class="slide"></div>');
+					$('#shinybox-slider').append('<div class="slide"></div>');
 				});
 
 				$this.setDim();
@@ -216,7 +216,7 @@
 				};
 
 
-				$('#swipebox-overlay').css(sliderCss);
+				$('#shinybox-overlay').css(sliderCss);
 
 			},
 
@@ -251,7 +251,7 @@
 					swipMinDistance = 10,
 					startCoords = {},
 					endCoords = {};
-					var bars = $('#swipebox-top, #swipebox-bottom');
+					var bars = $('#shinybox-top, #shinybox-bottom');
 
 					bars.addClass('visible-bars');
 					$this.setTimeout();
@@ -324,12 +324,12 @@
 			},
 
 			showBars : function () {
-				var bars = $('#swipebox-top, #swipebox-bottom');
+				var bars = $('#shinybox-top, #shinybox-bottom');
 				if (this.doCssTrans()) {
 					bars.addClass('visible-bars');
 				} else {
-					$('#swipebox-top').animate({ top : 0 }, 500);
-					$('#swipebox-bottom').animate({ bottom : 0 }, 500);
+					$('#shinybox-top').animate({ top : 0 }, 500);
+					$('#shinybox-bottom').animate({ bottom : 0 }, 500);
 					setTimeout(function () {
 						bars.addClass('visible-bars');
 					}, 1000);
@@ -337,12 +337,12 @@
 			},
 
 			hideBars : function () {
-				var bars = $('#swipebox-top, #swipebox-bottom');
+				var bars = $('#shinybox-top, #shinybox-bottom');
 				if (this.doCssTrans()) {
 					bars.removeClass('visible-bars');
 				} else {
-					$('#swipebox-top').animate({ top : '-50px' }, 500);
-					$('#swipebox-bottom').animate({ bottom : '-50px' }, 500);
+					$('#shinybox-top').animate({ top : '-50px' }, 500);
+					$('#shinybox-bottom').animate({ bottom : '-50px' }, 500);
 					setTimeout(function () {
 						bars.removeClass('visible-bars');
 					}, 1000);
@@ -351,19 +351,19 @@
 
 			animBars : function () {
 				var $this = this;
-				var bars = $('#swipebox-top, #swipebox-bottom');
+				var bars = $('#shinybox-top, #shinybox-bottom');
 
 				bars.addClass('visible-bars');
 				$this.setTimeout();
 
-				$('#swipebox-slider').click(function (e) {
+				$('#shinybox-slider').click(function (e) {
 					if (!bars.hasClass('visible-bars')) {
 						$this.showBars();
 						$this.setTimeout();
 					}
 				});
 
-				$('#swipebox-bottom').hover(
+				$('#shinybox-bottom').hover(
 					function () {
 						$this.showBars();
 						bars.addClass('force-visible-bars');
@@ -397,16 +397,16 @@
 				var $this = this;
 
 				if (elements.length < 2) {
-					$('#swipebox-prev, #swipebox-next').hide();
+					$('#shinybox-prev, #shinybox-next').hide();
 				} else {
-					$('#swipebox-prev').bind('click touchend', function (e) {
+					$('#shinybox-prev').bind('click touchend', function (e) {
 						e.preventDefault();
 						e.stopPropagation();
 						$this.getPrev();
 						$this.setTimeout();
 					});
 
-					$('#swipebox-next').bind('click touchend', function (e) {
+					$('#shinybox-next').bind('click touchend', function (e) {
 						e.preventDefault();
 						e.stopPropagation();
 						$this.getNext();
@@ -414,11 +414,11 @@
 					});
 				}
 
-				$('#swipebox-close').bind('click touchend', function (e) {
+				$('#shinybox-close').bind('click touchend', function (e) {
 					$this.closeSlide();
 				});
 
-				$('#swipebox-slider .slide').bind('click', function (e) {
+				$('#shinybox-slider .slide').bind('click', function (e) {
 					if (e.target === this) {
 						$this.closeSlide();
 					}
@@ -428,7 +428,7 @@
 			setSlide : function (index, isFirst) {
 				isFirst = isFirst || false;
 
-				var slider = $('#swipebox-slider');
+				var slider = $('#shinybox-slider');
 
 				if (this.doCssTrans()) {
 					slider.css({ left : (-index * 100) + '%' });
@@ -436,24 +436,24 @@
 					slider.animate({ left : (-index * 100) + '%' });
 				}
 
-				$('#swipebox-slider .slide').removeClass('current');
-				$('#swipebox-slider .slide').eq(index).addClass('current');
+				$('#shinybox-slider .slide').removeClass('current');
+				$('#shinybox-slider .slide').eq(index).addClass('current');
 				this.setTitle(index);
 
 				if (isFirst) {
 					slider.fadeIn();
 				}
 
-				$('#swipebox-prev, #swipebox-next').removeClass('disabled');
+				$('#shinybox-prev, #shinybox-next').removeClass('disabled');
 				if (index === 0) {
-					$('#swipebox-prev').addClass('disabled');
+					$('#shinybox-prev').addClass('disabled');
 				} else if (index === elements.length - 1) {
-					$('#swipebox-next').addClass('disabled');
+					$('#shinybox-next').addClass('disabled');
 				}
 			},
 
 			openSlide : function (index) {
-				$('html').addClass('swipebox');
+				$('html').addClass('shinybox');
 				$(window).trigger('resize'); // fix scroll bar visibility on desktop
 				this.setSlide(index, true);
 			},
@@ -485,10 +485,10 @@
 
 				if (!$this.isVideo(src)) {
 					$this.loadMedia(src, function () {
-						$('#swipebox-slider .slide').eq(index).html(this).addClass('loaded');
+						$('#shinybox-slider .slide').eq(index).html(this).addClass('loaded');
 					});
 				} else {
-					$('#swipebox-slider .slide').eq(index).html($this.getVideo(src));
+					$('#shinybox-slider .slide').eq(index).html($this.getVideo(src));
 				}
 
 			},
@@ -496,13 +496,13 @@
 			setTitle : function (index, isFirst) {
 				var title = null;
 
-				$('#swipebox-caption').empty();
+				$('#shinybox-caption').empty();
 
 				if (elements[index] !== undefined) {
 					title = elements[index].title;
 				}
 				if (title) {
-					$('#swipebox-caption').append(title);
+					$('#shinybox-caption').append(title);
 				}
 			},
 
@@ -527,7 +527,7 @@
 					iframe = '<iframe width="560" height="315"  src="http://player.vimeo.com/video/' + vimeoUrl[1] + '?byline=0&amp;portrait=0&amp;color=' + plugin.settings.vimeoColor + '" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
 				}
 
-				return '<div class="swipebox-video-container" style="max-width:' + plugin.settings.videomaxWidth + 'px"><div class="swipebox-video">' + iframe + '</div></div>';
+				return '<div class="shinybox-video-container" style="max-width:' + plugin.settings.videomaxWidth + 'px"><div class="shinybox-video">' + iframe + '</div></div>';
 			},
 
 			loadMedia : function (src, callback) {
@@ -542,37 +542,37 @@
 
 			getNext : function () {
 				var $this = this,
-					index = $('#swipebox-slider .slide').index($('#swipebox-slider .slide.current'));
+					index = $('#shinybox-slider .slide').index($('#shinybox-slider .slide.current'));
 				if (index + 1 < elements.length) {
 					index += 1;
 					$this.setSlide(index);
 					$this.preloadMedia(index + 1);
 				} else {
 
-					$('#swipebox-slider').addClass('rightSpring');
+					$('#shinybox-slider').addClass('rightSpring');
 					setTimeout(function () {
-						$('#swipebox-slider').removeClass('rightSpring');
+						$('#shinybox-slider').removeClass('rightSpring');
 					}, 500);
 				}
 			},
 
 			getPrev : function () {
-				var index = $('#swipebox-slider .slide').index($('#swipebox-slider .slide.current'));
+				var index = $('#shinybox-slider .slide').index($('#shinybox-slider .slide.current'));
 				if (index > 0) {
 					index -= 1;
 					this.setSlide(index);
 					this.preloadMedia(index - 1);
 				} else {
-					$('#swipebox-slider').addClass('leftSpring');
+					$('#shinybox-slider').addClass('leftSpring');
 					setTimeout(function () {
-						$('#swipebox-slider').removeClass('leftSpring');
+						$('#shinybox-slider').removeClass('leftSpring');
 					}, 500);
 				}
 			},
 
 
 			closeSlide : function () {
-				$('html').removeClass('swipebox');
+				$('html').removeClass('shinybox');
 				$(window).trigger('resize');
 				this.destroy();
 			},
@@ -582,13 +582,13 @@
 				$('body').unbind('touchstart');
 				$('body').unbind('touchmove');
 				$('body').unbind('touchend');
-				$('#swipebox-slider').unbind();
-				$('#swipebox-overlay').remove();
+				$('#shinybox-slider').unbind();
+				$('#shinybox-overlay').remove();
 				if (!$.isArray(elem))
-					elem.removeData('_swipebox');
+					elem.removeData('_shinybox');
 				if (this.target)
-					this.target.trigger('swipebox-destroy');
-				$.swipebox.isOpen = false;
+					this.target.trigger('shinybox-destroy');
+				$.shinybox.isOpen = false;
 				if (plugin.settings.afterClose)
 					plugin.settings.afterClose();
 			}
@@ -599,12 +599,12 @@
 
 	};
 
-	$.fn.swipebox = function (options) {
-		if (!$.data(this, "_swipebox")) {
-			var swipebox = new $.swipebox(this, options);
-			this.data('_swipebox', swipebox);
+	$.fn.shinybox = function (options) {
+		if (!$.data(this, "_shinybox")) {
+			var shinybox = new $.shinybox(this, options);
+			this.data('_shinybox', shinybox);
 		}
-		return this.data('_swipebox');
+		return this.data('_shinybox');
 	};
 
 }(window, document, jQuery));
