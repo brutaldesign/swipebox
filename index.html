@@ -13,13 +13,13 @@
 	<meta itemprop="name" content="Swipebox | A touchable jQuery lightbox">
 	<meta itemprop="image" content="http://swipebox.brutaldesign.com/meta/swipe250.jpg">
 	<meta itemprop="description" content="Swipebox is a jQuery lightbox plugin for desktop, mobile and tablet">
-	
+
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="source/swipebox.css">
 	<title>Swipebox | A touchable jQuery lightbox</title>
 	<!-- share buttons -->
 	<script type="text/javascript">(function(doc, script) {
-		var js, 
+		var js,
 		fjs = doc.getElementsByTagName(script)[0],
 		add = function(url, id) {
 		if (doc.getElementById(id)) {return;}
@@ -79,8 +79,8 @@
 			<section id="presentation">
 				<div id="what"></div>
 				<h2>What is Swipebox ?</h2>
-				<p>Swipebox is a jQuery "lightbox" plugin for desktop, mobile and tablet.</p>		
-				
+				<p>Swipebox is a jQuery "lightbox" plugin for desktop, mobile and tablet.</p>
+
 				<div id="features"></div>
 				<h3>Main Features</h3>
 				<ol>
@@ -151,7 +151,7 @@ jQuery(function($) {
 			<section id="advanced-usage">
 				<div id="advanced"></div>
 				<h2>Advanced</h2>
-				
+
 				<div id="rel"></div>
 				<h3>Use "rel" Attribute</h3>
 				<p>You can add a <code>rel</code> attribute to your links to seperate galleries.</p>
@@ -178,7 +178,7 @@ jQuery(function($) {
 					<a class="swipebox-video" href="http://www.youtube.com/watch?v=XSGBVzeBUbk">My Video</a>
 				</p>
 				<pre>&lt;a class="swipebox-video" rel="youtube" href="http://www.youtube.com/watch?v=XSGBVzeBUbk"&gt;My Videos&lt;/a&gt;</pre>
-				
+
 				<div id="dynamic"></div>
 				<h3>Load slides dynamically</h3>
 				<p>You can set your gallery dynamically by passing an array object to the swipebox.</p>
@@ -188,7 +188,7 @@ jQuery(function($) {
 $("#gallery").click(function(e){
 	e.preventDefault();
 	$.swipebox([
-		{href:'big/image1.jpg', title:'My Caption'}, 
+		{href:'big/image1.jpg', title:'My Caption'},
 		{href:'big/image2.jpg', title:'My Second Caption'}
 	]);
 });
@@ -196,14 +196,14 @@ $("#gallery").click(function(e){
 			<div id="refresh"></div>
 			<h3>Refresh Method</h3>
 			<p>The refresh method allows you to reload the slides if the DOM has changed.</p>
-			
+
 			<pre>var swipeboxInstance = $(".a:visible").swipebox();
 
 // Use the refresh method after your event is completed
 swipeboxInstance.refresh();</pre>
 
 			<p>For exemple, if you use <a href="http://isotope.metafizzy.co/demos/filtering.html" target="_blank">isotope</a> filter.</p>
-			
+
 			<ul id="filter">
 				<li><a href="#" data-filter="item">All</a></li>
 				<li><a href="#" data-filter="sea">Sea</a></li>
@@ -247,8 +247,8 @@ optionFilterLinks.attr('href', '#');
 
 optionFilterLinks.click( function(){
 	var selector = $(this).attr('data-filter');
-	$('#grid').isotope({ 
-		filter : '.' + selector, 
+	$('#grid').isotope({
+		filter : '.' + selector,
 		itemSelector : '.item',
 		layoutMode : 'fitRows',
 		animationEngine : 'best-available',
@@ -259,9 +259,9 @@ optionFilterLinks.click( function(){
 
 	return false;
 });</pre>
-			<div id="open"></div>
-			<h3>Check open state</h3>
-			<pre>if ($.swipebox.isOpen){
+<div id="open"></div>
+<h3>Check open state</h3>
+<pre>if ($.swipebox.isOpen){
 	// do stuff
 }</pre>
 
@@ -269,12 +269,15 @@ optionFilterLinks.click( function(){
 			<h3>Options</h3>
 <pre>&lt;script type="text/javascript"&gt;
 jQuery(function($) {
-	$(".swipebox").swipebox({
+$(".swipebox").swipebox({
 		useCSS : true, <span>// false will force the use of jQuery for animations</span>
 		hideBarsDelay : 3000, <span>// 0 to always show caption and action bar</span>
 		videoMaxWidth : 1140, <span>// videos max width</span>
 		beforeOpen: function(){}, <span>// called before opening</span>
-	      	afterClose: function(){} <span>// called after closing</span>
+		afterClose: function(){}, <span>// called after closing</span>
+		closePlacement: 'bottom', <span>// places close button in bottom bar</span>
+		captionPlacement: 'top', <span>// places caption in top bar</span>
+		navigationPlacement: 'bottom' <span>// places navigation buttons in bottom bar</span>
 	});
 });
 &lt;/script&gt;
@@ -288,7 +291,7 @@ jQuery(function($) {
 			<hr>
 			<section id="credits">
 				<p><strong>Credits</strong></p>
-				<p>Photos by <a href="http://www.flickr.com/photos/astragony/" target="_blank">Daniele Zedda</a></p>	
+				<p>Photos by <a href="http://www.flickr.com/photos/astragony/" target="_blank">Daniele Zedda</a></p>
 			</section>
 		</div>
 		<footer>
@@ -306,7 +309,7 @@ jQuery(function($) {
 
 			/* Basic Gallery */
 			$(".swipebox").swipebox();
-			
+
 			/* Video */
 			$(".swipebox-video").swipebox();
 
@@ -335,8 +338,8 @@ jQuery(function($) {
 
 			optionFilterLinks.click( function(){
 				var selector = $(this).attr('data-filter');
-				$container.isotope({ 
-					filter : '.' + selector, 
+				$container.isotope({
+					filter : '.' + selector,
 					itemSelector : '.item',
 					layoutMode : 'fitRows',
 					animationEngine : 'best-available',
@@ -346,11 +349,11 @@ jQuery(function($) {
 				optionFilterLinks.removeClass('active');
 				$(this).addClass('active');
 
-			
+
 				return false;
 			});
 		});
 	</script>
 </body>
-	
+
 </html>
