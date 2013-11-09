@@ -1,244 +1,242 @@
 <!DOCTYPE HTML>
 <html lang="en-US">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	<meta name="description" content="A touchable jQuery lightbox plugin for desktop, mobile and tablet" />
-	<meta property="og:site_name" content="Swipebox" />
-	<meta property="og:url" content="http://brutaldesign.github.com/swipebox/" />
-	<meta property="og:image" content="http://swipebox.brutaldesign.com/meta/swipe250.jpg" />
-	<meta property="og:type" content="article" />
-	<meta property="og:title" content="Swipebox | A touchable jQuery lightbox" />
-	<meta property="og:description" content="Swipebox is a jQuery lightbox plugin for desktop, mobile and tablet">
-	<meta itemprop="name" content="Swipebox | A touchable jQuery lightbox">
-	<meta itemprop="image" content="http://swipebox.brutaldesign.com/meta/swipe250.jpg">
-	<meta itemprop="description" content="Swipebox is a jQuery lightbox plugin for desktop, mobile and tablet">
-	
-	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="source/swipebox.css">
-	<title>Swipebox | A touchable jQuery lightbox</title>
-	<!-- share buttons -->
-	<script type="text/javascript">(function(doc, script) {
-		var js, 
-		fjs = doc.getElementsByTagName(script)[0],
-		add = function(url, id) {
-		if (doc.getElementById(id)) {return;}
-		js = doc.createElement(script);
-		js.src = url;
-		id && (js.id = id);
-		fjs.parentNode.insertBefore(js, fjs);
-		};add("//connect.facebook.net/en_US/all.js#xfbml=1", "facebook-jssdk");
-		add("//platform.twitter.com/widgets.js", "twitter-wjs");
-		}(document, "script"));
-	</script>
-	<!-- end share buttons -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="A touchable jQuery lightbox plugin for desktop, mobile and tablet" />
+    <meta property="og:site_name" content="Shinybox" />
+    <meta property="og:url" content="http://one-com.github.com/shinybox/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Shinybox | A touchable jQuery lightbox" />
+    <meta property="og:description" content="Shinybox is a jQuery lightbox plugin for desktop, mobile and tablet">
+    <meta itemprop="name" content="Shinybox | A touchable jQuery lightbox">
+    <meta itemprop="description" content="Shinybox is a jQuery lightbox plugin for desktop, mobile and tablet">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="source/shinybox.css">
+    <title>Shinybox | A touchable jQuery lightbox</title>
+    <!-- share buttons -->
+    <script type="text/javascript">(function(doc, script) {
+        var js,
+        fjs = doc.getElementsByTagName(script)[0],
+        add = function(url, id) {
+        if (doc.getElementById(id)) {return;}
+        js = doc.createElement(script);
+        js.src = url;
+        id && (js.id = id);
+        fjs.parentNode.insertBefore(js, fjs);
+        };add("//connect.facebook.net/en_US/all.js#xfbml=1", "facebook-jssdk");
+        add("//platform.twitter.com/widgets.js", "twitter-wjs");
+        }(document, "script"));
+    </script>
+    <!-- end share buttons -->
 </head>
 <body>
-	<div id="fb-root"></div>
-	<a href="https://github.com/brutaldesign/swipebox" id="fork-this"></a>
-	<div id="main">
-		<div class="wrap">
+    <div id="fb-root"></div>
+    <a href="https://github.com/one-com/shinybox" id="fork-this"></a>
+    <div id="main">
+        <div class="wrap">
 
-			<header>
-				<h1>Swipebox.</h1>
-				<p class="tagline">A touchable jQuery lightbox</p>
+            <header>
+                <h1>Shinybox.</h1>
+                <p class="tagline">A touchable jQuery lightbox</p>
 
-				<div id="share">
-					<div id="twitter-button">
-						<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://brutaldesign.github.com/swipebox" data-text="Swipebox | A touchable jQuery lightbox" data-via="brutaldesign">Tweet</a>
-					</div>
-					<div id="fb-like">
-						<div class="fb-like" data-href="http://brutaldesign.github.com/swipebox/" data-send="false" data-layout="button_count" data-width="110" data-show-faces="false" data-colorscheme="light" data-action="like"></div>
-					</div>
-				</div>
+                <div id="share">
+                    <div id="twitter-button">
+                        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://one-com.github.com/shinybox" data-text="Shinybox | A touchable jQuery lightbox" data-via="one-com">Tweet</a>
+                    </div>
+                    <div id="fb-like">
+                        <div class="fb-like" data-href="http://one-com.github.com/shinybox/" data-send="false" data-layout="button_count" data-width="110" data-show-faces="false" data-colorscheme="light" data-action="like"></div>
+                    </div>
+                </div>
 
-				<ul class="index-table">
-					<li><a href="#what">What is Swipebox ?</a>
-						<ul>
-							<li><a href="#features">Main Features</a></li>
-							<li><a href="#compatibility">Compatibility</a></li>
-						</ul>
-					</li>
-					<li><a href="#try">Try it</a></li>
-					<li><a href="#basic">Basic Usage</a></li>
-					<li><a href="#advanced">Advanced</a>
-						<ul>
-							<li><a href="#rel">Use Rel Attribute</a></li>
-							<li><a href="#video">Youtube support</a></li>
-							<li><a href="#dynamic">Load slides dynamically</a></li>
-							<li><a href="#refresh">Refresh Method</a></li>
-							<li><a href="#open">Check open state</a></li>
-							<li><a href="#options">Options</a></li>
-						</ul>
-					</li>
-					<li><a href="#download">Download</a></li>
+                <ul class="index-table">
+                    <li><a href="#what">What is Shinybox ?</a>
+                        <ul>
+                            <li><a href="#features">Main Features</a></li>
+                            <li><a href="#compatibility">Compatibility</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#try">Try it</a></li>
+                    <li><a href="#basic">Basic Usage</a></li>
+                    <li><a href="#advanced">Advanced</a>
+                        <ul>
+                            <li><a href="#rel">Use Rel Attribute</a></li>
+                            <li><a href="#video">Youtube support</a></li>
+                            <li><a href="#dynamic">Load slides dynamically</a></li>
+                            <li><a href="#refresh">Refresh Method</a></li>
+                            <li><a href="#open">Check open state</a></li>
+                            <li><a href="#options">Options</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#download">Download</a></li>
 
-				</ul>
-			</header>
-			<hr>
-			<section id="presentation">
-				<div id="what"></div>
-				<h2>What is Swipebox ?</h2>
-				<p>Swipebox is a jQuery "lightbox" plugin for desktop, mobile and tablet.</p>		
-				
-				<div id="features"></div>
-				<h3>Main Features</h3>
-				<ol>
-					<li>Swipe gestures for mobile</li>
-					<li>Keyboard Navigation for desktop</li>
-					<li>CSS transitions with jQuery fallback</li>
-					<li>Retina support for UI icons</li>
-					<li>Easy CSS customization</li>
-				</ol>
+                </ul>
+            </header>
+            <hr>
+            <section id="presentation">
+                <div id="what"></div>
+                <h2>What is Shinybox ?</h2>
+                <p>Shinybox is a jQuery "lightbox" plugin for desktop, mobile and tablet.</p>
 
-				<div id="compatibility"></div>
-				<h3>Compatibility</h3>
-				<p>Chrome, Safari, Firefox, Opera, IE8+, IOS4+, Android, windows phone.</p>
+                <div id="features"></div>
+                <h3>Main Features</h3>
+                <ol>
+                    <li>Swipe gestures for mobile</li>
+                    <li>Keyboard Navigation for desktop</li>
+                    <li>CSS transitions with jQuery fallback</li>
+                    <li>Retina support for UI icons</li>
+                    <li>Easy CSS customization</li>
+                </ol>
 
-			</section>
-			<hr>
-			<section id="exemple" class="clearfix">
-				<div id="try"></div>
-				<h2>Try it</h2>
-				<div class="box">
-					<a href="http://swipebox.brutaldesign.com/assets/full/nuke.jpg" class="swipebox" title="Nuke">
-						<img src="http://swipebox.brutaldesign.com/assets/nuke_thumb.jpg" alt="nuke">
-					</a>
-				</div>
-				<div class="box">
-					<a href="http://swipebox.brutaldesign.com/assets/full/leap.jpg" class="swipebox" title="Leap">
-						<img src="http://swipebox.brutaldesign.com/assets/leap_thumb.jpg" alt="leap">
-					</a>
-				</div>
-				<div class="box">
-					<a href="http://swipebox.brutaldesign.com/assets/full/reine.jpg" class="swipebox" title="Reine">
-						<img src="http://swipebox.brutaldesign.com/assets/reine_thumb.jpg" alt="reine">
-					</a>
-				</div>
-				<div class="box">
-					<a href="http://swipebox.brutaldesign.com/assets/full/neptune.jpg" class="swipebox" title="Neptune">
-						<img src="http://swipebox.brutaldesign.com/assets/neptune_thumb.jpg" alt="neptune">
-					</a>
-				</div>
-			</section>
-			<hr>
-			<section id="usage">
-				<div id="basic"></div>
-				<h2>Basic Usage</h2>
-				<h3>Javascript</h3>
+                <div id="compatibility"></div>
+                <h3>Compatibility</h3>
+                <p>Chrome, Safari, Firefox, Opera, IE8+, IOS4+, Android, windows phone.</p>
 
-				<p>Include jquery and the swipebox script in your <code>head</code> tags or right before your <code>body</code> closing tag.</p>
+            </section>
+            <hr>
+            <section id="exemple" class="clearfix">
+                <div id="try"></div>
+                <h2>Try it</h2>
+                <div class="box">
+                    <a href="http://swipebox.brutaldesign.com/assets/full/nuke.jpg" class="shinybox" title="Nuke">
+                        <img src="http://swipebox.brutaldesign.com/assets/nuke_thumb.jpg" alt="nuke">
+                    </a>
+                </div>
+                <div class="box">
+                    <a href="http://swipebox.brutaldesign.com/assets/full/leap.jpg" class="shinybox" title="Leap">
+                        <img src="http://swipebox.brutaldesign.com/assets/leap_thumb.jpg" alt="leap">
+                    </a>
+                </div>
+                <div class="box">
+                    <a href="http://swipebox.brutaldesign.com/assets/full/reine.jpg" class="shinybox" title="Reine">
+                        <img src="http://swipebox.brutaldesign.com/assets/reine_thumb.jpg" alt="reine">
+                    </a>
+                </div>
+                <div class="box">
+                    <a href="http://swipebox.brutaldesign.com/assets/full/neptune.jpg" class="shinybox" title="Neptune">
+                        <img src="http://swipebox.brutaldesign.com/assets/neptune_thumb.jpg" alt="neptune">
+                    </a>
+                </div>
+            </section>
+            <hr>
+            <section id="usage">
+                <div id="basic"></div>
+                <h2>Basic Usage</h2>
+                <h3>Javascript</h3>
+
+                <p>Include jquery and the shinybox script in your <code>head</code> tags or right before your <code>body</code> closing tag.</p>
 <pre>&lt;script src="lib/jquery-2.0.3.js"&gt;&lt;/script&gt;
-&lt;script src="source/jquery.swipebox.js"&gt;&lt;/script&gt;</pre>
-				<h3>CSS</h3>
-				<p>Include the swipebox CSS style in your <code>head</code> tags.</p>
-<pre>&lt;link rel="stylesheet" href="source/swipebox.css"&gt;</pre>
-				<h3>HTML</h3>
-				<p>Use a specific class for your links and use the title attribute as caption.</p>
-<pre>&lt;a href="big/image.jpg" class="swipebox" title="My Caption"&gt;
-	&lt;img src="small/image.jpg" alt="image"&gt;
+&lt;script src="source/jquery.shinybox.js"&gt;&lt;/script&gt;</pre>
+                <h3>CSS</h3>
+                <p>Include the shinybox CSS style in your <code>head</code> tags.</p>
+<pre>&lt;link rel="stylesheet" href="source/shinybox.css"&gt;</pre>
+                <h3>HTML</h3>
+                <p>Use a specific class for your links and use the title attribute as caption.</p>
+<pre>&lt;a href="big/image.jpg" class="shinybox" title="My Caption"&gt;
+    &lt;img src="small/image.jpg" alt="image"&gt;
 &lt;/a></pre>
-				<h3>Fire the plugin</h3>
-				<p>Bind the swipebox behaviour on every link with the "swipebox" class.</p>
+                <h3>Fire the plugin</h3>
+                <p>Bind the shinybox behaviour on every link with the "shinybox" class.</p>
 <pre>&lt;script type="text/javascript"&gt;
 jQuery(function($) {
-	$(".swipebox").swipebox();
+    $(".shinybox").shinybox();
 });
 &lt;/script&gt;
 </pre>
-			</section>
-			<hr>
-			<section id="advanced-usage">
-				<div id="advanced"></div>
-				<h2>Advanced</h2>
-				
-				<div id="rel"></div>
-				<h3>Use "rel" Attribute</h3>
-				<p>You can add a <code>rel</code> attribute to your links to seperate galleries.</p>
+            </section>
+            <hr>
+            <section id="advanced-usage">
+                <div id="advanced"></div>
+                <h2>Advanced</h2>
+
+                <div id="rel"></div>
+                <h3>Use "rel" Attribute</h3>
+                <p>You can add a <code>rel</code> attribute to your links to seperate galleries.</p>
 <pre>
 <span>&lt;!-- Gallery 1 --&gt;</span>
-&lt;a rel="gallery-1" href="big/image1.jpg" class="swipebox"&gt;
-	&lt;img src="small/image1.jpg" alt="image"&gt;
+&lt;a rel="gallery-1" href="big/image1.jpg" class="shinybox"&gt;
+    &lt;img src="small/image1.jpg" alt="image"&gt;
 &lt;/a&gt;
-&lt;a rel="gallery-1" href="big/image2.jpg" class="swipebox"&gt;
-	&lt;img src="small/image2.jpg" alt="image"&gt;
+&lt;a rel="gallery-1" href="big/image2.jpg" class="shinybox"&gt;
+    &lt;img src="small/image2.jpg" alt="image"&gt;
 &lt;/a&gt;
 <span>&lt;!-- Gallery 2 --&gt;</span>
-&lt;a rel="gallery-2" href="big/image3.jpg" class="swipebox"&gt;
-	&lt;img src="small/image3.jpg" alt="image"&gt;
+&lt;a rel="gallery-2" href="big/image3.jpg" class="shinybox"&gt;
+    &lt;img src="small/image3.jpg" alt="image"&gt;
 &lt;/a&gt;
-&lt;a rel="gallery-2" href="big/image4.jpg" class="swipebox"&gt;
-	&lt;img src="small/image4.jpg" alt="image"&gt;
+&lt;a rel="gallery-2" href="big/image4.jpg" class="shinybox"&gt;
+    &lt;img src="small/image4.jpg" alt="image"&gt;
 &lt;/a&gt;</pre>
 
-				<div id="video"></div>
-				<h3>Youtube support</h3>
-				<p>Simply paste a youtube video URL in your href attribute. The script will automatically check if it's a Youtube URL and open the video in the swipebox.</p>
-				<p>
-					<a class="swipebox-video" href="http://www.youtube.com/watch?v=XSGBVzeBUbk">My Video</a>
-				</p>
-				<pre>&lt;a class="swipebox-video" rel="youtube" href="http://www.youtube.com/watch?v=XSGBVzeBUbk"&gt;My Videos&lt;/a&gt;</pre>
-				
-				<div id="dynamic"></div>
-				<h3>Load slides dynamically</h3>
-				<p>You can set your gallery dynamically by passing an array object to the swipebox.</p>
-				<p><a id="gallery" href="#">View gallery</a></p>
+                <div id="video"></div>
+                <h3>Youtube support</h3>
+                <p>Simply paste a youtube video URL in your href attribute. The script will automatically check if it's a Youtube URL and open the video in the shinybox.</p>
+                <p>
+                    <a class="shinybox-video" href="http://www.youtube.com/watch?v=XSGBVzeBUbk">My Video</a>
+                </p>
+                <pre>&lt;a class="shinybox-video" rel="youtube" href="http://www.youtube.com/watch?v=XSGBVzeBUbk"&gt;My Videos&lt;/a&gt;</pre>
+
+                <div id="dynamic"></div>
+                <h3>Load slides dynamically</h3>
+                <p>You can set your gallery dynamically by passing an array object to the shinybox.</p>
+                <p><a id="gallery" href="#">View gallery</a></p>
 
 <pre>
 $("#gallery").click(function(e){
-	e.preventDefault();
-	$.swipebox([
-		{href:'big/image1.jpg', title:'My Caption'}, 
-		{href:'big/image2.jpg', title:'My Second Caption'}
-	]);
+    e.preventDefault();
+    $.shinybox([
+        {href:'big/image1.jpg', title:'My Caption'},
+        {href:'big/image2.jpg', title:'My Second Caption'}
+    ]);
 });
 </pre>
-			<div id="refresh"></div>
-			<h3>Refresh Method</h3>
-			<p>The refresh method allows you to reload the slides if the DOM has changed.</p>
-			
-			<pre>var swipeboxInstance = $(".a:visible").swipebox();
+            <div id="refresh"></div>
+            <h3>Refresh Method</h3>
+            <p>The refresh method allows you to reload the slides if the DOM has changed.</p>
+
+            <pre>var shinyboxInstance = $(".a:visible").shinybox();
 
 // Use the refresh method after your event is completed
-swipeboxInstance.refresh();</pre>
+shinyboxInstance.refresh();</pre>
 
-			<p>For exemple, if you use <a href="http://isotope.metafizzy.co/demos/filtering.html" target="_blank">isotope</a> filter.</p>
-			
-			<ul id="filter">
-				<li><a href="#" data-filter="item">All</a></li>
-				<li><a href="#" data-filter="sea">Sea</a></li>
-				<li><a href="#" data-filter="beach">Beach</a></li>
-			</ul>
-			<div id="grid" class="clearfix">
-				<div class="box item beach">
-					<a href="http://swipebox.brutaldesign.com/assets/full/nuke.jpg" class="swipebox-isotope" title="Nuke">
-						<img src="http://swipebox.brutaldesign.com/assets/nuke_thumb.jpg" alt="nuke">
-					</a>
-				</div>
-				<div class="box item sea">
-					<a href="http://swipebox.brutaldesign.com/assets/full/leap.jpg" class="swipebox-isotope" title="Leap">
-						<img src="http://swipebox.brutaldesign.com/assets/leap_thumb.jpg" alt="leap">
-					</a>
-				</div>
-				<div class="box item beach">
-					<a href="http://swipebox.brutaldesign.com/assets/full/reine.jpg" class="swipebox-isotope" title="Reine">
-						<img src="http://swipebox.brutaldesign.com/assets/reine_thumb.jpg" alt="reine">
-					</a>
-				</div>
-				<div class="box item sea">
-					<a href="http://swipebox.brutaldesign.com/assets/full/neptune.jpg" class="swipebox-isotope" title="Neptune">
-						<img src="http://swipebox.brutaldesign.com/assets/neptune_thumb.jpg" alt="neptune">
-					</a>
-				</div>
-			</div>
+            <p>For exemple, if you use <a href="http://isotope.metafizzy.co/demos/filtering.html" target="_blank">isotope</a> filter.</p>
+
+            <ul id="filter">
+                <li><a href="#" data-filter="item">All</a></li>
+                <li><a href="#" data-filter="sea">Sea</a></li>
+                <li><a href="#" data-filter="beach">Beach</a></li>
+            </ul>
+            <div id="grid" class="clearfix">
+                <div class="box item beach">
+                    <a href="http://swipebox.brutaldesign.com/assets/full/nuke.jpg" class="shinybox-isotope" title="Nuke">
+                        <img src="http://swipebox.brutaldesign.com/assets/nuke_thumb.jpg" alt="nuke">
+                    </a>
+                </div>
+                <div class="box item sea">
+                    <a href="http://swipebox.brutaldesign.com/assets/full/leap.jpg" class="shinybox-isotope" title="Leap">
+                        <img src="http://swipebox.brutaldesign.com/assets/leap_thumb.jpg" alt="leap">
+                    </a>
+                </div>
+                <div class="box item beach">
+                    <a href="http://swipebox.brutaldesign.com/assets/full/reine.jpg" class="shinybox-isotope" title="Reine">
+                        <img src="http://swipebox.brutaldesign.com/assets/reine_thumb.jpg" alt="reine">
+                    </a>
+                </div>
+                <div class="box item sea">
+                    <a href="http://swipebox.brutaldesign.com/assets/full/neptune.jpg" class="shinybox-isotope" title="Neptune">
+                        <img src="http://swipebox.brutaldesign.com/assets/neptune_thumb.jpg" alt="neptune">
+                    </a>
+                </div>
+            </div>
 
 <pre>
-<span>// Use the swipebox only for  visible elements</span>
-var swipeboxInstance = $(".swipebox-isotope:not(.isotope-hidden .swipebox-isotope)").swipebox();
+<span>// Use the shinybox only for  visible elements</span>
+var shinyboxInstance = $(".shinybox-isotope:not(.isotope-hidden .shinybox-isotope)").shinybox();
 
 <span>// Callback function that fire the refresh method, once the animation is finished</span>
 onAnimationCompleted = function(){
-	swipeboxInstance.refresh();
+    shinyboxInstance.refresh();
 };
 
 // Isotope stuff
@@ -246,111 +244,110 @@ optionFilterLinks = $('#filter').find('a');
 optionFilterLinks.attr('href', '#');
 
 optionFilterLinks.click( function(){
-	var selector = $(this).attr('data-filter');
-	$('#grid').isotope({ 
-		filter : '.' + selector, 
-		itemSelector : '.item',
-		layoutMode : 'fitRows',
-		animationEngine : 'best-available',
-	}, onAnimationCompleted); <span>// callback here</span>
+    var selector = $(this).attr('data-filter');
+    $('#grid').isotope({
+        filter : '.' + selector,
+        itemSelector : '.item',
+        layoutMode : 'fitRows',
+        animationEngine : 'best-available',
+    }, onAnimationCompleted); <span>// callback here</span>
 
-	optionFilterLinks.removeClass('active');
-	$(this).addClass('active');
+    optionFilterLinks.removeClass('active');
+    $(this).addClass('active');
 
-	return false;
+    return false;
 });</pre>
-			<div id="open"></div>
-			<h3>Check open state</h3>
-			<pre>if ($.swipebox.isOpen){
-	// do stuff
+<div id="open"></div>
+<h3>Check open state</h3>
+<pre>if ($.shinybox.isOpen){
+    // do stuff
 }</pre>
 
-			<div id="options"></div>
-			<h3>Options</h3>
+            <div id="options"></div>
+            <h3>Options</h3>
 <pre>&lt;script type="text/javascript"&gt;
 jQuery(function($) {
-	$(".swipebox").swipebox({
-		useCSS : true, <span>// false will force the use of jQuery for animations</span>
-		hideBarsDelay : 3000, <span>// 0 to always show caption and action bar</span>
-		videoMaxWidth : 1140, <span>// videos max width</span>
-		beforeOpen: function(){}, <span>// called before opening</span>
-	      	afterClose: function(){} <span>// called after closing</span>
-	});
+$(".shinybox").shinybox({
+        useCSS : true, <span>// false will force the use of jQuery for animations</span>
+        hideBarsDelay : 3000, <span>// 0 to always show caption and action bar</span>
+        videoMaxWidth : 1140, <span>// videos max width</span>
+        beforeOpen: function(){}, <span>// called before opening</span>
+        afterClose: function(){}, <span>// called after closing</span>
+        closePlacement: 'bottom', <span>// places close button in bottom bar</span>
+        captionPlacement: 'top', <span>// places caption in top bar</span>
+        navigationPlacement: 'bottom' <span>// places navigation buttons in bottom bar</span>
+    });
 });
 &lt;/script&gt;
 </pre>
-			</section>
+            </section>
 
-			<section id="action">
-				<div id="download"></div>
-				<p><a class="button" href="https://github.com/brutaldesign/swipebox/archive/master.zip">Download</a> <a class="button" href="https://github.com/brutaldesign/swipebox">View Source</a></p>
-			</section>
-			<hr>
-			<section id="credits">
-				<p><strong>Credits</strong></p>
-				<p>Photos by <a href="http://www.flickr.com/photos/astragony/" target="_blank">Daniele Zedda</a></p>	
-			</section>
-		</div>
-		<footer>
-			<div class="wrap">
-				<a href="http://csag.co" target="_blank">Constantin Saguin</a> | <a href="http://twitter.com/brutaldesign" target="_blank">@brutaldesign</a>
-			</div>
-		</footer>
-	</div>
-	<script src="lib/ios-orientationchange-fix.js"></script>
-	<script src="lib/jquery-2.0.3.min.js"></script>
-	<script src="lib/jquery.isotope.min.js"></script>
-	<script src="source/jquery.swipebox.js"></script>
-	<script type="text/javascript">
-		jQuery(function($) {
+            <section id="action">
+                <div id="download"></div>
+                <p><a class="button" href="https://github.com/One-com/shinybox/archive/master.zip">Download</a> <a class="button" href="https://github.com/One-com/shinybox">View Source</a></p>
+            </section>
+            <hr>
+            <section id="credits">
+                <p><strong>Credits</strong></p>
+                <p>Photos by <a href="http://www.flickr.com/photos/astragony/" target="_blank">Daniele Zedda</a></p>
+                <p>Forked from Swipebox by <a href="http://csag.co" target="_blank">Constantin Saguin</a>, <a href="http://twitter.com/brutaldesign" target="_blank">@brutaldesign</a>
+            </section>
+        </div>
+    </div>
+    <script src="lib/ios-orientationchange-fix.js"></script>
+    <script src="lib/jquery-2.0.3.min.js"></script>
+    <script src="lib/jquery.isotope.min.js"></script>
+    <script src="source/jquery.shinybox.js"></script>
+    <script type="text/javascript">
+        jQuery(function($) {
 
-			/* Basic Gallery */
-			$(".swipebox").swipebox();
-			
-			/* Video */
-			$(".swipebox-video").swipebox();
+            /* Basic Gallery */
+            $(".shinybox").shinybox();
+
+            /* Video */
+            $(".shinybox-video").shinybox();
 
 
-			/* Dynamic Gallery */
-			$("#gallery").click(function(e){
-				e.preventDefault();
-				$.swipebox([
-					{ href : 'http://swipebox.brutaldesign.com/assets/full/reine.jpg', title : 'My Caption' },
-					{ href : 'http://swipebox.brutaldesign.com/assets/full/nuke.jpg', title : 'My Second Caption' }
-				]);
-			});
+            /* Dynamic Gallery */
+            $("#gallery").click(function(e){
+                e.preventDefault();
+                $.shinybox([
+                    { href : 'http://swipebox.brutaldesign.com/assets/full/reine.jpg', title : 'My Caption' },
+                    { href : 'http://swipebox.brutaldesign.com/assets/full/nuke.jpg', title : 'My Second Caption' }
+                ]);
+            });
 
 
-			/* Isotope */
-			var swipeboxInstance = $(".swipebox-isotope:not(.isotope-hidden .swipebox-isotope)").swipebox();
+            /* Isotope */
+            var shinyboxInstance = $(".shinybox-isotope:not(.isotope-hidden .shinybox-isotope)").shinybox();
 
-			var $container = $('#grid');
-			var optionFilter = $('#filter'),
-			optionFilterLinks = optionFilter.find('a');
-			optionFilterLinks.attr('href', '#');
+            var $container = $('#grid');
+            var optionFilter = $('#filter'),
+            optionFilterLinks = optionFilter.find('a');
+            optionFilterLinks.attr('href', '#');
 
-			onAnimationCompleted = function(){
-				swipeboxInstance.refresh();
-			};
+            onAnimationCompleted = function(){
+                shinyboxInstance.refresh();
+            };
 
-			optionFilterLinks.click( function(){
-				var selector = $(this).attr('data-filter');
-				$container.isotope({ 
-					filter : '.' + selector, 
-					itemSelector : '.item',
-					layoutMode : 'fitRows',
-					animationEngine : 'best-available',
-				}, onAnimationCompleted);
+            optionFilterLinks.click( function(){
+                var selector = $(this).attr('data-filter');
+                $container.isotope({
+                    filter : '.' + selector,
+                    itemSelector : '.item',
+                    layoutMode : 'fitRows',
+                    animationEngine : 'best-available',
+                }, onAnimationCompleted);
 
-				// Highlight the correct filter
-				optionFilterLinks.removeClass('active');
-				$(this).addClass('active');
+                // Highlight the correct filter
+                optionFilterLinks.removeClass('active');
+                $(this).addClass('active');
 
-			
-				return false;
-			});
-		});
-	</script>
+
+                return false;
+            });
+        });
+    </script>
 </body>
-	
+
 </html>
