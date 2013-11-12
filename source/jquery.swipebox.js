@@ -35,9 +35,9 @@
 				<div id="swipebox-slider"></div>\
 				<div id="swipebox-caption"></div>\
 				<div id="swipebox-action">\
-					<a id="swipebox-close"></a>\
-					<a id="swipebox-prev"></a>\
-					<a id="swipebox-next"></a>\
+					<a id="swipebox-close" href="#close"></a>\
+					<a id="swipebox-prev" href="#prev"></a>\
+					<a id="swipebox-next" href="#next"></a>\
 				</div>\
 		</div>';
 
@@ -379,14 +379,14 @@
 				if( elements.length < 2 ){
 					$('#swipebox-prev, #swipebox-next').hide();
 				}else{
-					$('#swipebox-prev').bind('click touchend', function(e){
+					$('#swipebox-prev').bind('click', function(e){
 						e.preventDefault();
 						e.stopPropagation();
 						$this.getPrev();
 						$this.setTimeout();
 					});
 					
-					$('#swipebox-next').bind('click touchend', function(e){
+					$('#swipebox-next').bind('click', function(e){
 						e.preventDefault();
 						e.stopPropagation();
 						$this.getNext();
@@ -394,8 +394,9 @@
 					});
 				}
 
-				$('#swipebox-close').bind('click touchend', function(e){
+				$('#swipebox-close').bind('click', function(e){
 					$this.closeSlide();
+					return false;
 				});
 			},
 			
