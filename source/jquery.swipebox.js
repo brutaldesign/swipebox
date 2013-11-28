@@ -19,7 +19,12 @@
 			videoMaxWidth : 1140,
 			vimeoColor : 'CCCCCC',
 			beforeOpen: null,
-		      	afterClose: null
+		      	afterClose: null,
+			showBarsOnMouseMove: false,
+			closeOnBackgroundClick: false,
+			nextOnImageClick: false,
+			onSlideNext: null,
+			onSlidePrev: null
 		},
 		
 		plugin = this,
@@ -274,7 +279,10 @@
 	       					if(!bars.hasClass('visible-bars')){
 							$this.showBars();
 							$this.setTimeout();
-						}else{
+						}
+						else if (plugin.settings.closeOnBackgroundClick)
+							$this.closeSlide();
+						else{
 							$this.clearTimeout();
 							$this.hideBars();
 						}
@@ -338,7 +346,14 @@
 				$this.setTimeout();
 				
 				$('#swipebox-slider').click(function(e){
-					if(!bars.hasClass('visible-bars')){
+					if (plugin.settings.closeOnBackgroundClick)
+						$this.closeSlide();
+					else if(!bars.hasClass('visible-bars')){
+						$this.showBars();
+						$this.setTimeout();
+					}
+				}).mousemove(function () {
+					if (plugin.settings.showBarsOnMouseMove) {
 						$this.showBars();
 						$this.setTimeout();
 					}
@@ -516,6 +531,10 @@
 				if( !this.isVideo(src) ){
 					var img = $('<img>').on('load', function(){
 						callback.call(img);
+						if (plugin.settings.nextOnImageClick) img.click(function(e){
+							$('#swipebox-next').click();
+							return false;
+						}).css('cursor', 'pointer');
 					});
 					
 					img.attr('src',src);
@@ -529,6 +548,7 @@
 					index++;
 					$this.setSlide(index);
 					$this.preloadMedia(index+1);
+					if (plugin.settings.onSlideNext) plugin.settings.onSlideNext();
 				}
 				else{
 					
@@ -545,6 +565,7 @@
 					index--;
 					this.setSlide(index);
 					this.preloadMedia(index-1);
+					if (plugin.settings.onSlidePrev) plugin.settings.onSlidePrev();
 				}
 				else{
 					
