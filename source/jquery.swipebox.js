@@ -60,7 +60,7 @@
 
 			}else{
 
-				$selector.click(function(e){
+				elem.click(function(e){
 					elements = [];
 					var index , relType, relVal;
 
@@ -70,9 +70,9 @@
 					}
 
 					if (relVal && relVal !== '' && relVal !== 'nofollow') {
-						$elem = $selector.filter('[' + relType + '="' + relVal + '"]');
+						$elem = elem.filter('[' + relType + '="' + relVal + '"]');
 					}else{
-						$elem = $(selector);
+						$elem = elem;
 					}
 
 					$elem.each(function(){
