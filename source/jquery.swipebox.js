@@ -373,14 +373,16 @@
 
 			keyboard : function(){
 				var $this = this;
-				$(window).bind('keyup', function(e){
+				$(window).bind('keydown', function(e){
 					e.preventDefault();
 					e.stopPropagation();
 					if (e.keyCode == 37){
 						$this.getPrev();
+						$this.setTimeout();
 					}
 					else if (e.keyCode==39){
 						$this.getNext();
+						$this.setTimeout();
 					}
 					else if (e.keyCode == 27) {
 						$this.closeSlide();
@@ -584,7 +586,7 @@
 			},
 
 			destroy : function(){
-				$(window).unbind('keyup');
+				$(window).unbind('keydown');
 				$('body').unbind('touchstart');
 				$('body').unbind('touchmove');
 				$('body').unbind('touchend');
