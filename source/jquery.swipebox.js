@@ -350,7 +350,7 @@
 				bars.addClass('visible-bars');
 				$this.setTimeout();
 
-				$('#swipebox-slider').click(function(e){
+				if (!isTouch) $('#swipebox-slider').click(function(e){
 					if (plugin.settings.closeOnBackgroundClick)
 						$this.closeSlide();
 					else if(!bars.hasClass('visible-bars')){
