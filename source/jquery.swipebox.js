@@ -276,7 +276,12 @@
 
 						}else{
 							// tap
-							if(!bars.hasClass('visible-bars')){
+							if (e.target == $('#swipebox-slider > .slide.current > img')[0] &&
+								plugin.settings.nextOnImageClick) {
+								$this.getNext();
+								$this.setTimeout();
+							}
+							else if(!bars.hasClass('visible-bars')){
 								$this.showBars();
 								$this.setTimeout();
 							}
@@ -533,7 +538,7 @@
 				if( !this.isVideo(src) ){
 					var img = $('<img>').on('load', function(){
 						callback.call(img);
-						if (plugin.settings.nextOnImageClick) img.click(function(e){
+						if (!isTouch && plugin.settings.nextOnImageClick) img.click(function(e){
 							$('#swipebox-next').click();
 							return false;
 						}).css('cursor', 'pointer');
