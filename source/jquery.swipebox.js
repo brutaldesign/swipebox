@@ -285,7 +285,8 @@
 								$this.showBars();
 								$this.setTimeout();
 							}
-							else if (plugin.settings.closeOnBackgroundClick)
+							else if (e.target == $('#swipebox-slider > .slide.current')[0] &&
+									 plugin.settings.closeOnBackgroundClick)
 								$this.closeSlide();
 							else{
 								$this.clearTimeout();
