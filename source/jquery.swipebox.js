@@ -287,7 +287,7 @@
 							}
 							else if (e.target == $('#swipebox-slider > .slide.current')[0] &&
 									 plugin.settings.closeOnBackgroundClick)
-								$this.closeSlide();
+								setTimeout($.proxy($this.closeSlide, $this), isTouch ? 500 : 0);
 							else{
 								$this.clearTimeout();
 								$this.hideBars();
@@ -402,14 +402,14 @@
 				if( elements.length < 2 ){
 					$('#swipebox-prev, #swipebox-next').hide();
 				}else{
-					$('#swipebox-prev').bind('click', function(e){
+					$('#swipebox-prev').bind(isTouch ? 'touchend' : 'click', function(e){
 						e.preventDefault();
 						e.stopPropagation();
 						$this.getPrev();
 						$this.setTimeout();
 					});
 					
-					$('#swipebox-next').bind('click', function(e){
+					$('#swipebox-next').bind(isTouch ? 'touchend' : 'click', function(e){
 						e.preventDefault();
 						e.stopPropagation();
 						$this.getNext();
@@ -417,9 +417,10 @@
 					});
 				}
 
-				$('#swipebox-close').bind('click', function(e){
-					$this.closeSlide();
-					return false;
+				$('#swipebox-close').bind(isTouch ? 'touchend' : 'click', function(e){
+					e.preventDefault();
+					e.stopPropagation();
+					setTimeout($.proxy($this.closeSlide, $this), isTouch ? 500 : 0);
 				});
 			},
 
