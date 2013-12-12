@@ -174,17 +174,33 @@
 				
 				if( "onorientationchange" in window ){
 
-					window.addEventListener("orientationchange", function() {
-						if( window.orientation == 0 ){
-							width = winWidth;
-							height = winHeight;
-						}else if( window.orientation == 90 || window.orientation == -90 ){
-							width = winHeight;
-							height = winWidth;
-						}
-					}, false);
-					
-				
+					if (!window.addEventListener) {
+	                                
+						window.attachEvent("orientationchange", function() {
+	                                            if( window.orientation == 0 ){
+	                                                    width = winWidth;
+	                                                    height = winHeight;
+	                                            }else if( window.orientation == 90 || window.orientation == -90 ){
+	                                                    width = winHeight;
+	                                                    height = winWidth;
+	                                            }
+	                                        });
+									    
+					} else {
+									
+						window.addEventListener("orientationchange", function() {
+	                                            if( window.orientation == 0 ){
+	                                                    width = winWidth;
+	                                                    height = winHeight;
+	                                            }else if( window.orientation == 90 || window.orientation == -90 ){
+	                                                    width = winHeight;
+	                                                    height = winWidth;
+	                                            }
+	                                        }, false);
+									    
+					}
+
+
 				}else{
 
 					width = window.innerWidth ? window.innerWidth : $(window).width();
