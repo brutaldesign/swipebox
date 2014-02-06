@@ -117,7 +117,7 @@ html.swipebox {
 }
 
 #swipebox-action #swipebox-prev, #swipebox-action #swipebox-next,
-#swipebox-action #swipebox-close {
+#swipebox-action #swipebox-close, #swipebox-download{
   background-image: url("img/icons.png");
   background-repeat: no-repeat;
   border: none!important;
@@ -132,6 +132,14 @@ html.swipebox {
 #swipebox-action #swipebox-close {
   background-position: 15px 12px;
   left: 40px;
+}
+
+#swipebox-action #swipebox-download {
+  background-position: -78px 13px;
+  transform: rotate(90deg);
+  -ms-transform: rotate(90deg); /* IE 9 */
+  -webkit-transform: rotate(90deg);
+  left: 80px;
 }
 
 #swipebox-action #swipebox-prev {

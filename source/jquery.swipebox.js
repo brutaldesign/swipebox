@@ -19,7 +19,8 @@
 			videoMaxWidth : 1140,
 			vimeoColor : 'CCCCCC',
 			beforeOpen: null,
-		      	afterClose: null
+		    afterClose: null,
+            downloadIndicator: 'href'
 		},
 		
 		plugin = this,
@@ -36,6 +37,7 @@
 				<div id="swipebox-caption"></div>\
 				<div id="swipebox-action">\
 					<a id="swipebox-close"></a>\
+                    <a id="swipebox-download"></a>\
 					<a id="swipebox-prev"></a>\
 					<a id="swipebox-next"></a>\
 				</div>\
@@ -80,9 +82,13 @@
 						if( $(this).attr('href') )
 							href = $(this).attr('href');
 
+						if( $(this).attr(options.downloadIndicator) )
+							download = $(this).attr(options.downloadIndicator);
+                        
 						elements.push({
 							href: href,
-							title: title
+							title: title,
+                            download: download
 						});
 					});
 					
@@ -413,6 +419,7 @@
 				$('#swipebox-slider .slide').removeClass('current');
 				$('#swipebox-slider .slide').eq(index).addClass('current');
 				this.setTitle(index);
+                this.setDownload(index);
 
 				if( isFirst ){
 					slider.fadeIn();
@@ -479,6 +486,21 @@
 					$('#swipebox-caption').append(title);
 				}
 			},
+
+            setDownload : function (index, isFirst){
+                var download = null;
+
+                $('#swipebox-download').empty();
+
+				if( elements[index] !== undefined )
+					orig = elements[index].download;
+				
+				if(orig){
+					$('#swipebox-download').attr('href', orig);
+                    $('#swipebox-download').attr('title', 'Download');
+				}
+            },
+
 
 			isVideo : function (src){
 
