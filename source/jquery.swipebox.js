@@ -30,6 +30,7 @@
 		plugin = this,
 		elements = [], // slides array [{href:'...', title:'...'}, ...],
 		elem = elem,
+		$elem,
 		selector = elem.selector,
 		$selector = $(selector),
 		isTouch = document.createTouch !== undefined || ('ontouchstart' in window) || ('onmsgesturechange' in window) || navigator.msMaxTouchPoints,
