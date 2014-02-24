@@ -57,7 +57,7 @@
 			} else {
 
 				$( document ).on( 'click', selector, function( event ) {
-					
+					plugin.refresh();
 					elements = [];
 					var index , relType, relVal;
 
@@ -99,8 +99,6 @@
 
 		/**
 		 * Refresh method
-		 *
-		 * Call this method in an ajax callback to refresh the elements list
 		 */
 		plugin.refresh = function() {
 			if ( ! $.isArray( elem ) ) {
