@@ -4,7 +4,7 @@
  * @author Constantin Saguin - @brutaldesign
  * @link  http://csag.co
  * @github http://github.com/brutaldesign/swipebox
- * @version 1.2.2
+ * @version 1.2.3
  * @license MIT License
 */
 
@@ -582,7 +582,7 @@
 				
 				} else if ( vimeoUrl ) {
 
-					iframe = '<iframe width="560" height="315"  src="http://player.vimeo.com/video/' + vimeoUrl[1] + '?byline=0&amp;portrait=0&amp;color='+plugin.settings.vimeoColor+'" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
+					iframe = '<iframe width="560" height="315"  src="//player.vimeo.com/video/' + vimeoUrl[1] + '?byline=0&amp;portrait=0&amp;color='+plugin.settings.vimeoColor+'" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
 				
 				}
 
