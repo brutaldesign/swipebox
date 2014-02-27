@@ -9,6 +9,73 @@
 ----------------------------------------------------------------------------------------------*/
 
 ;(function (window, document, $, undefined) {
+	
+	var Modernizr = (function () {
+		var version = '2.7.1',
+			Modernizr = {},
+			docElement = document.documentElement,
+			mod = 'modernizr',
+			prefixes = ' -webkit- -moz- -o- -ms- '.split(' '),
+			tests = {},
+			injectElementWithStyles = function( rule, callback, nodes, testnames ) {
+
+			  var style, ret, node, docOverflow,
+				  div = document.createElement('div'),
+						body = document.body,
+						fakeBody = body || document.createElement('body');
+
+			  if ( parseInt(nodes, 10) ) {
+							  while ( nodes-- ) {
+					  node = document.createElement('div');
+					  node.id = testnames ? testnames[nodes] : mod + (nodes + 1);
+					  div.appendChild(node);
+				  }
+			  }
+
+						style = ['&#173;','<style id="s', mod, '">', rule, '</style>'].join('');
+			  div.id = mod;
+				  (body ? div : fakeBody).innerHTML += style;
+			  fakeBody.appendChild(div);
+			  if ( !body ) {
+						fakeBody.style.background = '';
+						fakeBody.style.overflow = 'hidden';
+				  docOverflow = docElement.style.overflow;
+				  docElement.style.overflow = 'hidden';
+				  docElement.appendChild(fakeBody);
+			  }
+
+			  ret = callback(div, rule);
+				if ( !body ) {
+				  fakeBody.parentNode.removeChild(fakeBody);
+				  docElement.style.overflow = docOverflow;
+			  } else {
+				  div.parentNode.removeChild(div);
+			  }
+
+			  return !!ret;
+
+			};
+			tests['touch'] = function() {
+				var bool;
+
+				if(('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch) {
+				  bool = true;
+				} else {
+				  injectElementWithStyles(['@media (',prefixes.join('touch-enabled),('),mod,')','{#modernizr{top:9px;position:absolute}}'].join(''), function( node ) {
+					bool = node.offsetTop === 9;
+				  });
+				}
+
+				return bool;
+			};
+		if (window.Modernizr) {
+			var hasTests = [];
+			for (var test in tests) if (test in window.Modernizr) hasTests.push(test);
+			if (hasTests.length == tests.length) return window.Modernizr;
+		}
+		for (var test in tests) Modernizr[test] = tests[test]();
+		return Modernizr;
+	})();
 
 	$.swipebox = function(elem, options) {
 
@@ -33,7 +100,6 @@
 		$elem,
 		selector = elem.selector,
 		$selector = $(selector),
-		isTouch = document.createTouch !== undefined || ('ontouchstart' in window) || ('onmsgesturechange' in window) || navigator.msMaxTouchPoints,
 		supportSVG = !!(window.SVGSVGElement),
 		winWidth = window.innerWidth ? window.innerWidth : $(window).width(),
 		winHeight = window.innerHeight ? window.innerHeight : $(window).height(),
@@ -232,7 +298,7 @@
 			},
 
 			gesture : function(){
-				if ( isTouch ){
+				if ( Modernizr.touch ){
 					var $this = this,
 					distance = null,
 					swipMinDistance = 10,
@@ -288,7 +354,7 @@
 							}
 							else if (e.target == $('#swipebox-slider > .slide.current')[0] &&
 									 plugin.settings.closeOnBackgroundClick)
-								setTimeout($.proxy($this.closeSlide, $this), isTouch ? 500 : 0);
+								setTimeout($.proxy($this.closeSlide, $this), Modernizr.touch ? 500 : 0);
 							else{
 								$this.clearTimeout();
 								$this.hideBars();
@@ -352,7 +418,7 @@
 				bars.addClass('visible-bars');
 				$this.setTimeout();
 
-				if (!isTouch) $('#swipebox-slider').click(function(e){
+				if (!Modernizr.touch) $('#swipebox-slider').click(function(e){
 					if (plugin.settings.closeOnBackgroundClick)
 						$this.closeSlide();
 					else if(!bars.hasClass('visible-bars')){
@@ -403,14 +469,14 @@
 				if( elements.length < 2 ){
 					$('#swipebox-prev, #swipebox-next').hide();
 				}else{
-					$('#swipebox-prev').bind(isTouch ? 'touchend' : 'click', function(e){
+					$('#swipebox-prev').bind(Modernizr.touch ? 'touchend' : 'click', function(e){
 						e.preventDefault();
 						e.stopPropagation();
 						$this.getPrev();
 						$this.setTimeout();
 					});
 					
-					$('#swipebox-next').bind(isTouch ? 'touchend' : 'click', function(e){
+					$('#swipebox-next').bind(Modernizr.touch ? 'touchend' : 'click', function(e){
 						e.preventDefault();
 						e.stopPropagation();
 						$this.getNext();
@@ -418,10 +484,10 @@
 					});
 				}
 
-				$('#swipebox-close').bind(isTouch ? 'touchend' : 'click', function(e){
+				$('#swipebox-close').bind(Modernizr.touch ? 'touchend' : 'click', function(e){
 					e.preventDefault();
 					e.stopPropagation();
-					setTimeout($.proxy($this.closeSlide, $this), isTouch ? 500 : 0);
+					setTimeout($.proxy($this.closeSlide, $this), Modernizr.touch ? 500 : 0);
 				});
 			},
 
@@ -541,7 +607,7 @@
 				if( !this.isVideo(src) ){
 					var img = $('<img>').on('load', function(){
 						callback.call(img);
-						if (!isTouch && plugin.settings.nextOnImageClick) img.click(function(e){
+						if (!Modernizr.touch && plugin.settings.nextOnImageClick) img.click(function(e){
 							$('#swipebox-next').click();
 							return false;
 						}).css('cursor', 'pointer');
