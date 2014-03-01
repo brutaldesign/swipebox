@@ -67,5 +67,11 @@ beforeOpen: function(){} , // called before opening
 afterClose: function(){} // called after closing
 ```
 
+###Pull Requests
+
+I want to keep this plugin as simple as possible. I won't merge pull requests for additional features such as download buttons, social like buttons, IE8 compatibility etc... But feel free to fork the project and customize it to suit to your needs. Most wanted PR are for bug fixes. Also, a future improvement will be to allow zoom on touchable devices.
+
+Thanks for your understanding and thank you all for your helpful support!
+
 ####Credits
 Photos by [Daniele Zedda](http://www.flickr.com/photos/astragony/)
