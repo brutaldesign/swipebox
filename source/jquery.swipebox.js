@@ -561,7 +561,7 @@
 			isVideo : function ( src ) {
 
 				if ( src ) {
-					if ( src.match( /youtube\.com\/watch\?v=([a-zA-Z0-9\-_]+)/) || src.match( /vimeo\.com\/([0-9]*)/ ) ) {
+					if ( src.match( /youtube\.com\/watch\?v=([a-zA-Z0-9\-_]+)/) || src.match( /vimeo\.com\/([0-9]*)/ ) || src.match( /youtu\.be\/([a-zA-Z0-9\-_]+)/ ) ) {
 						return true;
 					}
 				}
@@ -575,9 +575,12 @@
 				var iframe = '';
 				var output = '';
 				var youtubeUrl = url.match( /watch\?v=([a-zA-Z0-9\-_]+)/ );
+				var youtubeShortUrl = url.match(/youtu\.be\/([a-zA-Z0-9\-_]+)/);
 				var vimeoUrl = url.match( /vimeo\.com\/([0-9]*)/ );
-				if ( youtubeUrl ) {
-
+				if ( youtubeUrl || youtubeShortUrl) {
+					 if (youtubeShortUrl){
+					youtubeUrl = youtubeShortUrl;
+					}
 					iframe = '<iframe width="560" height="315" src="//www.youtube.com/embed/' + youtubeUrl[1] + '" frameborder="0" allowfullscreen></iframe>';
 				
 				} else if ( vimeoUrl ) {
