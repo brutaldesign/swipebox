@@ -31,7 +31,6 @@
 		supportSVG = !! ( window.SVGSVGElement ),
 		winWidth = window.innerWidth ? window.innerWidth : $( window ).width(),
 		winHeight = window.innerHeight ? window.innerHeight : $( window ).height(),
-		isOpen = false;
 		/* jshint multistr: true */
 		html = '<div id="swipebox-overlay">\
 				<div id="swipebox-slider"></div>\
@@ -59,15 +58,11 @@
 
 				$( document ).on( 'click', selector, function( event ) {
 
-					console.log( selector );
-
 					if ( event.target.parentNode.className === 'slide current' ) {
 
 						return false;
 
 					}
-
-					this.isOpen = true;
 					
 					if ( ! $.isArray( elem ) ) {
 						ui.destroy();

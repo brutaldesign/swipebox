@@ -465,7 +465,7 @@ th {
 
 /* line 1, sass/_base.scss */
 body {
-  border-top: 5px solid #4bbd93;
+  border-top: 5px solid #38a79f;
   overflow-x: hidden !important;
   background: #FFF;
   color: #666;
@@ -479,7 +479,7 @@ h1, h2, h3, h4, h4, h6 {
 /* line 14, sass/_base.scss */
 a {
   text-decoration: none;
-  color: #4bbd93;
+  color: #38a79f;
   -webkit-transition: color 0.2s;
   -moz-transition: color 0.2s;
   -o-transition: color 0.2s;
@@ -505,53 +505,66 @@ hr {
 /* line 34, sass/_base.scss */
 #fork-this {
   position: absolute;
+  z-index: 1;
+  right: 0;
+  top: 5px;
+  width: 0px;
+  height: 0px;
+  border-style: solid;
+  border-width: 0 150px 150px 0;
+  border-color: transparent #38a79f transparent transparent;
+}
+/* line 45, sass/_base.scss */
+#fork-this a {
+  display: block;
+  position: absolute;
   z-index: 10;
   width: 150px;
   height: 150px;
   top: 0;
-  right: 0;
+  right: -150px;
   z-index: 10;
   background: url("fork.png") no-repeat 0 0;
   background-size: 150px 150px;
 }
 
-/* line 46, sass/_base.scss */
+/* line 59, sass/_base.scss */
 #share {
   margin-bottom: 3rem;
 }
-/* line 50, sass/_base.scss */
+/* line 63, sass/_base.scss */
 #share #fb, #share #twitter {
   display: inline-block;
 }
-/* line 54, sass/_base.scss */
+/* line 67, sass/_base.scss */
 #share #fb {
   position: relative;
   top: -10px;
 }
 
-/* line 61, sass/_base.scss */
+/* line 74, sass/_base.scss */
 header {
   text-align: center;
 }
-/* line 65, sass/_base.scss */
+/* line 78, sass/_base.scss */
 header h1 {
   margin-top: 0;
   font-size: 8rem;
 }
-/* line 70, sass/_base.scss */
+/* line 83, sass/_base.scss */
 header .tagline {
   font-size: 1.5rem;
   font-family: "Helvetica neue", Helvetica, Arial, sans-serif;
   margin-bottom: 2.5rem;
 }
 
-/* line 83, sass/_base.scss */
+/* line 96, sass/_base.scss */
 #box-container {
   margin: 0;
   padding: 0;
 }
 
-/* line 90, sass/_base.scss */
+/* line 103, sass/_base.scss */
 .box {
   list-style-type: none;
   float: left;
@@ -560,22 +573,22 @@ header .tagline {
   margin-right: 1%;
   width: 48%;
 }
-/* line 98, sass/_base.scss */
+/* line 111, sass/_base.scss */
 .box:nth-child(2n+1) {
   clear: both;
   margin-left: 0;
 }
-/* line 103, sass/_base.scss */
+/* line 116, sass/_base.scss */
 .box:nth-child(2n+0) {
   margin-right: 0;
 }
-/* line 107, sass/_base.scss */
+/* line 120, sass/_base.scss */
 .box a {
   display: block;
   width: 100%;
   height: auto;
 }
-/* line 112, sass/_base.scss */
+/* line 125, sass/_base.scss */
 .box a img {
   display: block;
   width: 100%;
@@ -583,31 +596,30 @@ header .tagline {
   vertical-align: bottom;
 }
 
-/* line 123, sass/_base.scss */
+/* line 136, sass/_base.scss */
 #action {
   text-align: center;
 }
 
-/* line 127, sass/_base.scss */
+/* line 140, sass/_base.scss */
 footer {
-  background: #4bbd93;
   font-size: 0.9rem;
   font-family: "Helvetica neue", Helvetica, Arial, sans-serif;
   text-align: center;
   margin-top: 5rem;
   padding: 1rem;
-  color: #FFF;
+  color: #666;
 }
-/* line 135, sass/_base.scss */
+/* line 147, sass/_base.scss */
 footer a {
-  color: #FFF;
+  color: #666;
 }
 
 /* line 1, sass/_typography.scss */
 body {
   -webkit-font-smoothing: antialiased;
   font-family: 'Noto Serif', serif;
-  font-size: 20px;
+  font-size: 24px;
   line-height: 1.7;
 }
 
@@ -725,15 +737,15 @@ pre span {
   width: auto;
   border: none !important;
   background-image: none;
-  background-color: #4bbd93;
-  -webkit-box-shadow: 0 6px 0 #328969;
-  -moz-box-shadow: 0 6px 0 #328969;
-  box-shadow: 0 6px 0 #328969;
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  -ms-border-radius: 6px;
-  -o-border-radius: 6px;
-  border-radius: 6px;
+  background-color: #38a79f;
+  -webkit-box-shadow: 0 6px 0 #256e68;
+  -moz-box-shadow: 0 6px 0 #256e68;
+  box-shadow: 0 6px 0 #256e68;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+  border-radius: 8px;
   font-size: 1.5rem;
   padding: 1.7rem 2.5rem;
   margin: 1rem 0.5%;
@@ -743,68 +755,74 @@ pre span {
 .button:hover, .button:focus {
   background-image: none;
   border: none;
-  background-color: #40af86;
+  background-color: #32948d;
 }
 /* line 37, sass/_buttons.scss */
 .button:active {
   top: 1px;
   background-image: none;
-  -webkit-box-shadow: 0 3px 0 #328969;
-  -moz-box-shadow: 0 3px 0 #328969;
-  box-shadow: 0 3px 0 #328969;
+  -webkit-box-shadow: 0 3px 0 #256e68;
+  -moz-box-shadow: 0 3px 0 #256e68;
+  box-shadow: 0 3px 0 #256e68;
 }
 
-@media screen and (max-width: 799px) {
+@media screen and (max-width: 1600px) {
   /* line 5, sass/_media-queries.scss */
+  body {
+    font-size: 20px;
+  }
+}
+@media screen and (max-width: 799px) {
+  /* line 15, sass/_media-queries.scss */
   body {
     font-size: 16px;
   }
 
-  /* line 9, sass/_media-queries.scss */
+  /* line 19, sass/_media-queries.scss */
   header h1 {
     font-size: 5rem;
   }
 
-  /* line 13, sass/_media-queries.scss */
+  /* line 23, sass/_media-queries.scss */
   header .tagline {
     font-size: 1.1rem;
   }
 
-  /* line 17, sass/_media-queries.scss */
+  /* line 27, sass/_media-queries.scss */
   hr {
     margin: 2rem 0;
   }
 
-  /* line 21, sass/_media-queries.scss */
+  /* line 31, sass/_media-queries.scss */
   #fork-this {
     display: none;
   }
 
-  /* line 25, sass/_media-queries.scss */
+  /* line 35, sass/_media-queries.scss */
   #share #fb {
     top: -8px;
   }
 
-  /* line 29, sass/_media-queries.scss */
+  /* line 39, sass/_media-queries.scss */
   .button {
     margin-left: 0;
     margin-right: 0;
     width: 100%;
   }
 
-  /* line 35, sass/_media-queries.scss */
+  /* line 45, sass/_media-queries.scss */
   .button {
     font-size: 1.3rem;
     padding: 1.4rem 2rem;
   }
 }
 @media screen and (max-width: 410px) {
-  /* line 46, sass/_media-queries.scss */
+  /* line 56, sass/_media-queries.scss */
   header h1 {
     font-size: 3.5rem;
   }
 
-  /* line 50, sass/_media-queries.scss */
+  /* line 60, sass/_media-queries.scss */
   .box {
     width: 100%;
     margin-left: 0;
