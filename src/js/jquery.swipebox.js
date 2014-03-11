@@ -4,12 +4,12 @@
  * @author Constantin Saguin - @brutaldesign
  * @link  http://csag.co
  * @github http://github.com/brutaldesign/swipebox
- * @version 1.2.4
+ * @version 1.2.5
  * @license MIT License
 */
 
 ;( function ( window, document, $, undefined ) {
-	
+
 	$.swipebox = function( elem, options ) {
 
 		// Default options
@@ -31,6 +31,7 @@
 		supportSVG = !! ( window.SVGSVGElement ),
 		winWidth = window.innerWidth ? window.innerWidth : $( window ).width(),
 		winHeight = window.innerHeight ? window.innerHeight : $( window ).height(),
+		isOpen = false;
 		/* jshint multistr: true */
 		html = '<div id="swipebox-overlay">\
 				<div id="swipebox-slider"></div>\
@@ -57,8 +58,23 @@
 			} else {
 
 				$( document ).on( 'click', selector, function( event ) {
-					if ( event.target.parentNode.className == 'slide current') return false;
-					plugin.refresh();
+
+					console.log( selector );
+
+					if ( event.target.parentNode.className === 'slide current' ) {
+
+						return false;
+
+					}
+
+					this.isOpen = true;
+					
+					if ( ! $.isArray( elem ) ) {
+						ui.destroy();
+						$elem = $( selector );
+						ui.actions();
+					}
+					
 					elements = [];
 					var index , relType, relVal;
 
@@ -75,14 +91,18 @@
 
 					$elem.each( function() {
 
-						var title = null, href = null;
+						var title = null, 
+							href = null;
 						
-						if ( $( this ).attr( 'title' ) )
+						if ( $( this ).attr( 'title' ) ) {
 							title = $( this ).attr( 'title' );
+						}
+							
 
-						if ( $( this ).attr( 'href' ) )
+						if ( $( this ).attr( 'href' ) ) {
 							href = $( this ).attr( 'href' );
-
+						}
+							
 						elements.push( {
 							href: href,
 							title: title
@@ -492,7 +512,7 @@
 			 * Open slide
 			 */
 			openSlide : function ( index ) {
-				$( 'html' ).addClass( 'swipebox' );
+				$( 'html' ).addClass( 'swipebox-html' );
 				$( window ).trigger( 'resize' ); // fix scroll bar visibility on desktop
 				this.setSlide( index, true );
 			},
