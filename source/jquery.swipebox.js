@@ -136,17 +136,19 @@
 
 				if ( $this.doCssTrans() ) {
 					$( '#swipebox-slider' ).css( {
-						'-webkit-transition' : 'left 0.4s ease',
-						'-moz-transition' : 'left 0.4s ease',
-						'-o-transition' : 'left 0.4s ease',
-						'-khtml-transition' : 'left 0.4s ease',
-						'transition' : 'left 0.4s ease'
+						'-webkit-transition' : '-webkit-transform 0.4s ease',
+						'-moz-transition' : '-moz-transform 0.4s ease',
+						'-o-transition' : '-o-transform 0.4s ease',
+						'-khtml-transition' : '-khtml-transform 0.4s ease',
+						'-ms-transition' : '-ms-transform 0.4s ease',
+						'transition' : 'transform 0.4s ease'
 					} );
 					$( '#swipebox-overlay' ).css( {
 						'-webkit-transition' : 'opacity 1s ease',
 						'-moz-transition' : 'opacity 1s ease',
 						'-o-transition' : 'opacity 1s ease',
 						'-khtml-transition' : 'opacity 1s ease',
+						'-ms-transition' : 'opacity 1s ease',
 						'transition' : 'opacity 1s ease'
 					} );
 					$( '#swipebox-action, #swipebox-caption' ).css( {
@@ -154,6 +156,7 @@
 						'-moz-transition' : '0.5s',
 						'-o-transition' : '0.5s',
 						'-khtml-transition' : '0.5s',
+						'-ms-transition' : '0.5s',
 						'transition' : '0.5s'
 					} );
 				}
@@ -466,7 +469,14 @@
 				var slider = $( '#swipebox-slider' );
 				
 				if ( this.doCssTrans() ) {
-					slider.css( { left : ( -index*100 )+'%' } );
+					slider.css({
+  '-webkit-transform' : 'translateX(' + (-index*100)+'%)',
+  '-moz-transform' : 'translateX(' + (-index*100)+'%)',
+  '-o-transform' : 'translateX(' + (-index*100)+'%)',
+  '-khtml-transform' : 'translateX(' + (-index*100)+'%)',
+  '-ms-transform' : 'translateX(' + (-index*100)+'%)',
+  'transform' : 'translateX(' + (-index*100)+'%)',
+                                        });
 				} else {
 					slider.animate( { left : ( -index*100 )+'%' } );
 				}

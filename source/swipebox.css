@@ -17,6 +17,8 @@ html.swipebox {
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 #swipebox-slider {
@@ -27,6 +29,8 @@ html.swipebox {
   white-space: nowrap;
   position: absolute;
   display: none;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 #swipebox-slider .slide {
@@ -91,6 +95,8 @@ html.swipebox {
   z-index: 999;
   height: 50px;
   width: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 #swipebox-action {
