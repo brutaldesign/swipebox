@@ -57,6 +57,7 @@
 			} else {
 
 				$( document ).on( 'click', selector, function( event ) {
+					if(event.target.parentNode.className == 'slide current') return false;
 					plugin.refresh();
 					elements = [];
 					var index , relType, relVal;
