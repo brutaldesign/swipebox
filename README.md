@@ -19,7 +19,7 @@ Swipebox is a jQuery "lightbox" plugin for desktop, mobile and tablet.
 
 ###Compatibility
 
-Chrome, Safari, Firefox, Opera, IE8+, IOS4+, Android, windows phone.
+Chrome, Safari, Firefox, Opera, IE9+, IOS4+, Android, windows phone.
 
 ##Usage
 
@@ -29,7 +29,7 @@ Include jquery and the swipebox script in your head tags or right before your bo
 
 ```html
 <script src="lib/jquery-1.9.0.js"></script>
-<script src="source/jquery.swipebox.js"></script>
+<script src="src/js/jquery.swipebox.js"></script>
 ```
 
 ###CSS
@@ -37,7 +37,7 @@ Include jquery and the swipebox script in your head tags or right before your bo
 Include the swipebox CSS style in your head tags.
 
 ```html
-<link rel="stylesheet" href="source/swipebox.css">
+<link rel="stylesheet" href="src/css/swipebox.css">
 ```
 
 ###HTML
@@ -53,7 +53,7 @@ Use a specific class for your links and use the title attribute as caption.
 Bind the swipebox behaviour on every link with the "swipebox" class.
 
 ```javascript
-$(".swipebox").swipebox();
+$( '.swipebox' ).swipebox();
 ```
 
 ###Options
@@ -72,6 +72,3 @@ afterClose: function(){} // called after closing
 I want to keep this plugin as simple as possible. I won't merge pull requests for additional features such as download buttons, social like buttons, IE8 compatibility etc... But feel free to fork the project and customize it to suit to your needs. Most wanted PR are for bug fixes. Also, a future improvement will be to allow zoom on touchable devices.
 
 Thanks for your understanding and thank you all for your helpful support!
-
-####Credits
-Photos by [Daniele Zedda](http://www.flickr.com/photos/astragony/)

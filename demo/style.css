@@ -1,4 +1,4 @@
-/* normalize.css v3.0.0 | MIT License | git.io/normalize */
+/*! normalize.css v3.0.0 | MIT License | git.io/normalize */
 /**
  * 1. Set default font family to sans-serif.
  * 2. Prevent iOS text size adjust after orientation change, without disabling
@@ -741,11 +741,11 @@ pre span {
   -webkit-box-shadow: 0 6px 0 #256e68;
   -moz-box-shadow: 0 6px 0 #256e68;
   box-shadow: 0 6px 0 #256e68;
-  -webkit-border-radius: 8px;
-  -moz-border-radius: 8px;
-  -ms-border-radius: 8px;
-  -o-border-radius: 8px;
-  border-radius: 8px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
   font-size: 1.5rem;
   padding: 1.7rem 2.5rem;
   margin: 1rem 0.5%;
