@@ -1,9 +1,7 @@
-/* line 12, ../../sass/swipebox.scss */
 #swipebox-overlay img {
   border: none !important;
 }
 
-/* line 16, ../../sass/swipebox.scss */
 #swipebox-overlay {
   width: 100%;
   height: 100%;
@@ -17,7 +15,6 @@
   user-select: none;
 }
 
-/* line 27, ../../sass/swipebox.scss */
 #swipebox-slider {
   height: 100%;
   left: 0;
@@ -27,7 +24,6 @@
   position: absolute;
   display: none;
 }
-/* line 36, ../../sass/swipebox.scss */
 #swipebox-slider .slide {
   background: url("../img/loader.gif") no-repeat center center;
   height: 100%;
@@ -36,7 +32,6 @@
   text-align: center;
   display: inline-block;
 }
-/* line 44, ../../sass/swipebox.scss */
 #swipebox-slider .slide:before {
   content: "";
   display: inline-block;
@@ -44,7 +39,6 @@
   width: 1px;
   margin-right: -1px;
 }
-/* line 52, ../../sass/swipebox.scss */
 #swipebox-slider .slide img, #swipebox-slider .slide .swipebox-video-container {
   display: inline-block;
   max-height: 100%;
@@ -55,7 +49,6 @@
   height: auto;
   vertical-align: middle;
 }
-/* line 63, ../../sass/swipebox.scss */
 #swipebox-slider .slide .swipebox-video-container {
   background: none;
   max-width: 1140px;
@@ -66,7 +59,6 @@
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
 }
-/* line 73, ../../sass/swipebox.scss */
 #swipebox-slider .slide .swipebox-video-container .swipebox-video {
   width: 100%;
   height: 0;
@@ -74,7 +66,6 @@
   overflow: hidden;
   position: relative;
 }
-/* line 79, ../../sass/swipebox.scss */
 #swipebox-slider .slide .swipebox-video-container .swipebox-video iframe {
   width: 100% !important;
   height: 100% !important;
@@ -83,7 +74,6 @@
   left: 0;
 }
 
-/* line 92, ../../sass/swipebox.scss */
 #swipebox-action,
 #swipebox-caption {
   position: absolute;
@@ -93,19 +83,15 @@
   width: 100%;
 }
 
-/* line 100, ../../sass/swipebox.scss */
 #swipebox-action {
   bottom: -50px;
 }
-/* line 103, ../../sass/swipebox.scss */
 #swipebox-action.visible-bars {
   bottom: 0;
 }
-/* line 107, ../../sass/swipebox.scss */
 #swipebox-action.force-visible-bars {
   bottom: 0 !important;
 }
-/* line 113, ../../sass/swipebox.scss */
 #swipebox-action #swipebox-prev,
 #swipebox-action #swipebox-next,
 #swipebox-action #swipebox-close {
@@ -119,145 +105,119 @@
   height: 50px;
   top: 0;
 }
-/* line 125, ../../sass/swipebox.scss */
 #swipebox-action #swipebox-prev {
   background-position: -32px 13px;
   right: 100px;
 }
-/* line 130, ../../sass/swipebox.scss */
 #swipebox-action #swipebox-next {
   background-position: -78px 13px;
   right: 40px;
 }
-/* line 135, ../../sass/swipebox.scss */
 #swipebox-action #swipebox-close {
   background-position: 15px 12px;
   left: 40px;
 }
-/* line 142, ../../sass/swipebox.scss */
 #swipebox-action #swipebox-prev.disabled,
 #swipebox-action #swipebox-next.disabled {
   opacity: 0.3;
 }
 
-/* line 150, ../../sass/swipebox.scss */
 #swipebox-caption {
   top: -50px;
   text-align: center;
 }
-/* line 154, ../../sass/swipebox.scss */
 #swipebox-caption.visible-bars {
   top: 0;
 }
-/* line 158, ../../sass/swipebox.scss */
 #swipebox-caption.force-visible-bars {
   top: 0 !important;
 }
 
-/* line 163, ../../sass/swipebox.scss */
 #swipebox-slider.rightSpring {
   -moz-animation: rightSpring 0.3s;
   -webkit-animation: rightSpring 0.3s;
 }
 
-/* line 168, ../../sass/swipebox.scss */
 #swipebox-slider.leftSpring {
   -moz-animation: leftSpring 0.3s;
   -webkit-animation: leftSpring 0.3s;
 }
 
 @-moz-keyframes rightSpring {
-  /* line 174, ../../sass/swipebox.scss */
   0% {
     margin-left: 0px;
   }
 
-  /* line 178, ../../sass/swipebox.scss */
   50% {
     margin-left: -30px;
   }
 
-  /* line 182, ../../sass/swipebox.scss */
   100% {
     margin-left: 0px;
   }
 }
 
 @-moz-keyframes leftSpring {
-  /* line 188, ../../sass/swipebox.scss */
   0% {
     margin-left: 0px;
   }
 
-  /* line 192, ../../sass/swipebox.scss */
   50% {
     margin-left: 30px;
   }
 
-  /* line 196, ../../sass/swipebox.scss */
   100% {
     margin-left: 0px;
   }
 }
 
 @-webkit-keyframes rightSpring {
-  /* line 202, ../../sass/swipebox.scss */
   0% {
     margin-left: 0px;
   }
 
-  /* line 206, ../../sass/swipebox.scss */
   50% {
     margin-left: -30px;
   }
 
-  /* line 210, ../../sass/swipebox.scss */
   100% {
     margin-left: 0px;
   }
 }
 
 @-webkit-keyframes leftSpring {
-  /* line 216, ../../sass/swipebox.scss */
   0% {
     margin-left: 0px;
   }
 
-  /* line 220, ../../sass/swipebox.scss */
   50% {
     margin-left: 30px;
   }
 
-  /* line 224, ../../sass/swipebox.scss */
   100% {
     margin-left: 0px;
   }
 }
 
 @media screen and (max-width: 800px) {
-  /* line 230, ../../sass/swipebox.scss */
   #swipebox-action #swipebox-close {
     left: 0;
   }
 
-  /* line 234, ../../sass/swipebox.scss */
   #swipebox-action #swipebox-prev {
     right: 60px;
   }
 
-  /* line 238, ../../sass/swipebox.scss */
   #swipebox-action #swipebox-next {
     right: 0;
   }
 }
 /* Skin 
 --------------------------*/
-/* line 245, ../../sass/swipebox.scss */
 #swipebox-overlay {
   background: #0d0d0d;
 }
 
-/* line 250, ../../sass/swipebox.scss */
 #swipebox-action,
 #swipebox-caption {
   text-shadow: 1px 1px 1px black;
@@ -270,12 +230,10 @@
   opacity: 0.95;
 }
 
-/* line 256, ../../sass/swipebox.scss */
 #swipebox-action {
   border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* line 260, ../../sass/swipebox.scss */
 #swipebox-caption {
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   color: white !important;
