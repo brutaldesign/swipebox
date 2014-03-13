@@ -1,3 +1,5 @@
+/*! Swipebox v1.2.6 | Constantin Saguin csag.co | MIT License | github.com/brutaldesign/swipebox */
+
 @import "compass";
 @import "compass/css3/user-interface";
 @mixin bar($color) {
@@ -5,9 +7,9 @@
 	@include background-image(linear-gradient(  $color, darken($color, 20%))); 
 }
 
-// html.swipebox {
-//   overflow: hidden!important;
-// }
+html.swipebox-html.swipebox-touch {
+  overflow: hidden!important;
+}
 
 #swipebox-overlay img {
 	border: none!important;
@@ -101,11 +103,7 @@
 	bottom: -50px;
 
 	&.visible-bars {
-		bottom: 0;
-	}
-
-	&.force-visible-bars {
-		bottom: 0!important;
+		@include translateY(-50px);
 	}
 
 	#swipebox-prev, 
@@ -152,11 +150,7 @@
 	text-align: center;
 	
 	&.visible-bars {
-		top: 0;
-	}
-
-	&.force-visible-bars {
-		top: 0!important;
+		@include translateY(50px);
 	}
 }
 

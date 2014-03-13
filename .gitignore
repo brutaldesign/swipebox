@@ -3,6 +3,7 @@
 #############
 grunt
 demo/sass
+dist
 
 #################
 ## Eclipse

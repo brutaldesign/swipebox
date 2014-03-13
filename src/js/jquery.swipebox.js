@@ -1,12 +1,4 @@
-/**
- * Swipebox - A touchable jQuery lightbox
- *
- * @author Constantin Saguin - @brutaldesign
- * @link  http://csag.co
- * @github http://github.com/brutaldesign/swipebox
- * @version 1.2.5
- * @license MIT License
-*/
+/*! Swipebox v1.2.6 | Constantin Saguin csag.co | MIT License | github.com/brutaldesign/swipebox */
 
 ;( function ( window, document, $, undefined ) {
 
@@ -27,8 +19,8 @@
 		elements = [], // slides array [ { href:'...', title:'...' }, ...],
 		selector = elem.selector,
 		$selector = $( selector ),
-		isTouch = document.createTouch !== undefined || ( 'ontouchstart' in window ) || ( 'onmsgesturechange' in window ) || navigator.msMaxTouchPoints,
-		supportSVG = !! ( window.SVGSVGElement ),
+		isMobile = navigator.userAgent.match( /(iPad)|(iPhone)|(iPod)|(Android)|(PlayBook)|(BB10)|(BlackBerry)|(Opera Mini)|(IEMobile)|(webOS)|(MeeGo)/i ),
+		supportSVG = !! document.createElementNS && !! document.createElementNS( 'http://www.w3.org/2000/svg', "svg").createSVGRect,
 		winWidth = window.innerWidth ? window.innerWidth : $( window ).width(),
 		winHeight = window.innerHeight ? window.innerHeight : $( window ).height(),
 		/* jshint multistr: true */
@@ -103,7 +95,7 @@
 							title: title
 						} );
 					} );
-					
+
 					index = $elem.index( $( this ) );
 					event.preventDefault();
 					event.stopPropagation();
@@ -148,7 +140,7 @@
 				var $this = this;
 
 				$( 'body' ).append( html );
-
+								
 				if ( $this.doCssTrans() ) {
 					$( '#swipebox-slider' ).css( {
 						'-webkit-transition' : 'left 0.4s ease',
@@ -188,8 +180,13 @@
 
 				$this.setDim();
 				$this.actions();
-				$this.keyboard();
-				$this.gesture();
+				
+				if ( isMobile ) {
+					$this.gesture();
+				} else {
+					$this.keyboard();
+				}
+				
 				$this.animBars();
 				$this.resize();
 				
@@ -270,50 +267,49 @@
 			 * Touch navigation
 			 */
 			gesture : function () {
-				if ( isTouch ) {
-					var $this = this,
-						distance = null,
-						swipMinDistance = 10,
-						startCoords = {},
-						endCoords = {},
-						bars = $( '#swipebox-caption, #swipebox-action' );
+				
+				var $this = this,
+				distance = null,
+				swipMinDistance = 10,
+				startCoords = {},
+				endCoords = {};
+				var bars = $( '#swipebox-caption, #swipebox-action' );
 
-					bars.addClass( 'visible-bars' );
-					$this.setTimeout();
+				bars.addClass( 'visible-bars' );
+				$this.setTimeout();
 
-					$( 'body' ).bind( 'touchstart', function( event ) {
+				$( 'body' ).bind( 'touchstart', function( event ) {
 
-						$( this ).addClass( 'touching' );
+					$(this).addClass( 'touching' );
 
+					endCoords = event.originalEvent.targetTouches[0];
+					startCoords.pageX = event.originalEvent.targetTouches[0].pageX;
+
+					$( '.touching' ).bind( 'touchmove',function( event ) {
+						event.preventDefault();
+						event.stopPropagation();
 						endCoords = event.originalEvent.targetTouches[0];
-						startCoords.pageX = event.originalEvent.targetTouches[0].pageX;
 
-						$( '.touching' ).bind( 'touchmove', function( event ) {
-							event.preventDefault();
-							event.stopPropagation();
-							endCoords = e.originalEvent.targetTouches[0];
-
-						} );
-			
+					} );
+	
 					return false;
 
-				} ).bind( 'touchend', function( event ) {
-				
+				} ).bind( 'touchend',function( event ) {
 					event.preventDefault();
 					event.stopPropagation();
 				
 					distance = endCoords.pageX - startCoords.pageX;
-				
+						
 					if ( distance >= swipMinDistance ) {
-					
+						
 						// swipeLeft
 						$this.getPrev();
-				
-					} else if ( distance <= - swipMinDistance ) {
 					
+					} else if ( distance <= - swipMinDistance ) {
+						
 						// swipeRight
 						$this.getNext();
-				
+
 					} else {
 						// tap
 						if ( ! bars.hasClass( 'visible-bars' ) ) {
@@ -328,9 +324,8 @@
 
 					$( '.touching' ).off( 'touchmove' ).removeClass( 'touching' );
 						
-					} );
+				} );
 
-				}
 			},
 
 			/**
@@ -406,16 +401,20 @@
 					}
 				} );
 
-				$( '#swipebox-action' ).hover( function() {
+				if ( ! isMobile ) {
+
+					$( '#swipebox-action' ).hover( function() {
 						$this.showBars();
-						bars.addClass( 'force-visible-bars' );
+						bars.addClass( 'visible-bars' );
 						$this.clearTimeout();
 					
-					}, function() { 
-						bars.removeClass( 'force-visible-bars' );
-						$this.setTimeout();
+						}, function() { 
+							bars.removeClass( 'visible-bars' );
+							$this.setTimeout();
 
-				} );
+					} );
+
+				}
 			},
 
 			/**
@@ -448,18 +447,22 @@
 			 */
 			actions : function () {
 				var $this = this;
+
+				var action = isMobile ? 'touchend' : 'click';
 				
 				if ( elements.length < 2 ) {
+					
 					$( '#swipebox-prev, #swipebox-next' ).hide();
+				
 				} else {
-					$( '#swipebox-prev' ).bind( 'click touchend', function( event ) {
+					$( '#swipebox-prev' ).bind( action, function( event ) {
 						event.preventDefault();
 						event.stopPropagation();
 						$this.getPrev();
 						$this.setTimeout();
 					} );
 					
-					$( '#swipebox-next' ).bind( 'click touchend', function( event ) {
+					$( '#swipebox-next' ).bind( action, function( event ) {
 						event.preventDefault();
 						event.stopPropagation();
 						$this.getNext();
@@ -467,7 +470,7 @@
 					} );
 				}
 
-				$( '#swipebox-close' ).bind( 'click touchend', function() {
+				$( '#swipebox-close' ).bind( action, function() {
 					$this.closeSlide();
 				} );
 			},
@@ -508,6 +511,9 @@
 			 */
 			openSlide : function ( index ) {
 				$( 'html' ).addClass( 'swipebox-html' );
+				if ( isMobile ) {
+					$( 'html' ).addClass( 'swipebox-touch' );
+				}
 				$( window ).trigger( 'resize' ); // fix scroll bar visibility on desktop
 				this.setSlide( index, true );
 			},
@@ -594,7 +600,7 @@
 				var youtubeShortUrl = url.match(/youtu\.be\/([a-zA-Z0-9\-_]+)/);
 				var vimeoUrl = url.match( /vimeo\.com\/([0-9]*)/ );
 				if ( youtubeUrl || youtubeShortUrl) {
-					if ( youtubeShortUrl ){
+					if ( youtubeShortUrl ) {
 						youtubeUrl = youtubeShortUrl;
 					}
 					iframe = '<iframe width="560" height="315" src="//www.youtube.com/embed/' + youtubeUrl[1] + '" frameborder="0" allowfullscreen></iframe>';
@@ -651,7 +657,7 @@
 					this.setSlide( index );
 					this.preloadMedia( index-1 );
 				}
-				else{
+				else {
 					
 					$( '#swipebox-slider' ).addClass( 'leftSpring' );
 					setTimeout( function() {
@@ -664,7 +670,8 @@
 			 * Close
 			 */
 			closeSlide : function () {
-				$( 'html' ).removeClass( 'swipebox' );
+				$( 'html' ).removeClass( 'swipebox-html' );
+				$( 'html' ).removeClass( 'swipebox-touch' );
 				$( window ).trigger( 'resize' );
 				this.destroy();
 			},

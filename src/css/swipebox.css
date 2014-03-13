@@ -1,3 +1,8 @@
+/*! Swipebox v1.2.6 | Constantin Saguin csag.co | MIT License | github.com/brutaldesign/swipebox */
+html.swipebox-html.swipebox-touch {
+  overflow: hidden !important;
+}
+
 #swipebox-overlay img {
   border: none !important;
 }
@@ -87,10 +92,11 @@
   bottom: -50px;
 }
 #swipebox-action.visible-bars {
-  bottom: 0;
-}
-#swipebox-action.force-visible-bars {
-  bottom: 0 !important;
+  -webkit-transform: translateY(-50px);
+  -moz-transform: translateY(-50px);
+  -ms-transform: translateY(-50px);
+  -o-transform: translateY(-50px);
+  transform: translateY(-50px);
 }
 #swipebox-action #swipebox-prev,
 #swipebox-action #swipebox-next,
@@ -127,10 +133,11 @@
   text-align: center;
 }
 #swipebox-caption.visible-bars {
-  top: 0;
-}
-#swipebox-caption.force-visible-bars {
-  top: 0 !important;
+  -webkit-transform: translateY(50px);
+  -moz-transform: translateY(50px);
+  -ms-transform: translateY(50px);
+  -o-transform: translateY(50px);
+  transform: translateY(50px);
 }
 
 #swipebox-slider.rightSpring {
