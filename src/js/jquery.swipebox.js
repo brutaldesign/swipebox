@@ -1,4 +1,4 @@
-/*! Swipebox v1.2.6 | Constantin Saguin csag.co | MIT License | github.com/brutaldesign/swipebox */
+/*! Swipebox v1.2.7 | Constantin Saguin csag.co | MIT License | github.com/brutaldesign/swipebox */
 
 ;( function ( window, document, $, undefined ) {
 
@@ -20,6 +20,7 @@
 		selector = elem.selector,
 		$selector = $( selector ),
 		isMobile = navigator.userAgent.match( /(iPad)|(iPhone)|(iPod)|(Android)|(PlayBook)|(BB10)|(BlackBerry)|(Opera Mini)|(IEMobile)|(webOS)|(MeeGo)/i ),
+		isTouch = isMobile !== null || document.createTouch !== undefined || ( 'ontouchstart' in window ) || ( 'onmsgesturechange' in window ) || navigator.msMaxTouchPoints,
 		supportSVG = !! document.createElementNS && !! document.createElementNS( 'http://www.w3.org/2000/svg', "svg").createSVGRect,
 		winWidth = window.innerWidth ? window.innerWidth : $( window ).width(),
 		winHeight = window.innerHeight ? window.innerHeight : $( window ).height(),
@@ -49,6 +50,8 @@
 			} else {
 
 				$( document ).on( 'click', selector, function( event ) {
+
+					// console.log( isTouch );
 
 					if ( event.target.parentNode.className === 'slide current' ) {
 
@@ -181,7 +184,7 @@
 				$this.setDim();
 				$this.actions();
 				
-				if ( isMobile ) {
+				if ( isTouch ) {
 					$this.gesture();
 				} else {
 					$this.keyboard();
@@ -401,7 +404,7 @@
 					}
 				} );
 
-				if ( ! isMobile ) {
+				if ( ! isTouch ) {
 
 					$( '#swipebox-action' ).hover( function() {
 						$this.showBars();
@@ -448,7 +451,7 @@
 			actions : function () {
 				var $this = this;
 
-				var action = isMobile ? 'touchend' : 'click';
+				var action = isTouch ? 'touchend' : 'click';
 				
 				if ( elements.length < 2 ) {
 					
@@ -511,7 +514,7 @@
 			 */
 			openSlide : function ( index ) {
 				$( 'html' ).addClass( 'swipebox-html' );
-				if ( isMobile ) {
+				if ( isTouch ) {
 					$( 'html' ).addClass( 'swipebox-touch' );
 				}
 				$( window ).trigger( 'resize' ); // fix scroll bar visibility on desktop
