@@ -412,7 +412,6 @@
 						$this.clearTimeout();
 					
 						}, function() { 
-							bars.removeClass( 'visible-bars' );
 							$this.setTimeout();
 
 					} );
