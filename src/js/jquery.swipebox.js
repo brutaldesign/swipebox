@@ -8,6 +8,7 @@
 		var defaults = {
 			useCSS : true,
 			initialIndexOnArray : 0,
+			closeBySwipe: true,
 			hideBarsDelay : 3000,
 			videoMaxWidth : 1140,
 			vimeoColor : 'CCCCCC',
@@ -273,10 +274,15 @@
 				
 				var $this = this,
 				distance = null,
+				vDistance = null,
+				vSwipe = false,
 				swipMinDistance = 10,
+				vSwipMinDistance = 50,
 				startCoords = {},
 				endCoords = {};
-				var bars = $( '#swipebox-caption, #swipebox-action' );
+
+				var bars = $('#swipebox-caption, #swipebox-action');
+				var slider = $('#swipebox-slider');
 
 				bars.addClass( 'visible-bars' );
 				$this.setTimeout();
@@ -287,11 +293,24 @@
 
 					endCoords = event.originalEvent.targetTouches[0];
 					startCoords.pageX = event.originalEvent.targetTouches[0].pageX;
+					startCoords.pageY = event.originalEvent.targetTouches[0].pageY;
 
 					$( '.touching' ).bind( 'touchmove',function( event ) {
 						event.preventDefault();
 						event.stopPropagation();
 						endCoords = event.originalEvent.targetTouches[0];
+
+						if (plugin.settings.closeBySwipe) {
+							vDistance = endCoords.pageY - startCoords.pageY;
+							if (Math.abs(vDistance) >= vSwipMinDistance || vSwipe) {
+								var opacity = 0.75 - Math.abs(vDistance) / slider.height();
+
+								slider.css({ 'top': vDistance + 'px' });
+								slider.css({ 'opacity': opacity });
+
+								vSwipe = true;
+							}
+						}
 
 					} );
 	
@@ -300,6 +319,22 @@
 				} ).bind( 'touchend',function( event ) {
 					event.preventDefault();
 					event.stopPropagation();
+
+					if (plugin.settings.closeBySwipe) {
+						if (slider.css("opacity") <= 0.5) {
+							var vOffset = vDistance > 0 ? slider.height() : -slider.height();
+							slider.animate({ top: vOffset + 'px', 'opacity': 0 }, 300, function () {
+								$this.closeSlide();
+							});
+						} else {
+							slider.animate({ top: 0, 'opacity': 1 }, 300);
+						}
+
+						if (vSwipe) {
+							vSwipe = false;
+							return;
+						}
+					}
 				
 					distance = endCoords.pageX - startCoords.pageX;
 						
