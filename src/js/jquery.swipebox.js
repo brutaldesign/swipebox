@@ -125,6 +125,9 @@
 			 * Initiate Swipebox
 			 */
 			init : function( index ) {
+				if ($.swipebox.preventReopenFlag) {
+					return;
+				}
 				if ( plugin.settings.beforeOpen ) 
 					plugin.settings.beforeOpen();
 				this.target.trigger( 'swipebox-start' );
@@ -677,6 +680,12 @@
 				$( 'html' ).removeClass( 'swipebox-touch' );
 				$( window ).trigger( 'resize' );
 				this.destroy();
+
+				//prevent immediate reopen in native android browser
+				$.swipebox.preventReopenFlag = true;
+				window.setTimeout(function () {
+					$.swipebox.preventReopenFlag = false;
+				}, 500);
 			},
 
 			/**
