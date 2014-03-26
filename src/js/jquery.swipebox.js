@@ -17,6 +17,7 @@
 		
 		plugin = this,
 		elements = [], // slides array [ { href:'...', title:'...' }, ...],
+		$elem,
 		selector = elem.selector,
 		$selector = $( selector ),
 		isMobile = navigator.userAgent.match( /(iPad)|(iPhone)|(iPod)|(Android)|(PlayBook)|(BB10)|(BlackBerry)|(Opera Mini)|(IEMobile)|(webOS)|(MeeGo)/i ),
@@ -68,9 +69,14 @@
 					elements = [];
 					var index , relType, relVal;
 
+					// Allow for HTML5 compliant attribute before legacy use of rel
+					if ( ! relVal ) {
+						relType = 'data-rel';
+						relVal  = $( this ).attr( relType );
+					}
 					if ( ! relVal ) {
 						relType = 'rel';
-						relVal  = $( this ).attr( relType );
+						relVal = $( this ).attr( relType );
 					}
 
 					if ( relVal && relVal !== '' && relVal !== 'nofollow' ) {
@@ -105,17 +111,6 @@
 					ui.target = $( event.target );
 					ui.init( index );
 				} );
-			}
-		};
-
-		/**
-		 * Refresh method
-		 */
-		plugin.refresh = function() {
-			if ( ! $.isArray( elem ) ) {
-				ui.destroy();
-				$elem = $( selector );
-				ui.actions();
 			}
 		};
 
@@ -186,9 +181,9 @@
 				
 				if ( isTouch ) {
 					$this.gesture();
-				} else {
-					$this.keyboard();
 				}
+				// Devices can have both touch and keyboard input so always allow key events
+				$this.keyboard();
 				
 				$this.animBars();
 				$this.resize();
@@ -404,19 +399,15 @@
 					}
 				} );
 
-				if ( ! isTouch ) {
-
-					$( '#swipebox-action' ).hover( function() {
-						$this.showBars();
-						bars.addClass( 'visible-bars' );
-						$this.clearTimeout();
+				// touch devices can also have mouse/pointers
+				$( '#swipebox-action' ).hover( function() {
+					$this.showBars();
+					bars.addClass( 'visible-bars' );
+					$this.clearTimeout();
 					
-						}, function() { 
-							$this.setTimeout();
-
+					}, function() { 
+						$this.setTimeout();
 					} );
-
-				}
 			},
 
 			/**
@@ -450,7 +441,8 @@
 			actions : function () {
 				var $this = this;
 
-				var action = isTouch ? 'touchend' : 'click';
+				// Just detect for both event types to allow for multi-input
+				var action = 'touchend click';
 				
 				if ( elements.length < 2 ) {
 					
@@ -473,6 +465,8 @@
 				}
 
 				$( '#swipebox-close' ).bind( action, function() {
+					event.preventDefault();
+					event.stopPropagation();
 					$this.closeSlide();
 				} );
 			},
