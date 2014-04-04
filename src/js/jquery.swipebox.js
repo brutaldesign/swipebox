@@ -1,4 +1,4 @@
-/*! Swipebox v1.2.7 | Constantin Saguin csag.co | MIT License | github.com/brutaldesign/swipebox */
+/*! Swipebox v1.2.8 | Constantin Saguin csag.co | MIT License | github.com/brutaldesign/swipebox */
 
 ;( function ( window, document, $, undefined ) {
 
@@ -7,6 +7,7 @@
 		// Default options
 		var defaults = {
 			useCSS : true,
+			useSVG : true,
 			initialIndexOnArray : 0,
 			hideBarsDelay : 3000,
 			videoMaxWidth : 1140,
@@ -17,6 +18,7 @@
 		
 		plugin = this,
 		elements = [], // slides array [ { href:'...', title:'...' }, ...],
+		$elem,
 		selector = elem.selector,
 		$selector = $( selector ),
 		isMobile = navigator.userAgent.match( /(iPad)|(iPhone)|(iPod)|(Android)|(PlayBook)|(BB10)|(BlackBerry)|(Opera Mini)|(IEMobile)|(webOS)|(MeeGo)/i ),
@@ -68,9 +70,15 @@
 					elements = [];
 					var index , relType, relVal;
 
+					// Allow for HTML5 compliant attribute before legacy use of rel
+					if ( ! relVal ) {
+						relType = 'data-rel';
+						relVal  = $( this ).attr( relType );
+					}
+
 					if ( ! relVal ) {
 						relType = 'rel';
-						relVal  = $( this ).attr( relType );
+						relVal = $( this ).attr( relType );
 					}
 
 					if ( relVal && relVal !== '' && relVal !== 'nofollow' ) {
@@ -169,7 +177,7 @@
 				}
 
 
-				if ( supportSVG ) {
+				if ( supportSVG && plugin.settings.useSVG === true ) {
 					var bg = $( '#swipebox-action #swipebox-close' ).css( 'background-image' );
 					bg = bg.replace( 'png', 'svg' );
 					$( '#swipebox-action #swipebox-prev,#swipebox-action #swipebox-next,#swipebox-action #swipebox-close' ).css( {
@@ -186,9 +194,10 @@
 				
 				if ( isTouch ) {
 					$this.gesture();
-				} else {
-					$this.keyboard();
 				}
+				
+				// Devices can have both touch and keyboard input so always allow key events
+				$this.keyboard();
 				
 				$this.animBars();
 				$this.resize();
@@ -283,7 +292,7 @@
 
 				$( 'body' ).bind( 'touchstart', function( event ) {
 
-					$(this).addClass( 'touching' );
+					$( this ).addClass( 'touching' );
 
 					endCoords = event.originalEvent.targetTouches[0];
 					startCoords.pageX = event.originalEvent.targetTouches[0].pageX;
@@ -404,20 +413,17 @@
 					}
 				} );
 
-				if ( ! isTouch ) {
-
-					$( '#swipebox-action' ).hover( function() {
-						$this.showBars();
-						bars.addClass( 'visible-bars' );
-						$this.clearTimeout();
-					
-						}, function() { 
-							bars.removeClass( 'visible-bars' );
-							$this.setTimeout();
+				$( '#swipebox-action' ).hover( function() {
+					$this.showBars();
+					bars.addClass( 'visible-bars' );
+					$this.clearTimeout();
+				
+					}, function() { 
+						bars.removeClass( 'visible-bars' );
+						$this.setTimeout();
 
 					} );
 
-				}
 			},
 
 			/**
@@ -451,7 +457,8 @@
 			actions : function () {
 				var $this = this;
 
-				var action = isTouch ? 'touchend' : 'click';
+				// Just detect for both event types to allow for multi-input
+				var action = 'touchend click';
 				
 				if ( elements.length < 2 ) {
 					

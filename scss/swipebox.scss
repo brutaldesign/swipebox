@@ -1,14 +1,23 @@
-/*! Swipebox v1.2.6 | Constantin Saguin csag.co | MIT License | github.com/brutaldesign/swipebox */
+/*! Swipebox v1.2.8 | Constantin Saguin csag.co | MIT License | github.com/brutaldesign/swipebox */
 
-@import "compass";
-@import "compass/css3/user-interface";
+// Gradient mixin
+@mixin css-gradient($from: #dfdfdf, $to: #f8f8f8) {
+	background-color: $from;
+	background-image: -webkit-gradient(linear, left top, left bottom, from($from), to($to));
+	background-image: -webkit-linear-gradient(top, $from, $to);
+	background-image: -moz-linear-gradient(top, $from, $to);
+	background-image: -o-linear-gradient(top, $from, $to);
+	background-image: linear-gradient(to bottom, $from, $to);
+}
+
+// Bar mixin
 @mixin bar($color) {
 	background-color:$color;
-	@include background-image(linear-gradient(  $color, darken($color, 20%))); 
+	@include css-gradient( $color, darken($color, 20%) ); 
 }
 
 html.swipebox-html.swipebox-touch {
-  overflow: hidden!important;
+	overflow: hidden!important;
 }
 
 #swipebox-overlay img {
@@ -23,7 +32,7 @@ html.swipebox-html.swipebox-touch {
 	left: 0;
 	z-index: 99999!important;
 	overflow: hidden;
-	@include user-select(none);
+	user-select: none;
 }
 
 #swipebox-slider {
@@ -36,7 +45,7 @@ html.swipebox-html.swipebox-touch {
 	display: none;
 	
 	.slide {
-		background: url("../img/loader.gif") no-repeat center center;
+		background: url(../img/loader.gif) no-repeat center center;
 		height: 100%;
 		width: 100%;
 		line-height: 1px;
@@ -103,13 +112,16 @@ html.swipebox-html.swipebox-touch {
 	bottom: -50px;
 
 	&.visible-bars {
-		@include translateY(-50px);
+		-moz-transform: translateY(-50px);
+		-ms-transform: translateY(-50px);
+		-webkit-transform: translateY(-50px);
+		transform: translateY(-50px);
 	}
 
 	#swipebox-prev, 
 	#swipebox-next, 
 	#swipebox-close {
-		background-image: url("../img/icons.png");
+		background-image: url(../img/icons.png);
 		background-repeat: no-repeat;
 		border: none!important;
 		text-decoration: none!important;
@@ -141,8 +153,6 @@ html.swipebox-html.swipebox-touch {
 			opacity: 0.3;
 		}
 	}
-
-	
 }
 
 #swipebox-caption {
@@ -150,21 +160,22 @@ html.swipebox-html.swipebox-touch {
 	text-align: center;
 	
 	&.visible-bars {
-		@include translateY(50px);
+		-moz-transform: translateY(50px);
+		-ms-transform: translateY(50px);
+		-webkit-transform: translateY(50px);
+		transform: translateY(50px);
 	}
 }
 
 #swipebox-slider.rightSpring {
-	-moz-animation: rightSpring 0.3s;
-	-webkit-animation: rightSpring 0.3s;
+	animation : rightSpring 0.3s;
 }
 
 #swipebox-slider.leftSpring {
-	-moz-animation: leftSpring 0.3s;
-	-webkit-animation: leftSpring 0.3s;
+	animation : leftSpring 0.3s;
 }
 
-@-moz-keyframes rightSpring {
+@keyframes rightSpring {
 	0% {
 		margin-left: 0px;
 	}
@@ -178,35 +189,7 @@ html.swipebox-html.swipebox-touch {
 	}
 }
 
-@-moz-keyframes leftSpring {
-	0% {
-		margin-left: 0px;
-	}
-
-	50% {
-		margin-left: 30px;
-	}
-
-	100% {
-		margin-left: 0px;
-	}
-}
-
-@-webkit-keyframes rightSpring {
-	0% {
-		margin-left: 0px;
-	}
-
-	50% {
-		margin-left: -30px;
-	}
-
-	100% {
-		margin-left: 0px;
-	}
-}
-
-@-webkit-keyframes leftSpring {
+@keyframes leftSpring {
 	0% {
 		margin-left: 0px;
 	}
