@@ -35,7 +35,8 @@
 					<a id="swipebox-prev"></a>\
 					<a id="swipebox-next"></a>\
 				</div>\
-		</div>';
+		</div>',
+		$elem;
 
 		plugin.settings = {};
 
