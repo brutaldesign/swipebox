@@ -642,7 +642,7 @@
 			 */
 			getNext : function () {
 				var $this = this;
-				index = $( '#swipebox-slider .slide' ).index( $( '#swipebox-slider .slide.current' ) );
+				var index = $( '#swipebox-slider .slide' ).index( $( '#swipebox-slider .slide.current' ) );
 				if ( index+1 < elements.length ) {
 					index++;
 					$this.setSlide( index );
@@ -661,7 +661,7 @@
 			 * Get previous slide
 			 */
 			getPrev : function () {
-				index = $( '#swipebox-slider .slide' ).index( $( '#swipebox-slider .slide.current' ) );
+				var index = $( '#swipebox-slider .slide' ).index( $( '#swipebox-slider .slide.current' ) );
 				if ( index > 0 ) {
 					index--;
 					this.setSlide( index );
