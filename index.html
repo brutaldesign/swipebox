@@ -214,11 +214,12 @@ $( '#gallery' ).click( function( e ) {
 				<h3>Options</h3>
 <pre>
 &lt;script type="text/javascript"&gt;
-	;( function( $ ) {
+;( function( $ ) {
 
 	$( '.swipebox' ).swipebox( {
 		useCSS : true, <span>// false will force the use of jQuery for animations</span>
 		useSVG : true, <span>// false to force the use of png for buttons</span>
+		hideBarsOnMobile : true, <span>// false will show the caption and navbar on mobile devices</span>
 		hideBarsDelay : 3000, <span>// delay before hiding bars</span>
 		videoMaxWidth : 1140, <span>// videos max width</span>
 		beforeOpen: function() {}, <span>// called before opening</span>

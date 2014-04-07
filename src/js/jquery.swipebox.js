@@ -1,42 +1,45 @@
-/*! Swipebox v1.2.8 | Constantin Saguin csag.co | MIT License | github.com/brutaldesign/swipebox */
+/*! Swipebox v1.2.9 | Constantin Saguin csag.co | MIT License | github.com/brutaldesign/swipebox */
 
 ;( function ( window, document, $, undefined ) {
 
 	$.swipebox = function( elem, options ) {
 
 		// Default options
-		var defaults = {
-			useCSS : true,
-			useSVG : true,
-			initialIndexOnArray : 0,
-			closeBySwipe: true,
-			hideBarsDelay : 3000,
-			videoMaxWidth : 1140,
-			vimeoColor : 'CCCCCC',
-			beforeOpen: null,
-			afterClose: null
-		},
-		
-		plugin = this,
-		elements = [], // slides array [ { href:'...', title:'...' }, ...],
-		$elem,
-		selector = elem.selector,
-		$selector = $( selector ),
-		isMobile = navigator.userAgent.match( /(iPad)|(iPhone)|(iPod)|(Android)|(PlayBook)|(BB10)|(BlackBerry)|(Opera Mini)|(IEMobile)|(webOS)|(MeeGo)/i ),
-		isTouch = isMobile !== null || document.createTouch !== undefined || ( 'ontouchstart' in window ) || ( 'onmsgesturechange' in window ) || navigator.msMaxTouchPoints,
-		supportSVG = !! document.createElementNS && !! document.createElementNS( 'http://www.w3.org/2000/svg', "svg").createSVGRect,
-		winWidth = window.innerWidth ? window.innerWidth : $( window ).width(),
-		winHeight = window.innerHeight ? window.innerHeight : $( window ).height(),
-		/* jshint multistr: true */
-		html = '<div id="swipebox-overlay">\
-				<div id="swipebox-slider"></div>\
-				<div id="swipebox-caption"></div>\
-				<div id="swipebox-action">\
-					<a id="swipebox-close"></a>\
-					<a id="swipebox-prev"></a>\
-					<a id="swipebox-next"></a>\
-				</div>\
-		</div>';
+		var ui,
+			defaults = {
+				useCSS : true,
+				useSVG : true,
+				initialIndexOnArray : 0,
+				closeBySwipe: true,
+				hideBarsOnMobile : true,
+				hideBarsDelay : 3000,
+				videoMaxWidth : 1140,
+				vimeoColor : 'CCCCCC',
+				beforeOpen: null,
+				afterOpen: null,
+				afterClose: null
+			},
+			
+			plugin = this,
+			elements = [], // slides array [ { href:'...', title:'...' }, ...],
+			$elem,
+			selector = elem.selector,
+			$selector = $( selector ),
+			isMobile = navigator.userAgent.match( /(iPad)|(iPhone)|(iPod)|(Android)|(PlayBook)|(BB10)|(BlackBerry)|(Opera Mini)|(IEMobile)|(webOS)|(MeeGo)/i ),
+			isTouch = isMobile !== null || document.createTouch !== undefined || ( 'ontouchstart' in window ) || ( 'onmsgesturechange' in window ) || navigator.msMaxTouchPoints,
+			supportSVG = !! document.createElementNS && !! document.createElementNS( 'http://www.w3.org/2000/svg', 'svg').createSVGRect,
+			winWidth = window.innerWidth ? window.innerWidth : $( window ).width(),
+			winHeight = window.innerHeight ? window.innerHeight : $( window ).height(),
+			/* jshint multistr: true */
+			html = '<div id="swipebox-overlay">\
+					<div id="swipebox-slider"></div>\
+					<div id="swipebox-caption"></div>\
+					<div id="swipebox-action">\
+						<a id="swipebox-close"></a>\
+						<a id="swipebox-prev"></a>\
+						<a id="swipebox-next"></a>\
+					</div>\
+			</div>';
 
 		plugin.settings = {};
 
@@ -90,7 +93,7 @@
 
 					$elem.each( function() {
 
-						var title = null, 
+						var title = null,
 							href = null;
 						
 						if ( $( this ).attr( 'title' ) ) {
@@ -117,25 +120,15 @@
 			}
 		};
 
-		/**
-		 * Refresh method
-		 */
-		plugin.refresh = function() {
-			if ( ! $.isArray( elem ) ) {
-				ui.destroy();
-				$elem = $( selector );
-				ui.actions();
-			}
-		};
-
-		var ui = {
+		ui = {
 
 			/**
 			 * Initiate Swipebox
 			 */
 			init : function( index ) {
-				if ( plugin.settings.beforeOpen ) 
+				if ( plugin.settings.beforeOpen ) {
 					plugin.settings.beforeOpen();
+				}
 				this.target.trigger( 'swipebox-start' );
 				$.swipebox.isOpen = true;
 				this.build();
@@ -143,13 +136,16 @@
 				this.openMedia( index );
 				this.preloadMedia( index+1 );
 				this.preloadMedia( index-1 );
+				if ( plugin.settings.afterOpen ) {
+					plugin.settings.afterOpen();
+				}
 			},
 
 			/**
 			 * Built HTML containers and fire main functions
 			 */
 			build : function () {
-				var $this = this;
+				var $this = this, bg;
 
 				$( 'body' ).append( html );
 								
@@ -177,13 +173,16 @@
 					} );
 				}
 
-
 				if ( supportSVG && plugin.settings.useSVG === true ) {
-					var bg = $( '#swipebox-action #swipebox-close' ).css( 'background-image' );
+					bg = $( '#swipebox-action #swipebox-close' ).css( 'background-image' );
 					bg = bg.replace( 'png', 'svg' );
 					$( '#swipebox-action #swipebox-prev,#swipebox-action #swipebox-next,#swipebox-action #swipebox-close' ).css( {
 						'background-image' : bg
 					} );
+				}
+
+				if ( isMobile && plugin.settings.hideBarsOnMobile === true ) {
+					$( '#swipebox-action, #swipebox-caption' ).hide();
 				}
 				
 				$.each( elements,  function() {
@@ -213,9 +212,9 @@
 				var width, height, sliderCss = {};
 				
 				// Reset dimensions on mobile orientation change
-				if ( "onorientationchange" in window ) {
+				if ( 'onorientationchange' in window ) {
 
-					window.addEventListener( "orientationchange", function() {
+					window.addEventListener( 'orientationchange', function() {
 						if ( window.orientation === 0 ) {
 							width = winWidth;
 							height = winHeight;
@@ -257,9 +256,10 @@
 			 */
 			supportTransition : function () {
 				
-				var prefixes = 'transition WebkitTransition MozTransition OTransition msTransition KhtmlTransition'.split( ' ' );
+				var prefixes = 'transition WebkitTransition MozTransition OTransition msTransition KhtmlTransition'.split( ' ' ),
+					i;
 				
-				for ( var i = 0; i < prefixes.length; i++ ) {
+				for ( i = 0; i < prefixes.length; i++ ) {
 					if ( document.createElement( 'div' ).style[ prefixes[i] ] !== undefined ) {
 						return prefixes[i];
 					}
@@ -282,16 +282,16 @@
 			gesture : function () {
 				
 				var $this = this,
-				distance = null,
-				vDistance = null,
-				vSwipe = false,
-				swipMinDistance = 10,
-				vSwipMinDistance = 50,
-				startCoords = {},
-				endCoords = {};
+					distance = null,
+					vDistance = null,
+					vSwipe = false,
+					swipMinDistance = 10,
+					vSwipMinDistance = 50,
+					startCoords = {},
+					endCoords = {},
 
-				var bars = $('#swipebox-caption, #swipebox-action');
-				var slider = $('#swipebox-slider');
+					bars = $( '#swipebox-caption, #swipebox-action' ),
+					slider = $( '#swipebox-slider' );
 
 				bars.addClass( 'visible-bars' );
 				$this.setTimeout();
@@ -309,13 +309,13 @@
 						event.stopPropagation();
 						endCoords = event.originalEvent.targetTouches[0];
 
-						if (plugin.settings.closeBySwipe) {
+						if ( plugin.settings.closeBySwipe ) {
 							vDistance = endCoords.pageY - startCoords.pageY;
-							if (Math.abs(vDistance) >= vSwipMinDistance || vSwipe) {
+							if ( Math.abs( vDistance ) >= vSwipMinDistance || vSwipe ) {
 								var opacity = 0.75 - Math.abs(vDistance) / slider.height();
 
-								slider.css({ 'top': vDistance + 'px' });
-								slider.css({ 'opacity': opacity });
+								slider.css( { 'top': vDistance + 'px' } );
+								slider.css( { 'opacity': opacity } );
 
 								vSwipe = true;
 							}
@@ -329,17 +329,19 @@
 					event.preventDefault();
 					event.stopPropagation();
 
-					if (plugin.settings.closeBySwipe) {
-						if (slider.css("opacity") <= 0.5) {
-							var vOffset = vDistance > 0 ? slider.height() : -slider.height();
-							slider.animate({ top: vOffset + 'px', 'opacity': 0 }, 300, function () {
-								$this.closeSlide();
-							});
+					if ( plugin.settings.closeBySwipe ) {
+						if ( slider.css( 'opacity' ) <= 0.5) {
+							var vOffset = vDistance > 0 ? slider.height() : - slider.height();
+							slider.animate( { top: vOffset + 'px', 'opacity': 0 },
+								300,
+								function () {
+									$this.closeSlide();
+								} );
 						} else {
-							slider.animate({ top: 0, 'opacity': 1 }, 300);
+							slider.animate( { top: 0, 'opacity': 1 }, 300 );
 						}
 
-						if (vSwipe) {
+						if ( vSwipe ) {
 							vSwipe = false;
 							return;
 						}
@@ -366,8 +368,7 @@
 							$this.clearTimeout();
 							$this.hideBars();
 						}
-
-					}	
+					}
 
 					$( '.touching' ).off( 'touchmove' ).removeClass( 'touching' );
 						
@@ -383,7 +384,7 @@
 					var $this = this;
 					$this.clearTimeout();
 					$this.timeout = window.setTimeout( function() {
-							$this.hideBars(); 
+							$this.hideBars();
 						},
 						
 						plugin.settings.hideBarsDelay
@@ -394,7 +395,7 @@
 			/**
 			 * Clear timer
 			 */
-			clearTimeout: function () {	
+			clearTimeout: function () {
 				window.clearTimeout( this.timeout );
 				this.timeout = null;
 			},
@@ -435,8 +436,8 @@
 			 * Animate navigation and top bars
 			 */
 			animBars : function () {
-				var $this = this;
-				var bars = $( '#swipebox-caption, #swipebox-action' );
+				var $this = this,
+					bars = $( '#swipebox-caption, #swipebox-action' );
 					
 				bars.addClass( 'visible-bars' );
 				$this.setTimeout();
@@ -453,7 +454,7 @@
 					bars.addClass( 'visible-bars' );
 					$this.clearTimeout();
 				
-					}, function() { 
+					}, function() {
 						bars.removeClass( 'visible-bars' );
 						$this.setTimeout();
 
@@ -490,10 +491,8 @@
 			 * Navigation events : go to next slide, go to prevous slide and close
 			 */
 			actions : function () {
-				var $this = this;
-
-				// Just detect for both event types to allow for multi-input
-				var action = 'touchend click';
+				var $this = this,
+					action = 'touchend click'; // Just detect for both event types to allow for multi-input
 				
 				if ( elements.length < 2 ) {
 					
@@ -567,11 +566,12 @@
 			 * Set a time out if the media is a video
 			 */
 			preloadMedia : function ( index ) {
-				var $this = this, 
-				src = null;
+				var $this = this,
+					src = null;
 
-				if ( elements[index] !== undefined )
+				if ( elements[index] !== undefined ) {
 					src = elements[index].href;
+				}
 
 				if ( ! $this.isVideo( src ) ) {
 					setTimeout( function() {
@@ -586,11 +586,12 @@
 			 * Open
 			 */
 			openMedia : function ( index ) {
-				var $this = this, 
+				var $this = this,
 					src = null;
 
-				if ( elements[index] !== undefined )
+				if ( elements[index] !== undefined ) {
 					src = elements[index].href;
+				}
 
 				if (index < 0 || index >= elements.length) {
 					return false;
@@ -609,14 +610,15 @@
 			/**
 			 * Set link title attribute as caption
 			 */
-			setTitle : function ( index, isFirst ) {
+			setTitle : function ( index ) {
 				var title = null;
 
 				$( '#swipebox-caption' ).empty();
 
-				if ( elements[index] !== undefined )
+				if ( elements[index] !== undefined ) {
 					title = elements[index].title;
-				
+				}
+
 				if ( title ) {
 					$( '#swipebox-caption' ).append( title );
 				}
@@ -639,11 +641,10 @@
 			 * Get video iframe code from URL
 			 */
 			getVideo : function( url ) {
-				var iframe = '';
-				var output = '';
-				var youtubeUrl = url.match( /watch\?v=([a-zA-Z0-9\-_]+)/ );
-				var youtubeShortUrl = url.match(/youtu\.be\/([a-zA-Z0-9\-_]+)/);
-				var vimeoUrl = url.match( /vimeo\.com\/([0-9]*)/ );
+				var iframe = '',
+					youtubeUrl = url.match( /watch\?v=([a-zA-Z0-9\-_]+)/ ),
+					youtubeShortUrl = url.match(/youtu\.be\/([a-zA-Z0-9\-_]+)/),
+					vimeoUrl = url.match( /vimeo\.com\/([0-9]*)/ );
 				if ( youtubeUrl || youtubeShortUrl) {
 					if ( youtubeShortUrl ) {
 						youtubeUrl = youtubeShortUrl;
@@ -667,17 +668,17 @@
 					var img = $( '<img>' ).on( 'load', function() {
 						callback.call( img );
 					} );
-					
+
 					img.attr( 'src', src );
-				}	
+				}
 			},
 			
 			/**
 			 * Get next slide
 			 */
 			getNext : function () {
-				var $this = this;
-				var index = $( '#swipebox-slider .slide' ).index( $( '#swipebox-slider .slide.current' ) );
+				var $this = this,
+					index = $( '#swipebox-slider .slide' ).index( $( '#swipebox-slider .slide.current' ) );
 				if ( index+1 < elements.length ) {
 					index++;
 					$this.setSlide( index );
@@ -701,8 +702,7 @@
 					index--;
 					this.setSlide( index );
 					this.preloadMedia( index-1 );
-				}
-				else {
+				} else {
 					
 					$( '#swipebox-slider' ).addClass( 'leftSpring' );
 					setTimeout( function() {
@@ -731,15 +731,21 @@
 				$( 'body' ).unbind( 'touchend' );
 				$( '#swipebox-slider' ).unbind();
 				$( '#swipebox-overlay' ).remove();
-				if ( ! $.isArray( elem ) )
+				
+				if ( ! $.isArray( elem ) ) {
 					elem.removeData( '_swipebox' );
-				if ( this.target )
+				}
+					
+				if ( this.target ) {
 					this.target.trigger( 'swipebox-destroy' );
+				}
+					
 				$.swipebox.isOpen = false;
-				if ( plugin.settings.afterClose ) 
+				
+				if ( plugin.settings.afterClose ){
 					plugin.settings.afterClose();
+				}
 			}
-
 		};
 
 		plugin.init();

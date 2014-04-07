@@ -61,6 +61,7 @@ $( '.swipebox' ).swipebox();
 ```javascript
 useCSS : true, // false will force the use of jQuery for animations
 initialIndexOnArray: 0, // which image index to init when a array is passed
+hideBarsOnMobile : true, // false will show the caption and navbar on mobile devices
 hideBarsDelay : 3000, // 0 to always show caption and action bar
 videoMaxWidth : 1140, // videos max width
 beforeOpen: function(){} , // called before opening
