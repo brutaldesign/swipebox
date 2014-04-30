@@ -29,6 +29,7 @@ html.swipebox-html.swipebox-touch {
   white-space: nowrap;
   position: absolute;
   display: none;
+  cursor: pointer;
 }
 #swipebox-slider .slide {
   background: url(../img/loader.gif) no-repeat center center;
