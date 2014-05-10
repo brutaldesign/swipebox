@@ -597,12 +597,16 @@
 					return false;
 				}
 
+				var slide = $( '#swipebox-slider .slide' ).eq( index );
+
 				if ( ! $this.isVideo( src ) ) {
+					slide.addClass( 'slide-loading' );
 					$this.loadMedia( src, function() {
-						$( '#swipebox-slider .slide' ).eq( index ).html( this );
+						slide.removeClass( 'slide-loading' );
+						slide.html( this );
 					} );
 				} else {
-					$( '#swipebox-slider .slide' ).eq( index ).html( $this.getVideo( src ) );
+					slide.html( $this.getVideo( src ) );
 				}
 				
 			},

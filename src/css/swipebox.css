@@ -31,12 +31,14 @@ html.swipebox-html.swipebox-touch {
   display: none;
 }
 #swipebox-slider .slide {
-  background: url(../img/loader.gif) no-repeat center center;
   height: 100%;
   width: 100%;
   line-height: 1px;
   text-align: center;
   display: inline-block;
+}
+#swipebox-slider .slide-loading {
+  background: url(./loader.gif) no-repeat center center;
 }
 #swipebox-slider .slide:before {
   content: "";
