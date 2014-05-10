@@ -98,6 +98,8 @@
 						
 						if ( $( this ).attr( 'title' ) ) {
 							title = $( this ).attr( 'title' );
+						} else if ( $( this ).find( 'img' ).attr( 'alt' ) ) {
+							title = $( this ).find( 'img' ).attr( 'alt' );
 						}
 							
 
