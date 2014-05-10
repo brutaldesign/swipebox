@@ -519,6 +519,10 @@
 				$( '#swipebox-close' ).bind( action, function() {
 					$this.closeSlide();
 				} );
+				
+				$( '#swipebox-overlay' ).click( function() {
+					$this.closeSlide();
+				} );
 			},
 			
 			/**
@@ -670,8 +674,16 @@
 			 * Load image
 			 */
 			loadMedia : function ( src, callback ) {
+				var $this = this;
+				
 				if ( ! this.isVideo( src ) ) {
 					var img = $( '<img>' ).on( 'load', function() {
+					
+						img.click( function( event ) {
+							event.stopPropagation();
+							$this.getNext();
+						} );
+						
 						callback.call( img );
 					} );
 
