@@ -45,7 +45,6 @@ html.swipebox-html.swipebox-touch {
 	display: none;
 	
 	.slide {
-		background: url(../img/loader.gif) no-repeat center center;
 		height: 100%;
 		width: 100%;
 		line-height: 1px;
@@ -95,6 +94,10 @@ html.swipebox-html.swipebox-touch {
 				}
 			}
 		}
+	}
+	
+	.slide-loading {
+		background: url(../img/loader.gif) no-repeat center center;
 	}
 
 }
