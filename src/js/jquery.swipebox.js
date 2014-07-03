@@ -390,17 +390,9 @@
 					hDistance = endCoords.pageX - startCoords.pageX;
 					hDistancePercent = hDistance*100/winWidth;
 
-					$('#swipebox-slider').css({
-						'-webkit-transform' : 'translateX(' + currentX + '%)',
-						'-moz-transform' : 'translateX(' + currentX + '%)',
-						'-o-transform' : 'translateX(' + currentX + '%)',
-						'-khtml-transform' : 'translateX(' + currentX + '%)',
-						'-ms-transform' : 'translateX(' + currentX + '%)',
-						'transform' : 'translateX(' + currentX + '%)'
-					});
 
 					if ( vSwipe ) {
-						if ( slider.css( 'opacity' ) <= 0.5 && abs(vDistance) >= abs(vDistanceLast)) {
+						if ( slider.css( 'opacity' ) <= 0.5) {
 							var vOffset = vDistance > 0 ? slider.height() : - slider.height();
 							slider.animate( { top: vOffset + 'px', 'opacity': 0 },
 								300,
@@ -417,7 +409,7 @@
 						if( hDistance >= hSwipMinDistance && hDistance >= hDistanceLast) {
 							// swipeLeft
 							$this.getPrev();
-						} else if ( hDistance <= - hSwipMinDistance && hDistance <= hDistanceLast) {
+						} else if ( hDistance <= -hSwipMinDistance && hDistance <= hDistanceLast) {
 							// swipeRight
 							$this.getNext();
 						}
@@ -432,6 +424,15 @@
 							$this.hideBars();
 						}
 					}
+
+					$('#swipebox-slider').css({
+						'-webkit-transform' : 'translateX(' + currentX + '%)',
+						'-moz-transform' : 'translateX(' + currentX + '%)',
+						'-o-transform' : 'translateX(' + currentX + '%)',
+						'-khtml-transform' : 'translateX(' + currentX + '%)',
+						'-ms-transform' : 'translateX(' + currentX + '%)',
+						'transform' : 'translateX(' + currentX + '%)'
+					});
 
 					$( '.touching' ).off( 'touchmove' ).removeClass( 'touching' );
 						
