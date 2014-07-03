@@ -307,6 +307,9 @@
 
 					$( this ).addClass( 'touching' );
 
+					vSwipe = false;
+					hSwipe = false;
+
 					endCoords = event.originalEvent.targetTouches[0];
 					startCoords.pageX = event.originalEvent.targetTouches[0].pageX;
 					startCoords.pageY = event.originalEvent.targetTouches[0].pageY;
@@ -401,7 +404,6 @@
 							slider.animate( { top: 0, 'opacity': 1 }, 300 );
 						}
 
-						return;
 					} else if ( hSwipe ) {
 						hSwipe = false;
 						if( hDistance >= hSwipMinDistance && hDistance >= hDistanceLast) {
