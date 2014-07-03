@@ -326,6 +326,7 @@
 						endCoords = event.originalEvent.targetTouches[0];
 
 						if ( !hSwipe && plugin.settings.closeBySwipe ) {
+							vDistanceLast = vDistance;
 							vDistance = endCoords.pageY - startCoords.pageY;
 							if ( Math.abs( vDistance ) >= vSwipMinDistance || vSwipe ) {
 								var opacity = 0.75 - Math.abs(vDistance) / slider.height();
@@ -337,6 +338,7 @@
 							}
 						}
 
+						hDistanceLast = hDistance;
 						hDistance = endCoords.pageX - startCoords.pageX;
 						hDistancePercent = hDistance*100/winWidth;
 
@@ -381,12 +383,7 @@
 						'transition' : 'transform 0.4s ease'
 					});
 
-					endCoords = event.originalEvent.targetTouches[0];
-
-					vDistanceLast = vDistance;
 					vDistance = endCoords.pageY - startCoords.pageY;
-
-					hDistanceLast = hDistance;
 					hDistance = endCoords.pageX - startCoords.pageX;
 					hDistancePercent = hDistance*100/winWidth;
 
