@@ -389,7 +389,7 @@
 
 
 					if ( vSwipe ) {
-						if ( slider.css( 'opacity' ) <= 0.5) {
+						if ( slider.css( 'opacity' ) <= 0.5 && Math.abs(vDistance) > Math.abs(vDistanceLast)) {
 							var vOffset = vDistance > 0 ? slider.height() : - slider.height();
 							slider.animate( { top: vOffset + 'px', 'opacity': 0 },
 								300,
@@ -403,10 +403,10 @@
 						vSwipe = false;
 						return;
 					} else if ( hSwipe ) {
-						if( hDistance >= hSwipMinDistance ) {
+						if( hDistance >= hSwipMinDistance && hDistance >= hDistanceLast) {
 							// swipeLeft
 							$this.getPrev();
-						} else if ( hDistance <= -hSwipMinDistance ) {
+						} else if ( hDistance <= -hSwipMinDistance && hDistance <= hDistanceLast) {
 							// swipeRight
 							$this.getNext();
 						}
