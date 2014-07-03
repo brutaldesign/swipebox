@@ -288,6 +288,8 @@
 				var $this = this,
 					hDistance = null,
 					vDistance = null,
+					hDistanceLast = null,
+					vDistanceLast = null,
 					vSwipe = false,
 					hSwipe = false,
 					hSwipMinDistance = 50,
@@ -379,6 +381,12 @@
 						'transition' : 'transform 0.4s ease'
 					});
 
+					endCoords = event.originalEvent.targetTouches[0];
+
+					vDistanceLast = vDistance;
+					vDistance = endCoords.pageY - startCoords.pageY;
+
+					hDistanceLast = hDistance;
 					hDistance = endCoords.pageX - startCoords.pageX;
 					hDistancePercent = hDistance*100/winWidth;
 
@@ -392,7 +400,7 @@
 					});
 
 					if ( vSwipe ) {
-						if ( slider.css( 'opacity' ) <= 0.5) {
+						if ( slider.css( 'opacity' ) <= 0.5 && abs(vDistance) >= abs(vDistanceLast)) {
 							var vOffset = vDistance > 0 ? slider.height() : - slider.height();
 							slider.animate( { top: vOffset + 'px', 'opacity': 0 },
 								300,
@@ -406,10 +414,10 @@
 						vSwipe = false;
 						return;
 					} else if ( hSwipe ) {
-						if( hDistance >= hSwipMinDistance ) {
+						if( hDistance >= hSwipMinDistance && hDistance >= hDistanceLast) {
 							// swipeLeft
 							$this.getPrev();
-						} else if ( hDistance <= - hSwipMinDistance ) {
+						} else if ( hDistance <= - hSwipMinDistance && hDistance <= hDistanceLast) {
 							// swipeRight
 							$this.getNext();
 						}
