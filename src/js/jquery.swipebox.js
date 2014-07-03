@@ -290,7 +290,7 @@
 					vDistance = null,
 					vSwipe = false,
 					hSwipe = false,
-					hSwipMinDistance = 10,
+					hSwipMinDistance = 50,
 					vSwipMinDistance = 50,
 					startCoords = {},
 					endCoords = {},
@@ -405,16 +405,15 @@
 
 						vSwipe = false;
 						return;
-					} else if ( hDistance >= hSwipMinDistance ) {
-						
-						// swipeLeft
-						$this.getPrev();
-					
-					} else if ( hDistance <= - hSwipMinDistance ) {
-						
-						// swipeRight
-						$this.getNext();
-
+					} else if ( hSwipe ) {
+						if( hDistance >= hSwipMinDistance ) {
+							// swipeLeft
+							$this.getPrev();
+						} else if ( hDistance <= - hSwipMinDistance ) {
+							// swipeRight
+							$this.getNext();
+						}
+						hSwipe = false;
 					} else {
 						// tap
 						if ( ! bars.hasClass( 'visible-bars' ) ) {
