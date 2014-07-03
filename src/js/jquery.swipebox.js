@@ -335,7 +335,7 @@
 						}
 
 						hDistance = endCoords.pageX - startCoords.pageX;
-                                                hDistancePercent = hDistance*100/$(window).width();
+                                                hDistancePercent = hDistance*100/winWidth;
 
        						if( hDistance >= hSwipMinDistance || hDistance <= -hSwipMinDistance) {
 							$('#swipebox-slider').css({
@@ -374,6 +374,18 @@
 						'transition' : 'transform 0.4s ease'
 					});
 
+					hDistance = endCoords.pageX - startCoords.pageX;
+					hDistancePercent = hDistance*100/winWidth;
+
+					$('#swipebox-slider').css({
+						'-webkit-transform' : 'translateX(' + currentX + '%)',
+						'-moz-transform' : 'translateX(' + currentX + '%)',
+						'-o-transform' : 'translateX(' + currentX + '%)',
+						'-khtml-transform' : 'translateX(' + currentX + '%)',
+						'-ms-transform' : 'translateX(' + currentX + '%)',
+						'transform' : 'translateX(' + currentX + '%)'
+					});
+
 					if ( plugin.settings.closeBySwipe ) {
 						if ( slider.css( 'opacity' ) <= 0.5) {
 							var vOffset = vDistance > 0 ? slider.height() : - slider.height();
@@ -392,17 +404,6 @@
 						}
 					}
 				
-					hDistance = endCoords.pageX - startCoords.pageX;
-					hDistancePercent = hDistance*100/$(window).width();
-
-					$('#swipebox-slider').css({
-						'-webkit-transform' : 'translateX(' + currentX + '%)',
-						'-moz-transform' : 'translateX(' + currentX + '%)',
-						'-o-transform' : 'translateX(' + currentX + '%)',
-						'-khtml-transform' : 'translateX(' + currentX + '%)',
-						'-ms-transform' : 'translateX(' + currentX + '%)',
-						'transform' : 'translateX(' + currentX + '%)'
-					});
 	
 					if ( hDistance >= hSwipMinDistance ) {
 						
