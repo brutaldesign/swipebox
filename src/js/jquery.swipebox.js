@@ -292,7 +292,7 @@
 					vDistanceLast = null,
 					vSwipe = false,
 					hSwipe = false,
-					hSwipMinDistance = 50,
+					hSwipMinDistance = 10,
 					vSwipMinDistance = 50,
 					startCoords = {},
 					endCoords = {},
