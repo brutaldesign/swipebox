@@ -389,6 +389,7 @@
 
 
 					if ( vSwipe ) {
+						vSwipe = false;
 						if ( Math.abs( vDistance ) >= 2*vSwipMinDistance && Math.abs(vDistance) > Math.abs(vDistanceLast)) {
 							var vOffset = vDistance > 0 ? slider.height() : - slider.height();
 							slider.animate( { top: vOffset + 'px', 'opacity': 0 },
@@ -400,9 +401,9 @@
 							slider.animate( { top: 0, 'opacity': 1 }, 300 );
 						}
 
-						vSwipe = false;
 						return;
 					} else if ( hSwipe ) {
+						hSwipe = false;
 						if( hDistance >= hSwipMinDistance && hDistance >= hDistanceLast) {
 							// swipeLeft
 							$this.getPrev();
@@ -410,7 +411,6 @@
 							// swipeRight
 							$this.getNext();
 						}
-						hSwipe = false;
 					} else {
 						// tap
 						if ( ! bars.hasClass( 'visible-bars' ) ) {
