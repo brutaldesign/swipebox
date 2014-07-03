@@ -406,10 +406,10 @@
 						vSwipe = false;
 						return;
 					} else if ( hSwipe ) {
-						if( hDistance >= hSwipMinDistance && hDistance >= hDistanceLast) {
+						if( hDistance >= hSwipMinDistance ) {
 							// swipeLeft
 							$this.getPrev();
-						} else if ( hDistance <= -hSwipMinDistance && hDistance <= hDistanceLast) {
+						} else if ( hDistance <= -hSwipMinDistance ) {
 							// swipeRight
 							$this.getNext();
 						}
