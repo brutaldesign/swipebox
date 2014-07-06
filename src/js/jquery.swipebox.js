@@ -17,7 +17,8 @@
 				vimeoColor : 'CCCCCC',
 				beforeOpen: null,
 				afterOpen: null,
-				afterClose: null
+				afterClose: null,
+                loopAtEnd: false
 			},
 			
 			plugin = this,
@@ -549,7 +550,7 @@
 				
 				if ( index === 0 ) {
 					$( '#swipebox-prev' ).addClass( 'disabled' );
-				} else if ( index === elements.length - 1 ) {
+				} else if ( index === elements.length - 1 && plugin.settings.loopAtEnd != true) {
 					$( '#swipebox-next' ).addClass( 'disabled' );
 				}
 			},
@@ -689,13 +690,21 @@
 					index++;
 					$this.setSlide( index );
 					$this.preloadMedia( index+1 );
-				
 				} else {
 					
-					$( '#swipebox-slider' ).addClass( 'rightSpring' );
-					setTimeout( function() {
-						$( '#swipebox-slider' ).removeClass( 'rightSpring' );
-					}, 500 );
+                    if (plugin.settings.loopAtEnd === true){
+                      var src = $( '#swipebox-slider .slide' ).eq(index).contents().find("iframe").attr("src");
+                      $( '#swipebox-slider .slide' ).eq(index).contents().find("iframe").attr("src",src);
+                      index = 0;
+                      $this.preloadMedia( index );
+                      $this.setSlide( index );
+                      $this.preloadMedia( index + 1 );
+                    } else {
+					   $( '#swipebox-slider' ).addClass( 'rightSpring' );
+					   setTimeout( function() {
+						  $( '#swipebox-slider' ).removeClass( 'rightSpring' );
+					   }, 500 );
+                    }
 				}
 			},
 			
@@ -711,12 +720,11 @@
 					this.setSlide( index );
 					this.preloadMedia( index-1 );
 				} else {
-					
-					$( '#swipebox-slider' ).addClass( 'leftSpring' );
-					setTimeout( function() {
-						$( '#swipebox-slider' ).removeClass( 'leftSpring' );
-					}, 500 );
-				}
+					   $( '#swipebox-slider' ).addClass( 'leftSpring' );
+					      setTimeout( function() {
+						  $( '#swipebox-slider' ).removeClass( 'leftSpring' );
+					   }, 500 );
+                    }
 			},
 
 			/**
