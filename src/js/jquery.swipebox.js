@@ -44,9 +44,13 @@
 
 		plugin.settings = {};
         
-        plugin.close = function (){
+        $.swipebox.close = function (){
             ui.closeSlide();  
         };
+        
+        $.swipebox.extend = function (){
+            return ui;   
+        }
 
 		plugin.init = function() {
 
