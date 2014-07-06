@@ -17,7 +17,8 @@
 				vimeoColor : 'CCCCCC',
 				beforeOpen: null,
 				afterOpen: null,
-				afterClose: null
+				afterClose: null,
+                loopAtEnd: false
 			},
 			
 			plugin = this,
@@ -42,6 +43,14 @@
 			</div>';
 
 		plugin.settings = {};
+        
+        $.swipebox.close = function (){
+            ui.closeSlide();  
+        };
+        
+        $.swipebox.extend = function (){
+            return ui;   
+        }
 
 		plugin.init = function() {
 
@@ -455,8 +464,10 @@
 					$this.clearTimeout();
 				
 					}, function() {
+                        if (plugin.settings.hideBarsDelay > 0){
 						bars.removeClass( 'visible-bars' );
 						$this.setTimeout();
+                        }
 
 					} );
 
@@ -545,7 +556,7 @@
 				
 				if ( index === 0 ) {
 					$( '#swipebox-prev' ).addClass( 'disabled' );
-				} else if ( index === elements.length - 1 ) {
+				} else if ( index === elements.length - 1 && plugin.settings.loopAtEnd != true) {
 					$( '#swipebox-next' ).addClass( 'disabled' );
 				}
 			},
@@ -633,6 +644,11 @@
 					if ( src.match( /youtube\.com\/watch\?v=([a-zA-Z0-9\-_]+)/) || src.match( /vimeo\.com\/([0-9]*)/ ) || src.match( /youtu\.be\/([a-zA-Z0-9\-_]+)/ ) ) {
 						return true;
 					}
+                    
+                    if (src.toLowerCase().indexOf( "swipeboxvideo=1" ) >= 0){
+                        
+                        return true;
+                    }
 				}
 					
 			},
@@ -656,6 +672,12 @@
 					iframe = '<iframe width="560" height="315"  src="//player.vimeo.com/video/' + vimeoUrl[1] + '?byline=0&amp;portrait=0&amp;color='+plugin.settings.vimeoColor+'" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
 				
 				}
+                
+                if (youtubeShortUrl || youtubeShortUrl || vimeoUrl){
+                    
+                } else {
+                    iframe = '<iframe width="560" height="315" src="' + url + '" frameborder="0" allowfullscreen></iframe>';
+                }
 
 				return '<div class="swipebox-video-container" style="max-width:' + plugin.settings.videomaxWidth + 'px"><div class="swipebox-video">'+iframe+'</div></div>';
 			},
@@ -680,16 +702,26 @@
 				var $this = this,
 					index = $( '#swipebox-slider .slide' ).index( $( '#swipebox-slider .slide.current' ) );
 				if ( index+1 < elements.length ) {
+                    var src = $( '#swipebox-slider .slide' ).eq(index).contents().find("iframe").attr("src");
+                    $( '#swipebox-slider .slide' ).eq(index).contents().find("iframe").attr("src",src);
 					index++;
 					$this.setSlide( index );
 					$this.preloadMedia( index+1 );
-				
 				} else {
 					
-					$( '#swipebox-slider' ).addClass( 'rightSpring' );
-					setTimeout( function() {
-						$( '#swipebox-slider' ).removeClass( 'rightSpring' );
-					}, 500 );
+                    if (plugin.settings.loopAtEnd === true){
+                      var src = $( '#swipebox-slider .slide' ).eq(index).contents().find("iframe").attr("src");
+                      $( '#swipebox-slider .slide' ).eq(index).contents().find("iframe").attr("src",src);
+                      index = 0;
+                      $this.preloadMedia( index );
+                      $this.setSlide( index );
+                      $this.preloadMedia( index + 1 );
+                    } else {
+					   $( '#swipebox-slider' ).addClass( 'rightSpring' );
+					   setTimeout( function() {
+						  $( '#swipebox-slider' ).removeClass( 'rightSpring' );
+					   }, 500 );
+                    }
 				}
 			},
 			
@@ -699,16 +731,17 @@
 			getPrev : function () {
 				var index = $( '#swipebox-slider .slide' ).index( $( '#swipebox-slider .slide.current' ) );
 				if ( index > 0 ) {
+                    var src = $( '#swipebox-slider .slide' ).eq(index).contents().find("iframe").attr("src");
+                    $( '#swipebox-slider .slide' ).eq(index).contents().find("iframe").attr("src",src);
 					index--;
 					this.setSlide( index );
 					this.preloadMedia( index-1 );
 				} else {
-					
-					$( '#swipebox-slider' ).addClass( 'leftSpring' );
-					setTimeout( function() {
-						$( '#swipebox-slider' ).removeClass( 'leftSpring' );
-					}, 500 );
-				}
+					   $( '#swipebox-slider' ).addClass( 'leftSpring' );
+					      setTimeout( function() {
+						  $( '#swipebox-slider' ).removeClass( 'leftSpring' );
+					   }, 500 );
+                    }
 			},
 
 			/**

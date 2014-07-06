@@ -65,7 +65,8 @@ hideBarsOnMobile : true, // false will show the caption and navbar on mobile dev
 hideBarsDelay : 3000, // 0 to always show caption and action bar
 videoMaxWidth : 1140, // videos max width
 beforeOpen: function(){} , // called before opening
-afterClose: function(){} // called after closing
+afterClose: function(){}, // called after closing
+loopAtEnd: false // true will return to the first image after the last image is reached
 ```
 
 ###Pull Requests
