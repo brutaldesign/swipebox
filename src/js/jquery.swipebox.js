@@ -644,6 +644,11 @@
 					if ( src.match( /youtube\.com\/watch\?v=([a-zA-Z0-9\-_]+)/) || src.match( /vimeo\.com\/([0-9]*)/ ) || src.match( /youtu\.be\/([a-zA-Z0-9\-_]+)/ ) ) {
 						return true;
 					}
+                    
+                    if (src.toLowerCase().indexOf( "swipeboxvideo=1" ) >= 0){
+                        
+                        return true;
+                    }
 				}
 					
 			},
@@ -667,6 +672,12 @@
 					iframe = '<iframe width="560" height="315"  src="//player.vimeo.com/video/' + vimeoUrl[1] + '?byline=0&amp;portrait=0&amp;color='+plugin.settings.vimeoColor+'" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
 				
 				}
+                
+                if (youtubeShortUrl || youtubeShortUrl || vimeoUrl){
+                    
+                } else {
+                    iframe = '<iframe width="560" height="315" src="' + url + '" frameborder="0" allowfullscreen></iframe>';
+                }
 
 				return '<div class="swipebox-video-container" style="max-width:' + plugin.settings.videomaxWidth + 'px"><div class="swipebox-video">'+iframe+'</div></div>';
 			},
