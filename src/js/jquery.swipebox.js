@@ -42,6 +42,10 @@
 			</div>';
 
 		plugin.settings = {};
+        
+        plugin.close = function (){
+            ui.closeSlide();  
+        };
 
 		plugin.init = function() {
 
