@@ -464,8 +464,10 @@
 					$this.clearTimeout();
 				
 					}, function() {
+                        if (plugin.settings.hideBarsDelay > 0){
 						bars.removeClass( 'visible-bars' );
 						$this.setTimeout();
+                        }
 
 					} );
 
