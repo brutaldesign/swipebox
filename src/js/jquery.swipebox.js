@@ -684,6 +684,8 @@
 				var $this = this,
 					index = $( '#swipebox-slider .slide' ).index( $( '#swipebox-slider .slide.current' ) );
 				if ( index+1 < elements.length ) {
+                    var src = $( '#swipebox-slider .slide' ).eq(index).contents().find("iframe").attr("src");
+                    $( '#swipebox-slider .slide' ).eq(index).contents().find("iframe").attr("src",src);
 					index++;
 					$this.setSlide( index );
 					$this.preloadMedia( index+1 );
@@ -703,6 +705,8 @@
 			getPrev : function () {
 				var index = $( '#swipebox-slider .slide' ).index( $( '#swipebox-slider .slide.current' ) );
 				if ( index > 0 ) {
+                    var src = $( '#swipebox-slider .slide' ).eq(index).contents().find("iframe").attr("src");
+                    $( '#swipebox-slider .slide' ).eq(index).contents().find("iframe").attr("src",src);
 					index--;
 					this.setSlide( index );
 					this.preloadMedia( index-1 );
