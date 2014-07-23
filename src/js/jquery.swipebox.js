@@ -710,8 +710,8 @@
 				} else {
 					
                     if (plugin.settings.loopAtEnd === true){
-                      var src = $( '#swipebox-slider .slide' ).eq(index).contents().find("iframe").attr("src");
-                      $( '#swipebox-slider .slide' ).eq(index).contents().find("iframe").attr("src",src);
+                      var swipeboxSrc = $( '#swipebox-slider .slide' ).eq(index).contents().find("iframe").attr("src");
+                      $( '#swipebox-slider .slide' ).eq(index).contents().find("iframe").attr("src",swipeboxSrc);
                       index = 0;
                       $this.preloadMedia( index );
                       $this.setSlide( index );
