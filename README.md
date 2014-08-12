@@ -12,7 +12,7 @@ Swipebox is a jQuery "lightbox" plugin for desktop, mobile and tablet.
 ##Features
 
 - Swipe gestures for mobile
-- Keyboard Navigation for desktop
+- Keyboard and Mouse Navigation for desktop
 - CSS transitions with jQuery fallback
 - Retina support for UI icons
 - Easy CSS customization
