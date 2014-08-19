@@ -19,6 +19,8 @@ html.swipebox-html.swipebox-touch {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 #swipebox-slider {
@@ -29,14 +31,18 @@ html.swipebox-html.swipebox-touch {
   white-space: nowrap;
   position: absolute;
   display: none;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 #swipebox-slider .slide {
-  background: url(../img/loader.gif) no-repeat center center;
   height: 100%;
   width: 100%;
   line-height: 1px;
   text-align: center;
   display: inline-block;
+}
+#swipebox-slider .slide-loading {
+  background: url(./loader.gif) no-repeat center center;
 }
 #swipebox-slider .slide:before {
   content: "";
@@ -87,6 +93,8 @@ html.swipebox-html.swipebox-touch {
   z-index: 999;
   height: 50px;
   width: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 #swipebox-action {
