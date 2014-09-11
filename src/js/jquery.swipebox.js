@@ -31,6 +31,7 @@
 			supportSVG = !! document.createElementNS && !! document.createElementNS( 'http://www.w3.org/2000/svg', 'svg').createSVGRect,
 			winWidth = window.innerWidth ? window.innerWidth : $( window ).width(),
 			winHeight = window.innerHeight ? window.innerHeight : $( window ).height(),
+                	currentX = 0,
 			/* jshint multistr: true */
 			html = '<div id="swipebox-overlay">\
 					<div id="swipebox-slider"></div>\
@@ -160,17 +161,19 @@
 								
 				if ( $this.doCssTrans() ) {
 					$( '#swipebox-slider' ).css( {
-						'-webkit-transition' : 'left 0.4s ease',
-						'-moz-transition' : 'left 0.4s ease',
-						'-o-transition' : 'left 0.4s ease',
-						'-khtml-transition' : 'left 0.4s ease',
-						'transition' : 'left 0.4s ease'
+						'-webkit-transition' : '-webkit-transform 0.4s ease',
+						'-moz-transition' : '-moz-transform 0.4s ease',
+						'-o-transition' : '-o-transform 0.4s ease',
+						'-khtml-transition' : '-khtml-transform 0.4s ease',
+						'-ms-transition' : '-ms-transform 0.4s ease',
+						'transition' : 'transform 0.4s ease'
 					} );
 					$( '#swipebox-overlay' ).css( {
 						'-webkit-transition' : 'opacity 1s ease',
 						'-moz-transition' : 'opacity 1s ease',
 						'-o-transition' : 'opacity 1s ease',
 						'-khtml-transition' : 'opacity 1s ease',
+						'-ms-transition' : 'opacity 1s ease',
 						'transition' : 'opacity 1s ease'
 					} );
 					$( '#swipebox-action, #swipebox-caption' ).css( {
@@ -178,6 +181,7 @@
 						'-moz-transition' : '0.5s',
 						'-o-transition' : '0.5s',
 						'-khtml-transition' : '0.5s',
+						'-ms-transition' : '0.5s',
 						'transition' : '0.5s'
 					} );
 				}
@@ -291,10 +295,13 @@
 			gesture : function () {
 				
 				var $this = this,
-					distance = null,
+					hDistance = null,
 					vDistance = null,
+					hDistanceLast = null,
+					vDistanceLast = null,
 					vSwipe = false,
-					swipMinDistance = 10,
+					hSwipe = false,
+					hSwipMinDistance = 10,
 					vSwipMinDistance = 50,
 					startCoords = {},
 					endCoords = {},
@@ -309,16 +316,29 @@
 
 					$( this ).addClass( 'touching' );
 
+					vSwipe = false;
+					hSwipe = false;
+
 					endCoords = event.originalEvent.targetTouches[0];
 					startCoords.pageX = event.originalEvent.targetTouches[0].pageX;
 					startCoords.pageY = event.originalEvent.targetTouches[0].pageY;
+
+					$('#swipebox-slider').css({
+						'-webkit-transform' : 'translateX(' + currentX +'%)',
+						'-moz-transform' : 'translateX(' + currentX + '%)',
+						'-o-transform' : 'translateX(' + currentX + '%)',
+						'-khtml-transform' : 'translateX(' + currentX + '%)',
+						'-ms-transform' : 'translateX(' + currentX + '%)',
+						'transform' : 'translateX(' + currentX + '%)',
+					});
 
 					$( '.touching' ).bind( 'touchmove',function( event ) {
 						event.preventDefault();
 						event.stopPropagation();
 						endCoords = event.originalEvent.targetTouches[0];
 
-						if ( plugin.settings.closeBySwipe ) {
+						if ( !hSwipe && plugin.settings.closeBySwipe ) {
+							vDistanceLast = vDistance;
 							vDistance = endCoords.pageY - startCoords.pageY;
 							if ( Math.abs( vDistance ) >= vSwipMinDistance || vSwipe ) {
 								var opacity = 0.75 - Math.abs(vDistance) / slider.height();
@@ -330,6 +350,34 @@
 							}
 						}
 
+						hDistanceLast = hDistance;
+						hDistance = endCoords.pageX - startCoords.pageX;
+						hDistancePercent = hDistance*100/winWidth;
+
+       						if( !hSwipe && !vSwipe && Math.abs( hDistance ) >= hSwipMinDistance) {
+							$('#swipebox-slider').css({
+								'-webkit-transition' : '',
+								'-moz-transition' : '',
+								'-o-transition' : '',
+								'-khtml-transition' : '',
+								'-ms-transition' : '',
+								'transition' : ''
+							});
+							hSwipe = true;
+						}
+
+						if( hSwipe ) {
+							$('#swipebox-slider').css({
+								'-webkit-transform' : 'translateX(' + (currentX + hDistancePercent) +'%)',
+								'-moz-transform' : 'translateX(' + (currentX + hDistancePercent) + '%)',
+								'-o-transform' : 'translateX(' + (currentX + hDistancePercent) + '%)',
+								'-khtml-transform' : 'translateX(' + (currentX + hDistancePercent) + '%)',
+								'-ms-transform' : 'translateX(' + (currentX + hDistancePercent) + '%)',
+								'transform' : 'translateX(' + (currentX + hDistancePercent) + '%)'
+							});
+						}
+
+
 					} );
 	
 					return false;
@@ -338,8 +386,23 @@
 					event.preventDefault();
 					event.stopPropagation();
 
-					if ( plugin.settings.closeBySwipe ) {
-						if ( slider.css( 'opacity' ) <= 0.5) {
+					$('#swipebox-slider').css({
+						'-webkit-transition' : '-webkit-transform 0.4s ease',
+						'-moz-transition' : '-moz-transform 0.4s ease',
+						'-o-transition' : '-o-transform 0.4s ease',
+						'-khtml-transition' : '-khtml-transform 0.4s ease',
+						'-ms-transition' : '-ms-transform 0.4s ease',
+						'transition' : 'transform 0.4s ease'
+					});
+
+					vDistance = endCoords.pageY - startCoords.pageY;
+					hDistance = endCoords.pageX - startCoords.pageX;
+					hDistancePercent = hDistance*100/winWidth;
+
+
+					if ( vSwipe ) {
+						vSwipe = false;
+						if ( Math.abs( vDistance ) >= 2*vSwipMinDistance && Math.abs(vDistance) > Math.abs(vDistanceLast)) {
 							var vOffset = vDistance > 0 ? slider.height() : - slider.height();
 							slider.animate( { top: vOffset + 'px', 'opacity': 0 },
 								300,
@@ -350,24 +413,15 @@
 							slider.animate( { top: 0, 'opacity': 1 }, 300 );
 						}
 
-						if ( vSwipe ) {
-							vSwipe = false;
-							return;
+					} else if ( hSwipe ) {
+						hSwipe = false;
+						if( hDistance >= hSwipMinDistance && hDistance >= hDistanceLast) {
+							// swipeLeft
+							$this.getPrev();
+						} else if ( hDistance <= -hSwipMinDistance && hDistance <= hDistanceLast) {
+							// swipeRight
+							$this.getNext();
 						}
-					}
-				
-					distance = endCoords.pageX - startCoords.pageX;
-						
-					if ( distance >= swipMinDistance ) {
-						
-						// swipeLeft
-						$this.getPrev();
-					
-					} else if ( distance <= - swipMinDistance ) {
-						
-						// swipeRight
-						$this.getNext();
-
 					} else {
 						// tap
 						if ( ! bars.hasClass( 'visible-bars' ) ) {
@@ -378,6 +432,15 @@
 							$this.hideBars();
 						}
 					}
+
+					$('#swipebox-slider').css({
+						'-webkit-transform' : 'translateX(' + currentX + '%)',
+						'-moz-transform' : 'translateX(' + currentX + '%)',
+						'-o-transform' : 'translateX(' + currentX + '%)',
+						'-khtml-transform' : 'translateX(' + currentX + '%)',
+						'-ms-transform' : 'translateX(' + currentX + '%)',
+						'transform' : 'translateX(' + currentX + '%)'
+					});
 
 					$( '.touching' ).off( 'touchmove' ).removeClass( 'touching' );
 						
@@ -537,9 +600,18 @@
 				isFirst = isFirst || false;
 				
 				var slider = $( '#swipebox-slider' );
+
+                               	currentX = -index*100;
 				
 				if ( this.doCssTrans() ) {
-					slider.css( { left : ( -index*100 )+'%' } );
+					slider.css({
+						'-webkit-transform' : 'translateX(' + (-index*100)+'%)',
+						'-moz-transform' : 'translateX(' + (-index*100)+'%)',
+						'-o-transform' : 'translateX(' + (-index*100)+'%)',
+						'-khtml-transform' : 'translateX(' + (-index*100)+'%)',
+						'-ms-transform' : 'translateX(' + (-index*100)+'%)',
+						'transform' : 'translateX(' + (-index*100)+'%)',
+                                        });
 				} else {
 					slider.animate( { left : ( -index*100 )+'%' } );
 				}
