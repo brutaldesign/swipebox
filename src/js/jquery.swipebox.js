@@ -51,7 +51,7 @@
         
         $.swipebox.extend = function (){
             return ui;   
-        }
+        };
 
 		plugin.init = function() {
 
@@ -628,7 +628,7 @@
 				
 				if ( index === 0 ) {
 					$( '#swipebox-prev' ).addClass( 'disabled' );
-				} else if ( index === elements.length - 1 && plugin.settings.loopAtEnd != true) {
+				} else if ( index === elements.length - 1 && plugin.settings.loopAtEnd !== true) {
 					$( '#swipebox-next' ).addClass( 'disabled' );
 				}
 			},
