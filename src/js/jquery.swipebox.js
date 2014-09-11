@@ -207,7 +207,7 @@
 				
 				if ( isTouch ) {
 					$this.gesture();
-				}
+				} else $this.drag();
 				
 				// Devices can have both touch and keyboard input so always allow key events
 				$this.keyboard();
@@ -444,6 +444,109 @@
 
 					$( '.touching' ).off( 'touchmove' ).removeClass( 'touching' );
 						
+				} );
+
+			},
+
+			/**
+			 * Drag and drop navigation
+			 */
+
+			drag : function () {
+
+				var $this = this,
+					distance = null,
+					vDistance = null,
+					vSwipe = false,
+					swipMinDistance = 10,
+					vSwipMinDistance = 50,
+					startCoords = {},
+					endCoords = {},
+
+					bars = $( '#swipebox-caption, #swipebox-action' ),
+					slider = $( '#swipebox-slider' );
+
+				bars.addClass( 'visible-bars' );
+				$this.setTimeout();
+
+				$( 'body' ).bind( 'mousedown', function( event ) {
+
+					$( this ).addClass( 'touching' );
+
+					endCoords.pageX = event.pageX;
+					endCoords.pageY = event.pageY;
+					startCoords.pageX = event.pageX;
+					startCoords.pageY = event.pageY;
+
+					$( '.touching' ).bind( 'mousemove',function( event ) {
+						event.preventDefault();
+						event.stopPropagation();
+						endCoords.pageX = event.pageX;
+						endCoords.pageY = event.pageY;
+
+						if ( plugin.settings.closeBySwipe ) {
+							vDistance = endCoords.pageY - startCoords.pageY;
+							if ( Math.abs( vDistance ) >= vSwipMinDistance || vSwipe ) {
+								var opacity = 0.75 - Math.abs(vDistance) / slider.height();
+
+								slider.css( { 'top': vDistance + 'px' } );
+								slider.css( { 'opacity': opacity } );
+
+								vSwipe = true;
+							}
+						}
+
+					} );
+
+					return false;
+
+				} ).bind( 'mouseup',function( event ) {
+					event.preventDefault();
+					event.stopPropagation();
+
+					if ( plugin.settings.closeBySwipe ) {
+						if ( slider.css( 'opacity' ) <= 0.5) {
+							var vOffset = vDistance > 0 ? slider.height() : - slider.height();
+							slider.animate( { top: vOffset + 'px', 'opacity': 0 },
+								300,
+								function () {
+									$this.closeSlide();
+								} );
+						} else {
+							slider.animate( { top: 0, 'opacity': 1 }, 300 );
+						}
+
+						if ( vSwipe ) {
+							vSwipe = false;
+							return;
+						}
+					}
+
+					distance = endCoords.pageX - startCoords.pageX;
+
+					if ( distance >= swipMinDistance ) {
+
+						// swipeLeft
+						$this.getPrev();
+
+					} else if ( distance <= - swipMinDistance ) {
+
+						// swipeRight
+						$this.getNext();
+
+					} else {
+						// tap
+						if ( ! bars.hasClass( 'visible-bars' ) ) {
+							$this.showBars();
+							$this.setTimeout();
+						} else {
+							$this.clearTimeout();
+							$this.hideBars();
+						}
+					}
+
+					$( '.touching' ).off( 'mousemove' ).removeClass( 'touching' );
+
 				} );
 
 			},
