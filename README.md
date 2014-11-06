@@ -67,7 +67,8 @@ videoMaxWidth : 1140, // videos max width
 beforeOpen: function(){} , // called before opening
 afterOpen: null, // called after opening
 afterClose: function(){}, // called after closing
-loopAtEnd: false // true will return to the first image after the last image is reached
+loopAtEnd: false, // true will return to the first image after the last image is reached
+autoplayVideos: false // true will autoplay Youtube and Vimeo videos
 ```
 
 ###Pull Requests
