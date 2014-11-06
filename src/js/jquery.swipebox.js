@@ -1,4 +1,4 @@
-/*! Swipebox v1.3.0.1 | Constantin Saguin csag.co | MIT License | github.com/brutaldesign/swipebox */
+/*! Swipebox v1.3.0.2 | Constantin Saguin csag.co | MIT License | github.com/brutaldesign/swipebox */
 
 ;( function ( window, document, $, undefined ) {
 
@@ -739,11 +739,11 @@
 					if ( youtubeShortUrl ) {
 						youtubeUrl = youtubeShortUrl;
 					}
-					iframe = '<iframe width="560" height="315" src="//www.youtube.com/embed/' + youtubeUrl[1] + '?autoplay='+(+plugin.settings.autoplayVideos)+'" frameborder="0" allowfullscreen></iframe>';
+					iframe = '<iframe width="560" height="315" src="//www.youtube.com/embed/' + youtubeUrl[1] + '?autoplay='+ plugin.settings.autoplayVideos + '" frameborder="0" allowfullscreen></iframe>';
 
 				} else if ( vimeoUrl ) {
 
-					iframe = '<iframe width="560" height="315"  src="//player.vimeo.com/video/' + vimeoUrl[1] + '?byline=0&amp;portrait=0&amp;color='+plugin.settings.vimeoColor+'&autoplay='+(+plugin.settings.autoplayVideos)+'" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
+					iframe = '<iframe width="560" height="315"  src="//player.vimeo.com/video/' + vimeoUrl[1] + '?byline=0&amp;portrait=0&amp;color=' + plugin.settings.vimeoColor + '&autoplay=' + plugin.settings.autoplayVideos + '" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
 
 				}
 
@@ -753,7 +753,7 @@
 					iframe = '<iframe width="560" height="315" src="' + url + '" frameborder="0" allowfullscreen></iframe>';
 				}
 
-				return '<div class="swipebox-video-container" style="max-width:' + plugin.settings.videomaxWidth + 'px"><div class="swipebox-video">'+iframe+'</div></div>';
+				return '<div class="swipebox-video-container" style="max-width:' + plugin.settings.videomaxWidth + 'px"><div class="swipebox-video">' + iframe + '</div></div>';
 			},
 
 			/**
