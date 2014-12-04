@@ -763,7 +763,7 @@
 			 */
 			getVideo : function( url ) {
 				var iframe = '',
-					youtubeUrl = url.match( /watch\?v=([a-zA-Z0-9\-_]+)/ ),
+					youtubeUrl = url.match( /(youtube\.com|youtube-nocookie\.com)\/watch\?v=([a-zA-Z0-9\-_]+)/ ),
 					youtubeShortUrl = url.match(/youtu\.be\/([a-zA-Z0-9\-_]+)/),
 					vimeoUrl = url.match( /vimeo\.com\/([0-9]*)/ ),
 					qs = '';
@@ -775,7 +775,7 @@
 						'autoplay' : ( plugin.settings.autoplayVideos ? '1' : '0' ),
 						'v' : ''
 					});
-					iframe = '<iframe width="560" height="315" src="//www.youtube.com/embed/' + youtubeUrl[1] + '?' + qs + '" frameborder="0" allowfullscreen></iframe>';
+					iframe = '<iframe width="560" height="315" src="//' + youtubeUrl[1] + '/embed/' + youtubeUrl[2] + '?' + qs + '" frameborder="0" allowfullscreen></iframe>';
 
 				} else if ( vimeoUrl ) {
 					qs = ui.parseUri( url, {
