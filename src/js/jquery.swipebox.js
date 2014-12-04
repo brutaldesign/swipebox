@@ -741,7 +741,7 @@
 				a.href = decodeURIComponent( uri );
 
 				// QueryString to Object
-				qs = JSON.parse( a.search.toLowerCase().replace('?','').replace(/&/g,'","').replace(/=/g,'":"') );
+				qs = JSON.parse( '{"' + a.search.toLowerCase().replace('?','').replace(/&/g,'","').replace(/=/g,'":"') + '"}' );
 
 				// Extend with custom data
 				if ( $.isPlainObject( customData ) ) {
