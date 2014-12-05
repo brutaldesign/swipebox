@@ -763,9 +763,9 @@
 			 */
 			getVideo : function( url ) {
 				var iframe = '',
-					youtubeUrl = url.match( /(youtube\.com|youtube-nocookie\.com)\/watch\?v=([a-zA-Z0-9\-_]+)/ ),
-					youtubeShortUrl = url.match(/youtu\.be\/([a-zA-Z0-9\-_]+)/),
-					vimeoUrl = url.match( /vimeo\.com\/([0-9]*)/ ),
+					youtubeUrl = url.match( /((?:www\.)?youtube\.com|(?:www\.)?youtube-nocookie\.com)\/watch\?v=([a-zA-Z0-9\-_]+)/ ),
+					youtubeShortUrl = url.match(/(?:www\.)?youtu\.be\/([a-zA-Z0-9\-_]+)/),
+					vimeoUrl = url.match( /(?:www\.)?vimeo\.com\/([0-9]*)/ ),
 					qs = '';
 				if ( youtubeUrl || youtubeShortUrl) {
 					if ( youtubeShortUrl ) {
