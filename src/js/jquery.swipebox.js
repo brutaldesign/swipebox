@@ -18,7 +18,8 @@
 				afterOpen: null,
 				afterClose: null,
 				loopAtEnd: false,
-				autoplayVideos: false
+				autoplayVideos: false,
+				upscaleImages: false
 			},
 
 			plugin = this,
@@ -762,6 +763,14 @@
 			loadMedia : function ( src, callback ) {
 				if ( ! this.isVideo( src ) ) {
 					var img = $( '<img>' ).on( 'load', function() {
+						if (plugin.settings.upscaleImages) {
+							if (this.naturalWidth / document.body.clientWidth > this.naturalHeight / document.body.clientHeight) {
+								this.style.width = '100%';
+							}
+							else {
+								this.style.height = '100%';
+							}
+						}
 						callback.call( img );
 					} );
 
