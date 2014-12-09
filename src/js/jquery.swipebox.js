@@ -240,6 +240,7 @@
 
 				$( window ).resize( function() {
 					$this.setDim();
+					$this.upscaleImage();
 				} ).resize();
 			},
 
@@ -761,20 +762,30 @@
 			 * Load image
 			 */
 			loadMedia : function ( src, callback ) {
+				var img, upscaleImage = {};
+				upscaleImage = this.upscaleImage;
 				if ( ! this.isVideo( src ) ) {
-					var img = $( '<img>' ).on( 'load', function() {
-						if (plugin.settings.upscaleImages) {
-							if (this.naturalWidth / document.body.clientWidth > this.naturalHeight / document.body.clientHeight) {
-								this.style.width = '100%';
-							}
-							else {
-								this.style.height = '100%';
-							}
-						}
+					img = $( '<img class="swipebox-image">' ).on( 'load', function() {
 						callback.call( img );
+						upscaleImage();
 					} );
 
 					img.attr( 'src', src );
+				}
+			},
+
+			/**
+			 * If configured, expand the image to fill the viewport while preserving the aspect ratio.
+			 */
+			upscaleImage : function () {
+				if (plugin.settings.upscaleImages) {
+					var img = $( '.swipebox-image' );
+					if ( img.prop('naturalWidth') / document.body.clientWidth > img.prop('naturalHeight') / document.body.clientHeight) {
+						img.css({'width' : '100%', 'height' : ''});
+					}
+					else {
+						img.css({'height' : '100%', 'width' : ''});
+					}
 				}
 			},
 
