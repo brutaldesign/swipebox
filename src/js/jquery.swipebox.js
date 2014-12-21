@@ -152,7 +152,7 @@
 				this.preloadMedia( index+1 );
 				this.preloadMedia( index-1 );
 				if ( plugin.settings.afterOpen ) {
-					plugin.settings.afterOpen();
+					plugin.settings.afterOpen( this.target || undefined );
 				}
 			},
 
@@ -853,7 +853,7 @@
 				$.swipebox.isOpen = false;
 
 				if ( plugin.settings.afterClose ) {
-					plugin.settings.afterClose();
+					plugin.settings.afterClose( this.target || undefined );
 				}
 			}
 		};
