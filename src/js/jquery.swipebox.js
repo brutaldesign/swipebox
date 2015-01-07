@@ -778,15 +778,17 @@
 			 * If configured, expand the image to fill the viewport while preserving the aspect ratio.
 			 */
 			upscaleImage : function () {
-				if (plugin.settings.upscaleImages) {
-					var img = $( '.swipebox-image' );
-					if ( img.prop('naturalWidth') / document.body.clientWidth > img.prop('naturalHeight') / document.body.clientHeight) {
-						img.css({'width' : '100%', 'height' : ''});
-					}
-					else {
-						img.css({'height' : '100%', 'width' : ''});
-					}
-				}
+				if ( !plugin.settings.upscaleImages ) {
+                    return;
+                }
+
+                var img = $( '.swipebox-image' );
+                if ( img.prop('naturalWidth') / document.body.clientWidth > img.prop('naturalHeight') / document.body.clientHeight) {
+                    img.css({'width' : '100%', 'height' : ''});
+                }
+                else {
+                    img.css({'height' : '100%', 'width' : ''});
+                }
 			},
 
 			/**
