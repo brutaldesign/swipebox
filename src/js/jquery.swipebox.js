@@ -779,16 +779,16 @@
 			 */
 			upscaleImage : function () {
 				if ( !plugin.settings.upscaleImages ) {
-                    return;
-                }
+					return;
+				}
 
-                var img = $( '.swipebox-image' );
-                if ( img.prop('naturalWidth') / document.body.clientWidth > img.prop('naturalHeight') / document.body.clientHeight) {
-                    img.css({'width' : '100%', 'height' : ''});
-                }
-                else {
-                    img.css({'height' : '100%', 'width' : ''});
-                }
+				var img = $( '.swipebox-image' );
+				if ( img.prop('naturalWidth') / document.body.clientWidth > img.prop('naturalHeight') / document.body.clientHeight) {
+					img.css({'width' : '100%', 'height' : ''});
+				}
+				else {
+					img.css({'height' : '100%', 'width' : ''});
+				}
 			},
 
 			/**
