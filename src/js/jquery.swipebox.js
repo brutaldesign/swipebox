@@ -18,7 +18,8 @@
 				afterOpen: null,
 				afterClose: null,
 				loopAtEnd: false,
-				autoplayVideos: false
+				autoplayVideos: false,
+				upscaleImages: false
 			},
 
 			plugin = this,
@@ -239,6 +240,7 @@
 
 				$( window ).resize( function() {
 					$this.setDim();
+					$this.upscaleImage();
 				} ).resize();
 			},
 
@@ -760,12 +762,32 @@
 			 * Load image
 			 */
 			loadMedia : function ( src, callback ) {
+				var img, upscaleImage = {};
+				upscaleImage = this.upscaleImage;
 				if ( ! this.isVideo( src ) ) {
-					var img = $( '<img>' ).on( 'load', function() {
+					img = $( '<img class="swipebox-image">' ).on( 'load', function() {
 						callback.call( img );
+						upscaleImage();
 					} );
 
 					img.attr( 'src', src );
+				}
+			},
+
+			/**
+			 * If configured, expand the image to fill the viewport while preserving the aspect ratio.
+			 */
+			upscaleImage : function () {
+				if ( !plugin.settings.upscaleImages ) {
+					return;
+				}
+
+				var img = $( '.swipebox-image' );
+				if ( img.prop('naturalWidth') / document.body.clientWidth > img.prop('naturalHeight') / document.body.clientHeight) {
+					img.css({'width' : '100%', 'height' : ''});
+				}
+				else {
+					img.css({'height' : '100%', 'width' : ''});
 				}
 			},
 
