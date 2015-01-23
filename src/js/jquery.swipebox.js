@@ -802,9 +802,14 @@
                 // Inline content
                 if ( src.trim().indexOf('#') === 0 ) {
                     callback.call(
-                    	$(src)
-                    	.clone()
-                    	.toggleClass( plugin.settings.toggleClassOnLoad )
+                    	$('<div>', {
+                    		'class' : 'swipebox-inline-container'
+                    	})
+                    	.append(
+                    		$(src)
+	                    	.clone()
+	                    	.toggleClass( plugin.settings.toggleClassOnLoad )
+	                    )
                     );
                 }
                 // Everything else
