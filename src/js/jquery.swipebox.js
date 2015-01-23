@@ -20,7 +20,8 @@
 				afterClose: null,
 				loopAtEnd: false,
 				autoplayVideos: false,
-				queryStringData: {}
+				queryStringData: {},
+                toggleClassOnLoad: ''
 			},
 
 			plugin = this,
@@ -791,20 +792,31 @@
 					iframe = '<iframe width="560" height="315" src="' + url + '" frameborder="0" allowfullscreen></iframe>';
 				}
 
-				return '<div class="swipebox-video-container" style="max-width:' + plugin.settings.videomaxWidth + 'px"><div class="swipebox-video">' + iframe + '</div></div>';
+				return '<div class="swipebox-video-container" style="max-width:' + plugin.settings.videoMaxWidth + 'px"><div class="swipebox-video">' + iframe + '</div></div>';
 			},
 
 			/**
 			 * Load image
 			 */
 			loadMedia : function ( src, callback ) {
-				if ( ! this.isVideo( src ) ) {
-					var img = $( '<img>' ).on( 'load', function() {
-						callback.call( img );
-					} );
+                // Inline content
+                if ( src.trim().indexOf('#') === 0 ) {
+                    callback.call(
+                    	$(src)
+                    	.clone()
+                    	.toggleClass( plugin.settings.toggleClassOnLoad )
+                    );
+                }
+                // Everything else
+                else {
+    				if ( ! this.isVideo( src ) ) {
+    					var img = $( '<img>' ).on( 'load', function() {
+    						callback.call( img );
+    					} );
 
-					img.attr( 'src', src );
-				}
+    					img.attr( 'src', src );
+    				}
+                }
 			},
 
 			/**
