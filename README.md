@@ -1,3 +1,9 @@
+* Forked to add a few features: *
+
+- support rails asset compilation
+- support for map embedding (wip)
+
+
 Swipebox
 ================================
 

@@ -153,6 +153,14 @@ html.swipebox-html.swipebox-touch {
 	top: 0;
 }
 
+#swipebox-container.svg {
+  #swipebox-prev,
+  #swipebox-next,
+  #swipebox-close {
+    background-image: url(../img/icons.svg);
+  }
+}
+
 #swipebox-arrows{
 	display: block;
 	margin: 0 auto;

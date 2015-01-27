@@ -160,16 +160,12 @@
 			 * Built HTML containers and fire main functions
 			 */
 			build : function () {
-				var $this = this, bg;
+				var $this = this;
 
 				$( 'body' ).append( html );
 
 				if ( supportSVG && plugin.settings.useSVG === true ) {
-					bg = $( '#swipebox-close' ).css( 'background-image' );
-					bg = bg.replace( 'png', 'svg' );
-					$( '#swipebox-prev, #swipebox-next, #swipebox-close' ).css( {
-						'background-image' : bg
-					} );
+					$('#swipebox-container').addClass('svg');
 				}
 
 				if ( isMobile ) {
