@@ -1,3 +1,9 @@
+/*  Swipebox enhanced with a few changes:
+      - SVG icons are brought in by adding a class to the container instead of replacing "png" in filename.
+        This is needed in cases where asset compilation changes filename, e.g. with Rails.
+      - Google maps can be loaded as an element in the gallery by using a comgooglemaps-url (see method doc)
+*/
+
 /*! Swipebox v1.3.0.2 | Constantin Saguin csag.co | MIT License | github.com/brutaldesign/swipebox */
 
 ;( function ( window, document, $, undefined ) {
@@ -18,7 +24,9 @@
 				afterOpen: null,
 				afterClose: null,
 				loopAtEnd: false,
-				autoplayVideos: false
+				autoplayVideos: false,
+        mapOptions: {},
+        mapMarkerOptions: {}
 			},
 
 			plugin = this,
@@ -160,7 +168,7 @@
 			 * Built HTML containers and fire main functions
 			 */
 			build : function () {
-				var $this = this;
+				var $this = this, bg;
 
 				$( 'body' ).append( html );
 
@@ -646,7 +654,7 @@
 					src = elements[ index ].href;
 				}
 
-				if ( ! $this.isVideo( src ) ) {
+				if ( $this.isVideo( src ) || $this.isGoogleMap( src ) ) {
 					setTimeout( function() {
 						$this.openMedia( index );
 					}, 1000);
@@ -673,7 +681,10 @@
 
 				slide = $( '#swipebox-slider .slide' ).eq( index );
 
-				if ( ! $this.isVideo( src ) ) {
+				if ( $this.isGoogleMap( src ) ) {
+          slide.html( $this.getGoogleMapHTML() );
+          $this.loadGoogleMap(src, slide);
+        } else if ( ! $this.isVideo( src ) ) {
 					slide.addClass( 'slide-loading' );
 					$this.loadMedia( src, function() {
 						slide.removeClass( 'slide-loading' );
@@ -723,6 +734,65 @@
 
 			},
 
+      /**
+       * Check if the URL is an Google Map URL. URLs follow the basics of Google Map URL Scheme
+       * https://developers.google.com/maps/documentation/ios/urlscheme, with added "marker" functionality:
+       * comgooglemaps://?marker=11.234,21.1234&zoom=15.
+       */
+      isGoogleMap : function ( src ) {
+        if ( src ) {
+          if ( src.match( /^comgooglemaps:\/\// ) ) {
+            return true;
+          }
+        }
+      },
+
+      /**
+       * Get the HTML required for the Google Map container
+       */
+      getGoogleMapHTML : function() {
+        return '<div class="swipebox-google-map-container"></div>';
+      },
+
+      /**
+       * Get the HTML required for the Google Map container
+       */
+      loadGoogleMap : function( src, slide ) {
+        var variables = src.match(/(\w+)=([\w.,-]+)/g);
+        var customOpts = {};
+        $(variables).each(function() {
+          var split = this.split('=');
+          var attr = split[0],
+            value = split[1];
+          if(attr == 'center') {
+            var lat = parseFloat( value.split(',')[0] ),
+              lng = parseFloat( value.split(',')[1] );
+            customOpts.center = new google.maps.LatLng(lat, lng);
+          } else if(attr == 'marker') {
+            var lat = parseFloat( value.split(',')[0] ),
+              lng = parseFloat( value.split(',')[1] );
+            customOpts.markerPosition = [lat, lng];
+          } else if(attr == 'zoom') {
+            customOpts.zoom = parseInt(value);
+          }
+        });
+        if(customOpts.markerPosition && !customOpts.center) {
+          customOpts.center = new google.maps.LatLng( customOpts.markerPosition[0], customOpts.markerPosition[1] );
+        }
+        $.extend(customOpts, plugin.settings.mapOptions);
+        var elem = slide.children().eq(0).get(0);
+        var map = new google.maps.Map(elem, customOpts);
+        if(customOpts.markerPosition) {
+          var markerOpts = {
+            position: new google.maps.LatLng(customOpts.markerPosition[0], customOpts.markerPosition[1]),
+            map: map,
+            visible: true
+          };
+          $.extend(markerOpts, plugin.settings.mapMarkerOptions);
+          new google.maps.Marker(markerOpts);
+        }
+      },
+
 			/**
 			 * Get video iframe code from URL
 			 */
@@ -756,7 +826,7 @@
 			 * Load image
 			 */
 			loadMedia : function ( src, callback ) {
-				if ( ! this.isVideo( src ) ) {
+				if ( ! this.isVideo( src ) && ! this.isGoogleMap( src ) ) {
 					var img = $( '<img>' ).on( 'load', function() {
 						callback.call( img );
 					} );

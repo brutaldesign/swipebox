@@ -1,6 +1,8 @@
-* Forked to add a few features: *
+Forked to add a few features
+----------------------------
 
-- support rails asset compilation
+- adds a "svg" class for the container when supported to bring more flexibility in icon assets
+  (and support rails asset compilation)
 - support for map embedding (wip)
 
 
