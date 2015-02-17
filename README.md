@@ -1,3 +1,12 @@
+Forked to add a few features
+----------------------------
+
+- Adds a "svg" class for the container when supported to bring more flexibility in icon assets
+  (and support rails asset compilation)
+- Support for embedding a Google Map within the gallery. Currently uses a URL scheme similar
+  to Maps on iOS. Suggestions on better, more standardized scheme are very welcome!
+
+
 Swipebox
 ================================
 

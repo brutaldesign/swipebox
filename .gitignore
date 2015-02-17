@@ -18,3 +18,7 @@ Desktop.ini
 
 # Mac crap
 .DS_Store
+
+# IDEA project files
+*.iml
+.idea
