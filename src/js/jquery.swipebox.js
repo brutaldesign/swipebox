@@ -680,7 +680,6 @@
 				}
 
 				slide = $( '#swipebox-slider .slide' ).eq( index );
-
 				if ( $this.isGoogleMap( src ) ) {
           slide.html( $this.getGoogleMapHTML() );
           $this.loadGoogleMap(src, slide);
@@ -740,8 +739,10 @@
        * comgooglemaps://?marker=11.234,21.1234&zoom=15.
        */
       isGoogleMap : function ( src ) {
+        console.log('is this google maps' + src)
         if ( src ) {
           if ( src.match( /^comgooglemaps:\/\// ) ) {
+            console.log('yes')
             return true;
           }
         }

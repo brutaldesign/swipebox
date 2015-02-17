@@ -182,8 +182,16 @@
 &lt;a rel="gallery-2" href="big/image4.jpg" class="swipebox"&gt;
 	&lt;img src="small/image4.jpg" alt="image"&gt;
 &lt;/a&gt;</pre>
-			
-			<div id="video"></div>
+
+      <div id="googlemaps"></div>
+      <h3>Google maps support</h3>
+      <p>Use a URL similar to what Google maps uses in iOS.</p>
+      <p>
+        <a class="swipebox-googlemaps" href="comgooglemaps://?marker=62.8990398,27.6877738&zoom=12">Kuopio on a map</a>
+      </p>
+      <pre>&lt;a class="swipebox-googlemaps" href="comgooglemaps://?marker=62.8990398,27.6877738&zoom=12"&gt;Kuopio on a map&lt;/a&gt;</pre>
+
+      <div id="video"></div>
 			<h3>Video support</h3>
 			<p>Simply paste a youtube or vimeo video URL in your href attribute. The script will automatically check if it's a youtube or vimeo URL and open the video in the swipebox.</p>
 			<p>
@@ -246,16 +254,19 @@ $( '#gallery' ).click( function( e ) {
 			<a href="http://csag.co" target="_blank">csag.co</a> | <a href="http://wpwlf.co" target="_blank">wpwlf.co</a>
 		</div>
 	</footer>
+  <script src="//maps.googleapis.com/maps/api/js?key="></script>
 	<script src="lib/ios-orientationchange-fix.js"></script>
 	<script src="lib/jquery-2.1.0.min.js"></script>
 	<script src="src/js/jquery.swipebox.js"></script>
 	<script type="text/javascript">
 	$( document ).ready(function() {
-
 			/* Basic Gallery */
 			$( '.swipebox' ).swipebox();
-			
-			/* Video */
+
+      /* Google maps */
+      $( '.swipebox-googlemaps' ).swipebox();
+
+      /* Video */
 			$( '.swipebox-video' ).swipebox();
 
 			/* Dynamic Gallery */
