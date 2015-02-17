@@ -284,11 +284,12 @@ html.swipebox-html.swipebox-touch {
 }
 
 #swipebox-top-bar {
-  color: white !important;
+  color: white;
   font-size: 15px;
   line-height: 43px;
   font-family: Helvetica, Arial, sans-serif;
 }
+
 .swipebox-google-map-container {
   position: relative;
   line-height: 1.2em;
@@ -302,6 +303,7 @@ html.swipebox-html.swipebox-touch {
   padding: 0px;
   vertical-align: middle;
 }
+
 #swipebox-slider .slide .gmnoprint img {
   max-width: none;
   max-height: none;

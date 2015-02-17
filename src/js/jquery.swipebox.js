@@ -168,7 +168,7 @@
 			 * Built HTML containers and fire main functions
 			 */
 			build : function () {
-				var $this = this, bg;
+				var $this = this;
 
 				$( 'body' ).append( html );
 
@@ -739,10 +739,8 @@
        * comgooglemaps://?marker=11.234,21.1234&zoom=15.
        */
       isGoogleMap : function ( src ) {
-        console.log('is this google maps' + src)
         if ( src ) {
           if ( src.match( /^comgooglemaps:\/\// ) ) {
-            console.log('yes')
             return true;
           }
         }
@@ -761,20 +759,26 @@
       loadGoogleMap : function( src, slide ) {
         var variables = src.match(/(\w+)=([\w.,-]+)/g);
         var customOpts = {};
+        /* global google */
+        if(typeof google !== 'object') {
+          window.alert('Google maps does not seem to be included, but loadGoogleMap is called anyway. Aborting.');
+          return;
+        }
         $(variables).each(function() {
           var split = this.split('=');
           var attr = split[0],
             value = split[1];
-          if(attr == 'center') {
-            var lat = parseFloat( value.split(',')[0] ),
+          var lat = null, lng = null;
+          if(attr === 'center') {
+            lat = parseFloat( value.split(',')[0] ),
               lng = parseFloat( value.split(',')[1] );
             customOpts.center = new google.maps.LatLng(lat, lng);
-          } else if(attr == 'marker') {
-            var lat = parseFloat( value.split(',')[0] ),
+          } else if(attr === 'marker') {
+            lat = parseFloat( value.split(',')[0] ),
               lng = parseFloat( value.split(',')[1] );
             customOpts.markerPosition = [lat, lng];
-          } else if(attr == 'zoom') {
-            customOpts.zoom = parseInt(value);
+          } else if(attr === 'zoom') {
+            customOpts.zoom = parseInt(value, 10);
           }
         });
         if(customOpts.markerPosition && !customOpts.center) {
