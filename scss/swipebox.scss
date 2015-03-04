@@ -67,7 +67,9 @@ html.swipebox-html.swipebox-touch {
 			margin-right: -1px;
 		}
 
-		img, .swipebox-video-container {
+		img,
+        .swipebox-video-container,
+        .swipebox-inline-container {
 			display: inline-block;
 			max-height: 100%;
 			max-width: 100%;

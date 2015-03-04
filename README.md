@@ -16,6 +16,7 @@ Swipebox is a jQuery "lightbox" plugin for desktop, mobile and tablet.
 - CSS transitions with jQuery fallback
 - Retina support for UI icons
 - Easy CSS customization
+- Video, Images and Inline content
 
 ###Compatibility
 
@@ -69,6 +70,8 @@ afterOpen: null, // called after opening
 afterClose: function(){}, // called after closing
 loopAtEnd: false, // true will return to the first image after the last image is reached
 autoplayVideos: false // true will autoplay Youtube and Vimeo videos
+queryStringData: {} // plain object with custom query string arguments to pass/override for video URLs,
+toggleClassOnLoad: '' // CSS class that can be toggled when the slide will be loaded (like 'hidden' of Bootstrap)
 ```
 
 ###Pull Requests
