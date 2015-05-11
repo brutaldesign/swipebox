@@ -21,7 +21,8 @@
 				loopAtEnd: false,
 				autoplayVideos: false,
 				queryStringData: {},
-                toggleClassOnLoad: ''
+				toggleClassOnLoad: '',
+				mouseGestures: true
 			},
 
 			plugin = this,
@@ -76,10 +77,7 @@
 
 				$( document ).on( 'click', selector, function( event ) {
 
-					// console.log( isTouch );
-
 					if ( event.target.parentNode.className === 'slide current' ) {
-
 						return false;
 					}
 
@@ -186,7 +184,7 @@
 				$this.setDim();
 				$this.actions();
 
-				if ( isTouch ) {
+				if ( isTouch || plugin.settings.mouseGestures ) {
 					$this.gesture();
 				}
 
@@ -275,6 +273,10 @@
 			 */
 			gesture : function () {
 
+				function normalize( event ) {
+					return event.targetTouches ? event.targetTouches[0] : event;
+				}
+				
 				var $this = this,
 					index,
 					hDistance,
@@ -294,23 +296,25 @@
 				bars.addClass( 'visible-bars' );
 				$this.setTimeout();
 
-				$( 'body' ).bind( 'touchstart', function( event ) {
-
+				var startEvent = 'touchstart' + (plugin.settings.mouseGestures ? ' mousedown' : '');
+				var moveEvent = 'touchmove' + (plugin.settings.mouseGestures ? ' mousemove' : '');
+				var endEvent = 'touchend' + (plugin.settings.mouseGestures ? ' mouseup' : '');
+				
+				$( '#swipebox-container' ).bind( startEvent, function( event ) {
 					$( this ).addClass( 'touching' );
 					index = $( '#swipebox-slider .slide' ).index( $( '#swipebox-slider .slide.current' ) );
-					endCoords = event.originalEvent.targetTouches[0];
-					startCoords.pageX = event.originalEvent.targetTouches[0].pageX;
-					startCoords.pageY = event.originalEvent.targetTouches[0].pageY;
+					endCoords = normalize(event.originalEvent);
+					startCoords = normalize(event.originalEvent);
 
 					$( '#swipebox-slider' ).css( {
 						'-webkit-transform' : 'translate3d(' + currentX +'%, 0, 0)',
 						'transform' : 'translate3d(' + currentX + '%, 0, 0)'
 					} );
 
-					$( '.touching' ).bind( 'touchmove',function( event ) {
+					$( this ).bind( moveEvent, function( event ) {
 						event.preventDefault();
 						event.stopPropagation();
-						endCoords = event.originalEvent.targetTouches[0];
+						endCoords = normalize(event.originalEvent);
 
 						if ( ! hSwipe ) {
 							vDistanceLast = vDistance;
@@ -344,7 +348,6 @@
 
 								// first slide
 								if ( 0 === index ) {
-									// console.log( 'first' );
 									$( '#swipebox-overlay' ).addClass( 'leftSpringTouch' );
 								} else {
 									// Follow gesture
@@ -360,7 +363,6 @@
 
 								// last Slide
 								if ( elements.length === index +1 ) {
-									// console.log( 'last' );
 									$( '#swipebox-overlay' ).addClass( 'rightSpringTouch' );
 								} else {
 									$( '#swipebox-overlay' ).removeClass( 'leftSpringTouch' ).removeClass( 'rightSpringTouch' );
@@ -376,7 +378,7 @@
 
 					return false;
 
-				} ).bind( 'touchend',function( event ) {
+				} ).bind( endEvent, function( event ) {
 					event.preventDefault();
 					event.stopPropagation();
 
@@ -435,7 +437,7 @@
 					} );
 
 					$( '#swipebox-overlay' ).removeClass( 'leftSpringTouch' ).removeClass( 'rightSpringTouch' );
-					$( '.touching' ).off( 'touchmove' ).removeClass( 'touching' );
+					$( '.touching' ).off( moveEvent ).removeClass( 'touching' );
 
 				} );
 			},
@@ -799,29 +801,28 @@
 			 * Load image
 			 */
 			loadMedia : function ( src, callback ) {
-                // Inline content
-                if ( src.trim().indexOf('#') === 0 ) {
-                    callback.call(
-                    	$('<div>', {
-                    		'class' : 'swipebox-inline-container'
-                    	})
-                    	.append(
-                    		$(src)
-	                    	.clone()
-	                    	.toggleClass( plugin.settings.toggleClassOnLoad )
-	                    )
-                    );
-                }
-                // Everything else
-                else {
-    				if ( ! this.isVideo( src ) ) {
-    					var img = $( '<img>' ).on( 'load', function() {
-    						callback.call( img );
-    					} );
-
-    					img.attr( 'src', src );
-    				}
-                }
+				// Inline content
+				if ( src.trim().indexOf('#') === 0 ) {
+					callback.call(
+						$('<div>', {
+							'class' : 'swipebox-inline-container'
+						})
+						.append(
+							$(src)
+							.clone()
+							.toggleClass( plugin.settings.toggleClassOnLoad )
+						)
+					);
+				}
+				// Everything else
+				else {
+					if ( ! this.isVideo( src ) ) {
+						var img = $( '<img>' ).on( 'load', function() {
+							callback.call( img );
+						} );
+						img.attr( 'src', src );
+					}
+				}
 			},
 
 			/**
