@@ -1,4 +1,4 @@
-/*! Swipebox v1.4.3.1 | Constantin Saguin csag.co | MIT License | github.com/brutaldesign/swipebox */
+/*! Swipebox v1.4.4 | Constantin Saguin csag.co | MIT License | github.com/brutaldesign/swipebox */
 
 ;( function ( window, document, $, undefined ) {
 
@@ -272,9 +272,10 @@
 			 * Touch navigation
 			 */
 			gesture : function () {
-
-				function normalize( event ) {
-					return event.targetTouches ? event.targetTouches[0] : event;
+				function normalize( evt ) {
+					var e = evt.targetTouches ? evt.targetTouches[0] : evt;
+					// iOS recycles event objects, so make sure we copy instead of keeping ref
+					return {pageX: e.pageX, pageY: e.pageY};
 				}
 				
 				var $this = this,
