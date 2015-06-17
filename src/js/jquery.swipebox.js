@@ -18,6 +18,8 @@
 				beforeOpen: null,
 				afterOpen: null,
 				afterClose: null,
+				nextSlide: null,
+				prevSlide: null,
 				loopAtEnd: false,
 				autoplayVideos: false,
 				queryStringData: {},
@@ -838,6 +840,9 @@
 					index++;
 					$this.setSlide( index );
 					$this.preloadMedia( index+1 );
+					if ( plugin.settings.nextSlide ) {
+						plugin.settings.nextSlide();
+					}
 				} else {
 
 					if ( plugin.settings.loopAtEnd === true ) {
@@ -847,6 +852,9 @@
 						$this.preloadMedia( index );
 						$this.setSlide( index );
 						$this.preloadMedia( index + 1 );
+						if ( plugin.settings.nextSlide ) {
+							plugin.settings.nextSlide();
+						}
 					} else {
 						$( '#swipebox-overlay' ).addClass( 'rightSpring' );
 						setTimeout( function() {
@@ -868,12 +876,23 @@
 					index--;
 					this.setSlide( index );
 					this.preloadMedia( index-1 );
+					if ( plugin.settings.prevSlide ) {
+						plugin.settings.prevSlide();
+					}
 				} else {
 					$( '#swipebox-overlay' ).addClass( 'leftSpring' );
 					setTimeout( function() {
 						$( '#swipebox-overlay' ).removeClass( 'leftSpring' );
 					}, 500 );
 				}
+			},
+
+			nextSlide : function () {
+				// Callback for next slide
+			},
+
+			prevSlide : function () {
+				// Callback for prev slide
 			},
 
 			/**
