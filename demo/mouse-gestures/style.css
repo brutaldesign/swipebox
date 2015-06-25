@@ -1,0 +1,15 @@
+html, body, div, ul, li {
+	box-sizing: border-box;
+}
+
+.example a {
+	float: left;
+	width: 130px;
+	height: 80px;
+	margin: 8px 8px 8px 0;
+}
+
+.example a img {
+	max-width: 100%;
+	max-height: 100%;
+}

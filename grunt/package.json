@@ -1,11 +1,81 @@
 {
   "name": "grunt-swipebox",
-  "version": "1.4.1",
+  "version": "1.4.5",
   "description": "A touchable jQuery lightbox",
   "repository": {
     "type": "git",
     "url": "git://github.com/brutaldesign/swipebox.git"
   },
+  "author": {
+    "name": "Constantin Saguin",
+    "email": "hello@csag.co",
+    "url": "http://csag.co" 
+  },
+  "contributors": [
+    {
+      "name": "Dheera Venkatraman",
+      "email": "dheera@dheera.net",
+      "url": "http://dheera.net"
+    },
+    {
+      "name": "Matt Hayward",
+      "email": "matt@matthayward.com.au",
+      "url": "http://www.matthayward.com.au/"
+    },
+    {
+      "name": "stackcoder"
+    },
+    {
+      "name": "Szabó Gergő",
+      "url": "http://www.indikator.hu"
+    },
+    {
+      "name": "Jason Tremblay",
+      "email": "jason.tremblay@gmail.com",
+      "url": "http://www.bigbigtech.com/"
+    },
+    {
+      "name": "Lucas Stephanou",
+      "email": "lucas@lucas-ts.com",
+      "url": "http://lucas-ts.com/"
+    },
+    {
+      "name": "Piotr P.",
+      "email": "piotrek@jakbyco.com",
+      "url": "http://jakbyco.com/"
+    },
+    {
+      "name": "Philip A Senger",
+      "email": "philip.a.senger@cngrgroup.com",
+      "url": "http://www.apachecommonstipsandtricks.blogspot.com/"
+    },
+    {
+      "name": "Oswaldo Acauan",
+      "email": "oswaldoacauan@gmail.com",
+      "url": "http://oswaldoacauan.com/"
+    },
+    {
+      "name": "Dmitry Mayorov",
+      "url": "http://dmitrymayorov.com/"
+    },
+    {
+      "name": "Alessandro Carbone",
+      "url": "http://www.artera.it/"
+    },
+    {
+      "name": "Mario Drengner",
+      "url": "http://www.amarantus.de/"
+    },
+    {
+      "name": "Karolis",
+      "url": "http://www.zerobrainwash.com/"
+    },
+    {
+      "name": "Stijn de Witt",
+      "email": "StijnDeWitt@hotmail.com",
+      "url": "http://StijnDeWitt.com"
+    }
+  ],
   "license": "MIT",
   "devDependencies": {
     "grunt": "~0.4.5",

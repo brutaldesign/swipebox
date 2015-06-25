@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" href="../../src/css/swipebox.min.css">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<h2>Mouse gestures</h2>
+	<section class="example">
+		<a rel="gallery-1" href="http://swipebox.csag.co/images/image-1.jpg" title="Fog">
+			<img src="http://swipebox.csag.co/images/image-1.jpg" alt="image">
+		</a>
+		<a rel="gallery-1" href="http://swipebox.csag.co/images/image-2.jpg" title="City">
+			<img src="http://swipebox.csag.co/images/image-2.jpg" alt="image">
+		</a>
+		<a rel="gallery-1" href="http://swipebox.csag.co/images/image-3.jpg" title="Street">
+			<img src="http://swipebox.csag.co/images/image-3.jpg" alt="image">
+		</a>
+		<a rel="gallery-1" href="http://swipebox.csag.co/images/image-4.jpg" title="Mustache Guy">
+			<img src="http://swipebox.csag.co/images/image-4.jpg" alt="image">
+		</a>
+	</section>
+
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="../../src/js/jquery.swipebox.js"></script>
+	<script>
+		$(document).ready(function() {
+			// Initialize Swipebox
+			$('.example a').swipebox();
+		});
+	</script>
+</body>
+</html>

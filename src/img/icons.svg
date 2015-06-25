@@ -1,1 +1,58 @@
-<?xml version="1.0" encoding="utf-8"?> <!-- Generator: IcoMoon.io --> <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"> <svg width="120" height="24" viewBox="0 0 120 24" fill="#ffffff" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M 17.384,17.705q0.00,0.536 -0.375,0.911l-1.821,1.821q-0.375,0.375 -0.911,0.375t-0.911-0.375l-3.938-3.938l-3.938,3.938q-0.375,0.375 -0.911,0.375t-0.911-0.375l-1.821-1.821q-0.375-0.375 -0.375-0.911t 0.375-0.911l 3.938-3.938l-3.938-3.938q-0.375-0.375 -0.375-0.911t 0.375-0.911l 1.821-1.821q 0.375-0.375 0.911-0.375t 0.911,0.375l 3.938,3.938l 3.938-3.938q 0.375-0.375 0.911-0.375t 0.911,0.375l 1.821,1.821q 0.375,0.375 0.375,0.911 t-0.375,0.911l-3.938,3.938l 3.938,3.938q 0.375,0.375 0.375,0.911zM 57.938,21.067l-8.732-8.719q-0.496-0.496 -0.496-1.212t 0.496-1.212l 8.732-8.719q 0.496-0.496 1.212-0.496t 1.212,0.496l 1.004,1.004q 0.496,0.496 0.496,1.212t-0.496,1.212l-6.509,6.509l 6.509,6.496q 0.496,0.509 0.496,1.219t-0.496,1.205l-1.004,1.004q-0.496,0.496 -1.212,0.496t-1.212-0.496zM 110.719,11.143q0.00,0.696 -0.496,1.219l-8.732,8.719q-0.496,0.496 -1.205,0.496t-1.205-0.496l-1.018-1.004q-0.496-0.522 -0.496-1.219q0.00-0.71 0.496-1.205l 6.509-6.509l-6.509-6.496q-0.496-0.522 -0.496-1.219q0.00-0.71 0.496-1.205l 1.018-1.004q 0.482-0.509 1.205-0.509t 1.205,0.509l 8.732,8.719q 0.496,0.496 0.496,1.205z"></path></svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: IcoMoon.io -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="120"
+   height="24"
+   viewBox="0 0 120 24"
+   fill="#ffffff"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.4 r"
+   sodipodi:docname="icons.svg">
+  <metadata
+     id="metadata10">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs8" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="831"
+     inkscape:window-height="480"
+     id="namedview6"
+     showgrid="false"
+     inkscape:zoom="5.025"
+     inkscape:cx="60"
+     inkscape:cy="12"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2" />
+  <path
+     d="M 17.384,17.705q0.00,0.536 -0.375,0.911l-1.821,1.821q-0.375,0.375 -0.911,0.375t-0.911-0.375l-3.938-3.938l-3.938,3.938q-0.375,0.375 -0.911,0.375t-0.911-0.375l-1.821-1.821q-0.375-0.375 -0.375-0.911t 0.375-0.911l 3.938-3.938l-3.938-3.938q-0.375-0.375 -0.375-0.911t 0.375-0.911l 1.821-1.821q 0.375-0.375 0.911-0.375t 0.911,0.375l 3.938,3.938l 3.938-3.938q 0.375-0.375 0.911-0.375t 0.911,0.375l 1.821,1.821q 0.375,0.375 0.375,0.911 t-0.375,0.911l-3.938,3.938l 3.938,3.938q 0.375,0.375 0.375,0.911zM 57.938,21.067l-8.732-8.719q-0.496-0.496 -0.496-1.212t 0.496-1.212l 8.732-8.719q 0.496-0.496 1.212-0.496t 1.212,0.496l 1.004,1.004q 0.496,0.496 0.496,1.212t-0.496,1.212l-6.509,6.509l 6.509,6.496q 0.496,0.509 0.496,1.219t-0.496,1.205l-1.004,1.004q-0.496,0.496 -1.212,0.496t-1.212-0.496zM 110.719,11.143q0.00,0.696 -0.496,1.219l-8.732,8.719q-0.496,0.496 -1.205,0.496t-1.205-0.496l-1.018-1.004q-0.496-0.522 -0.496-1.219q0.00-0.71 0.496-1.205l 6.509-6.509l-6.509-6.496q-0.496-0.522 -0.496-1.219q0.00-0.71 0.496-1.205l 1.018-1.004q 0.482-0.509 1.205-0.509t 1.205,0.509l 8.732,8.719q 0.496,0.496 0.496,1.205z"
+     id="path4"
+     style="fill:#ffffff;stroke:#000000;stroke-opacity:1;stroke-width:0.6;stroke-miterlimit:4;stroke-dasharray:none" />
+</svg>
