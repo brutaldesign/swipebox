@@ -215,9 +215,11 @@ html.swipebox-html.swipebox-touch {
   0% {
     left: 0;
   }
+
   50% {
     left: -30px;
   }
+
   100% {
     left: 0;
   }
@@ -227,9 +229,11 @@ html.swipebox-html.swipebox-touch {
   0% {
     left: 0;
   }
+
   50% {
     left: -30px;
   }
+
   100% {
     left: 0;
   }
@@ -238,9 +242,11 @@ html.swipebox-html.swipebox-touch {
   0% {
     left: 0;
   }
+
   50% {
     left: 30px;
   }
+
   100% {
     left: 0;
   }
@@ -249,9 +255,11 @@ html.swipebox-html.swipebox-touch {
   0% {
     left: 0;
   }
+
   50% {
     left: 30px;
   }
+
   100% {
     left: 0;
   }

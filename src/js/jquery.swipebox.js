@@ -1,4 +1,4 @@
-/*! Swipebox v1.3.0.2 | Constantin Saguin csag.co | MIT License | github.com/brutaldesign/swipebox */
+/*! Swipebox v1.4.1 | Constantin Saguin csag.co | MIT License | github.com/brutaldesign/swipebox */
 
 ;( function ( window, document, $, undefined ) {
 
@@ -23,7 +23,7 @@
 				loopAtEnd: false,
 				autoplayVideos: false,
 				queryStringData: {},
-                toggleClassOnLoad: ''
+				toggleClassOnLoad: ''
 			},
 
 			plugin = this,
