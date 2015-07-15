@@ -23,7 +23,8 @@
 				loopAtEnd: false,
 				autoplayVideos: false,
 				queryStringData: {},
-				toggleClassOnLoad: ''
+				toggleClassOnLoad: '',
+				title: 'title'
 			},
 
 			plugin = this,
@@ -116,8 +117,8 @@
 						var title = null,
 							href = null;
 
-						if ( $( this ).attr( 'title' ) ) {
-							title = $( this ).attr( 'title' );
+						if ( $( this ).attr( plugin.settings.title ) ) {
+							title = $( this ).attr( plugin.settings.title );
 						}
 
 
