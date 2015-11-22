@@ -111,6 +111,16 @@
 						$elem = $( selector );
 					}
 
+					var include = function(haystack, needle) {
+						for (var i = 0; i <  haystack.length; i++) {
+							if(haystack[i] === needle) { return(true); }
+						}
+						return(false);
+					},
+					hrefs = [],
+					i = 0,
+					currentHref = $(this).attr('href');
+
 					$elem.each( function() {
 
 						var title = null,
@@ -120,18 +130,22 @@
 							title = $( this ).attr( 'title' );
 						}
 
-
 						if ( $( this ).attr( 'href' ) ) {
 							href = $( this ).attr( 'href' );
 						}
 
-						elements.push( {
-							href: href,
-							title: title
-						} );
+						if(include(hrefs, href)) {
+						} else {
+							if(currentHref === href) { index = i; }
+							hrefs.push(href);
+							elements.push( {
+								href: href,
+								title: title
+							} );
+							i++;
+						}
 					} );
 
-					index = $elem.index( $( this ) );
 					event.preventDefault();
 					event.stopPropagation();
 					ui.target = $( event.target );
@@ -219,7 +233,6 @@
 							height = winWidth;
 						}
 					}, false );
-
 
 				} else {
 
@@ -756,7 +769,7 @@
 				if ( a.search ) {
 					qs = JSON.parse( '{"' + a.search.toLowerCase().replace('?','').replace(/&/g,'","').replace(/=/g,'":"') + '"}' );
 				}
-				
+
 				// Extend with custom data
 				if ( $.isPlainObject( customData ) ) {
 					qs = $.extend( qs, customData, plugin.settings.queryStringData ); // The dev has always the final word
@@ -798,7 +811,7 @@
 						'portrait' : '0',
 						'color': plugin.settings.vimeoColor
 					});
-					iframe = '<iframe width="560" height="315"  src="//player.vimeo.com/video/' + vimeoUrl[1] + '?' + qs + '" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
+					iframe = '<iframe width="560" height="315" src="//player.vimeo.com/video/' + vimeoUrl[1] + '?' + qs + '" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
 
 				} else {
 					iframe = '<iframe width="560" height="315" src="' + url + '" frameborder="0" allowfullscreen></iframe>';
@@ -811,29 +824,29 @@
 			 * Load image
 			 */
 			loadMedia : function ( src, callback ) {
-                // Inline content
-                if ( src.trim().indexOf('#') === 0 ) {
-                    callback.call(
-                    	$('<div>', {
-                    		'class' : 'swipebox-inline-container'
-                    	})
-                    	.append(
-                    		$(src)
-	                    	.clone()
-	                    	.toggleClass( plugin.settings.toggleClassOnLoad )
-	                    )
-                    );
-                }
-                // Everything else
-                else {
-    				if ( ! this.isVideo( src ) ) {
-    					var img = $( '<img>' ).on( 'load', function() {
-    						callback.call( img );
-    					} );
+				// Inline content
+				if ( src.trim().indexOf('#') === 0 ) {
+					callback.call(
+							$('<div>', {
+								'class' : 'swipebox-inline-container'
+							})
+							.append(
+								$(src)
+								.clone()
+								.toggleClass( plugin.settings.toggleClassOnLoad )
+								)
+							);
+				}
+				// Everything else
+				else {
+					if ( ! this.isVideo( src ) ) {
+						var img = $( '<img>' ).on( 'load', function() {
+							callback.call( img );
+						} );
 
-    					img.attr( 'src', src );
-    				}
-                }
+						img.attr( 'src', src );
+					}
+				}
 			},
 
 			/**
