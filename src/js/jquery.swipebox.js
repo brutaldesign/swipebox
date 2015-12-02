@@ -157,7 +157,7 @@
 				this.preloadMedia( index+1 );
 				this.preloadMedia( index-1 );
 				if ( plugin.settings.afterOpen ) {
-					plugin.settings.afterOpen();
+					plugin.settings.afterOpen(index);
 				}
 			},
 
@@ -843,7 +843,7 @@
 					$this.setSlide( index );
 					$this.preloadMedia( index+1 );
 					if ( plugin.settings.nextSlide ) {
-						plugin.settings.nextSlide();
+						plugin.settings.nextSlide(index);
 					}
 				} else {
 
@@ -855,7 +855,7 @@
 						$this.setSlide( index );
 						$this.preloadMedia( index + 1 );
 						if ( plugin.settings.nextSlide ) {
-							plugin.settings.nextSlide();
+							plugin.settings.nextSlide(index);
 						}
 					} else {
 						$( '#swipebox-overlay' ).addClass( 'rightSpring' );
@@ -879,7 +879,7 @@
 					this.setSlide( index );
 					this.preloadMedia( index-1 );
 					if ( plugin.settings.prevSlide ) {
-						plugin.settings.prevSlide();
+						plugin.settings.prevSlide(index);
 					}
 				} else {
 					$( '#swipebox-overlay' ).addClass( 'leftSpring' );
@@ -889,11 +889,11 @@
 				}
 			},
 
-			nextSlide : function () {
+			nextSlide : function (index) {
 				// Callback for next slide
 			},
 
-			prevSlide : function () {
+			prevSlide : function (index) {
 				// Callback for prev slide
 			},
 
