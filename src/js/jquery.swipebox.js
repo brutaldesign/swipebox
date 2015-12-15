@@ -708,7 +708,7 @@
 
 				if ( title ) {
 					$( '#swipebox-top-bar' ).show();
-					$( '#swipebox-title' ).append( title );
+					$( '#swipebox-title' ).text( title );
 				} else {
 					$( '#swipebox-top-bar' ).hide();
 				}
