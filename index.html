@@ -84,7 +84,8 @@
 			<div id="try"></div>
 			<ul id="box-container">
 				<li class="box">
-					<a href="http://swipebox.csag.co/images/image-1.jpg" class="swipebox" title="Fog">
+					<a href="http://swipebox.csag.co/images/image-1.jpg" class="swipebox" title="Fog"
+					   data-caption="Two men fighting their way through the fog and storm. Nasty weather and a pretty long description of an old black'n'white photo.">
 						<img src="http://swipebox.csag.co/images/image-1.jpg" alt="image">
 					</a>
 				</li>
@@ -226,7 +227,9 @@ $( '#gallery' ).click( function( e ) {
 		beforeOpen: function() {}, <span>// called before opening</span>
 		afterOpen: null, <span>// called after opening</span>
 		afterClose: function() {}, <span>// called after closing</span>
-		loopAtEnd: false <span>// true will return to the first image after the last image is reached</span>
+		loopAtEnd: false, <span>// true will return to the first image after the last image is reached</span>
+		titleAttribute: 'title', <span>// attribute to take the image title from</span>
+		captionAttribute: 'data-caption' <span>// attribute to take the image caption from</span>
 	} );
 
 } )( jQuery );

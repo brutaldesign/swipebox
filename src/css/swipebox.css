@@ -99,7 +99,7 @@ html.swipebox-html.swipebox-touch {
   position: absolute;
   left: 0;
   z-index: 999;
-  height: 50px;
+  min-height: 50px;
   width: 100%;
 }
 
@@ -112,11 +112,11 @@ html.swipebox-html.swipebox-touch {
 }
 
 #swipebox-top-bar {
-  top: -50px;
+  bottom: 100%;
 }
 #swipebox-top-bar.visible-bars {
-  -webkit-transform: translate3d(0, 50px, 0);
-          transform: translate3d(0, 50px, 0);
+  -webkit-transform: translate3d(0, 100%, 0);
+          transform: translate3d(0, 100%, 0);
 }
 
 #swipebox-title {
@@ -215,11 +215,9 @@ html.swipebox-html.swipebox-touch {
   0% {
     left: 0;
   }
-
   50% {
     left: -30px;
   }
-
   100% {
     left: 0;
   }
@@ -229,11 +227,9 @@ html.swipebox-html.swipebox-touch {
   0% {
     left: 0;
   }
-
   50% {
     left: -30px;
   }
-
   100% {
     left: 0;
   }
@@ -242,11 +238,9 @@ html.swipebox-html.swipebox-touch {
   0% {
     left: 0;
   }
-
   50% {
     left: 30px;
   }
-
   100% {
     left: 0;
   }
@@ -255,11 +249,9 @@ html.swipebox-html.swipebox-touch {
   0% {
     left: 0;
   }
-
   50% {
     left: 30px;
   }
-
   100% {
     left: 0;
   }
@@ -292,4 +284,8 @@ html.swipebox-html.swipebox-touch {
   font-size: 15px;
   line-height: 43px;
   font-family: Helvetica, Arial, sans-serif;
+}
+#swipebox-top-bar div.caption {
+  font-size: 13px;
+  line-height: 20px;
 }
