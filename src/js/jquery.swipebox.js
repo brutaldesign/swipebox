@@ -18,6 +18,7 @@
 				beforeOpen: null,
 				afterOpen: null,
 				afterClose: null,
+				afterMedia: null,
 				nextSlide: null,
 				prevSlide: null,
 				loopAtEnd: false,
@@ -690,6 +691,10 @@
 					} );
 				} else {
 					slide.html( $this.getVideo( src ) );
+				}
+
+				if ( plugin.settings.afterMedia ) {
+					plugin.settings.afterMedia( index );
 				}
 
 			},
