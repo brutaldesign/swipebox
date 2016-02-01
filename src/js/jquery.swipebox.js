@@ -688,13 +688,17 @@
 					$this.loadMedia( src, function() {
 						slide.removeClass( 'slide-loading' );
 						slide.html( this );
+
+						if ( plugin.settings.afterMedia ) {
+							plugin.settings.afterMedia( index );
+						}
 					} );
 				} else {
 					slide.html( $this.getVideo( src ) );
-				}
 
-				if ( plugin.settings.afterMedia ) {
-					plugin.settings.afterMedia( index );
+					if ( plugin.settings.afterMedia ) {
+						plugin.settings.afterMedia( index );
+					}
 				}
 
 			},
