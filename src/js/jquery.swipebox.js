@@ -92,12 +92,12 @@
 					}
 
 					elements = [];
-					var index , relType, relVal;
+					var index, relType, relVal;
 
 					// Allow for HTML5 compliant attribute before legacy use of rel
 					if ( ! relVal ) {
 						relType = 'data-rel';
-						relVal  = $( this ).attr( relType );
+						relVal = $( this ).attr( relType );
 					}
 
 					if ( ! relVal ) {
