@@ -1,4 +1,4 @@
-/*! Swipebox v1.4.1 | Constantin Saguin csag.co | MIT License | github.com/brutaldesign/swipebox */
+/*! Swipebox v1.4.4 | Constantin Saguin csag.co | MIT License | github.com/brutaldesign/swipebox */
 
 ;( function ( window, document, $, undefined ) {
 
@@ -896,12 +896,12 @@
 					}, 500 );
 				}
 			},
-
-			nextSlide : function (index) {
+			/* jshint unused:false */
+			nextSlide : function ( index ) {
 				// Callback for next slide
 			},
 
-			prevSlide : function (index) {
+			prevSlide : function ( index ) {
 				// Callback for prev slide
 			},
 
