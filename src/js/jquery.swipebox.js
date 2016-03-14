@@ -18,6 +18,7 @@
 				beforeOpen: null,
 				afterOpen: null,
 				afterClose: null,
+				afterMedia: null,
 				nextSlide: null,
 				prevSlide: null,
 				loopAtEnd: false,
@@ -686,9 +687,17 @@
 					$this.loadMedia( src, function() {
 						slide.removeClass( 'slide-loading' );
 						slide.html( this );
+
+						if ( plugin.settings.afterMedia ) {
+							plugin.settings.afterMedia( index );
+						}
 					} );
 				} else {
 					slide.html( $this.getVideo( src ) );
+
+					if ( plugin.settings.afterMedia ) {
+						plugin.settings.afterMedia( index );
+					}
 				}
 
 			},

@@ -70,6 +70,7 @@ videoMaxWidth : 1140, // videos max width
 beforeOpen: function(){} , // called before opening
 afterOpen: null, // called after opening
 afterClose: function(){}, // called after closing
+afterMedia: function(){}, // called after media is loaded
 loopAtEnd: false, // true will return to the first image after the last image is reached
 autoplayVideos: false // true will autoplay Youtube and Vimeo videos
 queryStringData: {} // plain object with custom query string arguments to pass/override for video URLs,
