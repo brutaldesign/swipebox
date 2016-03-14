@@ -64,6 +64,7 @@ useCSS : true, // false will force the use of jQuery for animations
 initialIndexOnArray: 0, // which image index to init when a array is passed
 removeBarsOnMobile : true, // false will show bottom navigation bar on mobile devices
 hideCloseButtonOnMobile : false, // true will hide the close button on mobile devices
+removeBarsOnMobile : true, // false will show bottom bar on mobile devices
 hideBarsDelay : 3000, // delay before hiding bars on desktop
 videoMaxWidth : 1140, // videos max width
 beforeOpen: function(){} , // called before opening
