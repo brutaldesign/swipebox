@@ -1,4 +1,4 @@
-/*! Swipebox v1.4.1 | Constantin Saguin csag.co | MIT License | github.com/brutaldesign/swipebox */
+/*! Swipebox v1.4.4 | Constantin Saguin csag.co | MIT License | github.com/brutaldesign/swipebox */
 
 ;( function ( window, document, $, undefined ) {
 
@@ -92,12 +92,12 @@
 					}
 
 					elements = [];
-					var index , relType, relVal;
+					var index, relType, relVal;
 
 					// Allow for HTML5 compliant attribute before legacy use of rel
 					if ( ! relVal ) {
 						relType = 'data-rel';
-						relVal  = $( this ).attr( relType );
+						relVal = $( this ).attr( relType );
 					}
 
 					if ( ! relVal ) {
@@ -896,12 +896,12 @@
 					}, 500 );
 				}
 			},
-
-			nextSlide : function (index) {
+			/* jshint unused:false */
+			nextSlide : function ( index ) {
 				// Callback for next slide
 			},
 
-			prevSlide : function (index) {
+			prevSlide : function ( index ) {
 				// Callback for prev slide
 			},
 
