@@ -72,6 +72,7 @@ loopAtEnd: false, // true will return to the first image after the last image is
 autoplayVideos: false // true will autoplay Youtube and Vimeo videos
 queryStringData: {} // plain object with custom query string arguments to pass/override for video URLs,
 toggleClassOnLoad: '' // CSS class that can be toggled when the slide will be loaded (like 'hidden' of Bootstrap)
+useSVG: true
 ```
 
 ###Pull Requests
