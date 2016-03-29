@@ -436,7 +436,7 @@
 					} );
 
 					$( '#swipebox-overlay' ).removeClass( 'leftSpringTouch' ).removeClass( 'rightSpringTouch' );
-					$( '.touching' ).off( 'touchmove' ).removeClass( 'touching' );
+					$( '.touching' ).off( 'touchmove' );
 
 				} );
 			},
