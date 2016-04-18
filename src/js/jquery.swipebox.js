@@ -909,10 +909,12 @@
 			 * Close
 			 */
 			closeSlide : function () {
+				$('#swipebox-overlay').fadeOut( 300, function() { // fade out overlay
+					$(window).destroy(); 
+				});
 				$( 'html' ).removeClass( 'swipebox-html' );
 				$( 'html' ).removeClass( 'swipebox-touch' );
 				$( window ).trigger( 'resize' );
-				this.destroy();
 			},
 
 			/**
