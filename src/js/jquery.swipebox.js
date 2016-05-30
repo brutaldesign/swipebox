@@ -76,7 +76,7 @@
 
 			} else {
 
-				$( document ).on( 'click', selector, function( event ) {
+				$( document ).one( 'click', selector, function( event ) {
 
 					// console.log( isTouch );
 
