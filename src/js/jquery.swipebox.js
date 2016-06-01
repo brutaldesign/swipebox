@@ -76,7 +76,7 @@
 
 			} else {
 
-				$( document ).on( 'click', selector, function( event ) {
+				$( document ).on( 'click.swipebox', selector, function( event ) {
 
 					// console.log( isTouch );
 
@@ -925,6 +925,7 @@
 				$( 'body' ).unbind( 'touchend' );
 				$( '#swipebox-slider' ).unbind();
 				$( '#swipebox-overlay' ).remove();
+				$( document ).off( 'click.swipebox' );
 
 				if ( ! $.isArray( elem ) ) {
 					elem.removeData( '_swipebox' );
