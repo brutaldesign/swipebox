@@ -59,6 +59,10 @@
 		$.swipebox.close = function () {
 			ui.closeSlide();
 		};
+		
+		$.swipebox.destroy = function () {
+			$( document ).off( 'click.swipebox' );
+		};
 
 		$.swipebox.extend = function () {
 			return ui;
@@ -925,7 +929,6 @@
 				$( 'body' ).unbind( 'touchend' );
 				$( '#swipebox-slider' ).unbind();
 				$( '#swipebox-overlay' ).remove();
-				$( document ).off( 'click.swipebox' );
 
 				if ( ! $.isArray( elem ) ) {
 					elem.removeData( '_swipebox' );

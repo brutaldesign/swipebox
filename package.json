@@ -1,6 +1,6 @@
 {
   "name": "swipebox",
-  "version": "1.4.4",
+  "version": "1.4.6",
   "description": "A touchable jQuery lightbox",
   "main": "/src/js/jquery.swipebox.js",
   "repository": {
