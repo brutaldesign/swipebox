@@ -113,14 +113,10 @@
 
 					$elem.each( function() {
 
-						var title = null,
-							href = null;
+						var titleAttr = $( this ).attr( 'title' );
+						var title = titleAttr ? titleAttr : $( this ).data( 'title' );
 
-						if ( $( this ).attr( 'title' ) ) {
-							title = $( this ).attr( 'title' );
-						}
-
-
+						var href = null;
 						if ( $( this ).attr( 'href' ) ) {
 							href = $( this ).attr( 'href' );
 						}
