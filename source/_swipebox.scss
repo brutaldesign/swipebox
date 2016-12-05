@@ -1,0 +1,249 @@
+html.swipebox {
+  overflow: hidden !important;
+}
+
+#swipebox-overlay {
+  @include user-select(none);
+  height: 100%;
+  left: 0;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 99999 !important;
+
+  img {
+    border: none !important;
+  }
+}
+
+#swipebox-slider {
+  display: none;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  white-space: nowrap;
+  width: 100%;
+
+  &.rightSpring {
+    -moz-animation: rightSpring 0.3s;
+    -webkit-animation: rightSpring 0.3s;
+  }
+  &.leftSpring {
+    -moz-animation: leftSpring 0.3s;
+    -webkit-animation: leftSpring 0.3s;
+  }
+  .slide {
+    background: image-url("loading.gif") no-repeat center center;
+    display: inline-block;
+    height: 100%;
+    line-height: 1px;
+    text-align: center;
+    width: 100%;
+
+    &:before {
+      content: "";
+      display: inline-block;
+      height: 50%;
+      margin-right: -1px;
+      width: 1px;
+    }
+
+    img,
+    .swipebox-video-container {
+      display: inline-block;
+      height: auto;
+      margin: 0;
+      max-height: 100%;
+      max-width: 100%;
+      padding: 0;
+      vertical-align: middle;
+      width: auto;
+    }
+
+    .swipebox-video-container {
+      @include box-sizing(border-box);
+      background:none;
+      max-height: 100%;
+      max-width: 1140px;
+      padding:5%;
+      width: 100%;
+
+      .swipebox-video {
+        height: 0;
+        overflow: hidden;
+        padding-bottom: 56.25%;
+        position: relative;
+        width: 100%;
+
+        iframe {
+          height: 100% !important;
+          position: absolute;
+          top: 0; left: 0;
+          width: 100% !important;
+        }
+      }
+    }
+  }
+}
+
+%swipebox {
+  height: 50px;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  z-index: 999;
+}
+
+#swipebox-action {
+  @extend %swipebox;
+  bottom: -50px;
+
+  &.visible-bars {
+    bottom: 0;
+  }
+  &.force-visible-bars {
+    bottom: 0 !important;
+  }
+  #swipebox-prev,
+  #swipebox-next,
+  #swipebox-close {
+    background-image: image-url("icons.png");
+    background-repeat: no-repeat;
+    border: none !important;
+    text-decoration: none !important;
+    cursor: pointer;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 0;
+  }
+  #swipebox-close {
+    background-position: 15px 12px;
+    left: 40px;
+  }
+  #swipebox-prev {
+    background-position: -32px 13px;
+    right: 100px;
+  }
+  #swipebox-next {
+    background-position: -78px 13px;
+    right: 40px;
+  }
+  #swipebox-prev.disabled,
+  #swipebox-next.disabled {
+    @include opacity(0.3);
+  }
+}
+
+#swipebox-caption {
+  @extend %swipebox;
+  top: -50px;
+  text-align: center;
+
+  &.visible-bars {
+    top: 0;
+  }
+  &.force-visible-bars {
+    top: 0 !important;
+  }
+}
+
+@-moz-keyframes rightSpring {
+  0% {
+    margin-left: 0px;
+  }
+
+  50% {
+    margin-left: -30px;
+  }
+
+  100% {
+    margin-left: 0px;
+  }
+}
+
+@-moz-keyframes leftSpring {
+  0% {
+    margin-left: 0px;
+  }
+
+  50% {
+    margin-left: 30px;
+  }
+
+  100% {
+    margin-left: 0px;
+  }
+}
+
+@-webkit-keyframes rightSpring {
+  0% {
+    margin-left: 0px;
+  }
+
+  50% {
+    margin-left: -30px;
+  }
+
+  100% {
+    margin-left: 0px;
+  }
+}
+
+@-webkit-keyframes leftSpring {
+  0% {
+    margin-left: 0px;
+  }
+
+  50% {
+    margin-left: 30px;
+  }
+
+  100% {
+    margin-left: 0px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  #swipebox-action {
+    #swipebox-close {
+      left: 0;
+    }
+    #swipebox-prev {
+      right: 60px;
+    }
+    #swipebox-next {
+      right: 0;
+    }
+  }
+}
+
+
+/* Skin 
+--------------------------*/
+#swipebox-overlay {
+  background: #0d0d0d;
+}
+
+#swipebox-action,
+#swipebox-caption {
+  text-shadow: 1px 1px 1px black;
+  background-color: #0d0d0d;
+  @include filter-gradient(#0d0d0d, #000000, vertical);
+  @include background-image(linear-gradient(top,  #0d0d0d 0%,#000000 100%));
+  @include opacity(0.95);
+}
+
+#swipebox-action {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+#swipebox-caption {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  color: white !important;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 43px;
+}
