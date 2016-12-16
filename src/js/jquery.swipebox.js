@@ -185,6 +185,15 @@
 					$( '#swipebox-slider' ).append( '<div class="slide"></div>' );
 				} );
 
+				$('#swipebox-slider').click(function(e) {
+					if (e.target.nodeName == 'IMG') {
+						$this.getNext();
+					}
+					else {
+						$this.destroy();
+					}
+				});
+
 				$this.setDim();
 				$this.actions();
 
