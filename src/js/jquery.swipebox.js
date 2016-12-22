@@ -1,4 +1,4 @@
-/*! Swipebox v1.4.1 | Constantin Saguin csag.co | MIT License | github.com/brutaldesign/swipebox */
+/*! Swipebox v1.4.4 | Constantin Saguin csag.co | MIT License | github.com/brutaldesign/swipebox */
 
 ;( function ( window, document, $, undefined ) {
 
@@ -18,6 +18,7 @@
 				beforeOpen: null,
 				afterOpen: null,
 				afterClose: null,
+				afterMedia: null,
 				nextSlide: null,
 				prevSlide: null,
 				loopAtEnd: false,
@@ -32,7 +33,6 @@
 			elements = [], // slides array [ { href:'...', title:'...' }, ...],
 			$elem,
 			selector = elem.selector,
-			$selector = $( selector ),
 			isMobile = navigator.userAgent.match( /(iPad)|(iPhone)|(iPod)|(Android)|(PlayBook)|(BB10)|(BlackBerry)|(Opera Mini)|(IEMobile)|(webOS)|(MeeGo)/i ),
 			isTouch = isMobile !== null || document.createTouch !== undefined || ( 'ontouchstart' in window ) || ( 'onmsgesturechange' in window ) || navigator.msMaxTouchPoints,
 			supportSVG = !! document.createElementNS && !! document.createElementNS( 'http://www.w3.org/2000/svg', 'svg').createSVGRect,
@@ -94,12 +94,12 @@
 					}
 
 					elements = [];
-					var index , relType, relVal;
+					var index, relType, relVal;
 
 					// Allow for HTML5 compliant attribute before legacy use of rel
 					if ( ! relVal ) {
 						relType = 'data-rel';
-						relVal  = $( this ).attr( relType );
+						relVal = $( this ).attr( relType );
 					}
 
 					if ( ! relVal ) {
@@ -108,7 +108,7 @@
 					}
 
 					if ( relVal && relVal !== '' && relVal !== 'nofollow' ) {
-						$elem = $selector.filter( '[' + relType + '="' + relVal + '"]' );
+						$elem = $( selector ).filter( '[' + relType + '="' + relVal + '"]' );
 					} else {
 						$elem = $( selector );
 					}
@@ -164,7 +164,7 @@
 				this.preloadMedia( index+1 );
 				this.preloadMedia( index-1 );
 				if ( plugin.settings.afterOpen ) {
-					plugin.settings.afterOpen();
+					plugin.settings.afterOpen(index);
 				}
 			},
 
@@ -694,9 +694,17 @@
 					$this.loadMedia( src, function() {
 						slide.removeClass( 'slide-loading' );
 						slide.html( this );
+
+						if ( plugin.settings.afterMedia ) {
+							plugin.settings.afterMedia( index );
+						}
 					} );
 				} else {
 					slide.html( $this.getVideo( src ) );
+
+					if ( plugin.settings.afterMedia ) {
+						plugin.settings.afterMedia( index );
+					}
 				}
 
 			},
@@ -861,7 +869,7 @@
 					$this.setSlide( index );
 					$this.preloadMedia( index+1 );
 					if ( plugin.settings.nextSlide ) {
-						plugin.settings.nextSlide();
+						plugin.settings.nextSlide(index);
 					}
 				} else {
 
@@ -873,7 +881,7 @@
 						$this.setSlide( index );
 						$this.preloadMedia( index + 1 );
 						if ( plugin.settings.nextSlide ) {
-							plugin.settings.nextSlide();
+							plugin.settings.nextSlide(index);
 						}
 					} else {
 						$( '#swipebox-overlay' ).addClass( 'rightSpring' );
@@ -897,7 +905,7 @@
 					this.setSlide( index );
 					this.preloadMedia( index-1 );
 					if ( plugin.settings.prevSlide ) {
-						plugin.settings.prevSlide();
+						plugin.settings.prevSlide(index);
 					}
 				} else {
 					$( '#swipebox-overlay' ).addClass( 'leftSpring' );
@@ -906,12 +914,12 @@
 					}, 500 );
 				}
 			},
-
-			nextSlide : function () {
+			/* jshint unused:false */
+			nextSlide : function ( index ) {
 				// Callback for next slide
 			},
 
-			prevSlide : function () {
+			prevSlide : function ( index ) {
 				// Callback for prev slide
 			},
 
