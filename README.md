@@ -60,22 +60,23 @@ $( '.swipebox' ).swipebox();
 ###Options
 
 ```javascript
-useCSS : true, // false will force the use of jQuery for animations
+useCSS: true, // false will force the use of jQuery for animations
+useSVG: true, // false will force using of PNG images, instead of scalable vector graphics as CSS
 initialIndexOnArray: 0, // which image index to init when a array is passed
 removeBarsOnMobile : true, // false will show top navigation bar on mobile devices
 hideCloseButtonOnMobile : false, // true will hide the close button on mobile devices
 removeBarsOnMobile : true, // false will show bottom bar on mobile devices
 hideBarsDelay : 3000, // delay before hiding bars on desktop
 videoMaxWidth : 1140, // videos max width
-beforeOpen: function(){} , // called before opening
+beforeOpen: function(){}, // called before opening
 afterOpen: null, // called after opening
 afterClose: function(){}, // called after closing
 afterMedia: function(){}, // called after media is loaded
 loopAtEnd: false, // true will return to the first image after the last image is reached
-autoplayVideos: false // true will autoplay Youtube and Vimeo videos
-queryStringData: {} // plain object with custom query string arguments to pass/override for video URLs,
-toggleClassOnLoad: '' // CSS class that can be toggled when the slide will be loaded (like 'hidden' of Bootstrap)
-useSVG: true
+autoplayVideos: false, // true will autoplay Youtube and Vimeo videos
+queryStringData: {}, // plain object with custom query string arguments to pass/override for video URLs,
+toggleClassOnLoad: '', // CSS class that can be toggled when the slide will be loaded (like 'hidden' of Bootstrap)
+closeOnBack: false // true will close the SwipeBox and remain on same URL upon clicking back button
 ```
 
 ###Pull Requests
