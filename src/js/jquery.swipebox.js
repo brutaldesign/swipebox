@@ -24,7 +24,8 @@
 				loopAtEnd: false,
 				autoplayVideos: false,
 				queryStringData: {},
-				toggleClassOnLoad: ''
+				toggleClassOnLoad: '',
+				rtl: false
 			},
 
 			plugin = this,
@@ -598,15 +599,15 @@
 
 				var slider = $( '#swipebox-slider' );
 
-				currentX = -index*100;
+				currentX = plugin.settings.rtl ? index*100 : -index*100;
 
 				if ( this.doCssTrans() ) {
 					slider.css( {
-						'-webkit-transform' : 'translate3d(' + (-index*100)+'%, 0, 0)',
-						'transform' : 'translate3d(' + (-index*100)+'%, 0, 0)'
+						'-webkit-transform' : 'translate3d(' + currentX +'%, 0, 0)',
+						'transform' : 'translate3d(' + currentX +'%, 0, 0)'
 					} );
 				} else {
-					slider.animate( { left : ( -index*100 )+'%' } );
+					slider.animate( { left : currentX +'%' } );
 				}
 
 				$( '#swipebox-slider .slide' ).removeClass( 'current' );
