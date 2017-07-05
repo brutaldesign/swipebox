@@ -1,6 +1,8 @@
 /*! Swipebox v1.4.4 | Constantin Saguin csag.co | MIT License | github.com/brutaldesign/swipebox */
 
 ;( function ( window, document, $, undefined ) {
+	
+	var YOUTUBE_REGEX = /((?:www\.)?youtube\.com|(?:www\.)?youtube-nocookie\.com|(?:www\.)?youtu\.be)\/(?:watch\?v=|embed\/)([a-zA-Z0-9\-_]+)/;
 
 	$.swipebox = function( elem, options ) {
 
@@ -728,7 +730,7 @@
 			isVideo : function ( src ) {
 
 				if ( src ) {
-					if ( src.match( /(youtube\.com|youtube-nocookie\.com)\/watch\?v=([a-zA-Z0-9\-_]+)/) || src.match( /vimeo\.com\/([0-9]*)/ ) || src.match( /youtu\.be\/([a-zA-Z0-9\-_]+)/ ) ) {
+					if ( src.match( YOUTUBE_REGEX ) || src.match( /vimeo\.com\/([0-9]*)/ ) ) {
 						return true;
 					}
 
@@ -777,14 +779,10 @@
 			 */
 			getVideo : function( url ) {
 				var iframe = '',
-					youtubeUrl = url.match( /((?:www\.)?youtube\.com|(?:www\.)?youtube-nocookie\.com)\/watch\?v=([a-zA-Z0-9\-_]+)/ ),
-					youtubeShortUrl = url.match(/(?:www\.)?youtu\.be\/([a-zA-Z0-9\-_]+)/),
+					youtubeUrl = url.match( YOUTUBE_REGEX ),
 					vimeoUrl = url.match( /(?:www\.)?vimeo\.com\/([0-9]*)/ ),
 					qs = '';
-				if ( youtubeUrl || youtubeShortUrl) {
-					if ( youtubeShortUrl ) {
-						youtubeUrl = youtubeShortUrl;
-					}
+				if ( youtubeUrl ) {
 					qs = ui.parseUri( url, {
 						'autoplay' : ( plugin.settings.autoplayVideos ? '1' : '0' ),
 						'v' : ''
