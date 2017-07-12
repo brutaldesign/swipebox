@@ -788,7 +788,7 @@
 			/**
 			 * Get video iframe code from URL
 			 */
-			getVideo : function( url, poster = null ) {
+			getVideo : function( url, poster ) {
 				var iframe = '',
 					youtubeUrl = url.match( /((?:www\.)?youtube\.com|(?:www\.)?youtube-nocookie\.com)\/watch\?v=([a-zA-Z0-9\-_]+)/ ),
 					youtubeShortUrl = url.match(/(?:www\.)?youtu\.be\/([a-zA-Z0-9\-_]+)/),
