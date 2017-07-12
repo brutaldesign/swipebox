@@ -115,7 +115,9 @@
 					$elem.each( function() {
 
 						var title = null,
-							href = null;
+							href = null,
+							poster = null;
+
 
 						if ( $( this ).attr( 'title' ) ) {
 							title = $( this ).attr( 'title' );
@@ -126,9 +128,14 @@
 							href = $( this ).attr( 'href' );
 						}
 
+						if ( $( this ).data( 'poster' ) ) {
+							poster = $( this ).data( 'poster' );
+						}
+
 						elements.push( {
 							href: href,
-							title: title
+							title: title,
+							poster: poster,
 						} );
 					} );
 
@@ -671,7 +678,8 @@
 			openMedia : function ( index ) {
 				var $this = this,
 					src,
-					slide;
+					slide,
+					poster = null;
 
 				if ( elements[ index ] !== undefined ) {
 					src = elements[ index ].href;
@@ -679,6 +687,10 @@
 
 				if ( index < 0 || index >= elements.length ) {
 					return false;
+				}
+
+				if ( elements[ index ] !== undefined ) {
+					poster = elements[ index ].poster;
 				}
 
 				slide = $( '#swipebox-slider .slide' ).eq( index );
@@ -694,7 +706,7 @@
 						}
 					} );
 				} else {
-					slide.html( $this.getVideo( src ) );
+					slide.html( $this.getVideo( src, poster ) );
 
 					if ( plugin.settings.afterMedia ) {
 						plugin.settings.afterMedia( index );
@@ -776,7 +788,7 @@
 			/**
 			 * Get video iframe code from URL
 			 */
-			getVideo : function( url ) {
+			getVideo : function( url, poster = null ) {
 				var iframe = '',
 					youtubeUrl = url.match( /((?:www\.)?youtube\.com|(?:www\.)?youtube-nocookie\.com)\/watch\?v=([a-zA-Z0-9\-_]+)/ ),
 					youtubeShortUrl = url.match(/(?:www\.)?youtu\.be\/([a-zA-Z0-9\-_]+)/),
@@ -803,7 +815,8 @@
 					iframe = '<iframe width="560" height="315"  src="//player.vimeo.com/video/' + vimeoUrl[1] + '?' + qs + '" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
 
 				} else if ( Mp4Url ) {
-					iframe = '<video width="560" height="315" controls preload="none"><source src="' + url + '" type="video/mp4"/></video>';
+					var posterAttr = poster == null ? '' : 'poster="' + poster + '"';
+					iframe = '<video width="560" height="315" controls preload="none" ' + posterAttr + '><source src="' + url + '" type="video/mp4"/></video>';
 				} else {
 					iframe = '<iframe width="560" height="315" src="' + url + '" frameborder="0" allowfullscreen></iframe>';
 				}
