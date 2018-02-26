@@ -9,7 +9,7 @@ A touchable jQuery lightbox.
 
 Swipebox is a jQuery "lightbox" plugin for desktop, mobile and tablet.
 
-##Features
+## Features
 
 - Swipe gestures for mobile
 - Keyboard Navigation for desktop
@@ -18,13 +18,13 @@ Swipebox is a jQuery "lightbox" plugin for desktop, mobile and tablet.
 - Easy CSS customization
 - Video, Images and Inline content
 
-###Compatibility
+### Compatibility
 
 Chrome, Safari, Firefox, Opera, IE9+, IOS4+, Android, windows phone.
 
 ##Usage
 
-###Javascript
+### Javascript
 
 Include jquery and the swipebox script in your head tags or right before your body closing tag.
 
@@ -33,7 +33,7 @@ Include jquery and the swipebox script in your head tags or right before your bo
 <script src="src/js/jquery.swipebox.js"></script>
 ```
 
-###CSS
+### CSS
 
 Include the swipebox CSS style in your head tags.
 
@@ -41,7 +41,7 @@ Include the swipebox CSS style in your head tags.
 <link rel="stylesheet" href="src/css/swipebox.css">
 ```
 
-###HTML
+### HTML
 
 Use a specific class for your links and use the title attribute as caption.
 
@@ -49,7 +49,7 @@ Use a specific class for your links and use the title attribute as caption.
 <a href="big/image.jpg" class="swipebox" title="My Caption">
 ```
 
-###Fire the plugin
+### Fire the plugin
 
 Bind the swipebox behaviour on every link with the "swipebox" class.
 
@@ -57,7 +57,7 @@ Bind the swipebox behaviour on every link with the "swipebox" class.
 $( '.swipebox' ).swipebox();
 ```
 
-###Options
+### Options
 
 ```javascript
 useCSS : true, // false will force the use of jQuery for animations
@@ -78,7 +78,7 @@ toggleClassOnLoad: '' // CSS class that can be toggled when the slide will be lo
 useSVG: true
 ```
 
-###Pull Requests
+### Pull Requests
 
 I want to keep this plugin as simple as possible. I won't merge pull requests for additional features such as download buttons, social like buttons, IE8 compatibility etc... But feel free to fork the project and customize it to suit to your needs. Most wanted PR are for bug fixes. Also, a future improvement will be to allow zoom on touchable devices.
 
