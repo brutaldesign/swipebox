@@ -357,7 +357,7 @@
 									} );
 								}
 
-							// swipe rught
+							// swipe right
 							} else if ( 0 > hDistance ) {
 
 								// last Slide
