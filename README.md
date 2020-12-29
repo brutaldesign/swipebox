@@ -76,6 +76,8 @@ autoplayVideos: false // true will autoplay Youtube and Vimeo videos
 queryStringData: {} // plain object with custom query string arguments to pass/override for video URLs,
 toggleClassOnLoad: '' // CSS class that can be toggled when the slide will be loaded (like 'hidden' of Bootstrap)
 useSVG: true
+nextSlide: function(){} // called on next slide, works for next button, arrow keys and touch navigation
+prevSlide: function(){} // called on previous slide, works for previous button, arrow keys and touch navigation
 ```
 
 ###Pull Requests
