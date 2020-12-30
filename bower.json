@@ -1,6 +1,9 @@
 {
   "name": "swipebox",
   "version": "1.4.4",
-  "main": "src/js/jquery.swipebox.js",
+  "main": [
+    "src/js/jquery.swipebox.js",
+    "src/css/swipebox.min.css"
+  ],
   "ignore": []
 }
