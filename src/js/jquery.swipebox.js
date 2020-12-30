@@ -112,9 +112,11 @@
 					}
 
 					$elem.each( function() {
-
+						var img = $(this).children()[0];
+						
 						var title = null,
-							href = null;
+							href = null,
+							alt = null;
 
 						if ( $( this ).attr( 'title' ) ) {
 							title = $( this ).attr( 'title' );
@@ -125,9 +127,14 @@
 							href = $( this ).attr( 'href' );
 						}
 
+                        if ( $( img).attr( 'alt' ) ) {
+                            alt = $( img ).attr( 'alt' );
+                        }
+
 						elements.push( {
 							href: href,
-							title: title
+							title: title,
+							alt: alt
 						} );
 					} );
 
@@ -670,10 +677,13 @@
 			openMedia : function ( index ) {
 				var $this = this,
 					src,
-					slide;
+					slide,
+					alt;
 
 				if ( elements[ index ] !== undefined ) {
-					src = elements[ index ].href;
+					var elm = elements[ index ];
+					src = elm.href;
+					alt = elm.alt;
 				}
 
 				if ( index < 0 || index >= elements.length ) {
@@ -686,14 +696,17 @@
 					slide.addClass( 'slide-loading' );
 					$this.loadMedia( src, function() {
 						slide.removeClass( 'slide-loading' );
-						slide.html( this );
+						var html = this;
+						html[0].alt = alt;
+						slide.html( html );
 
 						if ( plugin.settings.afterMedia ) {
 							plugin.settings.afterMedia( index );
 						}
 					} );
 				} else {
-					slide.html( $this.getVideo( src ) );
+					var html = $this.getVideo( src );
+					slide.html( html );
 
 					if ( plugin.settings.afterMedia ) {
 						plugin.settings.afterMedia( index );
