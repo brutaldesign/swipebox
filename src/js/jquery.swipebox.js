@@ -59,6 +59,10 @@
 		$.swipebox.close = function () {
 			ui.closeSlide();
 		};
+		
+		$.swipebox.destroy = function () {
+			$( document ).off( 'click.swipebox' );
+		};
 
 		$.swipebox.extend = function () {
 			return ui;
@@ -76,7 +80,7 @@
 
 			} else {
 
-				$( document ).on( 'click', selector, function( event ) {
+				$( document ).on( 'click.swipebox', selector, function( event ) {
 
 					// console.log( isTouch );
 
