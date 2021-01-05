@@ -3,7 +3,7 @@ Swipebox
 
 A touchable jQuery lightbox.
 
-[View project page](http://brutaldesign.github.com/swipebox)
+[View project page](https://swipebox.codes/)
 
 ## What is Swipebox ?
 
