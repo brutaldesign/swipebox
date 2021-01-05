@@ -29,7 +29,7 @@ Chrome, Safari, Firefox, Opera, IE9+, IOS4+, Android, windows phone.
 Include jquery and the swipebox script in your head tags or right before your body closing tag.
 
 ```html
-<script src="lib/jquery-1.9.0.js"></script>
+<script src="lib/jquery-3.5.2.js"></script>
 <script src="src/js/jquery.swipebox.js"></script>
 ```
 

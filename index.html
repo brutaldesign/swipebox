@@ -13,94 +13,71 @@
 	<meta itemprop="name" content="Swipebox | A touchable jQuery lightbox">
 	<meta itemprop="image" content="http://swipebox.csag.co/images/swipe250.jpg">
 	<meta itemprop="description" content="Swipebox is a jQuery lightbox plugin for desktop, mobile and tablet">
-	<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Merriweather:400,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,700|Merriweather:400,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="demo/normalize.css">
 	<link rel="stylesheet" href="demo/bagpakk.min.css">
 	<link rel="stylesheet" href="demo/style.css">
 	<link rel="stylesheet" href="src/css/swipebox.css">
-	<title>Swipebox | A touchable jQuery lightbox</title>
-	<!-- share buttons -->
-	<script type="text/javascript">(function(doc, script) {
-		var js, 
-		fjs = doc.getElementsByTagName(script)[0],
-		add = function(url, id) {
-		if (doc.getElementById(id)) {return;}
-		js = doc.createElement(script);
-		js.src = url;
-		id && (js.id = id);
-		fjs.parentNode.insertBefore(js, fjs);
-		};add("//connect.facebook.net/en_US/all.js#xfbml=1", "facebook-jssdk");
-		add("//platform.twitter.com/widgets.js", "twitter-wjs");
-		}(document, "script"));
-	</script>
-	<!-- end share buttons -->
+	<title>Swipebox | A Touchable jQuery Lightbox</title>
 </head>
 <body>
 	<div id="fb-root"></div>
-	<div id="fork-this">
+	<!-- <div id="fork-this">
 		<a href="https://github.com/brutaldesign/swipebox"></a>
-	</div>
+	</div> -->
 
 	<header class="container">
-		<div class="wrap small-width">
+		<div class="wrap">
 			<div class="lead text-center">
-				<h1>Swipebox.</h1>
-				<p class="tagline">A touchable jQuery lightbox</p>
+				<h1>Swipebox<span class="accent">.</span></h1>
+				<p class="tagline">A Touchable jQuery Lightbox</p>
 			</div>
 			
-			<div id="share" class="text-center">
-				<div id="twitter">
-					<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://brutaldesign.github.com/swipebox" data-text="Swipebox | A touchable jQuery lightbox" data-via="brutaldesign">Tweet</a>
-				</div>
-				<div id="fb">
-					<div class="fb-like" data-href="http://brutaldesign.github.com/swipebox/" data-send="false" data-layout="button_count" data-width="110" data-show-faces="false" data-colorscheme="light" data-action="like"></div>
-				</div>
-			</div>
 			<ul>
-				<li><a href="#what">What is Swipebox ?</a>
+				<li><a class="scroll" href="#what">What is Swipebox ?</a>
 					<ul>
-						<li><a href="#features">Main Features</a></li>
-						<li><a href="#compatibility">Compatibility</a></li>
+						<li><a class="scroll" href="#features">Main Features</a></li>
+						<li><a class="scroll" href="#compatibility">Compatibility</a></li>
 					</ul>
 				</li>
-				<li><a href="#try">Try it</a></li>
-				<li><a href="#basic">Basic Usage</a></li>
-				<li><a href="#advanced">Advanced</a>
+				<li><a class="scroll" href="#try">Try it</a></li>
+				<li><a class="scroll" href="#basic">Basic Usage</a></li>
+				<li><a class="scroll" href="#advanced">Advanced</a>
 					<ul>
-						<li><a href="#rel">Gallery</a></li>
-						<li><a href="#video">Video support</a></li>
-						<li><a href="#dynamic">Load slides dynamically</a></li>
-						<li><a href="#open">Check open state</a></li>
-						<li><a href="#options">Options</a></li>
+						<li><a class="scroll" href="#rel">Gallery</a></li>
+						<li><a class="scroll" href="#video">Video support</a></li>
+						<li><a class="scroll" href="#dynamic">Load slides dynamically</a></li>
+						<li><a class="scroll" href="#open">Check open state</a></li>
+						<li><a class="scroll" href="#options">Options</a></li>
 					</ul>
 				</li>
-				<li><a href="#download">Download</a></li>
+				<li><a class="scroll" href="#download">Download</a></li>
 			</ul>
 		</div>
 	</header>
 
 	<section id="exemple" class="container">
-		<div class="wrap small-width">
+		<div class="wrap">
 			<div id="try"></div>
 			<ul id="box-container">
 				<li class="box">
-					<a href="http://swipebox.csag.co/images/image-1.jpg" class="swipebox" title="Fog">
-						<img src="http://swipebox.csag.co/images/image-1.jpg" alt="image">
+					<a href="demo/images/big-1.jpg" class="swipebox" title="Fog" rel="gallery">
+						<img src="demo/images/small-1.jpg" alt="image">
 					</a>
 				</li>
 				<li class="box">
-					<a href="http://swipebox.csag.co/images/image-2.jpg" class="swipebox" title="City">
-						<img src="http://swipebox.csag.co/images/image-2.jpg" alt="image">
+					<a href="demo/images/big-2.jpg" class="swipebox" title="City" rel="gallery">
+						<img src="demo/images/small-2.jpg" alt="image">
 					</a>
 				</li>
 				<li class="box">
-					<a href="http://swipebox.csag.co/images/image-3.jpg" class="swipebox" title="Street">
-						<img src="http://swipebox.csag.co/images/image-3.jpg" alt="image">
+					<a href="demo/images/big-3.jpg" class="swipebox" title="Street" rel="gallery">
+						<img src="demo/images/small-3.jpg" alt="image">
 					</a>
 				</li>
 				<li class="box">
-					<a href="http://swipebox.csag.co/images/image-4.jpg" class="swipebox" title="Mustache Guy">
-						<img src="http://swipebox.csag.co/images/image-4.jpg" alt="image">
+					<a href="demo/images/big-4.jpg" class="swipebox" title="Mustache Guy" rel="gallery">
+						<img src="demo/images/small-4.jpg" alt="image">
 					</a>
 				</li>
 			</ul>
@@ -108,7 +85,7 @@
 	</section>
 
 	<section  id="presentation" class="container">
-		<div class="wrap small-width">
+		<div class="wrap">
 			<div id="what"></div>
 			<h2>What is Swipebox ?</h2>
 			<p>Swipebox is a jQuery "lightbox" plugin for desktop, mobile and tablet.</p>		
@@ -125,18 +102,18 @@
 			
 			<div id="compatibility"></div>
 			<h3>Compatibility</h3>
-			<p>Chrome, Safari, Firefox, Opera, IE9+, IOS4+, Android, windows phone.</p>
+			<p>Chrome, Safari, Firefox, Opera, Brave, IOS, Android, Windows phone.</p>
 		</div>
 	</section>
 
 	<section id="usage" class="container">
-		<div class="wrap small-width">
+		<div class="wrap">
 			<div id="basic"></div>
 			<h2>Basic Usage</h2>
 			<h3>Javascript</h3>
 			
 			<p>Include jquery and the swipebox script in your <code>head</code> tags or right before your <code>body</code> closing tag.</p>
-			<pre>&lt;script src="lib/jquery-2.0.3.js"&gt;&lt;/script&gt;
+			<pre>&lt;script src="lib/jquery-3.5.2.js"&gt;&lt;/script&gt;
 &lt;script src="src/js/jquery.swipebox.js"&gt;&lt;/script&gt;</pre>
 
 			<h3>CSS</h3>
@@ -160,7 +137,7 @@
 		</div>
 	</section>
 	<section id="advanced-usage" class="container">
-		<div class="wrap small-width">
+		<div class="wrap">
 			<div id="advanced"></div>
 			<h2>Advanced</h2>
 			
@@ -187,21 +164,21 @@
 			<h3>Video support</h3>
 			<p>Simply paste a youtube or vimeo video URL in your href attribute. The script will automatically check if it's a youtube or vimeo URL and open the video in the swipebox.</p>
 			<p>
-				<a class="swipebox-video" href="http://vimeo.com/29193046">My Video</a>
+				<a class="swipebox-video accent" href="https://www.youtube.com/watch?v=TjsqpFqCf8k">My Video</a>
 			</p>
-			<pre>&lt;a class="swipebox-video" rel="vimeo" href="http://vimeo.com/29193046"&gt;My Videos&lt;/a&gt;</pre>
+			<pre>&lt;a class="swipebox-video" rel="vimeo" href="https://www.youtube.com/watch?v=TjsqpFqCf8k"&gt;My Videos&lt;/a&gt;</pre>
 			
 			<div id="dynamic"></div>
 			<h3>Load slides dynamically</h3>
 			<p>You can set your gallery dynamically by passing an array object to the swipebox.</p>
-			<p><a id="gallery" href="#">View gallery</a></p>
+			<p><a id="gallery" class="accent" href="#">View gallery</a></p>
 			
 			<pre>
 $( '#gallery' ).click( function( e ) {
 	e.preventDefault();
 	$.swipebox( [
-		{ href:'big/image1.jpg', title:'My Caption' }, 
-		{ href:'big/image2.jpg', title:'My Second Caption' }
+		{ href:'image1.jpg', title:'My Caption' }, 
+		{ href:'image2.jpg', title:'My Second Caption' }
 	] );
 } );</pre>
 				<div id="open"></div>
@@ -236,19 +213,19 @@ $( '#gallery' ).click( function( e ) {
 	</section>
 
 	<section id="action" class="container text-center">
-		<div class="wrap small-width">
+		<div class="wrap">
 			<div id="download"></div>
-			<p><a class="button-big" href="https://github.com/brutaldesign/swipebox/archive/master.zip">Download</a> <a class="button-big" href="https://github.com/brutaldesign/swipebox">View Source</a></p>
+			<p><a class="button-big" href="https://github.com/brutaldesign/swipebox/archive/master.zip">Download</a> <a class="button-big" href="https://github.com/brutaldesign/swipebox">Source</a>
+			<a class="button-big" href="https://paypal.me/ConstantinSaguin">Donate</a></p>
 		</div>
 	</section>
 
 	<footer class="text-center">
-		<div class="wrap small-width">
-			<a href="http://csag.co" target="_blank">csag.co</a> | <a href="http://wpwlf.co" target="_blank">wpwlf.co</a>
+		<div class="wrap">
+			<a href="https://csag.co" target="_blank">csag.co</a> | <a href="https://wolfthem.es/" target="_blank">wolfthem.es</a>
 		</div>
 	</footer>
-	<script src="lib/ios-orientationchange-fix.js"></script>
-	<script src="lib/jquery-2.1.0.min.js"></script>
+	<script src="lib/jquery-3.5.1.min.js"></script>
 	<script src="src/js/jquery.swipebox.js"></script>
 	<script type="text/javascript">
 	$( document ).ready(function() {
@@ -260,15 +237,20 @@ $( '#gallery' ).click( function( e ) {
 			$( '.swipebox-video' ).swipebox();
 
 			/* Dynamic Gallery */
-			$( '#gallery' ).click( function( e ) {
+			$( '#gallery' ).on( 'click', function( e ) {
 				e.preventDefault();
 				$.swipebox( [
-					{ href : 'http://swipebox.csag.co/mages/image-1.jpg', title : 'My Caption' },
-					{ href : 'http://swipebox.csag.co/images/image-2.jpg', title : 'My Second Caption' }
+					{ href : 'demo/images/big-1.jpg', title : 'My Caption' },
+					{ href : 'demo/images/big-2.jpg', title : 'My Second Caption' }
 				] );
 			} );
 
-      });
+			/* Smooth scroll */
+			$( '.scroll' ).on( 'click', function () {
+				$( 'html, body' ).animate( { scrollTop: $( $( this ).attr('href') ).offset().top - 15 }, 750 ); // Go
+				return false;
+			});
+      } );
 	</script>
 </body>
 	

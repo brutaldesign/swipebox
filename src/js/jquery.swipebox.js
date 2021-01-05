@@ -1,8 +1,10 @@
-/*! Swipebox v1.4.4 | Constantin Saguin csag.co | MIT License | github.com/brutaldesign/swipebox */
+/*! Swipebox v1.5 | Constantin Saguin csag.co | MIT License | github.com/brutaldesign/swipebox */
 
 ;( function ( window, document, $, undefined ) {
 
 	$.swipebox = function( elem, options ) {
+
+        $( elem ).addClass( 'swipebox' ); // fugly but yea, swipebox class all the things
 
 		// Default options
 		var ui,
@@ -30,7 +32,7 @@
 			plugin = this,
 			elements = [], // slides array [ { href:'...', title:'...' }, ...],
 			$elem,
-			selector = elem.selector,
+			selector = '.swipebox',
 			isMobile = navigator.userAgent.match( /(iPad)|(iPhone)|(iPod)|(Android)|(PlayBook)|(BB10)|(BlackBerry)|(Opera Mini)|(IEMobile)|(webOS)|(MeeGo)/i ),
 			isTouch = isMobile !== null || document.createTouch !== undefined || ( 'ontouchstart' in window ) || ( 'onmsgesturechange' in window ) || navigator.msMaxTouchPoints,
 			supportSVG = !! document.createElementNS && !! document.createElementNS( 'http://www.w3.org/2000/svg', 'svg').createSVGRect,
@@ -54,8 +56,8 @@
 					</div>\
 			</div>';
 
-		plugin.settings = {};
-
+        plugin.settings = {};
+        
 		$.swipebox.close = function () {
 			ui.closeSlide();
 		};
@@ -119,7 +121,6 @@
 						if ( $( this ).attr( 'title' ) ) {
 							title = $( this ).attr( 'title' );
 						}
-
 
 						if ( $( this ).attr( 'href' ) ) {
 							href = $( this ).attr( 'href' );
@@ -685,7 +686,7 @@
 				if ( ! $this.isVideo( src ) ) {
 					slide.addClass( 'slide-loading' );
 					$this.loadMedia( src, function() {
-						slide.removeClass( 'slide-loading' );
+                        slide.removeClass( 'slide-loading' );
 						slide.html( this );
 
 						if ( plugin.settings.afterMedia ) {
@@ -733,11 +734,9 @@
 					}
 
 					if ( src.toLowerCase().indexOf( 'swipeboxvideo=1' ) >= 0 ) {
-
 						return true;
-					}
+                    }
 				}
-
 			},
 
 			/**
@@ -781,15 +780,19 @@
 					youtubeShortUrl = url.match(/(?:www\.)?youtu\.be\/([a-zA-Z0-9\-_]+)/),
 					vimeoUrl = url.match( /(?:www\.)?vimeo\.com\/([0-9]*)/ ),
 					qs = '';
-				if ( youtubeUrl || youtubeShortUrl) {
+                
+                if ( youtubeUrl || youtubeShortUrl) {
 					if ( youtubeShortUrl ) {
 						youtubeUrl = youtubeShortUrl;
-					}
+                    }
+                    
+                    console.log( youtubeUrl );
+
 					qs = ui.parseUri( url, {
 						'autoplay' : ( plugin.settings.autoplayVideos ? '1' : '0' ),
 						'v' : ''
 					});
-					iframe = '<iframe width="560" height="315" src="//' + youtubeUrl[1] + '/embed/' + youtubeUrl[2] + '?' + qs + '" frameborder="0" allowfullscreen></iframe>';
+					iframe = '<iframe width="560" height="315" src="https://' + youtubeUrl[1] + '/embed/' + youtubeUrl[2] + '?' + qs + '" frameborder="0" allowfullscreen></iframe>';
 
 				} else if ( vimeoUrl ) {
 					qs = ui.parseUri( url, {
