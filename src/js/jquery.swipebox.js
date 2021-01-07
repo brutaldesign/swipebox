@@ -585,8 +585,10 @@
 					} );
 				}
 
-				$( '#swipebox-close' ).bind( action, function() {
+				$( '#swipebox-close' ).bind( action, function( event ) {
 					$this.closeSlide();
+					event.preventDefault();
+					event.stopPropagation();
 				} );
 			},
 
