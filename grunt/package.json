@@ -1,6 +1,6 @@
 {
   "name": "grunt-swipebox",
-  "version": "1.5",
+  "version": "1.5.1",
   "description": "A touchable jQuery lightbox",
   "repository": {
     "type": "git",
