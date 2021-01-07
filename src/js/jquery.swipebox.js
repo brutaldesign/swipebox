@@ -585,8 +585,9 @@
 					} );
 				}
 
-				$( '#swipebox-close' ).bind( action, function() {
+				$( '#swipebox-close' ).bind( action, function(e) {
 					$this.closeSlide();
+					e.preventDefault();
 				} );
 			},
 
