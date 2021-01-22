@@ -1,4 +1,4 @@
-/*! Swipebox v1.5.1 | Constantin Saguin csag.co | MIT License | github.com/brutaldesign/swipebox */
+/*! Swipebox v1.5.2 | Constantin Saguin csag.co | MIT License | github.com/brutaldesign/swipebox */
 
 ;( function ( window, document, $, undefined ) {
 
@@ -70,7 +70,7 @@
 
 			plugin.settings = $.extend( {}, defaults, options );
 
-			if ( $.isArray( elem ) ) {
+			if ( Array.isArray( elem ) ) {
 
 				elements = elem;
 				ui.target = $( window );
@@ -87,7 +87,7 @@
 						return false;
 					}
 
-					if ( ! $.isArray( elem ) ) {
+					if ( ! Array.isArray( elem ) ) {
 						ui.destroy();
 						$elem = $( selector );
 						ui.actions();
@@ -931,7 +931,7 @@
 				$( '#swipebox-slider' ).unbind();
 				$( '#swipebox-overlay' ).remove();
 
-				if ( ! $.isArray( elem ) ) {
+				if ( ! Array.isArray( elem ) ) {
 					elem.removeData( '_swipebox' );
 				}
 
