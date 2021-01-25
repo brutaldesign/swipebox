@@ -65,6 +65,20 @@
 		$.swipebox.extend = function () {
 			return ui;
 		};
+		
+		// This function checks if the specified event is supported by the browser.
+		// Source: http://perfectionkills.com/detecting-event-support-without-browser-sniffing/
+		function isEventSupported(eventName) {
+			var el = document.createElement('div');
+			eventName = 'on' + eventName;
+			var isSupported = (eventName in el);
+			if (!isSupported) {
+				el.setAttribute(eventName, 'return;');
+				isSupported = typeof el[eventName] == 'function';
+			}
+			el = null;
+			return isSupported;
+		}
 
 		plugin.init = function() {
 
@@ -195,6 +209,7 @@
 
 				// Devices can have both touch and keyboard input so always allow key events
 				$this.keyboard();
+				$this.mouse();
 
 				$this.animBars();
 				$this.resize();
@@ -551,6 +566,33 @@
 
 						$this.closeSlide();
 					}
+				} );
+			},
+
+ 			/**
+			 * Mouse navigation
+			 */
+			mouse : function () {
+				var wheelEvent = isEventSupported('mousewheel') ? 'mousewheel' : 'wheel';
+				var $this = this;
+				$( window ).bind( wheelEvent, function( event ) {
+					event.preventDefault();
+					//event.stopPropagation();
+					
+					var oEvent = event.originalEvent;
+					var delta  = oEvent.deltaY || oEvent.wheelDelta;
+					
+					// deltaY for wheel event
+					// wheelData for mousewheel event
+
+					if (delta > 0) {
+						// Scrolled up
+						$this.getNext();
+					} else if (delta < 0) {
+						// Scrolled down
+						$this.getPrev();
+					}
+					
 				} );
 			},
 
@@ -925,6 +967,9 @@
 			 */
 			destroy : function () {
 				$( window ).unbind( 'keyup' );
+				// need to check which event to unbind the same way as having binded it
+				var wheelEvent = isEventSupported('mousewheel') ? 'mousewheel' : 'wheel';
+				$( window ).unbind( wheelEvent );
 				$( 'body' ).unbind( 'touchstart' );
 				$( 'body' ).unbind( 'touchmove' );
 				$( 'body' ).unbind( 'touchend' );
