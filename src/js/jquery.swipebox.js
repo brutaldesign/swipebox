@@ -156,6 +156,8 @@
 				this.openSlide( index );
 				this.openMedia( index );
 				this.preloadMedia( index+1 );
+				this.preloadMedia( index+2 );
+				this.preloadMedia( index+3 );
 				this.preloadMedia( index-1 );
 				if ( plugin.settings.afterOpen ) {
 					plugin.settings.afterOpen(index);
@@ -855,6 +857,8 @@
 					index++;
 					$this.setSlide( index );
 					$this.preloadMedia( index+1 );
+					$this.preloadMedia( index+2 );
+					$this.preloadMedia( index+3 );
 					if ( plugin.settings.nextSlide ) {
 						plugin.settings.nextSlide(index);
 					}
