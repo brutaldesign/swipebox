@@ -297,9 +297,8 @@
 				bars.addClass( 'visible-bars' );
 				$this.setTimeout();
 
-				$( 'body' ).bind( 'touchstart', function( event ) {
+				$( 'body' ).addClass( 'touching' ).bind( 'touchstart', function( event ) {
 
-					$( this ).addClass( 'touching' );
 					index = $( '#swipebox-slider .slide' ).index( $( '#swipebox-slider .slide.current' ) );
 					endCoords = event.originalEvent.targetTouches[0];
 					startCoords.pageX = event.originalEvent.targetTouches[0].pageX;
@@ -438,7 +437,7 @@
 					} );
 
 					$( '#swipebox-overlay' ).removeClass( 'leftSpringTouch' ).removeClass( 'rightSpringTouch' );
-					$( '.touching' ).off( 'touchmove' ).removeClass( 'touching' );
+					$( '.touching' ).off( 'touchmove' );
 
 				} );
 			},
@@ -916,6 +915,7 @@
 			closeSlide : function () {
 				$( 'html' ).removeClass( 'swipebox-html' );
 				$( 'html' ).removeClass( 'swipebox-touch' );
+				$('body').removeClass('touching');
 				$( window ).trigger( 'resize' );
 				this.destroy();
 			},
