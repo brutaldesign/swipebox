@@ -26,7 +26,8 @@
 				loopAtEnd: false,
 				autoplayVideos: false,
 				queryStringData: {},
-				toggleClassOnLoad: ''
+				toggleClassOnLoad: '',
+				overlayTarget: 'body'
 			},
 
 			plugin = this,
@@ -168,7 +169,7 @@
 			build : function () {
 				var $this = this, bg;
 
-				$( 'body' ).append( html );
+				$( plugin.settings.overlayTarget ).append( html );
 
 				if ( supportSVG && plugin.settings.useSVG === true ) {
 					bg = $( '#swipebox-close' ).css( 'background-image' );
