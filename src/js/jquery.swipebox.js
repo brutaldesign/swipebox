@@ -134,7 +134,7 @@
 					} );
 
 					index = $elem.index( $( this ) );
-					event.preventDefault();
+					event.preventDefault();	
 					event.stopPropagation();
 					ui.target = $( event.target );
 					ui.init( index );
