@@ -26,7 +26,8 @@
 				loopAtEnd: false,
 				autoplayVideos: false,
 				queryStringData: {},
-				toggleClassOnLoad: ''
+				toggleClassOnLoad: '',
+				overlayTarget: 'body'
 			},
 
 			plugin = this,
@@ -57,7 +58,7 @@
 			</div>';
 
         plugin.settings = {};
-        
+
 		$.swipebox.close = function () {
 			ui.closeSlide();
 		};
@@ -168,7 +169,7 @@
 			build : function () {
 				var $this = this, bg;
 
-				$( 'body' ).append( html );
+				$( plugin.settings.overlayTarget ).append( html );
 
 				if ( supportSVG && plugin.settings.useSVG === true ) {
 					bg = $( '#swipebox-close' ).css( 'background-image' );
@@ -757,7 +758,7 @@
 				if ( a.search ) {
 					qs = JSON.parse( '{"' + a.search.toLowerCase().replace('?','').replace(/&/g,'","').replace(/=/g,'":"') + '"}' );
 				}
-				
+
 				// Extend with custom data
 				if ( $.isPlainObject( customData ) ) {
 					qs = $.extend( qs, customData, plugin.settings.queryStringData ); // The dev has always the final word
@@ -782,12 +783,12 @@
 					youtubeShortUrl = url.match(/(?:www\.)?youtu\.be\/([a-zA-Z0-9\-_]+)/),
 					vimeoUrl = url.match( /(?:www\.)?vimeo\.com\/([0-9]*)/ ),
 					qs = '';
-                
+
                 if ( youtubeUrl || youtubeShortUrl) {
 					if ( youtubeShortUrl ) {
 						youtubeUrl = youtubeShortUrl;
                     }
-                    
+
                     console.log( youtubeUrl );
 
 					qs = ui.parseUri( url, {
