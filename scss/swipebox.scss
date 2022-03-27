@@ -115,7 +115,7 @@ html.swipebox-html.swipebox-touch {
 	position: absolute;
 	left: 0;
 	z-index: 999;
-	height: 50px;
+	min-height: 50px;
 	width: 100%;
 }
 
@@ -128,10 +128,10 @@ html.swipebox-html.swipebox-touch {
 }
 
 #swipebox-top-bar {
-	top: -50px;
+	bottom: 100%;
 	
 	&.visible-bars {
-		transform: translate3d(0,50px,0);
+		transform: translate3d(0,100%,0);
 	}
 }
 
@@ -305,4 +305,9 @@ html.swipebox-html.swipebox-touch {
 	font-size: 15px;
 	line-height: 43px;
 	font-family: Helvetica, Arial, sans-serif;
+
+	div.caption {
+		font-size: 13px;
+		line-height: 20px;
+	}
 }

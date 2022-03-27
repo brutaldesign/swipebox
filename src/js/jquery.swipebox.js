@@ -26,7 +26,9 @@
 				loopAtEnd: false,
 				autoplayVideos: false,
 				queryStringData: {},
-				toggleClassOnLoad: ''
+				toggleClassOnLoad: '',
+				titleAttribute: 'title',
+				captionAttribute: 'data-caption'
 			},
 
 			plugin = this,
@@ -116,10 +118,15 @@
 					$elem.each( function() {
 
 						var title = null,
+							caption = null,
 							href = null;
 
-						if ( $( this ).attr( 'title' ) ) {
-							title = $( this ).attr( 'title' );
+						if ( $( this ).attr( plugin.settings.titleAttribute ) ) {
+							title = $( this ).attr( plugin.settings.titleAttribute );
+						}
+
+						if ( $( this ).attr( plugin.settings.captionAttribute ) ) {
+							caption = $( this ).attr( plugin.settings.captionAttribute );
 						}
 
 						if ( $( this ).attr( 'href' ) ) {
@@ -128,7 +135,8 @@
 
 						elements.push( {
 							href: href,
-							title: title
+							title: title,
+							caption: caption
 						} );
 					} );
 
@@ -710,16 +718,27 @@
 			 */
 			setTitle : function ( index ) {
 				var title = null;
+				var caption = null;
 
 				$( '#swipebox-title' ).empty();
 
 				if ( elements[ index ] !== undefined ) {
 					title = elements[ index ].title;
+					caption = elements[ index ].caption;
 				}
 
-				if ( title ) {
+				if ( title || caption ) {
 					$( '#swipebox-top-bar' ).show();
-					$( '#swipebox-title' ).append( title );
+
+					if ( title ) {
+						var tdiv = $( '<div></div>' ).addClass( 'title' ).text( title );
+						$( '#swipebox-title' ).append( tdiv );
+					}
+
+					if ( caption ) {
+						var cdiv = $( '<div></div>' ).addClass( 'caption' ).text( caption );
+						$( '#swipebox-title' ).append( cdiv );
+					}
 				} else {
 					$( '#swipebox-top-bar' ).hide();
 				}
