@@ -731,12 +731,12 @@
 					$( '#swipebox-top-bar' ).show();
 
 					if ( title ) {
-						var tdiv = $( '<div></div>' ).addClass( 'title' ).text( title );
+						var tdiv = $( '<div></div>' ).addClass( 'title' ).html( title );
 						$( '#swipebox-title' ).append( tdiv );
 					}
 
 					if ( caption ) {
-						var cdiv = $( '<div></div>' ).addClass( 'caption' ).text( caption );
+						var cdiv = $( '<div></div>' ).addClass( 'caption' ).html( caption );
 						$( '#swipebox-title' ).append( cdiv );
 					}
 				} else {
