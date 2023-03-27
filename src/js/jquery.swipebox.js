@@ -1,4 +1,5 @@
 /*! Swipebox v1.4.4 | Constantin Saguin csag.co | MIT License | github.com/brutaldesign/swipebox */
+// A commit test for Git course
 
 ;( function ( window, document, $, undefined ) {
 
