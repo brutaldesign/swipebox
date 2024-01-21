@@ -16,7 +16,6 @@ html.swipebox-html.swipebox-touch {
   z-index: 99999 !important;
   overflow: hidden;
   -webkit-user-select: none;
-     -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
 }

@@ -737,7 +737,11 @@
 
 					if ( src.toLowerCase().indexOf( 'swipeboxvideo=1' ) >= 0 ) {
 						return true;
-                    }
+          }
+					
+					if( src.match( /(mp4|wmv|wma|ogv|ogg|flv)$/)){
+						return true;
+					}
 				}
 			},
 
